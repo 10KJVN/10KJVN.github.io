@@ -10,7 +10,7 @@ function showSlides() {
   slideIndex++;
   if (slideIndex > slides.length) {slideIndex = 1}
   slides[slideIndex-1].style.display = "block";
-  setTimeout(showSlides, 2000); // Change image every 2 seconds
+  setTimeout(showSlides, 5000); // Change image every 5 seconds
 }
 
 /* Set the width of the side navigation to 250px and the left margin of the page content to 250px and add a black background color to body */

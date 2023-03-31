@@ -1,4 +1,4 @@
-* {box-sizing:border-box}
+*{box-sizing:border-box}
 
 /* Slideshow container */
 .slideshow-container {
@@ -135,57 +135,3 @@
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
   }
-
-  .sidenav {
-    right: 0;
-  }
-
-/* Hieronder is mijn eigen, hierboven is copy en paste */
-
-/* Font-family Later nog aanpassen op de style */
-body{
-    font-family: sans-serif;
-    font-size: 14px;
-}
-
-/* Color palette - Cyber Alley */
-/* 
-#E43681 
-#C1306F
-#6C193D
-#5269DD
-#517B9D
-#221e41
-#3b3f88
-#7089c1
-#c51c6d
-#af2499
-*/ 
-
-.header{
-    background: #5269DD;
-    display:flex;
-    height:80px;
-    justify-content: space-between;
-    align-items:center;
-    padding:20px;
-    padding-left:20px;
-    padding-right:20px;
-}
-
-.footer{
-    height:80px;
-    background:#221e41;
-    display:flex;
-    color:white;
-    justify-content: space-between;
-    align-items:center;
-    padding: 20px;
-    /*padding-left:20px;
-    padding-right:40px;*/
-}
-
-#content{
-    height: 600px;
-
-}
