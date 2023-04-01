@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head> </head>
+<head> 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,12 +9,17 @@
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="js/main.js" defer></script>
+</head>
 
-<body>
-
-    <header>  <!--Top Menu-->
+<body> 
+    <div class= "header">  <!--Top Menu-->
+      <h1>My Title</h1>
       
-       <div id="mySidenav" class="sidenav">
+      <div id="navbar">
+        <a href="#home">Home</a>
+      </div>
+       
+      <div id="mySidenav" class="sidenav">
           <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
           <a href="#">About Me</a>
           <a href="#">Services</a>
@@ -52,6 +57,9 @@
         <a href="#" class="fa fa-twitter"></a>
       </div>
       
+      <div class="topButton">
+        <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+      </div>
       <p>Pushing P, im pushing P.</p>
     </footer>
       
