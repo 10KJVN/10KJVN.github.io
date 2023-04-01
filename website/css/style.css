@@ -48,7 +48,7 @@
     .sidenav a {font-size: 18px;}
   } 
 
-  .container {
+  .MenuIcon {
     display: inline-block;
     cursor: pointer;
   }
@@ -61,15 +61,33 @@
     transition: 0.4s;
   }
   
-  /* Rotate first bar */
-  .change .bar1 {
-    transform: translate(0, 11px) rotate(-45deg);
-  }
-  
-  /* Fade out the second bar */
+  /* Rotate the bars */
+  .change .bar1 {transform: translate(0, 11px) rotate(-45deg);}
   .change .bar2 {opacity: 0;}
+  .change .bar3 {transform: translate(0, -11px) rotate(45deg);}
+   
   
-  /* Rotate last bar */
-  .change .bar3 {
-    transform: translate(0, -11px) rotate(45deg);
-  }
+.fa 
+    {
+      padding: 20px;
+      font-size: 30px;
+      width: 50px;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .fa:hover { opacity: 0.7;}
+    .fa-facebook 
+    {
+      background: #3B5998;
+      color: white;
+    }
+    .fa-twitter 
+    {
+      background: #55ACEE;
+      color: white;
+    }
+    
+     
+    
+    
