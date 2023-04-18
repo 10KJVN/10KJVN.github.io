@@ -15,7 +15,7 @@
 
 .navbar a {
   display: inline-block;
-  color: black;
+  color: white;
   text-align: center;
   padding: 14px;
   text-decoration: none;
@@ -37,10 +37,13 @@
 .navbar a:hover {
   background-color: #ddd;
   color: black;
-
- /* background-color: #ddd;
-  color: black; */
 }
+
+.pill-nav a.active{
+  background-color: dodgerblue;
+  color: white;
+}
+
 
 * {
   box-sizing: border-box;
