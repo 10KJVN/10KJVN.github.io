@@ -1,66 +1,69 @@
 .header {
-  padding: 80px; /* some padding */
-  text-align: center; /* center the text */
-  background: #1abc9c; /* green background */
-  color: white; /* white text color */
+  padding: 40px;
+  background: #5269DD;
+  color: white;
 }
 
-/* Increase the font size of the <h1> element */
 .header h1 {
   font-size: 40px;
 }
 
-/* Style the top navigation bar */
 .navbar {
-  overflow: hidden; /* Hide overflow */
-  background-color: #333; /* Dark background color */
+  overflow: hidden;
+  background-color: #333;
 }
 
-/* Style the navigation bar links */
 .navbar a {
-  float: left; /* Make sure that the links stay side-by-side */
-  display: block; /* Change the display to block, for responsive reasons (see below) */
-  color: white; /* White text color */
-  text-align: center; /* Center the text */
-  padding: 14px 20px; /* Add some padding */
-  text-decoration: none; /* Remove underline */
+  display: inline-block;
+  color: black;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+  font-size: 17px;
+  border-radius: 5px;
+
+  /* float: left;
+  display: block; 
+  color: white; 
+  text-align: center;
+  padding: 14px 20px; 
+  text-decoration: none; */
 }
 
-/* Right-aligned link */
 .navbar a.right {
-  float: right; /* Float a link to the right */
+  float: right;
 }
 
-/* Change color on hover/mouse-over */
 .navbar a:hover {
-  background-color: #ddd; /* Grey background color */
-  color: black; /* Black text color */
+  background-color: #ddd;
+  color: black;
+
+ /* background-color: #ddd;
+  color: black; */
 }
 
-/* Ensure proper sizing */
 * {
   box-sizing: border-box;
 }
 
-/* Column container */
 .row {
   display: flex;
   flex-wrap: wrap;
 }
 
-/* Create two unequal columns that sits next to each other */
-/* Sidebar/left column */
+
 .side {
-  flex: 30%; /* Set the width of the sidebar */
-  background-color: #f1f1f1; /* Grey background color */
-  padding: 20px; /* Some padding */
+  flex: 30%;
+  background-color: whitesmoke;
+  padding: 20px;
 }
 
-/* Main column */
+/* main */
+
 .main {
   flex: 70%; /* Set the width of the main content */
-  background-color: white; /* White background color */
-  padding: 20px; /* Some padding */
+  background-color: #517B9D;
+  padding: 20px;
 }
 
 /* Phone Compability */
@@ -75,4 +78,10 @@
     float: none;
     width: 100%;
   }
+}
+
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
 }
