@@ -54,7 +54,7 @@
 
 .side {
   flex: 30%;
-  background-color: whitesmoke;
+  background-color: #6C193D;
   padding: 20px;
 }
 
@@ -83,5 +83,5 @@
 .footer {
   padding: 20px;
   text-align: center;
-  background: #ddd;
+  background: #C1306F;
 }
