@@ -6,9 +6,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home Page</title>
+
     <link rel="stylesheet" href="style.css" />
     <script src="main.js" defer></script>
+    
+    <button class="tablink" onclick="openPage('Home', this, 'red')">Home</button>
+    <button class="tablink" onclick="openPage('News', this, 'green')" id="defaultOpen">News</button>
+    <button class="tablink" onclick="openPage('Contact', this, 'blue')">Contact</button>
+    <button class="tablink" onclick="openPage('About', this, 'orange')">About</button>
+    
 </head>
+
+<div id="Home" class="tabcontent">
+  <h3>Welcome to the Home Page</h3>
+</div>
+
+<div id="News" class="tabcontent">
+  <h3>News Tab</h3>
+</div>
+
+<div id="Contact" class="tabcontent">
+  <h3>Contact Tab</h3>
+</div>
+
+<div id="About" class="tabcontent">
+  <h3>Welcome to the About me Page</h3>
+</div>
 
 <div class="header">
   <h1>My Website</h1>
@@ -22,7 +45,7 @@
   <a href="#" class="right">Menu</a>
 </div>
 
-<div class="row">
+<div class="mainSection">
 
   <div class="side">Side Menu
 
@@ -86,6 +109,7 @@
     </p>
 
   </div>
+  
 </div>
 
 <div class="footer">
