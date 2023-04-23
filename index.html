@@ -26,18 +26,18 @@
     </div>
 
     <div class="navbar">
-      <a href="#", class="tablink" onclick="openPage(Home)">About Me</a>
-      <a href="index.html/footer">Contact</a>
-      <a href="#">Projects</a>
+      <a href="#aboutMe">About Me</a>
+      <a href="#contact">Contact</a>
+      <a href="#projects">Projects</a>
       <a href="#" class="right">Menu</a>
     </div>
 
-    <button class="tablinks" onclick="openPage(Projects, 'project')">Space</button>
+    <!-- <button class="tablinks" onclick="openPage(Projects, 'project')">Space</button> -->
 
     <div class="mainSection">
 
       <div class="side"> <!--Zet hier About me in de side-->
-        <h2>About Me</h2>
+        <h2 id="aboutMe">About Me</h2>
 
         <p>
           Hello there, my name is Jahvairo Monkau, I hail from Amsterdam, The Netherlands. As of right now, I’m 17 years old and in my 2nd year of studying Software Development at Mediacollege Amsterdam.
@@ -61,10 +61,10 @@
       </div>
 
       <div class="main"> <!--Plaats hier VIER projecten MET images included-->
-        <h2>Projects</h2>
+        <h2 id="projects">Projects</h2>
 
-        <div class="project-slideshow">
-          <img src="img/spaceMainMenu.png" style="width: 60%">
+        <div class="Projects">
+          <img src="img/spaceMainMenu.png" style="width: 60%", href="projects.html">
         </div>
 
         <p> <!-- 1 t/m 3 inleiding ofzo -->
@@ -112,14 +112,15 @@
     </div>
 
     <div class="footer">
-      <h2>Footer</h2>
+      <h2 id="contact">Contact</h2>
         <ul class="footerNavigation">
           <li class="footerNavigationItem">
-              Hoe ben ik te bereiken?
+              How can you reach me?
           </li>
           <li class="footerNavigationItem">
             Email: Jahva_game11@hotmail.com
           </li>
+          <p>or</p>
           <li class="footerNavigationItem">
             Github: https://github.com/10KJVN
           </li>
