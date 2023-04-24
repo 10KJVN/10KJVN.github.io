@@ -88,6 +88,19 @@ body, html {
   flex-wrap: wrap;
 }
 
+.Projects{
+  display: grid;
+  grid-template-columns: repeat (2, 1fr);
+  row-gap: 2rem;
+}
+
+.project-container{
+  margin-top: 5vh;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
 
 .side {
   flex: 30%;
