@@ -16,7 +16,7 @@ body, html {
 }
 
 .tablink:hover {
-  background-color: grey;
+  background-color: none;
 }
 
 .tabcontent {
@@ -24,6 +24,35 @@ body, html {
   display: none;
   padding: 0px 0px;
   height: 100%;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.navbar a {
+  display: inline-block;
+  color: #E43681;
+  outline: none;
+  text-align: center;
+  padding: 8px 150px;
+  text-decoration: none;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+.navbar a.right {
+  float: right;
+}
+
+.navbar a:hover {
+  color: black;
+}
+
+.pill-nav a.active{
+  background-color: dodgerblue;
+  color: white;
 }
 
 #Home {background-color: white;}
@@ -52,44 +81,6 @@ body, html {
   font-weight: bold;
 }
 
-.navbar {
-  overflow: hidden;
-  background-color: #333;
-}
-
-.navbar a {
-  background-color: #333;
-  display: inline-block;
-  color: white;
-  outline: none;
-  text-align: center;
-  padding: 10px 10px;
-  text-decoration: none;
-  font-size: 15px;
-  border-radius: 5px;
-
-  /* float: left;
-  display: block; 
-  color: white; 
-  text-align: center;
-  padding: 14px 20px; 
-  text-decoration: none; */
-}
-
-.navbar a.right {
-  float: right;
-}
-
-.navbar a:hover {
-  color: black;
-}
-
-.pill-nav a.active{
-  background-color: dodgerblue;
-  color: white;
-}
-
-
 * {
   box-sizing: border-box;
 }
@@ -99,16 +90,18 @@ body, html {
   flex-wrap: wrap;
 }
 
+
 .project-container{
-  margin: 20px auto;
-  width:400px;
-  height:400px;
+  margin-top: 0px;
+  width: 450px;
+  height: 400px;
   background-color:black;
-  display:grid 1;
+  display:grid 2;
   grid-template-columns: 200px 200px;
   grid-row: auto auto;
   grid-column-gap: 20px;
   grid-row-gap: 20px;
+  box-sizing: border-box;
 }
 
 .project-box{
