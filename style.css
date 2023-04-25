@@ -85,28 +85,27 @@ body, html {
   box-sizing: border-box;
 }
 
-.mainSection {
+*.mainSection {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap;  
 }
 
+.title{
+  padding: 0px;
+  text-align: left;
+}
 
-.project-container{
+.container{
   margin-top: 0px;
   width: 450px;
-  height: 400px;
-  background-color:black;
-  display:grid 2;
-  grid-template-columns: 200px 200px;
-  grid-row: auto auto;
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
-  box-sizing: border-box;
+  height: 330px;
+  background-color:none;
+  display:grid;
 }
 
-.project-box{
+.box{
     background-color: purple;
-    padding:2px;
+    padding:4px;
     border-radius:0px;
     color:#fff;
     display:flex;
@@ -129,7 +128,29 @@ body, html {
   flex: 70%; /* Set the width of the main content */
   background-color: #517B9D;
   padding: 20px;
+  text-align: center;
+  align-items: center;
+  display: center;
+
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 3rem;
 }
+
+.main h2{
+  text-align: center;
+}
+
+.main a{
+  float: left;
+  width: 50%;
+  height: 250px;
+  margin-bottom: 80px;
+}
+
+.main p{
+  text-align: justify;
+}
+
 
 /* Phone Compability */
 @media screen and (max-width: 700px) {
