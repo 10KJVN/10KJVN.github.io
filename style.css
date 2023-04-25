@@ -115,7 +115,6 @@ body, html {
     font-family:sans-serif;
 }
 
-
 .side {
   flex: 20.5%;
   background-color: #6C193D;
@@ -150,6 +149,58 @@ body, html {
 .main p{
   text-align: justify;
 }
+
+/* Project css*/
+
+*.project-header{
+  padding: 20px;
+  background-color:#5269DD;
+}
+
+*.project-navbar{
+  overflow: hidden;
+  background-color: hsl(0, 0%, 20%); 
+}
+
+*.project-navbar a{
+  display: inline-block;
+  color: #E43681;
+  text-align: center;
+  padding: 8px 150px;
+  font-size: 14;
+  border-radius: 5px;
+}
+
+*.project-body{
+  background-color:#517B9D;
+}
+
+*.project-title{
+  text-align: center;
+}
+
+*.project-subtitle{
+  text-align: center;
+}
+
+*.project-side{
+  flex: 20.5%;
+  background-color:#333;
+  padding: 20px;
+  color: white;
+  align-items: center;
+  align-content: center;
+}
+
+*.project-main{
+  flex: 70%;
+  padding: 20px;
+  text-align: left;
+  align-items: auto;
+  color: white;
+}
+
+
 
 
 /* Phone Compability */
