@@ -62,7 +62,7 @@ body, html {
 
 .header {
   padding: 40px;
-  background: #5269DD;
+  background: #5269DD; /* Hover Effect met #1F51FF later toevoegen */
   color: white;
 }
 
@@ -159,7 +159,7 @@ body, html {
 
 *.project-header{
   padding: 20px;
-  background-color:#5269DD;
+  background-color:#5e24f2;
 }
 
 *.project-navbar{
@@ -226,4 +226,86 @@ body, html {
   padding: 20px;
   text-align: center;
   background: #C1306F;
+}
+
+/* Add this CSS to your existing stylesheet */
+
+/* Responsive Navigation */
+@media screen and (max-width: 700px) {
+  .navbar a {
+    float: none;
+    width: 100%;
+    padding: 10px; /* Add padding for touch-friendly buttons */
+    text-align: center;
+  }
+}
+
+/* Header Styling */
+.header {
+  background-color: #5269DD;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.header h1 {
+  font-size: 40px;
+  margin: 0; /* Remove default margins */
+}
+
+.header h3 {
+  font-size: 20px;
+  margin: 10px 0; /* Add margin for spacing */
+}
+
+/* Main Section Styling */
+.mainSection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Add spacing between side and main */
+}
+
+.side {
+  flex: 1;
+  background-color: #6C193D;
+  padding: 20px;
+  color: white;
+  margin: 10px; /* Add margin for spacing */
+}
+
+.main {
+  flex: 2; /* Adjust the ratio of side and main */
+  background-color: #517B9D;
+  padding: 20px;
+  color: white;
+  margin: 10px; /* Add margin for spacing */
+}
+
+/* Project Section Styling */
+.project {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.project .title {
+  text-align: left;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px; /* Add margin for spacing */
+}
+
+.project a {
+  flex: 1; /* Equal width for project items */
+  margin-bottom: 20px;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Footer Styling */
+.footer {
+  background-color: #C1306F; /* Hover Effect met #e43681 later toevoegen */
+  color: white;
+  text-align: center;
+  padding: 20px;
 }
