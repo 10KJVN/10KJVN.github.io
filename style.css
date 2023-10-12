@@ -55,14 +55,9 @@ body, html {
   color: white;
 }
 
-#Home {background-color: white;}
-#News {background-color: #6C193D;}
-#Contact {background-color: #5269DD;}
-#About {background-color: #517B9D;}
-
 .header {
   padding: 40px;
-  background: #5e24f2; /* Hover Effect met #1F51FF later toevoegen */
+  background: #5e24f2;
   color: white;
 }
 
@@ -85,9 +80,9 @@ body, html {
   box-sizing: border-box;
 }
 
-*.mainSection {
+.mainSection {
   display: flex;
-  flex-wrap: wrap;  
+  flex-wrap: wrap;
 }
 
 .title{
@@ -99,20 +94,20 @@ body, html {
   margin-top: 0px;
   width: 450px;
   height: 330px;
-  background-color:none;
-  display:grid;
+  background-color: none;
+  display: grid;
 }
 
 .box{
     background-color: purple;
-    padding:4px;
-    border-radius:0px;
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:40px;
-    font-family:sans-serif;
+    padding: 4px;
+    border-radius: 0px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    font-family: sans-serif;
 }
 
 .side {
@@ -126,10 +121,8 @@ body, html {
   margin-top: 0px;
 }
 
-/* main */
-
 .main {
-  width: 70%; /* Set the width of the main content */
+  width: 70%;
   background-color: #517B9D;
   padding: 20px;
   text-align: center;
@@ -155,19 +148,19 @@ body, html {
   text-align: justify;
 }
 
-/* Project css*/
+/* Project CSS */
 
-*.project-header{
+.project-header{
   padding: 20px;
-  background-color:#5e24f2;
+  background-color: #5e24f2;
 }
 
-*.project-navbar{
+.project-navbar{
   overflow: hidden;
-  background-color: hsl(0, 0%, 20%); 
+  background-color: hsl(0, 0%, 20%);
 }
 
-*.project-navbar a{
+.project-navbar a{
   display: inline-block;
   color: #E43681;
   text-align: center;
@@ -176,47 +169,33 @@ body, html {
   border-radius: 5px;
 }
 
-*.project-body{
-  background-color:#517B9D;
+.project-body{
+  background-color: #517B9D;
 }
 
-*.project-title{
+.project-title{
   text-align: center;
 }
 
-*.project-subtitle{
+.project-subtitle{
   text-align: center;
 }
 
-*.project-side{
+.project-side{
   flex: 20.5%;
-  background-color:#333;
+  background-color: #333;
   padding: 20px;
   color: white;
   align-items: center;
   align-content: center;
 }
 
-*.project-main{
+.project-main{
   flex: 70%;
   padding: 20px;
   text-align: left;
   align-items: auto;
   color: white;
-}
-
-/* Phone Compability */
-@media screen and (max-width: 700px) {
-  .mainSection {
-    flex-direction: column;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .navbar a {
-    float: none;
-    width: 100%;
-  }
 }
 
 .footer {
@@ -226,16 +205,6 @@ body, html {
 }
 
 /* Add this CSS to your existing stylesheet */
-
-/* Responsive Navigation */
-@media screen and (max-width: 700px) {
-  .navbar a {
-    float: none;
-    width: 100%;
-    padding: 10px; /* Add padding for touch-friendly buttons */
-    text-align: center;
-  }
-}
 
 /* Header Styling */
 .header {
@@ -247,19 +216,17 @@ body, html {
 
 .header h1 {
   font-size: 40px;
-  margin: 0; /* Remove default margins */
+  margin: 0;
 }
 
 .header h3 {
   font-size: 20px;
-  margin: 10px 0; /* Add margin for spacing */
+  margin: 10px 0;
 }
 
 /* Main Section Styling */
 .mainSection {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between; /* Add spacing between side and main */
+  justify-content: space-between;
 }
 
 .side {
@@ -267,41 +234,89 @@ body, html {
   background-color: #6C193D;
   padding: 20px;
   color: white;
-  margin: 10px; /* Add margin for spacing */
+  margin: 10px;
 }
 
 .main {
-  flex: 2; /* Adjust the ratio of side and main */
+  flex: 2;
   background-color: #517B9D;
   padding: 20px;
   color: white;
-  margin: 10px; /* Add margin for spacing */
+  margin: 10px;
 }
 
 /* Project Section Styling */
-.project {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
 .project .title {
   text-align: left;
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 10px; /* Add margin for spacing */
+  margin-bottom: 10px;
+}
+
+/* Existing styles for project-navbar */
+.project-navbar {
+  overflow: hidden;
+  background-color: hsl(0, 0%, 20%);
+  display: flex;
+  justify-content: center; /* Horizontally center items */
+}
+
+.project-navbar a {
+  display: inline-block;
+  color: #E43681;
+  text-align: center;
+  padding: 8px 15px; /* Adjusted padding for mobile */
+  font-size: 14;
+  border-radius: 5px;
+  margin: 0 10px; /* Add horizontal margin to separate links */
+}
+
+/* Desktop Styles */
+@media (min-width: 1280px) {
+  .project-navbar a {
+    padding: 8px 150px; /* Restore original padding for desktop */
+  }
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .project-navbar a {
+    padding: 8px 25px; /* Adjusted padding for tablets */
+  }
+}
+
+/* Mobile Styles */
+@media (min-width: 320px) and (max-width: 375px) {
+  .project-navbar a {
+    padding: 8px 5px; /* Adjust padding for mobile */
+  }
 }
 
 .project a {
-  flex: 1; /* Equal width for project items */
+  flex: 1;
   margin-bottom: 20px;
   text-align: center;
   text-decoration: none;
 }
 
+#projects{
+  height: auto;
+
+}
+.project-holder{
+  display: flex;
+}
+
+
+.project-holder > img{
+  height: 50%;
+  width: 50%;
+  padding:.5vw;
+}
+
 /* Footer Styling */
 .footer {
-  background-color: #C1306F; /* Hover Effect met #e43681 later toevoegen */
+  background-color: #C1306F;
   color: white;
   text-align: center;
   padding: 20px;
