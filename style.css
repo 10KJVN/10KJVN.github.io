@@ -62,7 +62,7 @@ body, html {
 
 .header {
   padding: 40px;
-  background: #5269DD; /* Hover Effect met #1F51FF later toevoegen */
+  background: #5e24f2; /* Hover Effect met #1F51FF later toevoegen */
   color: white;
 }
 
@@ -116,7 +116,7 @@ body, html {
 }
 
 .side {
-  flex: 20.5%;
+  width: 30%;
   background-color: #6C193D;
   padding: 20px;
 }
@@ -129,7 +129,7 @@ body, html {
 /* main */
 
 .main {
-  flex: 70%; /* Set the width of the main content */
+  width: 70%; /* Set the width of the main content */
   background-color: #517B9D;
   padding: 20px;
   text-align: center;
@@ -204,9 +204,6 @@ body, html {
   align-items: auto;
   color: white;
 }
-
-
-
 
 /* Phone Compability */
 @media screen and (max-width: 700px) {
