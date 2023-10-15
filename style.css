@@ -4,76 +4,22 @@ body, html {
   font-family: Arial;
 }
 
-.tablink {
-  background-color: #333;
-  color: white;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  font-size: 15px;
-}
-
-.tablink:hover {
-  background-color: none;
-}
-
-.tabcontent {
-  color: white;
-  display: none;
-  padding: 0px 0px;
-  height: 100%;
-}
-
-.navbar {
-  overflow: hidden;
-  background-color: #333;
-}
-
-.navbar a {
-  display: inline-block;
-  color: #E43681;
-  outline: none;
-  text-align: center;
-  padding: 8px 150px;
-  text-decoration: none;
-  font-size: 14px;
-  border-radius: 5px;
-}
-
-.navbar a.right {
-  float: right;
-}
-
-.navbar a:hover {
-  color: black;
-}
-
-.pill-nav a.active{
-  background-color: dodgerblue;
-  color: white;
-}
-
+/* Header Styling */
 .header {
-  padding: 40px;
-  background: #5e24f2;
+  background-color: #5269DD;
   color: white;
+  text-align: center;
+  padding: 20px;
 }
 
 .header h1 {
   font-size: 40px;
-  font-weight: bold;
+  margin: 0;
 }
 
 .header h3 {
   font-size: 20px;
-  display: block;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  font-weight: bold;
+  margin: 10px 0;
 }
 
 * {
@@ -155,10 +101,13 @@ body, html {
   background-color: #5e24f2;
 }
 
-.project-navbar{
-  overflow: hidden;
+.project-navbar {
+  position: sticky;
+  top: 0;
   background-color: hsl(0, 0%, 20%);
+  z-index: 100;
 }
+
 
 .project-navbar a{
   display: inline-block;
@@ -205,24 +154,6 @@ body, html {
 }
 
 /* Add this CSS to your existing stylesheet */
-
-/* Header Styling */
-.header {
-  background-color: #5269DD;
-  color: white;
-  text-align: center;
-  padding: 20px;
-}
-
-.header h1 {
-  font-size: 40px;
-  margin: 0;
-}
-
-.header h3 {
-  font-size: 20px;
-  margin: 10px 0;
-}
 
 /* Main Section Styling */
 .mainSection {
