@@ -5,6 +5,10 @@ body, html {
   background-color: white;
 }
 
+*{
+    box-sizing: border-box;
+}
+
 /* Header Styling */
 .header {
     background-color: #5e24f2;
@@ -14,23 +18,37 @@ body, html {
 }
 
 .header h1 {
-  /* ... Your existing header h1 styles ... */
+    font-size: 40px;
+    margin: 0;
 }
 
 .header h3 {
-  /* ... Your existing header h3 styles ... */
+    font-size: 20px;
+    margin: 10px 0;
 }
 
-/* Navbar Styling 
-.navbar {
-  /* ... Your existing project-navbar styles ... */
+/* Navbar Styling */
+.project-navbar {
+  overflow: hidden;
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  background-color: hsl(0, 0%, 20%);
+  color: hsl(0, 0%, 20%);
+  z-index: 100;
 }
 
-.navbar a {
-  /* ... Your existing project-navbar a styles ... */
+.project-navbar a {
+  display: inline-block;
+  color: #E43681;
+  text-align: center;
+  padding: 8px 150px;
+  font-size: 14;
+  border-radius: 5px;
 }
 
-/* Main Section Styling (Applies to the entire site) 
+/* Main Section Styling (Applies to the entire site) */
 .mainSection {
   /* ... Your existing mainSection styles ... */
 }
@@ -55,12 +73,12 @@ body, html {
   /* ... Your existing main p styles ... */
 
 
-/* Project Header Styling 
+/* Project Header Styling */
 .project-header {
   /* ... Your existing project-header styles ... */
 }
 
-/* Project Main Section Styling 
+/* Project Main Section Styling */
 .project-main {
   /* ... Your existing project-main styles ... */
 }
@@ -73,12 +91,37 @@ body, html {
   /* ... Your existing project-subtitle styles ... */
 }
 
-/* Reference Material Styling 
+/* Reference Material Styling */
 .project-side {
   /* ... Your existing project-side styles ... */
 }
 
-/* Footer Styling (Applies to the entire site) 
+
+
+/* Desktop Styles */
+@media (min-width: 1280px) {
+    .project-navbar a {
+      padding: 8px 150px; /* Restore original padding for desktop */
+    }
+}
+  
+/* Tablet Styles */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .project-navbar a {
+      padding: 8px 25px; /* Adjusted padding for tablets */
+    }
+}
+  
+/* Mobile Styles */
+@media (min-width: 320px) and (max-width: 375px) {
+    .project-navbar a {
+      padding: 8px 5px; /* Adjust padding for mobile */
+    }
+}
+
 .footer {
-  /* ... Your existing footer styles ... */
+    background-color: #C1306F;
+    color: white;
+    text-align: center;
+    padding: 20px;
 } 
