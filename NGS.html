@@ -10,58 +10,52 @@
     <script src="main.js" defer></script>
 </head>
 
-<body class="project-body">
+<body class="body">
     <div class="project03"> 
 
         <div class="project-header">
-            <h1>Project Starfall</h1>
+            <h1 id="project-title">Project Title</h1>
             <h3>2023 - Now</h3>
         </div>
     
         <div class="project-navbar">
             <a href="index.html">Home</a>
-            <a href="aboutProject">About</a>
-            <a href="index.html">Projects</a>
+            <a href="#aboutProject">About</a>
+            <a href="#referenceMaterial">Reference Material</a>
             <a href="#contact">Contact</a>
         </div>
 
-        <div class="project-main">
-            <h2 class="project-title" id="aboutProject">About This Project</h2>
-            <p class="project-subtitle">Project Starfall is a 2.5D, Co-op, Metroidvania inspired by 80's cartoons.</p>
-            <br> 
-            <p>For this project i spend 3 days a week in a Hybrid Learning Environment (HLE) </p>
-            <p>At the Neon Game Studio i and my colleague are currently working on the Octo-drone's</p> 
-            </p>
-                 <li>
-                    Enemy Artifical Intelligence (AI)
-                </li>
-            <p>I've learned alot in these last weeks i spent there.</p>
-            <p>I really feel like the HLE, is a great preparation for the actual Industry</p>
-            <p>Because here i've learned to work with a Custom Engine, more in-depth Unity stuff</p>
-            <br>
-            <p>And so much more since they've got their own Force System which i had to learn</p>
-            <p>In short i could write a book about the knowledge i've gained while working on our enemy.</p>
-            <br>
-            <p>What did i contribute in this project until now?</p>
-            <li>
-                Re-based existing scripts.
-            </li>
-            <li>
-                Gave the Octodrone damage & made it destructable
-            </li>
+        <!-- Feature 1 -->
+        <div class="project-feature" id="feature-1">
+            <h2 class="project-title" id="aboutProject">About This Feature</h2>
+            <p class="project-subtitle">Feature 1 description goes here.</p>
+            <!-- Add specific content for Feature 1 -->
+        </div>
 
-            <a href="https://www.neonorigins.com/">   
-                <p> -> Their Website <- </p>
-            </a>
+        <!-- Feature 2 -->
+        <div class="project-feature" id="feature-2">
+            <h2 class="project-title" id="aboutProject">About This Feature</h2>
+            <p class="project-subtitle">Feature 2 description goes here.</p>
+            <!-- Add specific content for Feature 2 -->
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="project-feature" id="feature-3">
+            <h2 class="project-title" id="aboutProject">About This Feature</h2>
+            <p class="project-subtitle">Feature 3 description goes here.</p>
+            <!-- Add specific content for Feature 3 -->
+        </div>
+
+        <!-- Navigation for Features -->
+        <div class="feature-navigation">
+            <button onclick="showFeature(1)">Feature 1</button>
+            <button onclick="showFeature(2)">Feature 2</button>
+            <button onclick="showFeature(3)">Feature 3</button>
         </div>
 
         <div class="project-side">
-            <h2 id="RM">Refference Material</h2>
-
-            <img src="NGS_thumb.jpg" width="300" height="300" alt="The main menu of our game.">
-            <img src="NGif1.gif"></img>
-            <img src="NGif2.gif"></img>
-            <p class="project-subtitle">Neon Game Studio's Logo & The enemy i'm working on.</p>
+            <h2 id="referenceMaterial">Reference Material</h2>
+            <!-- Add reference material here for the selected feature -->
         </div>
 
         <div class="footer">
@@ -82,5 +76,16 @@
         
         </div>
     </div>
+    
+    <script>
+        function showFeature(featureNumber) {
+            // Hide all feature containers
+            for (let i = 1; i <= 3; i++) {
+                document.getElementById('feature-' + i).style.display = 'none';
+            }
+            // Show the selected feature container
+            document.getElementById('feature-' + featureNumber).style.display = 'block';
+        }
+    </script>
 </body>
 </html>

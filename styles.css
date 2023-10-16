@@ -1,0 +1,84 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial;
+  background-color: white;
+}
+
+/* Header Styling */
+.header {
+    background-color: #5e24f2;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.header h1 {
+  /* ... Your existing header h1 styles ... */
+}
+
+.header h3 {
+  /* ... Your existing header h3 styles ... */
+}
+
+/* Navbar Styling 
+.navbar {
+  /* ... Your existing project-navbar styles ... */
+}
+
+.navbar a {
+  /* ... Your existing project-navbar a styles ... */
+}
+
+/* Main Section Styling (Applies to the entire site) 
+.mainSection {
+  /* ... Your existing mainSection styles ... */
+}
+
+.side {
+  /* ... Your existing side styles ... */
+}
+
+.main {
+  /* ... Your existing main styles ... */
+}
+
+.main h2 {
+  /* ... Your existing main h2 styles ... */
+}
+
+.main a {
+  /* ... Your existing main a styles ... */
+}
+
+.main p {
+  /* ... Your existing main p styles ... */
+
+
+/* Project Header Styling 
+.project-header {
+  /* ... Your existing project-header styles ... */
+}
+
+/* Project Main Section Styling 
+.project-main {
+  /* ... Your existing project-main styles ... */
+}
+
+.project-title {
+  /* ... Your existing project-title styles ... */
+}
+
+.project-subtitle {
+  /* ... Your existing project-subtitle styles ... */
+}
+
+/* Reference Material Styling 
+.project-side {
+  /* ... Your existing project-side styles ... */
+}
+
+/* Footer Styling (Applies to the entire site) 
+.footer {
+  /* ... Your existing footer styles ... */
+} 
