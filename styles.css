@@ -50,11 +50,15 @@ body, html {
 
 /* Main Section Styling (Applies to the entire site) */
 .mainSection {
-  /* ... Your existing mainSection styles ... */
+  justify-content: space-between;
 }
 
 .side {
-  /* ... Your existing side styles ... */
+    flex: 1;
+    background-color: #6C193D;
+    padding: 20px;
+    color: white;
+    margin: 10px;
 }
 
 .main {
