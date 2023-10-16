@@ -46,11 +46,14 @@ body, html {
   padding: 8px 150px;
   font-size: 14;
   border-radius: 5px;
+  margin: 0 10px;
 }
 
 /* Main Section Styling (Applies to the entire site) */
 .mainSection {
   justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .side {
@@ -62,20 +65,27 @@ body, html {
 }
 
 .main {
-  /* ... Your existing main styles ... */
+    flex: 2;
+    background-color: #517B9D;
+    padding: 20px;
+    color: white;
+    margin: 10px;
 }
 
 .main h2 {
-  /* ... Your existing main h2 styles ... */
+  text-align: center;
 }
 
 .main a {
-  /* ... Your existing main a styles ... */
+  float: left;
+  width: 50%;
+  height: 250px;
+  margin-bottom: 80px;
 }
 
 .main p {
-  /* ... Your existing main p styles ... */
-
+  text-align: justify;
+}
 
 /* Project Header Styling */
 .project-header {
