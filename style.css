@@ -37,63 +37,25 @@ body, html {
   text-align: left;
 }
 
-.container{
-  margin-top: 0px;
-  width: 450px;
-  height: 330px;
-  background-color: none;
-  display: grid;
-}
-
-.box{
-    background-color: purple;
-    padding: 4px;
-    border-radius: 0px;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 40px;
-    font-family: sans-serif;
-}
-
 .side {
   width: 30%;
   background-color: #6C193D;
   padding: 20px;
 }
 
-.side img{
-  padding-top: 0px;
-  margin-top: 0px;
-}
-
 .main {
   width: 70%;
   background-color: #517B9D;
   padding: 20px;
-  text-align: center;
-  align-items: center;
-  display: center;
-
-  grid-template-columns: repeat(2, 1fr);
-  row-gap: 3rem;
 }
 
 .main h2{
   text-align: center;
 }
 
-.main a{
-  float: left;
-  width: 50%;
-  height: 250px;
-  margin-bottom: 80px;
-}
+/* Denk dat Deze weg kan want wat doet het?? */
 
-.main p{
-  text-align: justify;
-}
+
 
 /* Project CSS */
 
@@ -235,6 +197,11 @@ body, html {
   display: flex;
 }
 
+.project-holder > a{
+  height: 100%;
+  width: 100%;
+  padding: 2vw;
+}
 
 .project-holder > img{
   height: 50%;

@@ -60,31 +60,22 @@ body, html {
     flex: 1;
     background-color: #6C193D;
     padding: 20px;
+    width: 30%;
     color: white;
     margin: 10px;
 }
 
 .main {
     flex: 2;
-    background-color: #517B9D;
-    padding: 20px;
     color: white;
+    background-color: #517B9D;
+    width: 70%;
+    padding: 20px;
     margin: 10px;
 }
 
 .main h2 {
   text-align: center;
-}
-
-.main a {
-  float: left;
-  width: 50%;
-  height: 250px;
-  margin-bottom: 80px;
-}
-
-.main p {
-  text-align: justify;
 }
 
 /* Project Header Styling */
