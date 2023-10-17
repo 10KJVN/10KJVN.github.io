@@ -65,17 +65,72 @@ body, html {
 .project-navbar a:hover {
   transform: scale(1.1); /* Scale the link up by 10% when hovered */
 }
-
-/* Arrow Button Styling */
-#arrow-button {
+.mainSection {
   display: flex;
-  background-color: #5e24f2; /* Background color for the button */
-  color: white; /* Text color for the button */
-  border: none;
-  padding: 10px 20px;
-  margin-left: 10px; /* Adjust the margin to position the button */
-  cursor: pointer;
+  height: 42vw;
 }
+
+.side {
+  flex: 30%;
+  background-color: #6C193D;
+  color: white;
+  padding: 20px;
+}
+
+.main {
+  flex: 70%;
+  background-color: #5269dd;
+  padding-left: 3vw;
+}
+
+.main h2 {
+  text-align: center;
+}
+
+/* Scope the project-slider and project styles to .mainSection */
+.mainSection .project-slider {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+}
+
+.mainSection .project {
+  flex: 0 0 70%;
+  padding: 20px;
+  background-color: #f0f0f0;
+  margin: 10px;
+  border: 1px solid #ccc;
+  max-width: 100%;
+}
+
+
+.project-tabs {
+  display: flex;
+  padding:1vw;
+}
+
+.tab {
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+}
+
+.tab:hover {
+  background-color: #ddd;
+}
+.project-features{
+  height: 90vh;
+}
+.project-features .feature {
+  display: none;
+}
+
+.project-features .feature.active {
+  display: block;
+}
+
 
 /* Footer Styling */
 .footer {
