@@ -196,13 +196,6 @@ body, html {
 .project-holder{
   display: flex;
 }
-
-.project-holder > a{
-  height: 100%;
-  width: 100%;
-  padding: 2vw;
-}
-
 .project-holder > img{
   height: 50%;
   width: 50%;

@@ -1,82 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>10KJVN</title>
-
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles.css" />
     <script src="main.js" defer></script>
 </head>
 
 <body class="body">
-    <div class="project03"> 
-
-        <div class="project-header">
-            <h1 id="project-title">Project Title</h1>
-            <h3>2023 - Now</h3>
+    <div id="Starfall">
+        <div class="header">
+            <div class="header-title">
+                <h1>Project Title</h1>
+                <h3>2023 - Now</h3>
+            </div>
+            <button class="header-button">➤</button>
         </div>
-    
         <div class="project-navbar">
-            <a href="index.html">Home</a>
-            <a href="#aboutProject">About</a>
-            <a href="#referenceMaterial">Reference Material</a>
-            <a href="#contact">Contact</a>
+            <a class="navbar-link" href="index.html">Home</a>
+            <a class="navbar-link" href="#aboutProject">About</a>
+            <a class="navbar-link" href="#referenceMaterial">Reference</a>
+            <a class="navbar-link" href="#contact">Contact</a>
         </div>
-
         <!-- Feature 1 -->
         <div class="project-feature" id="feature-1">
-            <h2 class="project-title" id="aboutProject">About This Feature</h2>
-            <p class="project-subtitle">Feature 1 description goes here.</p>
+            <h2 class="feature-title" id="aboutProject">About This Feature</h2>
+            <p class="feature-subtitle">Feature 1 description goes here.</p>
             <!-- Add specific content for Feature 1 -->
         </div>
-
         <!-- Feature 2 -->
         <div class="project-feature" id="feature-2">
-            <h2 class="project-title" id="aboutProject">About This Feature</h2>
-            <p class="project-subtitle">Feature 2 description goes here.</p>
+            <h2 class="feature-title" id="aboutProject">About This Feature</h2>
+            <p class="feature-subtitle">Feature 2 description goes here.</p>
             <!-- Add specific content for Feature 2 -->
         </div>
-
         <!-- Feature 3 -->
         <div class="project-feature" id="feature-3">
-            <h2 class="project-title" id="aboutProject">About This Feature</h2>
-            <p class="project-subtitle">Feature 3 description goes here.</p>
+            <h2 class="feature-title" id="aboutProject">About This Feature</h2>
+            <p class="feature-subtitle">Feature 3 description goes here.</p>
             <!-- Add specific content for Feature 3 -->
         </div>
-
         <!-- Navigation for Features -->
         <div class="feature-navigation">
-            <button onclick="showFeature(1)">Feature 1</button>
-            <button onclick="showFeature(2)">Feature 2</button>
-            <button onclick="showFeature(3)">Feature 3</button>
+            <button class="feature-button" onclick="showFeature(1)">Feature 1</button>
+            <button class="feature-button" onclick="showFeature(2)">Feature 2</button>
+            <button class="feature-button" onclick="showFeature(3)">Feature 3</button>
         </div>
-
         <div class="project-side">
             <h2 id="referenceMaterial">Reference Material</h2>
             <!-- Add reference material here for the selected feature -->
         </div>
-
         <div class="footer">
             <h2 id="contact">Contact</h2>
-              <ul class="footerNavigation">
-                <p class="footerNavigationItem">
+            <ul class="footer-navigation">
+                <li class="footer-item">
                     How can you reach me?
-                </p>
-                <p class="footerNavigationItem">
-                  Email: Jahva_game11@hotmail.com
-                </p>
-                <p>
-                  or via 
-                  <a href="https://github.com/10KJVN">My Github</a>
-                </p>
-              </ul>
-            </div>
-        
+                </li>
+                <li class="footer-item">
+                    Email: Jahva_game11@hotmail.com
+                </li>
+                <li class="footer-item">
+                    or via
+                    <a class="github-link" href="https://github.com/10KJVN">My Github</a>
+                </li>
+            </ul>
         </div>
     </div>
-    
     <script>
         function showFeature(featureNumber) {
             // Hide all feature containers
@@ -88,4 +80,5 @@
         }
     </script>
 </body>
+
 </html>
