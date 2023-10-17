@@ -18,6 +18,7 @@ body, html {
   color: white;
   text-align: center;
   padding: 20px;
+  transition: background-color 0.3s;
 }
 
 .header-title {
@@ -30,8 +31,13 @@ body, html {
   margin: 0;
 }
 
+.header:hover {
+  background-color:#1F51FF;  /* Change background color on hover */
+  color: gold;
+}
+
 .header-button {
-  transition: transform 0.s ease; /* Add a smooth transition on the transform property */
+  transition: transform 0.15s ease; /* Add a smooth transition on the transform property */
 }
 
 .header-button:hover {
@@ -65,6 +71,7 @@ body, html {
 .project-navbar a:hover {
   transform: scale(1.1); /* Scale the link up by 10% when hovered */
 }
+
 .mainSection {
   display: flex;
   height: 42vw;
@@ -131,13 +138,16 @@ body, html {
   display: block;
 }
 
-
-/* Footer Styling */
 .footer {
   background-color: #C1306F;
   color: white;
   text-align: center;
   padding: 20px;
+  transition: background-color 0.3s; /* Add transition for smoother color change */
+}
+
+.footer:hover {
+  background-color: #e43681; /* Change background color on hover */
 }
 
 /* Desktop Styles */
