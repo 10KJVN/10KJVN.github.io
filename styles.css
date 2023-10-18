@@ -32,20 +32,20 @@ body, html {
 }
 
 .header:hover {
-  background-color:#1F51FF;  /* Change background color on hover */
+  background-color:#1F51FF;
   color: gold;
 }
 
 .header-button {
-  transition: transform 0.15s ease; /* Add a smooth transition on the transform property */
+  transition: transform 0.15s ease;
 }
 
 .header-button:hover {
-  transform: scale(1.1); /* Scale the button up by 10% when hovered */
+  transform: scale(1.1);
 }
 
 /* Navbar Styling */
-.project-navbar {
+.navbar {
   overflow: hidden;
   position: sticky;
   top: 0;
@@ -56,7 +56,7 @@ body, html {
   z-index: 100;
 }
 
-.project-navbar a {
+.navbar a {
   display: inline-block;
   color: #E43681;
   text-align: center;
@@ -68,13 +68,14 @@ body, html {
   transform: scale(1);
 }
 
-.project-navbar a:hover {
-  transform: scale(1.1); /* Scale the link up by 10% when hovered */
+.navbar a:hover {
+  transform: scale(1.1);
 }
 
+/* MainSection Styling */
 .mainSection {
   display: flex;
-  height: 42vw;
+  height: 40vw;
 }
 
 .side {
@@ -87,27 +88,91 @@ body, html {
 .main {
   flex: 70%;
   background-color: #5269dd;
-  padding-left: 3vw;
+  background-image: url(none);
+  overflow:auto;
 }
 
+/* Original styling for the h2 element */
 .main h2 {
   text-align: center;
+  color: white;
+  background-color: #5269dd;
+  background-image: url(none);
+  padding:1.5vh;
+  margin: 0px;
 }
 
-/* Scope the project-slider and project styles to .mainSection */
-.mainSection .project-slider {
-  display: flex;
+.main img{
+  width: 70vw;
+  padding: 0px;
+  margin: 0px;
+}
+
+/* Styles for the Project Container */
+.project-container {
+  text-align: center;
+  background-color: #5269dd; /* Background color similar to .main */
+  background-image: url(none); /* Background image similar to .main h2 */
+  border-right: 1px;
+  color: white;
+  padding: 1.5vh;
+  display: block;
+  position: relative;
+}
+
+/* Add a right-side border to the Project Container */
+.project-container::before {
+  content: "";
+  background-color: #5269dd; /* Background color similar to .main */
+  width: 2vh; /* Adjust as needed for the width of the right bar */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+
+/* Bar at the bottom of the Project Container */
+.project-container::after { 
+  content: "";
+  background-color: #5269dd; /* Background color similar to .main */
+  background-image: url(none); /* Background image similar to .main h2 */
+  display: block;
+  height: 2vh; /* Adjust as needed for the height of the bar */
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* Disable scrolling for the Project Section */
+.project-container {
   overflow: hidden;
-  width: 100%;
 }
 
-.mainSection .project {
-  flex: 0 0 70%;
-  padding: 20px;
-  background-color: #f0f0f0;
-  margin: 10px;
-  border: 1px solid #ccc;
-  max-width: 100%;
+/* Arrow Styling (unchanged) */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  z-index: 1;
+}
+
+.arrow.prev {
+  left: 440px; /* Position on the left side of the project slider */
+}
+
+.arrow.next {
+  right: 20px; /* Position on the right side of the project slider */
 }
 
 
@@ -138,6 +203,7 @@ body, html {
   display: block;
 }
 
+/* Footer Styling */
 .footer {
   background-color: #C1306F;
   color: white;
@@ -151,22 +217,22 @@ body, html {
 }
 
 /* Desktop Styles */
-@media (min-width: 1280px) {
-  .project-navbar a {
-    padding: 8px 150px; /* Restore original padding for desktop */
+@media (min-width: 1280px) and (max-width: 1440px) {
+  .navbar a {
+    padding: 8px 150px;
   }
 }
 
 /* Tablet Styles */
 @media (min-width: 768px) and (max-width: 1024px) {
-  .project-navbar a {
-    padding: 8px 25px; /* Adjusted padding for tablets */
+  .navbar a {
+    padding: 8px 32px; /* Adjusted padding for tablets */
   }
 }
 
 /* Mobile Styles */
 @media (min-width: 320px) and (max-width: 375px) {
-  .project-navbar a {
-    padding: 8px 5px; /* Adjust padding for mobile */
+  .navbar a {
+    padding: 8px 16px; /* Adjust padding for mobile */
   }
 }

@@ -16,28 +16,35 @@ tabs.forEach(tab => {
     });
 });
 
-// JavaScript for the project slider
-const projectSlider = document.querySelector('.project-slider');
+// JavaScript for the project image slider
+const projectContainer = document.querySelector('.project-container');
 const projects = document.querySelectorAll('.project');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
+const prevArrow = document.querySelector('.arrow.prev');
+const nextArrow = document.querySelector('.arrow.next');
 let projectIndex = 0;
 
 function showProject(index) {
-  projects.forEach((project, i) => {
-    project.style.transform = `translateX(-${100 * (i - index)}%)`;
-  });
+  projectContainer.style.transform = `translateX(-${100 * index}%)`;
 }
 
-prevBtn.addEventListener('click', () => {
-  projectIndex = Math.max(0, projectIndex - 1);
+prevArrow.addEventListener('click', () => {
+  projectIndex = (projectIndex - 1 + projects.length) % projects.length; // Loop back to the end if at the beginning
   showProject(projectIndex);
 });
 
-nextBtn.addEventListener('click', () => {
-  projectIndex = Math.min(projects.length - 1, projectIndex + 1);
+nextArrow.addEventListener('click', () => {
+  projectIndex = (projectIndex + 1) % projects.length; // Loop back to the beginning if at the end
   showProject(projectIndex);
 });
+
+function autoSlide() {
+  projectIndex = (projectIndex + 1) % projects.length;
+  showProject(projectIndex);
+}
+
+// Set an interval for automated sliding (change every 5 seconds)
+setInterval(autoSlide, 5000);
 
 // Show the first project initially
 showProject(projectIndex);
+
