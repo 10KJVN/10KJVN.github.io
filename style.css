@@ -270,7 +270,7 @@ body, html {
   background-color: #6C193D;
   padding: 20px;
   color: white;
-  margin: 10px; /* Add margin for spacing */
+  margin: 0px; /* Add margin for spacing */
 }
 
 .main {
@@ -278,7 +278,7 @@ body, html {
   background-color: #517B9D;
   padding: 20px;
   color: white;
-  margin: 10px; /* Add margin for spacing */
+  margin: 0px; /* Add margin for spacing */
 }
 
 /* Project Section Styling */
