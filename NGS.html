@@ -1,86 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>10KJVN</title>
-
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles.css" />
     <script src="main.js" defer></script>
 </head>
 
-<body class="project-body">
-    <div class="project03"> 
-
-        <div class="project-header">
-            <h1>Project Starfall</h1>
-            <h3>2023 - Now</h3>
+<body class="body">
+    <div id="Starfall">
+        <div class="header">
+            <div class="header-title">
+                <h1>Project Title</h1>
+                <h3>2023 - Now</h3>
+            </div>
+            <button class="header-button">➤</button>
         </div>
-    
-        <div class="project-navbar">
-            <a href="index.html">Home</a>
-            <a href="aboutProject">About</a>
-            <a href="index.html">Projects</a>
-            <a href="#contact">Contact</a>
-        </div>
-
-        <div class="project-main">
-            <h2 class="project-title" id="aboutProject">About This Project</h2>
-            <p class="project-subtitle">Project Starfall is a 2.5D, Co-op, Metroidvania inspired by 80's cartoons.</p>
-            <br> 
-            <p>For this project i spend 3 days a week in a Hybrid Learning Environment (HLE) </p>
-            <p>At the Neon Game Studio i and my colleague are currently working on the Octo-drone's</p> 
-            </p>
-                 <li>
-                    Enemy Artifical Intelligence (AI)
-                </li>
-            <p>I've learned alot in these last weeks i spent there.</p>
-            <p>I really feel like the HLE, is a great preparation for the actual Industry</p>
-            <p>Because here i've learned to work with a Custom Engine, more in-depth Unity stuff</p>
-            <br>
-            <p>And so much more since they've got their own Force System which i had to learn</p>
-            <p>In short i could write a book about the knowledge i've gained while working on our enemy.</p>
-            <br>
-            <p>What did i contribute in this project until now?</p>
-            <li>
-                Re-based existing scripts.
-            </li>
-            <li>
-                Gave the Octodrone damage & made it destructable
-            </li>
-
-            <a href="https://www.neonorigins.com/">   
-                <p> -> Their Website <- </p>
-            </a>
+        <div class="navbar">
+            <a class="navbar-link" href="index.html">Home</a>
+            <a class="navbar-link" href="#aboutProject">About</a>
+            <a class="navbar-link" href="#project">Reference</a>
+            <a class="navbar-link" href="#contact">Contact</a>
         </div>
 
-        <div class="project-side">
-            <h2 id="RM">Refference Material</h2>
+        <div class="mainSection">
+            <div class="side">
+                <h2 id="aboutProject">About Project</h2>
+                <p>
+                    A Short summary about the project.
+                </p>
+            </div>
+            <div class="main">
+                <div class="project-tabs">
+                    <div class="tab" data-tab="1">Tab 1</div>
+                    <div class="tab" data-tab="2">Tab 2</div>
+                    <div class="tab" data-tab="3">Tab 3</div>
+                </div>
 
-            <img src="NGS_thumb.jpg" width="300" height="300" alt="The main menu of our game.">
-            <img src="NGif1.gif"></img>
-            <img src="NGif2.gif"></img>
-            <p class="project-subtitle">Neon Game Studio's Logo & The enemy i'm working on.</p>
+            
+                <div class="project-features">
+                    <div class="feature" id="feature-1">
+                        <h2 class="feature-title">Tab 1</h2>
+                        <p class="feature-subtitle">Feature 1 description goes here.</p>
+                        <!-- Add specific content for Tab 1 -->
+                    </div>
+                    <div class="feature" id="feature-2">
+                        <h2 class="feature-title">Tab 2</h2>
+                        <p class="feature-subtitle">Feature 2 description goes here.</p>
+                        <!-- Add specific content for Tab 2 -->
+                    </div>
+                    <div class="feature" id="feature-3">
+                        <h2 class="feature-title">Tab 3</h2>
+                        <p class="feature-subtitle">Feature 3 description goes here.</p>
+                        <!-- Add specific content for Tab 3 -->
+                    </div>
+                </div>
+            </div>
+            
         </div>
 
         <div class="footer">
             <h2 id="contact">Contact</h2>
-              <ul class="footerNavigation">
-                <p class="footerNavigationItem">
+            <ul class="footer-navigation">
+                <p class="footer-item">
                     How can you reach me?
                 </p>
-                <p class="footerNavigationItem">
-                  Email: Jahva_game11@hotmail.com
+                <p class="footer-item">
+                    Email: Jahva_game11@hotmail.com
                 </p>
-                <p>
-                  or via 
-                  <a href="https://github.com/10KJVN">My Github</a>
+                <p class="footer-item">
+                    or via
+                    <a class="github-link" href="https://github.com/10KJVN">My Github</a>
                 </p>
-              </ul>
-            </div>
-        
+            </ul>
         </div>
     </div>
+
+    <script>
+        function showFeature(featureNumber) {
+            // Hide all feature containers
+            for (let i = 1; i <= 3; i++) {
+                document.getElementById('feature-' + i).style.display = 'none';
+            }
+            // Show the selected feature container
+            document.getElementById('feature-' + featureNumber).style.display = 'block';
+        }
+    </script>
+
 </body>
+
 </html>

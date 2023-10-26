@@ -2,242 +2,7 @@ body, html {
   height: 100%;
   margin: 0;
   font-family: Arial;
-}
-
-.tablink {
-  background-color: #333;
-  color: white;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  font-size: 15px;
-}
-
-.tablink:hover {
-  background-color: none;
-}
-
-.tabcontent {
-  color: white;
-  display: none;
-  padding: 0px 0px;
-  height: 100%;
-}
-
-.navbar {
-  overflow: hidden;
-  background-color: #333;
-}
-
-.navbar a {
-  display: inline-block;
-  color: #E43681;
-  outline: none;
-  text-align: center;
-  padding: 8px 150px;
-  text-decoration: none;
-  font-size: 14px;
-  border-radius: 5px;
-}
-
-.navbar a.right {
-  float: right;
-}
-
-.navbar a:hover {
-  color: black;
-}
-
-.pill-nav a.active{
-  background-color: dodgerblue;
-  color: white;
-}
-
-#Home {background-color: white;}
-#News {background-color: #6C193D;}
-#Contact {background-color: #5269DD;}
-#About {background-color: #517B9D;}
-
-.header {
-  padding: 40px;
-  background: #5269DD; /* Hover Effect met #1F51FF later toevoegen */
-  color: white;
-}
-
-.header h1 {
-  font-size: 40px;
-  font-weight: bold;
-}
-
-.header h3 {
-  font-size: 20px;
-  display: block;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  font-weight: bold;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-*.mainSection {
-  display: flex;
-  flex-wrap: wrap;  
-}
-
-.title{
-  padding: 0px;
-  text-align: left;
-}
-
-.container{
-  margin-top: 0px;
-  width: 450px;
-  height: 330px;
-  background-color:none;
-  display:grid;
-}
-
-.box{
-    background-color: purple;
-    padding:4px;
-    border-radius:0px;
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:40px;
-    font-family:sans-serif;
-}
-
-.side {
-  flex: 20.5%;
-  background-color: #6C193D;
-  padding: 20px;
-}
-
-.side img{
-  padding-top: 0px;
-  margin-top: 0px;
-}
-
-/* main */
-
-.main {
-  flex: 70%; /* Set the width of the main content */
-  background-color: #517B9D;
-  padding: 20px;
-  text-align: center;
-  align-items: center;
-  display: center;
-
-  grid-template-columns: repeat(2, 1fr);
-  row-gap: 3rem;
-}
-
-.main h2{
-  text-align: center;
-}
-
-.main a{
-  float: left;
-  width: 50%;
-  height: 250px;
-  margin-bottom: 80px;
-}
-
-.main p{
-  text-align: justify;
-}
-
-/* Project css*/
-
-*.project-header{
-  padding: 20px;
-  background-color:#5e24f2;
-}
-
-*.project-navbar{
-  overflow: hidden;
-  background-color: hsl(0, 0%, 20%); 
-}
-
-*.project-navbar a{
-  display: inline-block;
-  color: #E43681;
-  text-align: center;
-  padding: 8px 150px;
-  font-size: 14;
-  border-radius: 5px;
-}
-
-*.project-body{
-  background-color:#517B9D;
-}
-
-*.project-title{
-  text-align: center;
-}
-
-*.project-subtitle{
-  text-align: center;
-}
-
-*.project-side{
-  flex: 20.5%;
-  background-color:#333;
-  padding: 20px;
-  color: white;
-  align-items: center;
-  align-content: center;
-}
-
-*.project-main{
-  flex: 70%;
-  padding: 20px;
-  text-align: left;
-  align-items: auto;
-  color: white;
-}
-
-
-
-
-/* Phone Compability */
-@media screen and (max-width: 700px) {
-  .mainSection {
-    flex-direction: column;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .navbar a {
-    float: none;
-    width: 100%;
-  }
-}
-
-.footer {
-  padding: 20px;
-  text-align: center;
-  background: #C1306F;
-}
-
-/* Add this CSS to your existing stylesheet */
-
-/* Responsive Navigation */
-@media screen and (max-width: 700px) {
-  .navbar a {
-    float: none;
-    width: 100%;
-    padding: 10px; /* Add padding for touch-friendly buttons */
-    text-align: center;
-  }
+  background-color: white;
 }
 
 /* Header Styling */
@@ -250,19 +15,108 @@ body, html {
 
 .header h1 {
   font-size: 40px;
-  margin: 0; /* Remove default margins */
+  margin: 0;
 }
 
 .header h3 {
   font-size: 20px;
-  margin: 10px 0; /* Add margin for spacing */
+  margin: 10px 0;
 }
 
-/* Main Section Styling */
+* {
+  box-sizing: border-box;
+}
+
 .mainSection {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between; /* Add spacing between side and main */
+}
+
+.title{
+  padding: 0px;
+  text-align: left;
+}
+
+.side {
+  width: 30%;
+  background-color: #6C193D;
+  padding: 20px;
+}
+
+.main {
+  width: 70%;
+  background-color: #517B9D;
+  padding: 20px;
+}
+
+.main h2{
+  text-align: center;
+}
+
+/* Denk dat Deze weg kan want wat doet het?? */
+
+
+
+/* Project CSS */
+
+.project-header{
+  padding: 20px;
+  background-color: #5e24f2;
+}
+
+.project-navbar {
+  position: sticky;
+  top: 0;
+  background-color: hsl(0, 0%, 20%);
+  z-index: 100;
+}
+
+
+.project-navbar a{
+  display: inline-block;
+  color: #E43681;
+  text-align: center;
+  padding: 8px 150px;
+  font-size: 14;
+  border-radius: 5px;
+}
+
+.project-title{
+  text-align: center;
+}
+
+.project-subtitle{
+  text-align: center;
+}
+
+.project-side{
+  flex: 20.5%;
+  background-color: #333;
+  padding: 20px;
+  color: white;
+  align-items: center;
+  align-content: center;
+}
+
+.project-main{
+  flex: 70%;
+  padding: 20px;
+  text-align: left;
+  align-items: auto;
+  color: white;
+}
+
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #C1306F;
+}
+
+/* Add this CSS to your existing stylesheet */
+
+/* Main Section Styling */
+.mainSection {
+  justify-content: space-between;
 }
 
 .side {
@@ -270,42 +124,164 @@ body, html {
   background-color: #6C193D;
   padding: 20px;
   color: white;
-  margin: 0px; /* Add margin for spacing */
+  margin: 10px;
 }
 
 .main {
-  flex: 2; /* Adjust the ratio of side and main */
+  flex: 2;
   background-color: #517B9D;
   padding: 20px;
   color: white;
-  margin: 0px; /* Add margin for spacing */
+  margin: 10px;
 }
 
 /* Project Section Styling */
-.project {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
 .project .title {
   text-align: left;
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 10px; /* Add margin for spacing */
+  margin-bottom: 10px;
+}
+
+/* Existing styles for project-navbar */
+.project-navbar {
+  overflow: hidden;
+  background-color: hsl(0, 0%, 20%);
+  display: flex;
+  justify-content: center; /* Horizontally center items */
+}
+
+.project-navbar a {
+  display: inline-block;
+  color: #E43681;
+  text-align: center;
+  padding: 8px 15px; /* Adjusted padding for mobile */
+  font-size: 14;
+  border-radius: 5px;
+  margin: 0 10px; /* Add horizontal margin to separate links */
+}
+
+/* Desktop Styles */
+@media (min-width: 1280px) {
+  .project-navbar a {
+    padding: 8px 150px; /* Restore original padding for desktop */
+  }
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .project-navbar a {
+    padding: 8px 25px; /* Adjusted padding for tablets */
+  }
+}
+
+/* Mobile Styles */
+@media (min-width: 320px) and (max-width: 375px) {
+  .project-navbar a {
+    padding: 8px 5px; /* Adjust padding for mobile */
+  }
 }
 
 .project a {
-  flex: 1; /* Equal width for project items */
+  flex: 1;
   margin-bottom: 20px;
   text-align: center;
   text-decoration: none;
 }
 
+#projects{
+  height: auto;
+
+}
+.project-holder{
+  display: flex;
+}
+.project-holder > img{
+  height: 50%;
+  width: 50%;
+  padding: 2vw;
+}
+
 /* Footer Styling */
 .footer {
-  background-color: #C1306F; /* Hover Effect met #e43681 later toevoegen */
+  background-color: #C1306F;
   color: white;
   text-align: center;
   padding: 20px;
 }
+
+
+/* Header Styling 
+.header {
+  /* ... Your existing header styles ... 
+}
+
+.header h1 {
+  /* ... Your existing header h1 styles ... 
+}
+
+.header h3 {
+  /* ... Your existing header h3 styles ... 
+}
+
+/* Navbar Styling 
+.navbar {
+  /* ... Your existing project-navbar styles ... 
+}
+
+.navbar a {
+  /* ... Your existing project-navbar a styles ... 
+}
+
+/* Main Section Styling (Applies to the entire site) 
+.mainSection {
+  /* ... Your existing mainSection styles ... 
+}
+
+.side {
+  /* ... Your existing side styles ... 
+}
+
+.main {
+  /* ... Your existing main styles ... 
+}
+
+.main h2 {
+  /* ... Your existing main h2 styles ... 
+}
+
+.main a {
+  /* ... Your existing main a styles ... 
+}
+
+.main p {
+  /* ... Your existing main p styles ... 
+}
+
+/* Project Header Styling 
+.project-header {
+  /* ... Your existing project-header styles ... 
+}
+
+/* Project Main Section Styling 
+.project-main {
+  /* ... Your existing project-main styles ... 
+}
+
+.project-title {
+  /* ... Your existing project-title styles ... 
+}
+
+.project-subtitle {
+  /* ... Your existing project-subtitle styles ... 
+}
+
+/* Reference Material Styling 
+.project-side {
+  /* ... Your existing project-side styles ... 
+}
+
+/* Footer Styling (Applies to the entire site) 
+.footer {
+  /* ... Your existing footer styles ... 
+} */
