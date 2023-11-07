@@ -47,6 +47,8 @@ showSlide(0);
 // Tabs section on site
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("Service1").style.display = "block";
+    document.getElementById("Service2").style.display = "none"; // Hide Service2
+    document.getElementById("Service3").style.display = "none"; // Hide Service3
 });
 
 function openTab(evt, tabName) {

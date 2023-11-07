@@ -1,0 +1,74 @@
+* {
+  color: white;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background-image: url('img/NeoN_Logo-wide-1024x374.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+}
+
+/* Adjusted styles to make the navbar sticky */
+.navbar {
+  background-color: #333333;
+  padding: 1px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1vw;
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Ensure the navbar is on top of other elements */
+}
+
+.navbar h1 {
+  display: inline;
+}
+
+.navbar nav ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar nav ul li {
+  margin: 0 2vw; /* Adjust the margin as needed */
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.project-header {
+  text-align: center; /* Align text to the center */ 
+  background-color: #333333bc;
+  width: 50%;
+}
+
+.project-details {
+  /* Adjusted width as specified */
+  background-color: #333333bc;
+  height: 50vw;
+  width: 50%;
+  overflow: auto; /* Added overflow property to enable scrolling for overflowing content */
+}
+
+.project-text {
+  text-align: center;
+  padding: 2vw;
+}
+
+footer {
+  background-color: #333333;
+  text-align: center;
+  padding: 2%;
+  display: block;
+}

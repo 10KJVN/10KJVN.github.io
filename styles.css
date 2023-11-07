@@ -1,6 +1,11 @@
+*{
+  color: white;
+  background-color: #333333;
+}
 body {
-  font-family: Arial, sans-serif;
+  font-family:Arial, Helvetica, sans-serif;
   margin: 0;
+  
 }
 
 .introTitle {
@@ -10,10 +15,14 @@ body {
 }
 
 .navbar {
-  background-color: #f4f4f4;
-  padding: 10px;
+  background-color: #333333bc;
+  padding: 1px;
   display: flex;
   justify-content: center;
+  margin-bottom: 1vw;
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Ensure the navbar is on top of other elements */
 }
 
 .navbar h1 {
@@ -30,6 +39,7 @@ body {
 .navbar nav ul li {
   margin: 0 2vw; /* Adjust the margin as needed */
 }
+
 
 .slider {
   width: 50%; /* Adjust the width as needed */
@@ -78,14 +88,14 @@ section {
 
 .tab {
   overflow: hidden;
-  border: 1px solid #ccc;
-  background-color: #f1f1f1;
+  
+  
 }
 
 .tab button {
   background-color: inherit;
   float: left;
-  border: none;
+  border-color: white;
   outline: none;
   cursor: pointer;
   padding: 1.5%; /* Adjust the padding as needed */
@@ -104,13 +114,13 @@ section {
   display: flex; /* Adjusted to use flexbox */
   flex-wrap: wrap; /* Added flex-wrap property to allow content to wrap within the flex container */
   padding: 2%; /* Adjust the padding as needed */
-  border: 1px solid #ccc;
   border-top: none;
   overflow: hidden; /* Add overflow property to hide overflowing content */
 }
 
 .tabcontent .image-container {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
@@ -119,7 +129,7 @@ section {
 
 .tabcontent .image-link {
   position: relative;
-  width: 30%; /* Adjusted width as needed */
+  width: 29%; /* Adjusted width as needed */
   margin: 2%; /* Adjusted margin as needed */
   overflow: hidden;
 }
@@ -149,8 +159,34 @@ section {
   opacity: 1;
 }
 
-footer {
-  background-color: #f4f4f4;
-  text-align: center;
-  padding: 5%; /* Adjust the padding as needed */
+.about-me {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 20px;
 }
+
+.about-me-content {
+  flex: 1;
+  padding: 0 20px;
+}
+
+.about-me-image img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  max-height: 500px; /* Adjust the maximum height as needed */
+}
+
+
+
+#Contact {
+  background-color: #2c2b2b;
+  text-align: center;
+  padding: 2%; /* Adjust the padding as needed */
+}
+#Contact > p{
+  background-color: #2c2b2b;
+}
+
