@@ -13,6 +13,10 @@ body {
   color: white;
 }
 
+#space{
+  background-image: url(img/spaceMainMenu.jpg);
+}
+
 /* Adjusted styles to make the navbar sticky */
 .navbar {
   background-color: #333333;
