@@ -40,3 +40,25 @@ slider.addEventListener('mouseover', function() {
 slider.addEventListener('mouseout', function() {
     slideInterval = setInterval(autoSlide, 3000);
 });
+
+// Call the showSlide function with initial value to display the first slide
+showSlide(0);
+
+// Tabs section on site
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("Service1").style.display = "block";
+});
+
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}

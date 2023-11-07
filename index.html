@@ -10,20 +10,19 @@
 
 <body>
   <div class="introTitle">
-    <h1>Jahvairo Monkey</h1>
+    <h1>Your Name</h1>
     <h2>Game Developer</h2>
   </div>
   <header class="navbar">
     <nav>
       <ul>
         <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
         <li><a href="#">Services</a></li>
+        <li><a href="#">About me</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
     </nav>
   </header>
-
   <div class="slider">
     <button class="prevButton" onclick="prevSlide()">← </button>
     <a href="https://www.google.com" target="_blank">
@@ -37,17 +36,41 @@
   </div>
 
   <section>
-    <h2>About Us</h2>
-    <p>This is where you can write about your company or yourself.</p>
-  </section>
+    <h2>Services</h2>
+    <div class="tab">
+      <button class="tablinks" onclick="openTab(event, 'Service1')">Service 1</button>
+      <button class="tablinks" onclick="openTab(event, 'Service2')">Service 2</button>
+      <button class="tablinks" onclick="openTab(event, 'Service3')">Service 3</button>
+    </div>
 
-  <section>
-    <h2>Our Services</h2>
-    <ul>
-      <li>Service 1</li>
-      <li>Service 2</li>
-      <li>Service 3</li>
-    </ul>
+    <div id="Service1" class="tabcontent">
+      <h3>Service 1</h3>
+      <p>Description of service 1.</p>
+      <div class="image-container">
+        <a href="https://www.yahoo.com" target="_blank" class="image-link">
+          <img src="img/FPSpaceCam.jpg" alt="">
+          <div class="overlay">Text overlay for Service 1</div>
+        </a>
+        <a href="https://www.yahoo.com" target="_blank" class="image-link">
+          <img src="img/FPSpaceCam.jpg" alt="">
+          <div class="overlay">Text overlay for Service 1</div>
+        </a>
+        <a href="https://www.yahoo.com" target="_blank" class="image-link">
+          <img src="img/FPSpaceCam.jpg" alt="">
+          <div class="overlay">Text overlay for Service 1</div>
+        </a>
+      </div>
+    </div>
+
+    <div id="Service2" class="tabcontent">
+      <h3>Service 2</h3>
+      <p>Description of service 2.</p>
+    </div>
+
+    <div id="Service3" class="tabcontent">
+      <h3>Service 3</h3>
+      <p>Description of service 3.</p>
+    </div>
   </section>
 
   <footer>

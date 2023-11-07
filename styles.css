@@ -1,7 +1,12 @@
-/* styles.css */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
+}
+
+.introTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .navbar {
@@ -9,7 +14,6 @@ body {
   padding: 10px;
   display: flex;
   justify-content: center;
-  flex-direction: column;
 }
 
 .navbar h1 {
@@ -20,24 +24,20 @@ body {
   list-style-type: none;
   padding: 0;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 .navbar nav ul li {
-  margin: 0 15px;
-}
-
-.introTitle{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: 0 2vw; /* Adjust the margin as needed */
 }
 
 .slider {
   width: 50%; /* Adjust the width as needed */
+  height: auto; /* Adjust the height for responsiveness */
   margin: 0 auto;
   position: relative;
   overflow: hidden;
+  transition: transform 0.5s ease; /* Smooth transition for the slider */
 }
 
 .slider a {
@@ -46,7 +46,9 @@ body {
 
 .slider img {
   width: 100%; /* Adjust the width as needed */
-  height: auto;
+  height: auto; /* Adjust the height for responsiveness */
+  object-fit: cover; /* Maintain aspect ratio while covering the area */
+  transition: transform 0.5s ease; /* Smooth transition for the slider */
 }
 
 .prevButton,
@@ -54,27 +56,101 @@ body {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: #4CAF50;
+  background-color: rgb(0, 0, 194);
   color: white;
-  padding: 10px 15px;
+  padding: 2%; /* Adjust the padding as needed */
   border: none;
   cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for button appearance */
 }
 
 .prevButton {
-  left: 0;
+  left: 2%; /* Adjust the distance from the left as needed */
 }
 
 .nextButton {
-  right: 0;
+  right: 2%; /* Adjust the distance from the right as needed */
 }
 
 section {
-  margin: 20px;
+  margin: 5%; /* Adjust the margin as needed */
+}
+
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 1.5%; /* Adjust the padding as needed */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for tab appearance */
+}
+
+.tab button:hover {
+  background-color: #ddd;
+}
+
+.tab button.active {
+  background-color: #ccc;
+}
+
+.tabcontent {
+  display: flex; /* Adjusted to use flexbox */
+  flex-wrap: wrap; /* Added flex-wrap property to allow content to wrap within the flex container */
+  padding: 2%; /* Adjust the padding as needed */
+  border: 1px solid #ccc;
+  border-top: none;
+  overflow: hidden; /* Add overflow property to hide overflowing content */
+}
+
+.tabcontent .image-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%; /* Adjusted width to 100% to ensure it takes the full width */
+}
+
+.tabcontent .image-link {
+  position: relative;
+  width: 30%; /* Adjusted width as needed */
+  margin: 2%; /* Adjusted margin as needed */
+  overflow: hidden;
+}
+
+.tabcontent .image-link img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.tabcontent .image-link .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.tabcontent .image-link:hover .overlay {
+  opacity: 1;
 }
 
 footer {
   background-color: #f4f4f4;
   text-align: center;
-  padding: 10px;
+  padding: 5%; /* Adjust the padding as needed */
 }
