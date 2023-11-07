@@ -1,6 +1,6 @@
 *{
   color: white;
-  background-color: #3333;
+  background-color: #333333;
 }
 body {
   font-family:Arial, Helvetica, sans-serif;
@@ -86,6 +86,9 @@ section {
   margin: 5%; /* Adjust the margin as needed */
 }
 
+#services{
+  padding: 1.5vw;
+}
 .tab {
   overflow: hidden;
   
@@ -112,8 +115,7 @@ section {
 
 .tabcontent {
   display: flex; /* Adjusted to use flexbox */
-  flex-wrap: wrap; /* Added flex-wrap property to allow content to wrap within the flex container */
-  padding: 2%; /* Adjust the padding as needed */
+  flex-wrap: wrap; /* Added flex-wrap property to allow content to wrap within the flex container */ 
   border-top: none;
   overflow: hidden; /* Add overflow property to hide overflowing content */
 }
