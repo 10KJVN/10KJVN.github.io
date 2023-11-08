@@ -41,24 +41,43 @@ body {
 }
 
 
-.slider {
-  width: 50%; /* Adjust the width as needed */
-  height: auto; /* Adjust the height for responsiveness */
-  margin: 0 auto;
+.slider-container {
+  display: flex;
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
   position: relative;
+  width: 50%;
+  margin: 0 auto;
   overflow: hidden;
-  transition: transform 0.5s ease; /* Smooth transition for the slider */
+  flex-direction: row;
 }
 
-.slider a {
-  display: none;
-}
-
-.slider img {
+.slide-content {
+  display: flex;
+  align-items: center; /* Align items vertically */
   width: 100%; /* Adjust the width as needed */
-  height: auto; /* Adjust the height for responsiveness */
+  height: 50vh; /* Adjust the height as needed */
+  margin: 0 auto;
+  text-align: left;
+  transition: transform 3s ease; /* Smooth transition for the slider */
+}
+
+.slide-content img {
+  width: 50%; /* Adjust the width as needed */
+  height: 100%; /* Make the height 100% of the container */
   object-fit: cover; /* Maintain aspect ratio while covering the area */
-  transition: transform 0.5s ease; /* Smooth transition for the slider */
+}
+
+.text-content {
+  width: 50%; /* Adjust the width as needed */
+  height: 100%; /* Make the height 100% of the container */
+  padding: 20px; /* Adjust the padding as needed */
+  box-sizing: border-box;
+  
+}
+
+.text-content {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .prevButton,

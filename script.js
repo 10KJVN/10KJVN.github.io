@@ -1,8 +1,10 @@
-// script.js
 let currentSlide = 0;
-const slides = document.querySelectorAll('.slider a');
+const slides = document.querySelectorAll('.slide-content');
 
 function showSlide(n) {
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = 'none';
+    }
     if (n >= slides.length) {
         currentSlide = 0;
     } else if (n < 0) {
@@ -10,10 +12,7 @@ function showSlide(n) {
     } else {
         currentSlide = n;
     }
-    for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = 'none';
-    }
-    slides[currentSlide].style.display = 'block';
+    slides[currentSlide].style.display = 'flex';
 }
 
 function prevSlide() {
@@ -31,13 +30,13 @@ function autoSlide() {
 let slideInterval = setInterval(autoSlide, 3000); // Change slide every 3 seconds
 
 // Pause the slider when hovering over the slider area
-const slider = document.querySelector('.slider');
-slider.addEventListener('mouseover', function() {
+const sliderContainer = document.querySelector('.slider-container');
+sliderContainer.addEventListener('mouseover', function() {
     clearInterval(slideInterval);
 });
 
 // Resume the slider when not hovering
-slider.addEventListener('mouseout', function() {
+sliderContainer.addEventListener('mouseout', function() {
     slideInterval = setInterval(autoSlide, 3000);
 });
 
