@@ -49,25 +49,62 @@ body {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  
 }
 
 .project-header {
   text-align: center; /* Align text to the center */ 
   background-color: #333333bc;
-  width: 50%;
+  width: 70%;
+  font-size: 20px;
+}
+
+.my-features > h2{
+  font: 16px;
 }
 
 .project-details {
   /* Adjusted width as specified */
   background-color: #333333bc;
   height: 50vw;
-  width: 50%;
+  width: 70%;
   overflow: auto; /* Added overflow property to enable scrolling for overflowing content */
 }
 
 .project-text {
   text-align: center;
   padding: 2vw;
+  flex-direction: row;
+}
+.project-stats{
+  display: flex;
+  flex-direction: row;
+  padding-left: 4vw;
+  justify-content:  space-evenly;
+}
+
+.project-description{
+  padding: 2vw;
+}
+
+.project-description > .h2{
+  font-size: 36px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.project-description > .p{
+  font-size: 14px;
+}
+
+.project-description > .subtitle{
+  font-size: 16px;
+}
+
+.project-images{
+  text-align: center;
+  font-size: 14px;
+
 }
 
 footer {

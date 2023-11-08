@@ -10,7 +10,7 @@
 
 <body>
   <div class="introTitle">
-    <h1>Your Name</h1>
+    <h1>Jahvairo Monkau</h1>
     <h2>Game Developer</h2>
   </div>
   <header class="navbar">
@@ -31,6 +31,10 @@
     <a href="https://www.yahoo.com" target="_blank">
       <img src="img/cartoThumbnail.jpg" alt="Image 2">
     </a>
+    <a href="https://www.bing.com" target="_blank">
+      <img src="img/NGS_thumb.jpg" alt="Image 3">
+    </a>
+    </a>
     <!-- Add more images with the corresponding links -->
     <button class="nextButton" onclick="nextSlide()">→</button>
   </div>
@@ -38,39 +42,55 @@
   <section id="services">
     <h2>Services</h2>
     <div class="tab">
-      <button class="tablinks" onclick="openTab(event, 'Service1')">Service 1</button>
-      <button class="tablinks" onclick="openTab(event, 'Service2')">Service 2</button>
-      <button class="tablinks" onclick="openTab(event, 'Service3')">Service 3</button>
+      <button class="tablinks" onclick="openTab(event, 'Service1')">Unity</button>
+      <button class="tablinks" onclick="openTab(event, 'Service2')">UE5</button>
+      <button class="tablinks" onclick="openTab(event, 'Service3')">Starfall</button>
     </div>
 
     <div id="Service1" class="tabcontent">
       <h3>Service 1</h3>
       <p>Description of service 1.</p>
       <div class="image-container">
-        <a href="NGS.html" target="_blank" class="image-link">
-          <img src="img/FPSpaceCam.jpg" alt="">
-          <div class="overlay">Template</div>
+        <a href="space.html" target="_blank" class="image-link">
+          <img src="img/spaceMainMenu.jpg" alt="">
+          <div class="overlay">Expanding Space</div>
         </a>
-        <a href="https://www.yahoo.com" target="_blank" class="image-link">
-          <img src="img/FPSpaceCam.jpg" alt="">
-          <div class="overlay">Template</div>
-        </a>
-        <a href="https://www.yahoo.com" target="_blank" class="image-link">
-          <img src="img/FPSpaceCam.jpg" alt="">
-          <div class="overlay">Template</div>
+        <a href="carto.html" target="_blank" class="image-link">
+          <img src="img/cartoThumbnail.jpg" alt="">
+          <div class="overlay">Vertical Slice</div>
         </a>
       </div>
     </div>
 
     <div id="Service2" class="tabcontent">
-      <h3>Service 2</h3>
+      <h3>Unreal Engine 5</h3>
       <p>Description of service 2.</p>
+      <div class="image-container">
+        <a href="NGS.html" target="_blank" class="image-link">
+          <img src="img/FPSpaceCam.jpg" alt="">
+          <div class="overlay">Godspeed</div>
+        </a>
+      </div>
+    </div>
+   
+    <div id="Service3" class="tabcontent">
+      <h3>Starfall</h3>
+      <p>Description of service 3.</p>
+      <div class="image-container">
+        <a href="NGS.html" target="_blank" class="image-link">
+          <img src="img/OctoThumb.png" alt="">
+          <div class="overlay">Octodrone</div>
+        </a>
+        <a href="NGS.html" target="_blank" class="image-link">
+          <img src="img/RadialThumb.png" alt="">
+          <div class="overlay">Radial Stamina</div>
+        </a>
+        <a href="NGS.html" target="_blank" class="image-link">
+          <img src="img/FPSpaceCam.jpg" alt="">
+          <div class="overlay">Post-processing</div>
+        </a>
     </div>
 
-    <div id="Service3" class="tabcontent">
-      <h3>Service 3</h3>
-      <p>Description of service 3.</p>
-    </div>
   </section>
   <section>
     <h2 class="about-me">About Me</h2>
@@ -94,7 +114,7 @@
 
 
   <footer id="Contact">
-    <p>Contact information: <a href="mailto:Jahvam@outlook.com">JahvaM@outlook.com</a></p>
+    <p>Contact: <a href="mailto:Jahvam@outlook.com">JahvaM@outlook.com</a></p>
   </footer>
 
   <script src="script.js"></script>
