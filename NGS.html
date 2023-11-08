@@ -70,7 +70,9 @@
                         <li>Shadergraph</li>
                         <li>Animator</li>
                     </ul>
-                    <p class="project-text">The Octo Monster project meant a lot to us, it was our first shot at creating a ground-based enemy in the game. 
+
+                    <h2 class="project-title">Intro</h2>
+                    <p class="project-text">The Octo Monster feature meant a lot to us, it was our first shot at creating a ground-based enemy in the game. 
                          Figuring out how to make a monster that attacks was tough, so we started by looking into AI systems.
                          It was tricky because of this thing called the ForceSystem (FS), but we kept at it and finally understood how it worked.
                          My colleague Jason Siegersma and I worked well together, with a clear plan outlining our roles. 
@@ -78,19 +80,57 @@
                          What was cool is that we switched roles every 1-2 hours, keeping things balanced.
                          Oh, and we worked in sprints of 2 weeks, which helped us stay focused and make progress quickly.
                     </p>
+
                     <div class="project-images">
                         <p class="image-title">Each of octo's animations:</p>
                             <img src="img/OctoAnim.gif" alt="Image 1">
+                        <p class="project-text">
+                            In the gif above you can see Octo's Idle, Walking, Jumping, Attacking & Fuzzy animations!<br>
+                            The visuals as well as the animations of this entity are made by Alex Kentie.
+                        </p>
                     </div>
 
-                    <p class="project-text">The Octo Monster has four unique states that make it tick. We began by setting up the Pathfinding script, which went pretty smoothly thanks to our grasp of the ForceSystem. We even included a GIF to demonstrate how it all came together.
+                    <h2>Development</h2>
+                    <p class="project-text">
+                        The Octo Monster operates on 4 unique states that make it function.
+                        We began by setting up a new Pathfinding script dedicated to ground units.
+                        Which did not go without the neccesairy struggle to make it a generic.
 
+                        Moving on to the Detection state wasn't too difficult.
+                        However, things got complicated once we delved into the Fuzzy and Attack States.
+                        <br></br>
+                        We had to call in our Lead Developer, Berend, for assistance.
+                        It turned out that triggering the AttackState caused the DetectionState to be triggered at the same time causing several animation glitches.
                     </p>
-                    <P>Moving on to the Idle and Detection states was a breeze. However, things got complicated when we delved into Fuzzy and Attacking. We had to call in our Lead Developer, Berend, for assistance. It turned out that triggering Attack and Fuzzy at the same time caused an animator glitch, which you can spot in the upper GIF.
-                    </P>
-                    <p>The Attacking and Fuzzy States played a vital role in bringing the Octo Monster to life. The Attacking state was all about making the creature come alive during battles, while Fuzzy injected an element of unpredictability into its actions.</p>
-                    <P>The incredible visual appeal of the Octo Monster was the handiwork of Alex Kentie, who utilized VFX shaders to highlight its legs. These legs not only bent on their own but were also easy to customize, lending a touch of visual elegance to the Octo.</P>
-                    <P>In sum, our journey with the Octo Monster taught us some crucial lessons in game development, especially the significance of teamwork and creative troubleshooting in this thrilling realm.</P>
+
+                    <div class="project-images">
+                        <p class="image-title">A function from our patrolling script:</p>
+                            <img src="img/PatrolSnippet.png" alt="Image 1">
+                        <p class="project-text">
+                            In the snippet above you can the walkForce direction being inversed by math functions.<br>
+                            Simply said, if the direction of your walkForce is negative, update walkForce to positive.<br>
+                            Or from positive to negative of course depending on the X-axis' position.
+                        </p>
+                    </div>
+                
+                    <p class="project-text">
+                        The Attacking and Fuzzy States played a vital role in bringing the Octo Monster to life.
+                        The Attacking state was all about making the creature come alive during battles, while Fuzzy injected an element of unpredictability into its actions.
+                    </p>
+
+                    <div class="project-images">
+                        <p class="image-title">A function from our patrolling script:</p>
+                            <img src="img/PatrolSnippet.png" alt="Image 1">
+                        <p class="project-text">
+                            In the snippet above you can the walkForce direction being inversed by math functions.<br>
+                            Simply said, if the direction of your walkForce is negative, update walkForce to positive.<br>
+                            Or from positive to negative of course depending on the X-axis' position.
+                        </p>
+                    </div>
+
+                    <P class="project-text">The incredible visual appeal of the Octo Monster was the handiwork of Alex Kentie, who utilized VFX shaders to highlight its legs.
+                        These legs not only bent on their own but were also easy to customize, lending a touch of visual elegance to the Octo.</P>
+                    <P class="project-text">In sum, our journey with the Octo Monster taught us some crucial lessons in game development, especially the significance of teamwork and creative troubleshooting in this thrilling realm.</P>
                     
                     <p class="project-text">Lorem ipsum dolor sit amet
                         consectetur adipisicing elit. Amet provident itaque
