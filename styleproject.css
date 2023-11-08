@@ -5,8 +5,7 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
-  background-image: url('img/NeoN_Logo-wide-1024x374.jpg');
-  background-color: #000; /* Fallback background color */
+  background-image: url('img/NGS_thumb.jpg');
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -14,35 +13,58 @@ body {
   color: white;
 }
 
+a {
+  text-decoration: none;
+  
+}
+
 #space{
   background-image: url(img/spaceMainMenu.jpg);
 }
 
 /* Adjusted styles to make the navbar sticky */
-.navbar {
-  background-color: #333333;
-  padding: 1px;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1vw;
-  position: sticky;
+nav {
+  display: block;
+  left: 0;
   top: 0;
-  z-index: 1000; /* Ensure the navbar is on top of other elements */
-}
-
-.navbar h1 {
-  display: inline;
-}
-
-.navbar nav ul {
-  list-style-type: none;
-  padding: 0;
+  text-transform: uppercase;
+  position: sticky;
+  z-index: 1;
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: rgb(46, 46, 46);
+  height: 4vw;
+  margin-bottom: 2%;
 }
 
-.navbar nav ul li {
-  margin: 0 2vw; /* Adjust the margin as needed */
+.name {
+  font-size: 80%;
+  padding: 1vw;
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.nav-items {
+  display: inline-block;
+  background-color: #181818;
+  border: none;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+  padding: 10px 20px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.nav-items:hover {
+  background-color: #4e4e4eb7;
 }
 
 .container {
@@ -115,10 +137,25 @@ body {
   font-size: 14px;
 
 }
+.project-images > img{
+  width: 75%;
+}
+
+
+#contact {
+  background-color: #2c2b2b;
+  text-align: center;
+  padding: 2%;
+  margin: 0; /* Reset margin to remove any default spacing */
+}
+
+#contact h1, #contact h3 {
+  margin: 0; /* Reset margin to remove any default spacing */
+}
 
 footer {
   background-color: #333333;
   text-align: center;
-  padding: 2%;
+  padding: 1%; /* Adjust the padding as needed */
   display: block;
 }
