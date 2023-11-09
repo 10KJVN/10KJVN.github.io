@@ -1,168 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styleproject.css">
-    <title>Project Starfall</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styleproject.css">
+        <title>Project Starfall</title>
+    </head>
 
-<body id="space">
-    <header class="navbar">
-        <nav>
-            <div class="name">
-                <a href="index.html">
-                    <h1>Jahvairo Monkau</h1>
-                    <h2>Game Developer</h2>
-                </a>
-            </div>
-            <div class="menu">
-                <button class="nav-items" onclick="window.location.href='index.html'">Home</button>
-                <button class="nav-items" onclick="window.location.href='#contact'">Contact</button>
-                <a class="nav-items" href="img/CV.png" target="_blank">CV</a>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <div class="project-header">
-            <h1>Expanding Space</h1>
-        </div>
-
-        <div class="project-details">
-            <div class="project-stats">
-                <p class="project-text">
-                    Project Status: Finished<br>
-                    Project Type: Group<br>
-                    Project Duration: 8 weeks <br>
-                    Software Used: Unity <br>
-                    Languages Used: C#<br>
-                    Primary Role(s): Programmer, Git master<br>
-                    Team: 3 Devs, 4 Artists<br>
-                </p>
-            </div>
-
-            <div class="project-description">
-                <h2>About Expanding Space</h2>
-                <p>
-                    "Expanding Space" was a collaborative project to develop an engaging game that would inspire space travel and astronomy interest amongst a younger audience.
-                    It marked the first partnership between Game Developers and Game Artists, with each group comprising two developers and four artists. 
-                    But our group had an extra dev who joined the project at a later date. This was also the second time we worked with sprints if i recall correctly.
-                
-                    <br></br>
-                    Sprint 0: Initial research phase.<br>
-                    Sprint 1 and 2: Concentrated on creating a playable game.<br>
-                    Sprint 3: Finish & Present the product on a project market.<br>
-                <p>
-
-                <h2 class="subtitle">My Features</h2>
-                <ul>
-                    <li>Player Movement</li>
-                    <li>Enemy AI</li>
-                    <li>UI</li>
-                    <li>Skybox</li>
-                </ul>
-
-                <h2 class="subtitle">Software Used</h2>
-                <ul>
-                    <li>Navmesh</li>
-                    <li>TextMesh Pro</li>
-                    <li>Trello</li>
-                </ul>
-
-                <!--Begin Intro Section-->
-                <h2 class="project-text">Intro</h2>
-                <p class="project-text">
-                        To start this project off, we as a team were brainstorming about the genre of the game, the gameplay loop, and a goal and such.
-                        We decided to do go for a 3D horror game with parkouring and FPS elements. 
-                        So the artists went ahead to create their assets and sketches, while i started working on a First Person Camera Controller as seen below.
-                    <br>
-                </p>
-
-                <div class="project-images">
-                    <p class="image-title">FPS Camera Script:</p>
-                    <img src="img/BOSpace/InversedCam.png" alt="Image 1">
-                    <p class="project-text">
-                        In the snippet above i expanded on a simple script i've learned to make in the math classes of my teacher Jelle. <br>
-                        Thanks to those lessons i already knew how to implement mathematical features like 'Mathf.Clamp' for camera related scripts.
-                    </p>
+    <body id="space">
+        <header class="navbar">
+            <nav>
+                <div class="name">
+                    <a href="index.html">
+                        <h1>Jahvairo Monkau</h1>
+                        <h2>Game Developer</h2>
+                    </a>
                 </div>
-                <!--End Intro Section-->
+                <div class="menu">
+                    <button class="nav-items"
+                        onclick="window.location.href='index.html'">Home</button>
+                    <button class="nav-items"
+                        onclick="window.location.href='#contact'">Contact</button>
+                    <a class="nav-items" href="img/CV.png" target="_blank">CV</a>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            <div class="project-header">
+                <h1>Expanding Space</h1>
+            </div>
 
-                <!--Begin Development Section-->
-
-                <h2 class="project-text">Development</h2>
-                <p class="project-text">
-                    After making an inverted Camera Controller script, i continued to think about what would be logical to implement next in our project,
-                    and concluded the player doesn't only need to look around but also be able to move around.
-                </p>
-
-                <div class="project-images">
-                    <p class="image-title">Player Mobility</p>
-                    <img src="img/BOSpace/movement.gif" alt="Image 1">
+            <div class="project-details">
+                <div class="project-stats">
                     <p class="project-text">
-                       Here you can see the player jumping from wall to wall. <br>
-                       I've also added the possibility to run and slide in case the player engages combat.
+                        Project Status: Finished<br>
+                        Project Type: Group<br>
+                        Project Duration: 8 weeks <br>
+                        Software Used: Unity <br>
+                        Languages Used: C#<br>
+                        Primary Role(s): Programmer, Git master<br>
+                        Team: 3 Devs, 4 Artists<br>
                     </p>
                 </div>
 
+                <div class="project-description">
+                    <h2>About Expanding Space</h2>
+                    <p>
+                        "Expanding Space" was a collaborative project to develop
+                        an engaging game that would inspire space travel and
+                        astronomy interest amongst a younger audience.
+                        It marked the first partnership between Game Developers
+                        and Game Artists, with each group comprising two
+                        developers and four artists.
+                        But our group had an extra dev who joined the project at
+                        a later date. This was also the second time we worked
+                        with sprints if i recall correctly.
+                        <p>
 
-                <div class="project-images">
-                    <p class="image-title">My Test Scene:</p>
-                    <img src="img/BOSpace/TestScene.png" alt="Image 1">
-                    <p class="project-text">
-                        Here i created a scene to propperly test out simple things such as ground checks<br>
-                        Gravity, Slopes, Wall jumps, parkouring options and more.
-                    </p>
+                            <a
+                                href="https://github.com/10KJVN/Expanding-Space-2/tree/Jahvairo">Github</a>
 
-                    <p class="image-title">My Test Scene:</p>
-                    <img src="img/BOSpace/EnemyAI.gif" alt="Image 1">
-                    <p class="project-text">
-                        Here i created a scene to propperly test out simple things such as ground checks<br>
-                        Gravity, Slopes, Wall jumps, parkouring options and more.
-                    </p>
+                            <h2 class="subtitle">My Features</h2>
+                            <ul>
+                                <li>Player Movement</li>
+                                <li>Enemy AI</li>
+                                <li>UI</li>
+                                <li>Skybox</li>
+                            </ul>
+
+                            <h2 class="subtitle">Software Used</h2>
+                            <ul>
+                                <li>Navmesh</li>
+                                <li>TextMesh Pro</li>
+                                <li>Trello</li>
+                            </ul>
+
+                            <!--Begin Intro Section-->
+                            <h2 class="project-text">Intro</h2>
+                            <p class="project-text">
+                                To start this project off, we as a team were
+                                brainstorming about the genre of the game, the
+                                gameplay loop, and a goal and such.
+                                We decided to do go for a 3D horror game with
+                                parkouring and FPS elements.
+                                So the artists went ahead to create their assets
+                                and sketches, while i started working on a First
+                                Person Camera Controller as seen below.
+                                <br>
+                            </p>
+                            <p class="project-text">
+                                Sprint 0: Initial research phase.  <br>
+                                Sprint 1 and 2: Concentrated on creating a
+                                playable game. <br>
+                                Sprint 3: Finish & Present the product on a
+                                project market. <br>
+                            </p>
+
+                            <div class="project-images">
+                                <p class="image-title">FPS Camera Script:</p>
+                                <img src="img/BOSpace/InversedCam.png"
+                                    alt="Image 1">
+                                <p class="project-text">
+                                    In the snippet above i expanded on a simple
+                                    script i've learned to make in the math
+                                    classes of my teacher Jelle. <br>
+                                    Thanks to those lessons i already knew how
+                                    to implement mathematical features like
+                                    'Mathf.Clamp' for camera related scripts.
+                                </p>
+                            </div>
+                            <!--End Intro Section-->
+
+                            <!--Begin Development Section-->
+
+                            <h2 class="project-text">Development</h2>
+                            <p class="project-text">
+                                After making an inverted Camera Controller
+                                script, i continued to think about what would be
+                                logical to implement next in our project,
+                                and concluded the player doesn't only need to
+                                look around but also be able to move around.
+                            </p>
+
+                            <div class="project-images">
+                                <p class="image-title">Player Mobility</p>
+                                <img src="img/BOSpace/movement.gif"
+                                    alt="Image 1">
+                                <p class="project-text">
+                                    Here you can see the player jumping from
+                                    wall to wall. <br>
+                                    I've also added the possibility to run and
+                                    slide in case the player engages combat.
+                                </p>
+                            </div>
+
+                            <div class="project-images">
+                                <p class="image-title">My Test Scene:</p>
+                                <img src="img/BOSpace/TestScene.png"
+                                    alt="Image 1">
+                                <p class="project-text">
+                                    Here i created a scene to propperly test out
+                                    simple things such as ground checks<br>
+                                    Gravity, Slopes, Wall jumps, parkouring
+                                    options and more.
+                                </p>
+
+                                <p class="image-title">My Test Scene:</p>
+                                <img src="img/BOSpace/EnemyAI.gif" alt="Image 1">
+                                <p class="project-text">
+                                    Here i created a scene to propperly test out
+                                    simple things such as ground checks<br>
+                                    Gravity, Slopes, Wall jumps, parkouring
+                                    options and more.
+                                </p>
+                            </div>
+                            <p class="project-text">
+                                The navmesh was tough to figure out, and in the
+                                end i didn't completely get it working with the
+                                enemies not moving from their position.
+                                Atleast i managed to figure out how the
+                                following Attack Function
+                            </p>
+                            <div class="project-images">
+                                <p class="image-title">My Test Scene:</p>
+                                <img src="img/BOSpace/AttackSnippet.png"
+                                    alt="Image 1">
+                                <p class="project-text">
+                                    The Enemy checks every frame wether the
+                                    player is in Sight- or Attack range.<br>
+                                    So as soon the player gets within sight
+                                    range, the enemy starts looking at you.<br>
+                                    And when you enter the Attack Range the
+                                    enemy shoots a bullet at you every 3
+                                    seconds.
+                                </p>
+                            </div>
+                            <h3 class="project-text">Conclusion</h3>
+                            <p class="project-text">
+                                By the end of this project, i've improved my
+                                developing skills alot during the development
+                                process of this game.
+                                I learned how to work together with artists more
+                                through communicating with them about Anchor
+                                Points in their models for example.
+                                And i had to learn each of them how Github
+                                worked and i myself learned how branches worked
+                                mid-process.
+                                Because of our little knowledge there were some
+                                bugs and errors in the Repositories so i had to
+                                make 2 new ones in total.
+                                also making use of Git LFS for the first time,
+                                since the map file was above 100Mb.
+                            </p>
+
+                            <div class="project-images">
+                                <p class="image-title">Gameplay:</p>
+                                <img src="img/BOSpace/Gameplay.gif"
+                                    alt="Image 1">
+                                <p class="project-text">
+                                    Here the player has just picked up a gun.<br>
+                                    The player loses HP by the enemy's attacks
+                                    and regens.<br>
+                                    In the end the player dies eitherway and
+                                    respawns.
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-                <p class="project-text">
-                    The navmesh was tough to figure out, and in the end i didn't completely get it working with the enemies not moving from their position.
-                    Atleast i managed to figure out how the following Attack Function
-                </p>
-                <div class="project-images">
-                    <p class="image-title">My Test Scene:</p>
-                        <img src="img/BOSpace/AttackSnippet.png" alt="Image 1">
-                        <p class="project-text">
-                            The Enemy checks every frame wether the player is in Sight- or Attack range.<br>
-                            So as soon the player gets within sight range, the enemy starts looking at you.<br>
-                            And when you enter the Attack Range the enemy shoots a bullet at you every 3 seconds.
-                        </p>
-                </div>
-                <h3 class="project-text">Conclusion</h3>
-                <p class="project-text">
-                    By the end of this project, i've improved my developing skills alot during the development process of this game.
-                    I learned how to work together with artists more through communicating with them about Anchor Points in their models for example.
-                    And i had to learn each of them how Github worked and i myself learned how branches worked mid-process. 
-                    Because of our little knowledge there were some bugs and errors in the Repositories so i had to make 2 new ones in total.
-                    also making use of Git LFS for the first time, since the map file was above 100Mb.
-                </p>
 
-                <div class="project-images">
-                    <p class="image-title">Gameplay:</p>
-                        <img src="img/BOSpace/Gameplay.gif" alt="Image 1">
-                        <p class="project-text">
-                            Here the player has just picked up a gun.<br>
-                            The player loses HP by the enemy's attacks and regens.<br>
-                            In the end the player dies eitherway and respawns.
-                        </p>
-                </div>
+                <footer id="Contact">
+                    <p>Contact: <a href="mailto:Jahvam@outlook.com">JahvaM@outlook.com</a></p>
+                </footer>
 
-                
-            </div>
-        </div>
-    </div>
+            </body>
 
-    <footer id="Contact">
-        <p>Contact: <a href="mailto:Jahvam@outlook.com">JahvaM@outlook.com</a></p>
-      </footer>
-
-</body>
-
-</html>
+        </html>
