@@ -5,22 +5,22 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
-  background-image: url('img/NeoN_Logo-wide-1024x374.jpg');
+  background-image: url(img/NeoN_Logo-wide-1024x374.jpg);
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  color: white;
-}
 
-
-#space{
-  background-image: url(img/BOSpace/spaceMainMenu.jpg);
 }
 
 #carto{
   background-image: url(img/Carto/cartoThumbnail.jpg);
 }
+
+#space{
+  background-image: url(img/BOSpace/spaceMainMenu.jpg);
+}
+
 
 /* Adjusted styles to make the navbar sticky */
 nav {
@@ -42,13 +42,20 @@ nav {
 .name {
   font-size: 80%;
   padding: 1vw;
-  text-decoration: none;
+}
+
+.name a {
+text-decoration: none;
 }
 
 .menu {
   display: flex;
   flex-direction: row;
   gap: 30px;
+}
+
+.menu a{
+  margin-right: 1vw;
 }
 
 .nav-items {
@@ -84,18 +91,9 @@ nav {
   border-bottom: solid 2px white;
 }
 
-
-.project-header {
-  text-align: center; /* Align text to the center */ 
-  background-color: #333333bc;
-  width: 70%;
-  font-size: 20px;
-}
-
 .project-title{
   padding: 0;
   margin-bottom:0;
-  padding-top:25px ;
 }
 
 .my-features > h2{
@@ -104,7 +102,7 @@ nav {
 
 .project-details {
   /* Adjusted width as specified */
-  background-color: #333333bc;
+  background-color: #141414bc;
   height: 50vw;
   width: 70%;
   overflow: auto; /* Added overflow property to enable scrolling for overflowing content */
@@ -112,8 +110,9 @@ nav {
 
 .project-text {
   text-align: center;
-  padding: 2vw;
+  padding-top: 1vw;
   margin-left: 5.5vw;
+  margin-right: 5vw;;
 }
 .project-stats{
   display: flex;
@@ -145,6 +144,7 @@ nav {
 .project-images{
   text-align: center;
   font-size: 14px;
+  padding-top: 2vw;
 
 }
 .project-images > img{
@@ -156,16 +156,15 @@ nav {
   background-color: #2c2b2b;
   text-align: center;
   padding: 2%;
-  margin: 0; /* Reset margin to remove any default spacing */
 }
 
-#contact h1, #contact h3 {
-  margin: 0; /* Reset margin to remove any default spacing */
+#contact>p {
+  background-color: #2c2b2b;
 }
 
 footer {
   background-color: #333333;
   text-align: center;
-  padding: 1%; /* Adjust the padding as needed */
+  padding: 2%;
   display: block;
 }

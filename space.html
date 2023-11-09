@@ -19,12 +19,9 @@
             </div>
             <div class="menu">
                 <button class="nav-items" onclick="window.location.href='index.html'">Home</button>
-                <button class="nav-items" onclick="window.location.href='#services'">Projects</button>
                 <button class="nav-items" onclick="window.location.href='#contact'">Contact</button>
-                <button class="nav-items" onclick="window.location.href='#about'">About Me</button>
                 <a class="nav-items" href="img/CV.png" target="_blank">CV</a>
             </div>
-
         </nav>
     </header>
     <div class="container">
@@ -100,8 +97,6 @@
                     and concluded the player doesn't only need to look around but also be able to move around.
                 </p>
 
-                
-
                 <div class="project-images">
                     <p class="image-title">Player Mobility</p>
                     <img src="img/BOSpace/movement.gif" alt="Image 1">
@@ -113,20 +108,52 @@
 
 
                 <div class="project-images">
-                    <p class="image-title">Enemy AI:</p>
-                    <img src="img/Radial/radialplayergif.gif" alt="Image 1">
+                    <p class="image-title">My Test Scene:</p>
+                    <img src="img/BOSpace/TestScene.png" alt="Image 1">
                     <p class="project-text">
-                        Here you see the flying entity following the player, shooting bullets targeted at the players position.
-                        There were no animations at the time, but with the limited knowledge i had.<br>
-                        I managed to make the enemy's orientation work along with the Attacking script.
+                        Here i created a scene to propperly test out simple things such as ground checks<br>
+                        Gravity, Slopes, Wall jumps, parkouring options and more.
                     </p>
+
+                    <p class="image-title">My Test Scene:</p>
+                    <img src="img/BOSpace/EnemyAI.gif" alt="Image 1">
+                    <p class="project-text">
+                        Here i created a scene to propperly test out simple things such as ground checks<br>
+                        Gravity, Slopes, Wall jumps, parkouring options and more.
+                    </p>
+                </div>
+                <p class="project-text">
+                    The navmesh was tough to figure out, and in the end i didn't completely get it working with the enemies not moving from their position.
+                    Atleast i managed to figure out how the following Attack Function
+                </p>
+                <div class="project-images">
+                    <p class="image-title">My Test Scene:</p>
+                        <img src="img/BOSpace/AttackSnippet.png" alt="Image 1">
+                        <p class="project-text">
+                            The Enemy checks every frame wether the player is in Sight- or Attack range.<br>
+                            So as soon the player gets within sight range, the enemy starts looking at you.<br>
+                            And when you enter the Attack Range the enemy shoots a bullet at you every 3 seconds.
+                        </p>
                 </div>
                 <h3 class="project-text">Conclusion</h3>
                 <p class="project-text">
-                    By leveraging Shader Graph, developers can create visually stunning and customizable stamina bars
-                    that align with the aesthetic and design requirements of their game, ultimately contributing to a
-                    more immersive and engaging gameplay experience for players.
+                    By the end of this project, i've improved my developing skills alot during the development process of this game.
+                    I learned how to work together with artists more through communicating with them about Anchor Points in their models for example.
+                    And i had to learn each of them how Github worked and i myself learned how branches worked mid-process. 
+                    Because of our little knowledge there were some bugs and errors in the Repositories so i had to make 2 new ones in total.
+                    also making use of Git LFS for the first time, since the map file was above 100Mb.
                 </p>
+
+                <div class="project-images">
+                    <p class="image-title">Gameplay:</p>
+                        <img src="img/BOSpace/Gameplay.gif" alt="Image 1">
+                        <p class="project-text">
+                            Here the player has just picked up a gun.<br>
+                            The player loses HP by the enemy's attacks and regens.<br>
+                            In the end the player dies eitherway and respawns.
+                        </p>
+                </div>
+
                 
             </div>
         </div>
