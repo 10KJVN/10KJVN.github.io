@@ -203,10 +203,15 @@ section {
   margin-top: 20px;
   background-color: rgba(0, 0, 0, 0.5);
 }
+.about-me h2{
+  font-size: 120%;
+}
 
 .about-me-content {
+  margin: 3vw;
   flex: 1;
   padding: 0 20px;
+  font-size: 120%;
 }
 
 .about-me-image img {
@@ -216,13 +221,13 @@ section {
   max-height: 500px;
 }
 
-#Contact {
+#contact {
   background-color: #2c2b2b;
   text-align: center;
   padding: 2%;
 }
 
-#Contact>p {
+#contact>p {
   background-color: #2c2b2b;
 }
 

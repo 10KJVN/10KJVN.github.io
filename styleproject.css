@@ -77,6 +77,15 @@ nav {
 
 .project-header {
   text-align: center; /* Align text to the center */ 
+  background-color: #141414bc;
+  width: 70%;
+  font-size: 20px;
+  border-bottom: solid 2px white;
+}
+
+
+.project-header {
+  text-align: center; /* Align text to the center */ 
   background-color: #333333bc;
   width: 70%;
   font-size: 20px;
