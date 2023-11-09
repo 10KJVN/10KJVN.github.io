@@ -223,6 +223,12 @@ section {
   margin-top: 20px;
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+#about {
+  text-align: center;
+  margin-top: 20px;
+}
+
 .about-me h2{
   font-size: 120%;
 }
