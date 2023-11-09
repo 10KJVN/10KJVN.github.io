@@ -15,7 +15,11 @@ body {
 
 
 #space{
-  background-image: url(img/spaceMainMenu.jpg);
+  background-image: url(img/BOSpace/spaceMainMenu.jpg);
+}
+
+#carto{
+  background-image: url(img/Carto/cartoThumbnail.jpg);
 }
 
 /* Adjusted styles to make the navbar sticky */
