@@ -13,10 +13,6 @@ body {
   color: white;
 }
 
-a {
-  text-decoration: none;
-  
-}
 
 #space{
   background-image: url(img/spaceMainMenu.jpg);
@@ -42,6 +38,7 @@ nav {
 .name {
   font-size: 80%;
   padding: 1vw;
+  text-decoration: none;
 }
 
 .menu {
@@ -112,7 +109,7 @@ nav {
 .project-text {
   text-align: center;
   padding: 2vw;
-  flex-direction: row;
+  margin-left: 5.5vw;
 }
 .project-stats{
   display: flex;
