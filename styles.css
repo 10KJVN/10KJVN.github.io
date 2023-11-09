@@ -1,15 +1,22 @@
-*{
+* {
   color: white;
-  background-color: #3333;
-}
-body {
-  font-family:Arial, Helvetica, sans-serif;
-  margin: 0;
-  
 }
 
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background:  url("img/hellabg.jpg");
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 a {
   text-decoration: none;
+  
+}
+.homepageredirect {
+  color: white;
 }
 
 nav {
@@ -37,6 +44,7 @@ nav {
   display: flex;
   flex-direction: row;
   gap: 30px;
+  margin-right: 1vw;
 }
 
 .nav-items {
@@ -50,10 +58,16 @@ nav {
   cursor: pointer;
   text-decoration: none;
   transition: background-color 0.3s;
+
 }
 
 .nav-items:hover {
   background-color: #4e4e4eb7;
+}
+
+.introHeader {
+  text-align: center;
+  margin: 50px;
 }
 
 .slider-container {
@@ -74,7 +88,7 @@ nav {
   height: 50vh; /* Adjust the height as needed */
   margin: 0 auto;
   text-align: left;
-  transition: transform 3s ease; /* Smooth transition for the slider */
+  transition: transition 3s ease; /* Smooth transition for the slider */
 }
 
 .slide-content img {
@@ -102,31 +116,37 @@ nav {
   transform: translateY(-50%);
   background-color: rgb(0, 0, 194);
   color: white;
-  padding: 2%; /* Adjust the padding as needed */
+  padding: 2%;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for button appearance */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .prevButton {
-  left: 2%; /* Adjust the distance from the left as needed */
+  left: 2%;
 }
 
 .nextButton {
-  right: 2%; /* Adjust the distance from the right as needed */
+  right: 2%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 section {
-  margin: 5%; /* Adjust the margin as needed */
+  margin: 5%;
 }
 
-#services{
+#services {
   padding: 1.5vw;
 }
+
 .tab {
   overflow: hidden;
-  
-  
 }
 
 .tab button {
@@ -135,8 +155,8 @@ section {
   border-color: white;
   outline: none;
   cursor: pointer;
-  padding: 1.5%; /* Adjust the padding as needed */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for tab appearance */
+  padding: 1.5%;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .tab button:hover {
@@ -148,10 +168,10 @@ section {
 }
 
 .tabcontent {
-  display: flex; /* Adjusted to use flexbox */
-  flex-wrap: wrap; /* Added flex-wrap property to allow content to wrap within the flex container */ 
+  display: flex;
+  flex-wrap: wrap;
   border-top: none;
-  overflow: hidden; /* Add overflow property to hide overflowing content */
+  overflow: hidden;
 }
 
 .tabcontent .image-container {
@@ -160,13 +180,13 @@ section {
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
-  width: 100%; /* Adjusted width to 100% to ensure it takes the full width */
+  width: 100%;
 }
 
 .tabcontent .image-link {
   position: relative;
-  width: 29%; /* Adjusted width as needed */
-  margin: 2%; /* Adjusted margin as needed */
+  width: 29%;
+  margin: 2%;
   overflow: hidden;
 }
 
@@ -234,6 +254,6 @@ section {
 footer {
   background-color: #333333;
   text-align: center;
-  padding: 5px;
+  padding: 2%;
   display: block;
 }
