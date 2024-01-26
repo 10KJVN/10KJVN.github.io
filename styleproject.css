@@ -25,6 +25,10 @@ body {
   background-image: url(img/GSthumb.png);
 }
 
+#urp{
+  background-image: url(img/URP/thumburp.png);
+}
+
 
 /* Adjusted styles to make the navbar sticky */
 nav {
