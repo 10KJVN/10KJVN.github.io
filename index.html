@@ -3,75 +3,137 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>10KJVN</title>
-  <link rel="stylesheet" href="styles.css" />
-  <script src="main.js" defer></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Your Website Title</title>
 </head>
 
-<body class="body">
-  <div id="Starfall">
-    <div class="header">
-      <div class="header-title">
-        <h1>10KJVN</h1>
-        <h3>Game Developer</h3>
-      </div>
+<body>
+  <nav>
+    <div class="name">
+      <a href="index.html">
+        <h1>Your name</h1>
+        <h2>Your profession</h2>
+      </a>
+    </div>
+    <div class="menu">
+      <button class="nav-items" onclick="window.location.href='index2.html'">Home</button>
+      <button class="nav-items" onclick="window.location.href='#services'">Projects</button>
+      <button class="nav-items" onclick="window.location.href='#contact'">Contact</button>
+      <button class="nav-items" onclick="window.location.href='#about'">About Me</button>
+      <a class="nav-items" href="img/CV.png" target="_blank">CV</a>
     </div>
 
-    <div class="navbar">
-      <a class="navbar-link" href="index.html">Home</a>
-      <a class="navbar-link" href="#aboutMe">About</a>
-      <a class="navbar-link" href="#projects">Projects</a>
-      <a class="navbar-link" href="#contact">Contact</a>
-    </div>
-
-    <div class="mainSection">
-      <div class="side">
-        <h2 id="aboutMe">About Me</h2>
-        <p>
-          Greetings, I'm Jahvairo Monkau, hailing from the city of Amsterdam, The Netherlands.
-          I'm currently 18 years old, and in my third year of pursuing a degree in Software Development at Mediacollege
-          Amsterdam.
-        </p>
-
-        <p>
-          I originally aimed to become a Gameplay Programmer, UI Designer, Environment artist, or Music composer.
-        </p>
-
-        <p>
-          But, as of lately, I've discovered that the role of Technical Artist aligns better with my overall interests
-          and ambitions.
-        </p>
-        <a href="AboutMe.html">
-          <p>Learn More..</p>
-        </a>
-      </div>
-
-      <div class="main">
-        <h2 id="projects">Projects</h2>
-        <div class="project-container">
-          <div class="project">
-            <a href="space.html">
-              <img src="spaceMainMenu.jpg" alt="Space Main Menu">
-            </a>
-            <p></p>
+  </nav>
+  <div class="introHeader">
+    <h1>
+      Welcome to your portfolio.
+    </h1>
+    <h3>
+      Type something here.
+    </h3>
+    <br>
+    <br>
+    <h4>These are your highlighted items.</h4>
+  </div>
+  <div class="slider-container">
+    <div class="slider-content">
+      <a href="#" target="_blank">
+        <div class="slide-content">
+          <img src="img/placeholder-image.png" alt="Image 1">
+          <div class="text-content">
+            <h3>Your Item</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ut quidem quos ullam distinctio,
+              aspernatur optio officiis! Voluptate veniam distinctio odit neque hic minus, maxime dolorem ipsam cumque
+              autem nobis.</p>
           </div>
         </div>
-      </div>
+      </a>
     </div>
-  
+  </div>
+  <div class="slider-container">
+    <div class="slider-content">
+      <a href="#" target="_blank">
+        <div class="slide-content">
+          <img src="img/placeholder-image.png" alt="Image 1">
+          <div class="text-content">
+            <h3>Your Item</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid eligendi, voluptatum rem pariatur
+              recusandae eum quos suscipit, corporis, quasi ut excepturi vitae? Asperiores dolorem neque beatae.
+              Molestias nesciunt corrupti minus.</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
 
-      <div class="footer">
-        <h2 id="contact">Contact</h2>
-        <ul class="footer-navigation">
-          <p class="footer-item">How can you reach me?</p>
-          <p class="footer-item">Email: Jahva_game11@hotmail.com</p>
-          <p class="footer-item">or via <a class="github-link" href="https://github.com/10KJVN">My Github</a></p>
-        </ul>
+
+  <section id="services">
+    <h2>Services</h2>
+    <div class="tab">
+      <button class="tablinks" onclick="openTab(event, 'Service1')">Service 1</button>
+      <button class="tablinks" onclick="openTab(event, 'Service2')">Service 2</button>
+      <button class="tablinks" onclick="openTab(event, 'Service3')">Service 3</button>
+    </div>
+
+    <div id="Service1" class="tabcontent">
+      <h3>Service 1</h3>
+      <p>Description of service 1.</p>
+      <div class="image-container">
+        <a href="https://www.google.com" target="_blank" class="image-link">
+          <img src="img/placeholder-image.png" alt="">
+          <div class="overlay">Template</div>
+        </a>
+        <a href="https://www.yahoo.com" target="_blank" class="image-link">
+          <img src="img/placeholder-image.png" alt="">
+          <div class="overlay">Template</div>
+        </a>
+        <a href="https://www.yahoo.com" target="_blank" class="image-link">
+          <img src="img/placeholder-image.png" alt="">
+          <div class="overlay">Template</div>
+        </a>
       </div>
     </div>
-  
+
+    <div id="Service2" class="tabcontent">
+      <h3>Service 2</h3>
+      <p>Description of service 2.</p>
+    </div>
+
+    <div id="Service3" class="tabcontent">
+      <h3>Service 3</h3>
+      <p>Description of service 3.</p>
+    </div>
+  </section>
+  <section>
+    <h2 class="about-me">About Me</h2>
+    <div class="about-me">
+      <div class="about-me-content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eget justo vitae odio suscipit vestibulum.
+          Nulla
+          facilisi. Nullam scelerisque, turpis sit amet tincidunt eleifend, eros libero imperdiet mi, id ultrices est
+          neque
+          id augue. Sed congue pharetra ligula, non volutpat nunc pulvinar et. Nam ut lorem feugiat, efficitur nunc sed,
+          aliquam nunc. Suspendisse vitae eros nec metus efficitur fermentum et ut ex. In hac habitasse platea dictumst.
+          Curabitur ultrices dolor sed arcu pharetra, at ultricies magna pulvinar. Proin ultrices ex eu purus tincidunt,
+          vitae hendrerit urna tristique. Fusce in odio nec nisl feugiat lacinia. Vivamus ac fermentum risus. Maecenas
+          congue accumsan lectus, ut bibendum ligula ullamcorper et. Aenean fermentum magna vitae nisi ultrices, eu
+          dapibus
+          neque interdum. Integer nec sagittis est, in hendrerit nulla.</p>
+      </div>
+      <div class="about-me-image">
+        <img src="img/placeholder-image.png" alt="About Me Image">
+      </div>
+    </div>
+  </section>
+
+
+
+  <footer id="Contact">
+    <p>Contact information: <a href="mailto:your@email.com">your@email.com</a></p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 
 </html>
