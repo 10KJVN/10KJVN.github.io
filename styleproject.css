@@ -5,16 +5,32 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("img/greybackground.jpg");
-}
-a {
-  text-decoration: none;
-  
-}
-.homepageredirect {
-  color: white;
+  background-image: url(img/NeoN_Logo-wide-1024x374.jpg);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
 }
 
+#carto{
+  background-image: url(img/Carto/cartoThumbnail.jpg);
+}
+
+#space{
+  background-image: url(img/BOSpace/spaceMainMenu.jpg);
+}
+
+#gs{
+  background-image: url(img/GSthumb.png);
+}
+
+#urp{
+  background-image: url(img/URP/thumburp.png);
+}
+
+
+/* Adjusted styles to make the navbar sticky */
 nav {
   display: block;
   left: 0;
@@ -36,10 +52,18 @@ nav {
   padding: 1vw;
 }
 
+.name a {
+text-decoration: none;
+}
+
 .menu {
   display: flex;
   flex-direction: row;
   gap: 30px;
+}
+
+.menu a{
+  margin-right: 1vw;
 }
 
 .nav-items {
@@ -59,176 +83,82 @@ nav {
   background-color: #4e4e4eb7;
 }
 
-.introHeader {
-  text-align: center;
-  margin: 50px;
-}
-
-.slider-container {
-  display: flex;
-  justify-content: center; /* Center items horizontally */
-  align-items: center; /* Center items vertically */
-  position: relative;
-  width: 50%;
-  margin: 0 auto;
-  overflow: hidden;
-  flex-direction: row;
-}
-
-.slide-content {
-  display: flex;
-  align-items: center; /* Align items vertically */
-  width: 100%; /* Adjust the width as needed */
-  height: 50vh; /* Adjust the height as needed */
-  margin: 0 auto;
-  text-align: left;
-  transition: transform 3s ease; /* Smooth transition for the slider */
-}
-
-.slide-content img {
-  width: 50%; /* Adjust the width as needed */
-  height: 100%; /* Make the height 100% of the container */
-  object-fit: cover; /* Maintain aspect ratio while covering the area */
-}
-
-.text-content {
-  width: 50%; /* Adjust the width as needed */
-  height: 100%; /* Make the height 100% of the container */
-  padding: 20px; /* Adjust the padding as needed */
-  box-sizing: border-box;
-  
-}
-
-.text-content {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.prevButton,
-.nextButton {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgb(0, 0, 194);
-  color: white;
-  padding: 2%;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.prevButton {
-  left: 2%;
-}
-
-.nextButton {
-  right: 2%;
-}
-
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
+  
 }
 
-section {
-  margin: 5%;
+.project-header {
+  text-align: center; /* Align text to the center */ 
+  background-color: #141414bc;
+  width: 70%;
+  font-size: 20px;
+  border-bottom: solid 2px white;
 }
 
-#services {
-  padding: 1.5vw;
+.project-title{
+  padding: 0;
+  margin-bottom:0;
 }
 
-.tab {
-  overflow: hidden;
+.my-features > h2{
+  font: 16px;
 }
 
-.tab button {
-  background-color: inherit;
-  float: left;
-  border-color: white;
-  outline: none;
-  cursor: pointer;
-  padding: 1.5%;
-  transition: background-color 0.3s ease, color 0.3s ease;
+.project-details {
+  /* Adjusted width as specified */
+  background-color: #141414bc;
+  height: 50vw;
+  width: 70%;
+  overflow: auto; /* Added overflow property to enable scrolling for overflowing content */
 }
 
-.tab button:hover {
-  background-color: #ddd;
+.project-text {
+  text-align: center;
+  padding-top: 1vw;
+  margin-left: 5.5vw;
+  margin-right: 5vw;;
 }
-
-.tab button.active {
-  background-color: #ccc;
-}
-
-.tabcontent {
-  display: flex;
-  flex-wrap: wrap;
-  border-top: none;
-  overflow: hidden;
-}
-
-.tabcontent .image-container {
+.project-stats{
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 100%;
+  padding-left: 4vw;
+  justify-content:  space-evenly;
 }
 
-.tabcontent .image-link {
-  position: relative;
-  width: 29%;
-  margin: 2%;
-  overflow: hidden;
+.project-description{
+  padding: 2vw;
 }
 
-.tabcontent .image-link img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
-.tabcontent .image-link .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: opacity 0.5s;
-}
-
-.tabcontent .image-link:hover .overlay {
-  opacity: 1;
-}
-
-.about-me {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
+.project-description > .h2{
+  font-size: 36px;
   margin-top: 20px;
-  background-color: rgba(0, 0, 0, 0.5);
+  margin-bottom: 10px;
 }
 
-.about-me-content {
-  flex: 1;
-  padding: 0 20px;
+.project-description > .p{
+  font-size: 14px;
 }
 
-.about-me-image img {
-  max-width: 100%;
-  width: auto;
-  height: auto;
-  max-height: 500px;
+.project-description > .subtitle{
+  font-size: 18px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
+
+.project-images{
+  text-align: center;
+  font-size: 14px;
+  padding-top: 2vw;
+
+}
+.project-images > img{
+  width: 75%;
+}
+
 
 #contact {
   background-color: #2c2b2b;

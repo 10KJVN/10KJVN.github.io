@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styleproject.css">
+        <title>Jahvairo's Portfolio</title>
+    </head>
+
+    <body id="urp">
+        <header class="navbar">
+            <nav>
+                <div class="name">
+                    <a href="index.html">
+                        <h1>Jahvairo Monkau</h1>
+                        <h2>Game Developer</h2>
+                    </a>
+                </div>
+                <div class="menu">
+                    <button class="nav-items" onclick="window.location.href='index.html'">Home</button>
+                    <button class="nav-items" onclick="window.location.href='index.html#services'">Projects</button>
+                    <button class="nav-items" onclick="window.location.href='#contact'">Contact</button>
+                    <a class="nav-items" href="img/JM_CV.pdf" target="_blank">CV</a>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            <div class="project-header">
+                <h1>Universal Render Pipeline</h1>
+            </div>
+
+            <div class="project-details">
+                <div class="project-stats">
+                    <p class="project-text">
+                        Project Status: Work in progress<br>
+                        Project Type: Solo<br>
+                        Software Used: Unity <br>
+                        Languages Used: C#, HLSL<br>
+                    </p>
+                </div>
+
+                <div class="project-description">
+                    <h2>About my URP project</h2>
+                    <p>
+                        In this project i was given 8 weeks to pick any software of choice and specialize in it.
+                        Since i've already worked with shaders 1 period before this,
+                        i thought to myself "Yeah that was cool, i'd love to know more about that."
+            
+                        <p>
+
+                            <a
+                                href="https://github.com/10KJVN/URPShaders">Github</a>
+
+                            <h2 class="subtitle">My Features</h2>
+                            <ul>
+                                <li>Fullscreen Chromatic Aberration</li>
+                            </ul>
+
+                            <!--Begin Intro Section-->
+                            <h2 class="project-text">Intro</h2>
+                            <p class="project-text">
+                                So in the first week of this period there was a list of existing userstories for <a href="https://www.neonorigins.com/">Operation Starfall.</a>
+                                And of one these userstories said something along the lines of 'I want the game to feel like watching an 80's NTSC TV.' 
+                                Which of course sounded pretty cool to me, so i picked that userstory.
+                                <br>
+                            </p>
+                            <p class="project-text">
+                                At first we were tasked to create a little presentation about the subject you've picked. 
+                                And here is the one i created with a retro-like aesthetic <a href="pdf/80s vibe HLO.pdf">My Presentation</a>
+                            </p>
+
+                            <div class="project-images">
+                                <p class="image-title">Me experimenting with volumes overrides:</p>
+                                <img src="img/URP/127.0.0.1_5501_index.html (2).png"
+                                    alt="Image 1">
+                                <p class="project-text">
+                                    Lens Distortion & my first iterration of chromatic abberation shader.
+                                </p>
+                            </div>
+                            <!--End Intro Section-->
+
+                            <!--Begin Development Section-->
+
+                            <h2 class="project-text">Development</h2>
+                            <p class="project-text">
+                                I was asked to look for possibilities to create custom overrides for unity's volumes. 
+                                So i went on ahead and found out it's pretty simple and created 3 scripts.
+                                <br></br>
+                                A CustomRenderPassFeature, TintRendererFeature & CustomPostScreenTint.
+                                Each of these serve a purpose to make the effect render (show up).
+                                
+                            </p>
+
+                            <div class="project-images">
+                                <p class="image-title">Code Snippets</p>
+                                <img src="img/URP/TintSnippet.png"
+                                    alt="Image 1">
+                                <p class="project-text">
+                                    Identifying the target this shader needs to render to.
+                                </p>
+                            </div>
+
+                            <div class="project-images">
+                                <p class="image-title">My Custom Volume Override:</p>
+                                <img src="img/URP/tintSnippet2.png"
+                                    alt="Image 1">
+                                <p class="project-text">
+                                    This script allows you to set a custom color & intensity.
+                                </p>
+
+                                <p class="image-title">RGB offset on a texture:</p>
+                                <img src="img/URP/offset1.gif" alt="Image 1">
+                                <p class="project-text">
+                                   Here i've been playing around with Shadergraph to create an chromatic aberration like effect.
+                                </p>
+                            </div>
+                            <p class="project-text">
+                                The navmesh was tough to figure out, and in the
+                                end i didn't completely get it working with the
+                                enemies not moving from their position.
+                                Atleast i managed to figure out how the
+                                following Attack Function
+                            </p>
+                            <div class="project-images">
+                                <p class="image-title">Fullscreen Aberration</p>
+                                <img src="img/URP/offset2.gif"
+                                    alt="Image 1">
+                                <p class="project-text">
+                                    This feature is directly added to the renderer. 
+                                    It splits every rendereds object RGB values apart with an customizable offset.
+                                </p>
+                            </div>
+                            <h3 class="project-text">Conclusion</h3>
+                            <p class="project-text">
+                                At the end of the 8 week period i've learned alot more about render pipelines, 
+                                shaders and how they can work together. Which i at first did not have the slightest knowledge about.
+                                I was stuck on getting my screen tint to be rendered for 2 weeks straight. 
+                                Turns out the issue was i forgot to add my renderer feature, to the renderer. 
+                                Since there was nothing disfunctional about the shaders i've created.
+                            </p>
+
+                            <div class="project-images">
+                                <p class="image-title">The Shaders</p>
+                                <img src="img/URP/Shader3.png"
+                                    alt="Image 1">
+                                <p class="project-text">
+                                    Here's the first version of the shader with a test texture.
+                                </p>
+
+                                <img src="img/URP/Shader2.png" alt="Image 2">
+                                <p class="project-text">
+                                   This is the second version of the shader.
+                                </p>
+                            </div>
+
+                            <h2 class="project-text">Continuation</h2>
+                            <p class="project-text">
+                                Outside of the 8 weeks i worked on the RGB offset shader,
+                                I've been experimenting of my own with rendering etc.
+                                But more of that is to be uploaded as soon as i got something more polished to show.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <footer id="Contact">
+                    <p>Contact: <a href="mailto:Jahvam_2005@outlook.com">JahvaM@outlook.com</a></p>
+                </footer>
+
+            </body>
+
+        </html>

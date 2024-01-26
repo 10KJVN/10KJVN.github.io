@@ -4,77 +4,144 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>10KJVN</title>
-
-    <link rel="stylesheet" href="style.css" />
-    <script src="main.js" defer></script>
+    <title>Jahvairo's Portfolio</title>
+    <link rel="stylesheet" href="styleproject.css"/>
 </head>
 
-<body class="project-body">
-    <div class="project02"> 
-
+<body id="carto">
+    <header class="navbar">
+        <nav>
+            <div class="name">
+                <a href="index.html">
+                    <h1>Jahvairo Monkau</h1>
+                    <h2>Game Developer</h2>
+                </a>
+            </div>
+            <div class="menu">
+                <button class="nav-items" onclick="window.location.href='index.html'">Home</button>
+                <button class="nav-items" onclick="window.location.href='index.html#services'">Projects</button>
+                <button class="nav-items" onclick="window.location.href='#contact'">Contact</button>
+                <a class="nav-items" href="img/JM_CV.pdf" target="_blank">CV</a>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
         <div class="project-header">
             <h1>Vertical Slice</h1>
-            <h3>2022 - 2023</h3>
-        </div>
-    
-        <div class="project-navbar">
-            <a href="index.html">Home</a>
-            <a href="aboutProject">About</a>
-            <a href="index.html">Projects</a>
-            <a href="#contact">Contact</a>
         </div>
 
-        <div class="project-main">
-            <h2 class="project-title" id="aboutProject">About This Project</h2>
-            <p class="project-subtitle">In Vertical Slice we were given the task to copy 10 seconds from an already existing game. In our case the game "Carto" </p>
-            <br> 
-            <p>In our vertical slice we worked with 4 developers & 4 artists.</p>
-            <p>In this project i contributed to: </p>
-                 <li>
-                    Some of the UI elements such as the overworld map,
-                 </li> 
-                 <li>
-                    The inventory for map pieces
-                 </li> 
-                 <li>
-                    And the map placement.
-                 </li> 
-            <p>From this project i learned a few things as well</p>
-            <p>things such as u can make a 2D game in a 3D engine as well</p>
-            <p>You just gotta make it look like its 2D using visual techniques.</p>
-            <br>
-            <p>And new code refferences such as putting things Active and Inactive with a "!"</p>
-            <a href="https://github.com/stenkristel/Vertical-Slice-Carto">   
-                <p> -> Our Github <- </p>
-            </a>
-        </div>
-
-        <div class="project-side">
-            <h2 id="RM">Refference Material</h2>
-
-            <img src="cartoThumbnail.jpg" width="300" height="300" alt="The main menu of our game.">
-            <img src="cartoimg1.jpg" width="500" height="300"></img> 
-            <p class="project-subtitle">The game's thumbnail, overworld map, menu and in-game screenshot.</p>
-        </div>
-
-        <div class="footer">
-            <h2 id="contact">Contact</h2>
-              <ul class="footerNavigation">
-                <p class="footerNavigationItem">
-                    How can you reach me?
+        <div class="project-details">
+            <div class="project-stats">
+                <p class="project-text">
+                    Project Status: Finished <br>
+                    Project Type: Group <br>
+                    Project Duration: 8 weeks <br>
+                    Software Used: Unity <br>
+                    Languages Used: C# <br>
+                    Primary Role(s): UI Programmer<br>
+                    Team: 4 devs, 4 artists <br>
                 </p>
-                <p class="footerNavigationItem">
-                  Email: Jahva_game11@hotmail.com
-                </p>
-                <p>
-                  or via 
-                  <a href="https://github.com/10KJVN">My Github</a>
-                </p>
-              </ul>
             </div>
-        
+
+            <div class="project-description">
+                <h2>About Vertical Slice</h2>
+                <p>
+                    Vertical Slice is a project in which we had to recreate 10 seconds from a game on a 1:1 scale.
+                    It marked the second collaboration between Artists and Developers. 
+                <p>
+                
+                <a href="https://github.com/stenkristel/Vertical-Slice-Carto/tree/jahvaV2">Github</a>
+
+                <h2 class="subtitle">My Features</h2>
+                <ul>
+                    <li>UI</li>
+                </ul>
+
+                <!--Begin Intro Section-->
+                <h2 class="project-text">Intro</h2>
+                <p class="project-text">
+                    In this project i mainly focused on putting together the UI.
+                    Together with one of the artists within our team i recreated the UI elements seen in the gameplay footage with 2D Objects.
+                    Closely inspecting the assets at <a href="https://www.gameuidatabase.com/gameData.php?id=714">Game UI Database.</a>
+                    <br>
+                    
+                </p>
+
+                <div class="project-images">
+                    <p class="image-title">Canvas Template:</p>
+                    <img src="img/Carto/Canvas.png" alt="Image 1">
+                    <p class="project-text">
+                        I've added placeholders for the main UI elements seen in the game.<br>
+                        Buttons highlight when hovered over.
+                    </p>
+                </div>
+                <!--End Intro Section-->
+
+                <!--Begin Development Section-->
+
+                <h2 class="project-text">Development</h2>
+                <p class="project-text">
+                    The development of Carto was a little different than other projects i've worked on since we already have a concrete visual of what we were working to.
+                    At the start of the sprint we were brainstorming on the techniques and strategies the original creators may have used to recreate these assets.
+                    We searched more gameplay footage of Carto and were excited to recreate other parts of the game,
+                    Until we were attended by our teachers that we needed to only focus on the dedicated 10 seconds they've provided to us.
+                </p>
+
+                <div class="project-images">
+                    <p class="image-title">An in-game gif</p>
+                    <img src="img/Carto/placement.gif" alt="Image 1">
+                    <p class="project-text">
+                        My colleagues made the Map Placement class. <br>
+                        I made the script for the 'Scope' as i like to call it to change when picking up a map piece. <br>
+                    </p>
+                </div>
+
+
+                <div class="project-images">
+                    <p class="image-title">The 10 seconds we had to recreate:</p>
+                    <img src="img/Carto/VerticalSlice.gif" alt="Image 1">
+                    <p class="project-text">
+                        The main Mechanics we've seen off the bat would be difficult to recreate,<br>
+                        Due to us not knowing where to start or how they'd function the best.
+                    </p>
+                </div>
+                <h3 class="project-text">Conclusion</h3>
+                <p class="project-text">
+                    In The end of this trajectory i learned quite alot about the intricasies of having to pay attention to every little detail provided in these games.
+                    And that you can perform all sorts of tricks to make a 2D game in a 3D unity scene for example, we just used camera angles and canvases to make the game appear like its 2 Dimension,
+                    While in reality, in our case it isn't.
+                </p>
+
+                <div class="project-images">
+                    <p class="image-title">This is when you click on the map:</p>
+                    <img src="img/Carto/Scope2.png" alt="Image 1">
+                    <p class="image-title">This is when you've selected the map:</p>
+                    <img src="img/Carto/Scope1.png" alt="Image 1">
+                    <p class="project-text">
+                        Usually these would be sprites, but i went on ahead and made them myself using only 2D blocks.<br>
+                        They also shift from shape whenever a map piece is selected, or spacebar is pressed!
+                    </p>
+                </div>
+
+                <p class="project-text">
+                    Even though i haven't really contributed as much as i wished i did in this project i am still proud of the things i have achieved and learned from this project.
+                </p>
+
+                <div class="project-images">
+                    <p class="image-title">Simple Script:</p>
+                    <img src="img/Carto/SimpleSnippet.png" alt="Image 1">
+                    <p class="project-text">
+                        What the code above does is switch the Active object to Inactive and vice versa.
+                    </p>
+                </div>
+    
+            </div>
         </div>
     </div>
+
+    <footer id="Contact">
+        <p>Contact: <a href="mailto:Jahvam_2005@outlook.com">JahvaM@outlook.com</a></p>
+      </footer>
+
 </body>
-</html>
+
