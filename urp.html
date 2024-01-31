@@ -60,9 +60,9 @@
                             <!--Begin Intro Section-->
                             <h2 class="project-text">Intro</h2>
                             <p class="project-text">
-                                So in the first week of this period there was a list of existing userstories for <a href="https://www.neonorigins.com/">Operation Starfall.</a>
-                                And of one these userstories said something along the lines of 'I want the game to feel like watching an 80's NTSC TV.' 
-                                Which of course sounded pretty cool to me, so i picked that userstory.
+                                In the first week of this period there was a list of existing user stories for <a href="https://www.neonorigins.com/"target="_blank">Operation Starfall.</a>
+                                And of one these user stories said something along the lines of 'I want the game to feel like watching an 80's NTSC TV. 
+                                Which of course sounded pretty cool to me, so i picked that user story.
                                 <br>
                             </p>
                             <p class="project-text">
@@ -75,7 +75,7 @@
                                 <img src="img/URP/127.0.0.1_5501_index.html (2).png"
                                     alt="Image 1">
                                 <p class="project-text">
-                                    Lens Distortion & my first iterration of chromatic abberation shader.
+                                    Lens Distortion & my first iteration of chromatic aberration shader.
                                 </p>
                             </div>
                             <!--End Intro Section-->
@@ -85,19 +85,33 @@
                             <h2 class="project-text">Development</h2>
                             <p class="project-text">
                                 I was asked to look for possibilities to create custom overrides for unity's volumes. 
-                                So i went on ahead and found out it's pretty simple and created 3 scripts.
+                                So i went on ahead and found out it's pretty simple which led to the creation of 2 scripts.
                                 <br></br>
-                                A CustomRenderPassFeature, TintRendererFeature & CustomPostScreenTint.
-                                Each of these serve a purpose to make the effect render (show up).
+                                A 'TintRendererFeature' and a 'CustomPostScreenTint'.
+                                These two scripts work together to apply the tint to your screen.
                                 
                             </p>
 
-                            <div class="project-images">
+                            <div class="code    ">
                                 <p class="image-title">Code Snippets</p>
-                                <img src="img/URP/TintSnippet.png"
-                                    alt="Image 1">
+                                <pre>
+                                    <code class="snippet">
+                                        public override void Create()
+                                        {
+                                            tintPass = new TintPass();
+                                        }
+                                    </code>    
+                                    <br>
+                                    <code class="snippet">
+                                        public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
+                                        {
+                                            renderer.EnqueuePass(tintPass);
+                                        }
+                                    </code>
+                                </pre>
+                                
                                 <p class="project-text">
-                                    Identifying the target this shader needs to render to.
+                                    Here a RenderPass is created & added to the renderer.
                                 </p>
                             </div>
 
@@ -106,20 +120,20 @@
                                 <img src="img/URP/tintSnippet2.png"
                                     alt="Image 1">
                                 <p class="project-text">
-                                    This script allows you to set a custom color & intensity.
+                                    Here
                                 </p>
 
                                 <p class="image-title">RGB offset on a texture:</p>
                                 <img src="img/URP/offset1.gif" alt="Image 1">
                                 <p class="project-text">
-                                   Here i've been playing around with Shadergraph to create an chromatic aberration like effect.
+                                   Here i've been playing around with Shader graph to create an chromatic aberration like effect.
                                 </p>
                             </div>
                             <p class="project-text">
                                 The navmesh was tough to figure out, and in the
                                 end i didn't completely get it working with the
                                 enemies not moving from their position.
-                                Atleast i managed to figure out how the
+                                At least i managed to figure out how the
                                 following Attack Function
                             </p>
                             <div class="project-images">
@@ -128,37 +142,33 @@
                                     alt="Image 1">
                                 <p class="project-text">
                                     This feature is directly added to the renderer. 
-                                    It splits every rendereds object RGB values apart with an customizable offset.
+                                    It splits every rendered object RGB values apart with an customizable offset.
                                 </p>
                             </div>
                             <h3 class="project-text">Conclusion</h3>
                             <p class="project-text">
-                                At the end of the 8 week period i've learned alot more about render pipelines, 
+                                At the end of the 8 week period i've learned a lot more about render pipelines, 
                                 shaders and how they can work together. Which i at first did not have the slightest knowledge about.
                                 I was stuck on getting my screen tint to be rendered for 2 weeks straight. 
                                 Turns out the issue was i forgot to add my renderer feature, to the renderer. 
-                                Since there was nothing disfunctional about the shaders i've created.
+                                Since there was nothing dysfunctional about the shaders i've created.
                             </p>
 
                             <div class="project-images">
-                                <p class="image-title">The Shaders</p>
+                                <p class="image-title">The Shaders:</p>
                                 <img src="img/URP/Shader3.png"
                                     alt="Image 1">
-                                <p class="project-text">
-                                    Here's the first version of the shader with a test texture.
-                                </p>
-
                                 <img src="img/URP/Shader2.png" alt="Image 2">
                                 <p class="project-text">
-                                   This is the second version of the shader.
+                                   These are the first and second version of my shaders.
                                 </p>
                             </div>
 
                             <h2 class="project-text">Continuation</h2>
                             <p class="project-text">
                                 Outside of the 8 weeks i worked on the RGB offset shader,
-                                I've been experimenting of my own with rendering etc.
-                                But more of that is to be uploaded as soon as i got something more polished to show.
+                                I've been experimenting of my own with rendering settings etc. 
+                                But that is yet to be continued another time.
                             </p>
 
                         </div>
