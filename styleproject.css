@@ -29,7 +29,6 @@ body {
   background-image: url(img/URP/thumburp.png);
 }
 
-
 /* Adjusted styles to make the navbar sticky */
 nav {
   display: block;
@@ -157,6 +156,21 @@ text-decoration: none;
 }
 .project-images > img{
   width: 75%;
+}
+
+div.code {
+  white-space: pre;
+}
+
+code.snippet {
+  display: block;
+  background-color: #282828;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  overflow-x: auto;
+  font-size: 14px;
+  color: #a9b7c6;
 }
 
 
