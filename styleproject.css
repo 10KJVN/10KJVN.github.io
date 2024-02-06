@@ -173,17 +173,11 @@ code.snippet {
   color: #a9b7c6;
 }
 
-/* Your existing CSS */
-
 .centered-list {
   text-align: center; /* Center-align the list items within this specific ul element */
   list-style: none;   /* Remove default list styles (bullets) */
   padding: 3px;         /* Remove default padding for the list */
 }
-
-/* Your remaining CSS */
-
-
 
 #contact {
   background-color: #2c2b2b;
