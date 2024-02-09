@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jahvairo's Portfolio</title>
+    <link rel="stylesheet" href="styleproject.css"/>
+</head>
+
+<body id="overlayMap">
+<header class="navbar">
+    <nav>
+        <div class="name">
+            <a href="index.html">
+                <h1>Jahvairo Monkau</h1>
+                <h2>Game Developer</h2>
+            </a>
+        </div>
+        <div class="menu">
+            <button class="nav-items" onclick="window.location.href='index.html'">Home</button>
+            <button class="nav-items" onclick="window.location.href='index.html#services'">Projects</button>
+            <button class="nav-items" onclick="window.location.href='#contact'">Contact</button>
+            <a class="nav-items" href="img/JM_CV.pdf" target="_blank">CV</a>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <div class="project-header">
+        <h1>Operation Starfall</h1>
+    </div>
+
+    <div class="project-details">
+        <div class="project-stats">
+            <p class="project-text">
+                Project Status: On hold <br>
+                Project Type: Hybrid Learning Environment <br>
+                Project Duration: 3 ~ 4 weeks <br>
+                Software Used: Unity <br>
+                Languages Used: C# <br>
+                Primary Role(s): Game Developer<br>
+                Team: 2 ~ 3 devs <br>
+            </p>
+        </div>
+
+        <div class="project-description">
+            <h2>About Operation Starfall</h2>
+            <p>
+                Our Unannounced Game as a Service is a 2D Metroidvania experience for local co-op play, inspired by beloved 1980s cartoons.
+                It operates as a constantly evolving game, offering an expanding open world, engaging storylines, and character customization.
+                Join up to 4 players as you embark on cooperative adventures and exciting missions, uncovering the mysteries of the game's world while customizing your characters with 1980s nostalgia.
+            <p>
+
+                <a href="https://www.neonorigins.com/">neonorigins.com</a>
+
+            <h2 class="subtitle">My Features</h2>
+            <ul>
+                <li><a href="NGSocto.html">Octodrone</a></li>
+                <li><a href="NGSradial.html">Radial Stamina</a></li>
+                <li><a href="NGSmap.html">Overlay Map</a></li>
+            </ul>
+
+            <!--Begin Intro Section-->
+            <h2 class="project-text">Intro</h2>
+            <p class="project-text">
+                Utilizing a shader for the first time to create a stamina bar in Unity offered me a new perspective.
+                instead of traditional coding approaches, or using UI.
+                Having Shadergraph provide a visual and node-based interface,
+                made it more accessible for developers who did not have any experience with shaders at all.
+                This was an eye opening experience to develop something so visually impressive and functional at the same time,
+                without having to write a single line of code.
+                <br>
+                <br>
+                The Radial Stamina bar serves as a substitute for the previous stamina system due to popular demand
+                within our development team.
+                The design is inspired by the stamina bar in Zelda Breath of the Wild.
+                This collaborative project was undertaken in partnership with Jason Siegersma.
+                Given that the stamina bar makes use of Shadergraph,
+                it resulted in me discovering new potential ways to utilize shaders and their
+                intricacy within a feature like this.
+            </p>
+
+            <div class="project-images">
+                <p class="image-title">Gif of the Radial</p>
+                <img src="img/Radial/radialprefabgif.gif" alt="Image 1">
+                <p class="project-text">
+                    In the gif above you can see the shape and size of the radial, as you can see it looks just
+                    like Zelda: Breath of the Wild!
+                </p>
+            </div>
+            <!--End Intro Section-->
+
+            <!--Begin Development Section-->
+
+            <h2 class="project-text">Development</h2>
+            <p class="project-text">
+                Learning Unity shader coding was a real challenge.
+                At first, I had to grasp the concept of how shaders manipulate graphics.
+                It didn't click at once. Then, I delved into the shader language and its functions, which was like deciphering complex
+                instructions. There were moments of frustration when my shaders didn't work as intended, just like
+                when you hit roadblocks with an assignment. But, with determination and lots of trial and error, I
+                started to understand how to control colors, lighting, and textures. Finally, I realized that
+                shaders were like crafting a unique artistic expression for each object in the game. It was a
+                demanding journey, but in the end, it was incredibly rewarding to see how shaders transformed the
+                visual aspect of the game.
+            </p>
+
+            <div class="project-images">
+                <p class="image-title">A function from the script.</p>
+                <img src="img/Radial/StaminabarCode.png" alt="Image 1">
+                <p class="project-text">
+                    In the snippet above you can see the code of when the staminabar is depleted and how long it
+                    takes to regenerate the stamina back.
+                </p>
+            </div>
+
+
+            <div class="project-images">
+                <p class="image-title">How the radial would look in game</p>
+                <img src="img/Radial/radialplayergif.gif" alt="Image 1">
+                <p class="project-text">
+                    As seen above the stamina radial goes empty when running and when it hits 0, it plays an
+                    animations and then regenerates the stamina back over time.<br>
+                </p>
+            </div>
+            <h3 class="project-text">Conclusion</h3>
+            <p class="project-text">
+                By leveraging Shader Graph, developers can create visually stunning and customizable stamina bars
+                that align with the aesthetic and design requirements of their game, ultimately contributing to a
+                more immersive and engaging gameplay experience for players.
+            </p>
+
+            <div class="project-images">
+                <p class="image-title">The full Shadergraph:</p>
+                <img src="img/Radial/fullshader.png" alt="Image 1">
+                <p class="project-text">
+                    This shader has 3 significant things happening in the top, middle & bottom.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<footer id="Contact">
+    <p>Contact: <a href="mailto:Jahvam_2005@outlook.com">JahvaM_2005@outlook.com</a></p>
+</footer>
+
+</body>
+
