@@ -246,6 +246,59 @@ section {
   max-height: 500px;
 }
 
+/* Add this media query for smaller screens */
+@media screen and (max-width: 600px) {
+  .slider-container {
+    width: 90%; /* Adjust the width for better responsiveness on smaller screens */
+    margin: 0 auto;
+  }
+
+  .slide-content {
+    height: 300px; /* Adjust the height for smaller screens */
+  }
+
+  .slide-content img {
+    width: 100%; /* Make the image responsive within the container */
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .text-content {
+    width: 100%; /* Adjust the width for better responsiveness */
+  }
+
+  .prevButton,
+  .nextButton {
+    padding: 1%;
+  }
+}
+
+
+
+/* Add this media query for smaller screens */
+@media screen and (max-width: 600px) {
+  .about-me {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about-me-content {
+    margin: 3vw;
+    flex: 1;
+    padding: 0 10px;
+    font-size: 100%; /* Adjust font size for better readability on smaller screens */
+    text-align: justify; /* Align text for better readability */
+  }
+
+  .about-me-image img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    max-height: 300px; /* Adjust max-height for smaller screens */
+  }
+}
+
+
 #contact {
   background-color: #2c2b2b;
   text-align: center;
