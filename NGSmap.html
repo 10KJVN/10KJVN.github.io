@@ -63,29 +63,19 @@
             <!--Begin Intro Section-->
             <h2 class="project-text">Intro</h2>
             <p class="project-text">
-                Utilizing a shader for the first time to create a stamina bar in Unity offered me a new perspective.
-                instead of traditional coding approaches, or using UI.
-                Having Shadergraph provide a visual and node-based interface,
-                made it more accessible for developers who did not have any experience with shaders at all.
-                This was an eye opening experience to develop something so visually impressive and functional at the same time,
-                without having to write a single line of code.
-                <br>
-                <br>
-                The Radial Stamina bar serves as a substitute for the previous stamina system due to popular demand
-                within our development team.
-                The design is inspired by the stamina bar in Zelda Breath of the Wild.
-                This collaborative project was undertaken in partnership with Jason Siegersma.
-                Given that the stamina bar makes use of Shadergraph,
-                it resulted in me discovering new potential ways to utilize shaders and their
-                intricacy within a feature like this.
+                The overlay map feature was supposed to act as a sort of mini-map to the player(s). 
+                Though we didn't get to finish it before our time at Neon Origins was over, it has been yet another great learning experience.
+                In this project i learned how to utilize blitting in multiple ways and i've discovered about render textures & blend materials.
             </p>
 
             <div class="project-images">
-                <p class="image-title">Gif of the Radial</p>
-                <img src="img/Radial/radialprefabgif.gif" alt="Image 1">
+                <p class="image-title">The shadergraph</p>
+                <img src="img/OverlayMap/MapShader.png" alt="Image 1">
                 <p class="project-text">
-                    In the gif above you can see the shape and size of the radial, as you can see it looks just
-                    like Zelda: Breath of the Wild!
+                    The initial shader we've put together with 3 inputs: <br><br>
+                    1: The Map. <br>
+                    2: The Fog. <br>
+                    3: The Mask. <br>
                 </p>
             </div>
             <!--End Intro Section-->
@@ -94,35 +84,61 @@
 
             <h2 class="project-text">Development</h2>
             <p class="project-text">
-                Learning Unity shader coding was a real challenge.
-                At first, I had to grasp the concept of how shaders manipulate graphics.
-                It didn't click at once. Then, I delved into the shader language and its functions, which was like deciphering complex
-                instructions. There were moments of frustration when my shaders didn't work as intended, just like
-                when you hit roadblocks with an assignment. But, with determination and lots of trial and error, I
-                started to understand how to control colors, lighting, and textures. Finally, I realized that
-                shaders were like crafting a unique artistic expression for each object in the game. It was a
-                demanding journey, but in the end, it was incredibly rewarding to see how shaders transformed the
-                visual aspect of the game.
+                During the initial design phase of this feature i had just worked on multiple shader related features before this one.
+                So i got together with my colleagues to discuss how we were going to handle this from a technical standpoint. 
+                <br><br>
+                Each of us vaguely knew what had to be done, but which way would be the most effecient? 
+                I suggested setting up an extra camera that screenshots the whole map of each level through blitting.
+                The only issue with this was, i had no idea how to do this specifically, so i went on ahead and experimented a little.
+                <br><br>
+                I wrote some throwaway shader code that was supposed to get the Main Camera in the scene as a component,
+                then i litteraly wrote 'Camera.Blit' thinking that was a thing. 
+                It wasn't so at that point i hit a roadblock in my thinking process due to my limited knowledge at the time.
+
             </p>
 
             <div class="project-images">
-                <p class="image-title">A function from the script.</p>
-                <img src="img/Radial/StaminabarCode.png" alt="Image 1">
+                <p class="image-title">2 classes on the camera</p>
+                <img src="img/OverlayMap/CamClasses.png" alt="Image 1">
                 <p class="project-text">
-                    In the snippet above you can see the code of when the staminabar is depleted and how long it
-                    takes to regenerate the stamina back.
+                    After a lot of research and brainstorming, we asked our technical director for advice. <br>
+                    I explained to him i couldn't find out how to blit a whole level with the camera.
                 </p>
             </div>
 
 
             <div class="project-images">
-                <p class="image-title">How the radial would look in game</p>
-                <img src="img/Radial/radialplayergif.gif" alt="Image 1">
+                <p class="image-title">A function derrived from the original Texture Drawer class.</p>
+                <img src="img/OverlayMap/OGdraw.png" alt="Image 1">
                 <p class="project-text">
-                    As seen above the stamina radial goes empty when running and when it hits 0, it plays an
-                    animations and then regenerates the stamina back over time.<br>
+                    He told me i could possibly draw a texture upon the map itself instead of blitting the level. <br>
+                    That's how i found out about render textures and blend materials existance.   
                 </p>
             </div>
+
+            <p class="project-text">
+                Creating a class that uses the draw function from the Texture Drawer, 
+                i could now clearly figure out how to create my contribution in this feature.
+            </p>
+                                <pre>
+                                    <code class="snippet">
+                                        drawPosition.x += 0.5f;
+                                    </code>
+                                </pre>   
+            <p class="project-text">                    
+                This single line of code uses the brush, in this case a custom blit shader to draw at it's destination.
+                The blend material in use is a perfect example of an efficient way to achieve what i tried by just using a regular blit.
+            </p>
+
+            <div class="project-images">
+                <p class="image-title">A gif of me drawing manually</p>
+                <img src="img/OverlayMap/gif1.gif" alt="">
+                <p class="project-text">
+                    Since this feature is intended for Operation Starfall i added a placeholder player. <br>
+                    I connected the draw function to that player's position and manually moved it during runtime.
+                </p>
+            </div>
+
             <h3 class="project-text">Conclusion</h3>
             <p class="project-text">
                 By leveraging Shader Graph, developers can create visually stunning and customizable stamina bars
@@ -132,9 +148,8 @@
 
             <div class="project-images">
                 <p class="image-title">The full Shadergraph:</p>
-                <img src="img/Radial/fullshader.png" alt="Image 1">
-                <p class="project-text">
-                    This shader has 3 significant things happening in the top, middle & bottom.
+                <p>
+
                 </p>
             </div>
 
