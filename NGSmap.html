@@ -120,11 +120,14 @@
                 Creating a class that uses the draw function from the Texture Drawer, 
                 i could now clearly figure out how to create my contribution in this feature.
             </p>
-                                <pre>
-                                    <code class="snippet">
-                                        drawPosition.x += 0.5f;
-                                    </code>
-                                </pre>   
+
+            <div>
+                <pre>
+                    <code class="snippet">
+                        drawPosition.x += 0.5f;
+                    </code>
+                </pre>  
+            </div>
             <p class="project-text">                    
                 This single line of code uses the brush, in this case a custom blit shader to draw at it's destination.
                 The blend material in use is a perfect example of an efficient way to achieve what i tried by just using a regular blit.
@@ -134,10 +137,25 @@
                 <p class="image-title">A gif of me drawing manually</p>
                 <img src="img/OverlayMap/gif1.gif" alt="">
                 <p class="project-text">
-                    Since this feature is intended for Operation Starfall i added a placeholder player. <br>
-                    I connected the draw function to that player's position and manually moved it during runtime.
+                    Since this feature is intended to have the player act as the element that clears up the fog on the map, <br>
+                    I linked the draw position to the player position.
                 </p>
             </div>
+            
+            <div id="vertex_snippet">
+                <pre>
+                    <code class="snippet">
+                        v2f vert (appdata v)
+                        {
+                            v2f o;
+                            o.vertex = UnityObjectToClipPos(v.vertex);
+                            o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                            UNITY_TRANSFER_FOG(o,o.vertex);
+                            return o;
+                        }
+                    </code>
+                </pre>
+            </div>    
 
             <h3 class="project-text">Conclusion</h3>
             <p class="project-text">
