@@ -29,9 +29,12 @@ body {
   background-image: url(img/URP/thumburp.png);
 }
 
+#overlayMap{
+  background-image: url(img/OverlayMap/mapScreenShot.png);
+}
+
 /* Adjusted styles to make the navbar sticky */
 nav {
-  display: block;
   left: 0;
   top: 0;
   text-transform: uppercase;

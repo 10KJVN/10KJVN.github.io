@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jahvairo's Portfolio</title>
+    <link rel="stylesheet" href="styleproject.css"/>
+</head>
+
+<body id="overlayMap">
+<header class="navbar">
+    <nav>
+        <div class="name">
+            <a href="index.html">
+                <h1>Jahvairo Monkau</h1>
+                <h2>Game Developer</h2>
+            </a>
+        </div>
+        <div class="menu">
+            <button class="nav-items" onclick="window.location.href='index.html'">Home</button>
+            <button class="nav-items" onclick="window.location.href='index.html#services'">Projects</button>
+            <button class="nav-items" onclick="window.location.href='#contact'">Contact</button>
+            <a class="nav-items" href="img/FebCV.png" target="_blank">CV</a>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <div class="project-header">
+        <h1>Operation Starfall</h1>
+    </div>
+
+    <div class="project-details">
+        <div class="project-stats">
+            <p class="project-text">
+                Project Status: On hold <br>
+                Project Type: Hybrid Learning Environment <br>
+                Project Duration: 3 ~ 4 weeks <br>
+                Software Used: Unity <br>
+                Languages Used: C# <br>
+                Primary Role(s): Game Developer<br>
+                Team: 2 devs <br>
+            </p>
+        </div>
+
+        <div class="project-description">
+            <h2>About Operation Starfall</h2>
+            <p>
+                Our Unannounced Game as a Service is a 2D Metroidvania experience for local co-op play, inspired by beloved 1980s cartoons.
+                It operates as a constantly evolving game, offering an expanding open world, engaging storylines, and character customization.
+                Join up to 4 players as you embark on cooperative adventures and exciting missions, uncovering the mysteries of the game's world while customizing your characters with 1980s nostalgia.
+            <p>
+
+                <a href="https://www.neonorigins.com/">neonorigins.com</a>
+
+            <h2 class="subtitle">My Features</h2>
+            <ul>
+                <li><a href="NGSocto.html">Octodrone</a></li>
+                <li><a href="NGSradial.html">Radial Stamina</a></li>
+                <li><a href="NGSmap.html">Overlay Map</a></li>
+            </ul>
+
+            <!--Begin Intro Section-->
+            <h2 class="project-text">Intro</h2>
+            <p class="project-text">
+                The overlay map feature was supposed to act as a sort of mini-map to the player(s). 
+                Though we didn't get to finish it before our time at Neon Origins was over, it has been yet another great learning experience.
+                In this project i learned how to utilize blitting in multiple ways and i've discovered about render textures & blend materials.
+            </p>
+
+            <div class="project-images">
+                <p class="image-title">The shadergraph</p>
+                <img src="img/OverlayMap/MapShader.png" alt="Image 1">
+                <p class="project-text">
+                    The initial shader we've put together with 3 inputs: <br><br>
+                    1: The Map. <br>
+                    2: The Fog. <br>
+                    3: The Mask. <br>
+                </p>
+            </div>
+            <!--End Intro Section-->
+
+            <!--Begin Development Section-->
+
+            <h2 class="project-text">Development</h2>
+            <p class="project-text">
+                During the initial design phase of this feature i had just worked on multiple shader related features before this one.
+                So i got together with my colleagues to discuss how we were going to handle this from a technical standpoint. 
+                <br><br>
+                Each of us vaguely knew what had to be done, but which way would be the most effecient? 
+                I suggested setting up an extra camera that screenshots the whole map of each level through blitting.
+                The only issue with this was, i had no idea how to do this specifically, so i went on ahead and experimented a little.
+                <br><br>
+                I wrote some throwaway shader code that was supposed to get the Main Camera in the scene as a component,
+                then i litteraly wrote 'Camera.Blit' thinking that was a thing. 
+                It wasn't so at that point i hit a roadblock in my thinking process due to my limited knowledge at the time.
+
+            </p>
+
+            <div class="project-images">
+                <p class="image-title">2 classes on the camera</p>
+                <img src="img/OverlayMap/CamClasses.png" alt="Image 1">
+                <p class="project-text">
+                    After a lot of research and brainstorming, we asked our technical director for advice. <br>
+                    I explained to him i couldn't find out how to blit a whole level with the camera.
+                </p>
+            </div>
+
+
+            <div class="project-images">
+                <p class="image-title">A function derrived from the original Texture Drawer class.</p>
+                <img src="img/OverlayMap/OGdraw.png" alt="Image 1">
+                <p class="project-text">
+                    He told me i could possibly draw a texture upon the map itself instead of blitting the level. <br>
+                    That's how i found out about render textures and blend materials existance.   
+                </p>
+            </div>
+
+            <p class="project-text">
+                Creating a class that uses the draw function from the Texture Drawer, 
+                i could now clearly figure out how to create my contribution in this feature.
+            </p>
+
+            <div>
+                <pre>
+                    <code class="snippet">
+                        drawPosition.x += 0.5f;
+                    </code>
+                </pre>  
+            </div>
+
+            <p class="project-text">                    
+                This single line of code uses the brush, in this case a custom blit shader to draw at it's destination.
+                The blend material in use is a perfect example of an efficient way to achieve what i tried by just using a regular blit.
+            </p>
+
+            <div class="project-images">
+                <p class="image-title">A gif of me drawing manually</p>
+                <img src="img/OverlayMap/gif1.gif" alt="">
+                <p class="project-text">
+                    Since this feature is intended to have the player act as the element that clears up the fog on the map, <br>
+                    I linked the draw position to the player position.
+                </p>
+            </div>
+            
+            <div id="vertex_snippet">
+                <pre>
+                    <code class="snippet">
+                        v2f vert (appdata v)
+                        {
+                            v2f o;
+                            o.vertex = UnityObjectToClipPos(v.vertex);
+                            o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                            UNITY_TRANSFER_FOG(o,o.vertex);
+                            return o;
+                        }
+                    </code>
+                </pre>
+            </div>
+            
+            <p class="project-text">
+                In the snippet shown above is a small piece of logic from the CustomBlit shader written for this feature. 
+                It ensures that the vertex position is converted from object space to clip space, allowing correct rendering in the camera's view. <br><br>
+                Simplified: the brush only draws within the borders of it's destination (the canvas).
+            </p>
+
+            <div class="project-images">
+                <p class="image-title">The drawn texture:</p>
+                <img src="img/OverlayMap/gif2.gif" alt="">
+                <p class="project-text">
+                    Thanks to the Custom Blit, the drawn texture saves on play and out of play. <br>
+                    Even when starting up the game again it's still there and will draw as usual.
+                </p>
+
+            </div>
+
+            <h3 class="project-text">Conclusion</h3>
+            <p class="project-text">
+                After playing around with the TextureDrawer class and some more experimenting,
+                It was ready for me to bring it to the actual game instead of my prototype.
+                By the time i was done, my colleague also got his class together. <br><br>
+
+                His camera bounds class screenshots the level, 
+                and cuts out all uneccesairy elements needed for a map and automatically converts it to a texture.
+            </p>
+
+            <div class="project-images">
+                <p class="image-title">The source & the texture:</p>
+                <img src="img/OverlayMap/CustomTex.png">
+                <img src="img/OverlayMap/screenTex.png">
+                <p>
+                    All materials and backgrounds are stripped and screenshot.
+                </p>
+            </div>
+
+            <p class="project-text">
+                Until this point, the 3rd week of the development cycle.
+                After alot of head bashing and eye opening solutions to our code problems,
+                i had a last issue before my part of mapping the player worked.
+                <br><br>
+                Getting the players position mapped on the canvas accurately according to the world space & level size.
+                By implementing this, my class would be generic enough for levels of any size instead of just the one we used for testing.
+            </p>
+
+            <div class="project-images">
+                <p class="image-title">My final extension to the draw function.</p>
+                <img src="img/OverlayMap/FinalDraw.png">
+                <p class="project-text">
+                    I thought since the render texture the canvas uses can max be 2048x2048, so i'll scale by that. <br>
+                    Turned out the player gets drawn way more accurate than unscaled but sadly not 100%.
+                </p>
+            </div>
+
+            <p class="project-text">
+                As the player spawns in, my class automatically assigns a player to an array that serves as a list for the players.
+                Then my class draws the players position onto the map texture every frame.
+                This doesn't impact the performance of the game since shaders mainly run on the GPU memory.
+                <br><br>
+                By utilizing the Draw function utilizing the logic within the if statement behind the drawPosition variable,
+                you can customize this class however you like.
+            </p>
+
+            <div class="project-images">
+                <p class="image-title">The players path:</p>
+                <img src="img/OverlayMap/drawnPlayer.png">
+                <p>
+                    Most of the code can found here:
+                    <a href="https://github.com/10KJVN/URPShaders">Github</a>
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<footer id="Contact">
+    <p>Contact: <a href="mailto:JahvaM_2005@outlook.com">JahvaM_2005@outlook.com</a></p>
+</footer>
+
+</body>
+

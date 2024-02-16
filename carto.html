@@ -21,7 +21,7 @@
                 <button class="nav-items" onclick="window.location.href='index.html'">Home</button>
                 <button class="nav-items" onclick="window.location.href='index.html#services'">Projects</button>
                 <button class="nav-items" onclick="window.location.href='#contact'">Contact</button>
-                <a class="nav-items" href="img/JM_CV.pdf" target="_blank">CV</a>
+                <a class="nav-items" href="img/FebCV.png" target="_blank">CV</a>
             </div>
         </nav>
     </header>
@@ -50,30 +50,30 @@
                     It marked the second collaboration between Artists and Developers. 
                 <p>
                 
-                <a href="https://github.com/stenkristel/Vertical-Slice-Carto/tree/jahvaV2">Github</a>
+                <a href="https://github.com/stenkristel/Vertical-Slice-Carto/tree/jahvaV2" target="_blank">Github</a>
 
                 <h2 class="subtitle">My Features</h2>
                 <ul>
                     <li>UI</li>
+                    <li>Map Movement</li>
                 </ul>
 
                 <!--Begin Intro Section-->
                 <h2 class="project-text">Intro</h2>
                 <p class="project-text">
                     In this project i mainly focused on putting together the UI.
-                    Together with one of the artists within our team i recreated the UI elements seen in the gameplay footage with 2D Objects.
-                    Closely inspecting the assets at <a href="https://www.gameuidatabase.com/gameData.php?id=714">Game UI Database.</a>
+                    Together with one of the artists within our team i recreated the UI elements seen in the gameplay footage with sprites.
+                    Closely inspecting the assets seen at <a href="https://www.gameuidatabase.com/gameData.php?id=714" target="_blank">Game UI Database.</a>
+                    When initiating the Carto project, our team, one of two groups, deliberated whether to build the scene from a 3D or 2D template.
+                    Despite initial discussions, we decided on a 3D approach.
+                    Unlike the other group, which started from a 2D template, we creatively simulated certain elements using perspective techniques.
                     <br>
                     
                 </p>
 
                 <div class="project-images">
-                    <p class="image-title">Canvas Template:</p>
-                    <img src="img/Carto/Canvas.png" alt="Image 1">
-                    <p class="project-text">
-                        I've added placeholders for the main UI elements seen in the game.<br>
-                        Buttons highlight when hovered over.
-                    </p>
+                    <p class="image-title">The 10 seconds we had to recreate:</p>
+                    <img src="img/Carto/VerticalSlice.gif" alt="Image 1">
                 </div>
                 <!--End Intro Section-->
 
@@ -81,66 +81,88 @@
 
                 <h2 class="project-text">Development</h2>
                 <p class="project-text">
-                    The development of Carto was a little different than other projects i've worked on since we already have a concrete visual of what we were working to.
-                    At the start of the sprint we were brainstorming on the techniques and strategies the original creators may have used to recreate these assets.
-                    We searched more gameplay footage of Carto and were excited to recreate other parts of the game,
-                    Until we were attended by our teachers that we needed to only focus on the dedicated 10 seconds they've provided to us.
+                    The development of Carto was a little bit different than other projects i've previously worked on.
+                    Since we already knew, and had a concrete visual of what we were tasked to create it was pretty straight forward.
+                    At least until we've started discussing the technical side of things.
+                    <br><br>
+                    In the first week we made a trello and wrote down to-do's for each feature.
+                    Then we held a stand-up to discuss who's going to be doing what.
+                    As seen below, my contributions.
                 </p>
 
                 <div class="project-images">
-                    <p class="image-title">An in-game gif</p>
-                    <img src="img/Carto/placement.gif" alt="Image 1">
+                    <p class="image-title">A canvas put together by me:</p>
+                    <img src="img/Carto/Canvas.png" alt="Image 1">
                     <p class="project-text">
-                        My colleagues made the Map Placement class. <br>
-                        I made the script for the 'Scope' as i like to call it to change when picking up a map piece. <br>
+                        Since i was quick to put this together, not yet all art assets were available yet.<br>
+                        hencewhy i utilized placeholders or made them myself.
                     </p>
                 </div>
-
-
+                
                 <div class="project-images">
-                    <p class="image-title">The 10 seconds we had to recreate:</p>
-                    <img src="img/Carto/VerticalSlice.gif" alt="Image 1">
+                    <p class="image-title">Tile Rotation</p>
+                    <img src="img/Carto/rotateGif.gif" alt="Image 1">
                     <p class="project-text">
-                        The main Mechanics we've seen off the bat would be difficult to recreate,<br>
-                        Due to us not knowing where to start or how they'd function the best.
+                        Here you see a map piece being rotated.<br>
+                        When pressing W, a map piece centers itself inside the scope.
+                        It also remains as a child of the map once placed.
+                    </p>
+                    
+                    <p class="image-title">Code Snippets:</p>
+                    <img src="img/Carto/PieceMovement.png" alt="Code Snippet rotation">
+                    <img src="img/Carto/PieceRotation.png" alt="Rotation snippet">
+                    <p class="project-text">
+                        This is basically the logic behind what u just saw happening in the gif above.<br>
+                        The PieceMovement function transforms a map pieces' (A1) position, to the center position.<br>
+                        The PieceRotation functions either Add or Subtract a value of 90 to the objects' Z-axis, allowing it to rotate.
                     </p>
                 </div>
                 <h3 class="project-text">Conclusion</h3>
                 <p class="project-text">
-                    In The end of this trajectory i learned quite alot about the intricasies of having to pay attention to every little detail provided in these games.
-                    And that you can perform all sorts of tricks to make a 2D game in a 3D unity scene for example, we just used camera angles and canvases to make the game appear like its 2 Dimension,
-                    While in reality, in our case it isn't.
+                    After completing the project, we received feedback from our teachers. 
+                    While we got positive comments, their main critique highlighted the absence of audio—
+                    something we had overlooked. 
+                    It made me realize that recreating even a short segment of a game involves more work than it appears on the surface. 
+                    Despite the challenge, it was a valuable learning experience.
                 </p>
 
                 <div class="project-images">
-                    <p class="image-title">This is when you click on the map:</p>
-                    <img src="img/Carto/Scope2.png" alt="Image 1">
-                    <p class="image-title">This is when you've selected the map:</p>
-                    <img src="img/Carto/Scope1.png" alt="Image 1">
-                    <p class="project-text">
-                        Usually these would be sprites, but i went on ahead and made them myself using only 2D blocks.<br>
-                        They also shift from shape whenever a map piece is selected, or spacebar is pressed!
-                    </p>
+                    <p class="image-title">The final product</p>
+                    <img src="img/Carto/placement.gif" alt="Image 1">
+                    <p class="image-title">Our Vertical Slice of Carto</p>
                 </div>
 
                 <p class="project-text">
-                    Even though i haven't really contributed as much as i wished i did in this project i am still proud of the things i have achieved and learned from this project.
+                    One of the best things i learned from this project is how to improvise when u don't know something.
+                    For example, it's not the 'Scope' that moves map pieces around.
+                    The map itself is litteraly moving instead.
                 </p>
 
                 <div class="project-images">
-                    <p class="image-title">Simple Script:</p>
-                    <img src="img/Carto/SimpleSnippet.png" alt="Image 1">
-                    <p class="project-text">
-                        What the code above does is switch the Active object to Inactive and vice versa.
+                    <p class="image-title">mapMovement.cs</p>
+                    <img src="img/Carto/ShorterSnip.png" alt="Image 1">
+                    <p class="image-title">
+                        Repeat this 4 times for each arrow in the Update function. <br>
+                        And you've got movement.
                     </p>
                 </div>
-    
+               <div class="project-images">
+                   <p class="project-text">
+                       And last but not least, scope.cs:
+                   </p>
+                   <img src="img/Carto/SimplerSnip.png" alt="simple snippet">
+               </div> 
+                
+                <p class="project-text">
+                    TL;DR - Work smarter, not harder.
+                </p>
+                
             </div>
         </div>
     </div>
 
     <footer id="Contact">
-        <p>Contact: <a href="mailto:Jahvam_2005@outlook.com">JahvaM_2005@outlook.com</a></p>
+        <p>Contact: <a href="mailto:JahvaM_2005@outlook.com">JahvaM_2005@outlook.com</a></p>
       </footer>
 
 </body>
