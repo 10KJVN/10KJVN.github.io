@@ -88,37 +88,20 @@
                                 A 'TintRendererFeature' and a 'CustomPostScreenTint'.
                                 These two scripts work together to apply the tint to your screen.
                                 
-                            </p>
-
-                            <div class="code">
-                                <p class="image-title">Code Snippets</p>
-                                <pre>
-                                    <code class="snippet">
-                                        public override void Create()
-                                        {
-                                            tintPass = new TintPass();
-                                        }
-                                    </code>    
-                                    <br>
-                                    <code class="snippet">
-                                        public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
-                                        {
-                                            renderer.EnqueuePass(tintPass);
-                                        }
-                                    </code>
-                                </pre>
-                                
+                            <div class="project-images">
+                                <p class="image-title">Create & Add</p>
+                                <img src="img/Snippet/addRTPasses.png" alt="">
                                 <p class="project-text">
-                                    Here a RenderPass is created & added to the renderer.
+                                    In the snippet above a new TintPass is created and assigned. <br>
+                                    Also the assigned tintPass is enqueued to the renderer in use.
                                 </p>
-                            </div>
+                            </div>           
 
                             <div class="project-images">
                                 <p class="image-title">My Custom Volume Override:</p>
-                                <img src="img/URP/tintSnippet2.png"
-                                    alt="Image 1">
+                                <img src="img/URP/tintSnippet2.png"alt="Image 1">
                                 <p class="project-text">
-                                    Here
+                                    Here a float and color is added to the inspector with booleans to turn them on or off.
                                 </p>
 
                                 <p class="image-title">RGB offset on a texture:</p>
