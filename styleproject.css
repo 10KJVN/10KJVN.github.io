@@ -33,6 +33,10 @@ body {
   background-image: url(img/OverlayMap/mapScreenShot.png);
 }
 
+#candy{
+  background-image: url(img/CandyDandy/BigBackground.png);
+}
+
 /* Adjusted styles to make the navbar sticky */
 nav {
   left: 0;
