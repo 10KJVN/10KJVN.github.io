@@ -34,7 +34,7 @@
         <div class="project-stats">
             <p class="project-text">
                 Project Status: Finished <br>
-                Project Type: Mobile Game <br>
+                Project Type: 2D Mobile Game <br>
                 Project Duration: 3 Months <br>
                 Software Used: Unity <br>
                 Languages Used: C# <br>
@@ -46,7 +46,7 @@
         <div class="project-description">
             <h2>About Candy Dandy</h2>
             <p>
-                This has been the project for our Final Exam at Mediacollege Amsterdam.
+                This has been the project for our final exam at Mediacollege.
                 It involves both Game Development and Game Artist course with different criteria to be met.
                 In response to our external clients assignment to create a innovative match-3 metagame in which,
                 the match-3 mechanic has direct influence onto the secondary gameplay layer or game.
@@ -97,12 +97,41 @@
             </p>
 
             <div class="project-images">
-                <!-- Visual -->
-                <!-- Example: <img src="img/ProjectName/Visual2.gif" alt="Visual 2"> -->
-
-                <!-- Code Snippet -->
-                <!-- Example: <img src="img/ProjectName/CodeSnippet1.png" alt="Code Snippet 1"> -->
+                <img src="img/CandyDandy/CharacterSceneSS.png" alt="Screenshot of character scene used.">
+                <p>
+                    In the Awake function of Character.cs the code checks for Attack- and HealthComponents.<br>
+                    If none are found, they are automatically assigned with default attributes set.
+                </p>
+                
+                 <img src="img/CandyDandy/PC_Awake.png" alt="Code Snippet 1"> 
+                <p>
+                    AttackConfig is the configuration settings to define an attack<br>
+                    simply put view it like a recipe with interchangeable ingredients such as sound effects, visual effects and attack damage.
+                </p>
             </div>
+            
+            <!-- Methaporical attempt at explaining attack system to non-technical people --> 
+            <p class="project-text">
+                About the Attack System, it's like a chain of violence and sensitive people. 
+                You could view it as both the Players and Enemies each having their own unique triggers.
+                If one of these is triggered it will cause a couple of things to happen in rapid succession like the butterfly effect.
+                For example if either of these is 'Taunted' they will relapse to their method of attacking.
+                In the case of the enemies its at random based on the available attacks it has learned (Predefined scriptableObjects in an Array)
+                In the case of the player, controlled by you, the actual player who can think through actions,
+                it picks the 1 attack we have available and perform that until we've warmed up enough to perform a special attack.
+                <br>
+                Now technically speaking both methods of attacking are valid and executed as follows:
+                1. Prepare to look cool (aka animator?.SetTrigger)
+                2. Let out your anger by releasing a grunt (aka audioSource.PlayOneShot(config.attackSfx)
+                3. Take aim at your target (targetOverride = explicitTarget;)
+                4. Make sure to pack a punch (calling the deal damage method)
+                <br>
+                Now for the aftermath of your devastating attack
+                1. the way you swing your weapon was so tough, it has to physically hurt
+                2. But we not done, it's time to leave our impact (vfx) and see where it hit em!
+                3. You've done it, you're finally done attacking.
+                Keep in mind our enemies won't stop until either you or they are dead.
+            </p>
             <!-- End Development Section -->
 
             <!-- Begin Conclusion Section -->
