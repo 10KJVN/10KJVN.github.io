@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Project Template - Jahvairo's Portfolio</title>
+    <title>Candy Dandy - Jahvairo's Portfolio</title>
     <link rel="stylesheet" href="styleproject.css"/>
 </head>
 
@@ -32,120 +32,171 @@
 
     <div class="project-details">
         <div class="project-stats">
-            <p class="project-text">
-                Project Status: Finished <br>
-                Project Type: 2D Mobile Game <br>
-                Project Duration: 3 Months <br>
-                Software Used: Unity <br>
-                Languages Used: C# <br>
-                Primary Role(s): Programmer, Scrum Master <br>
-                Team: 3 Devs, 5 Artists <br>
+            <p>
+                <strong>Status:</strong> Finished <br>
+                <strong>Type:</strong> 2D Mobile Game <br>
+                <strong>Duration:</strong> 3 Months <br>
+                <strong>Engine:</strong> Unity <br>
+                <strong>Language:</strong> C# <br>
+                <strong>Roles:</strong> Programmer, Scrum Master <br>
+                <strong>Team:</strong> 3 Developers, 5 Artists <br>
+                <a href="https://github.com/j5x/PvB2025" target="_blank">View on GitHub</a>
             </p>
         </div>
 
         <div class="project-description">
             <h2>About Candy Dandy</h2>
             <p>
-                This has been the project for our final exam at Mediacollege.
-                It involves both Game Development and Game Artist course with different criteria to be met.
-                In response to our external clients assignment to create a innovative match-3 metagame in which,
-                the match-3 mechanic has direct influence onto the secondary gameplay layer or game.
-                Our client being Ramses Di Perna besides being a Game Dev at Azerion also an old student at our college.
+                Candy Dandy was our final exam project at Mediacollege, bringing together both Game Development and Game Art students under a real client brief.
+                The goal: create an innovative match-3 mobile game where the match-3 mechanic directly influences a secondary gameplay layer.
+                Our client, Ramses Di Perna — a Game Developer at Azerion and an alumnus of our college — guided us through the process.
             </p>
 
-            <a href="https://github.com/j5x/PvB2025" target="_blank">Github</a>
-
-            <h2 class="subtitle">My Features</h2>
+            <h2>My Features</h2>
             <ul>
-                <li>Character Classes</li>
-                <li>Combat System</li>
-                <li>Canvas & UI scaling</li>
+                <li>Designed and implemented Character Classes</li>
+                <li>Built the Combat System</li>
+                <li>Handled Canvas & UI scaling for mobile</li>
             </ul>
-            
-            <h2 class="project-text">Intro</h2>
-            <p class="project-text">
-                At the start of this project there was a briefing by 3 external clients. 
-                We as students with our group could communicate our preferences. In the end we got our nr. 1 pick.
-                So we approached our client and asked a few questions and exchanged contact info to update each them.
-                On the first day of the official exam our group gathered together and scanned our intel to come up with ideas.
-                Almost everybody had their own ideas, some indifferent some alike until we had 3 core concepts.
-                Some folks wanted to make a dating sim, the other a cake baking sim and me and the other 2 devs wanted a fighting game.
-                So we eventually convinced them and decided to go for a fighting game. Then we had difference of opinion within the group.
-                About how, some people thought it was better to make landscape orientated game over a portrait because it would be too cropped and small.
-                So we had 1 of the artists draw a mockup of the 2 concepts we were divided about and presented the question with context to our client.
-                Also forgot to mention, the reason we devs didn't agree with the dating sim and cake baking sim concepts because they seemed art heavy to such a degree,
-                we wouldn't have much more to do outside of the Core mechanics required and the short amount of time we could create those.
-             </p>
+
+            <h2>Project Kickoff</h2>
+            <p>
+                The project started with a briefing from three external clients. After discussing preferences as a group, we got our first choice.
+                We reached out to our client, asked questions, and exchanged contact details to keep them updated.
+                On the first official day, our team brainstormed ideas. Some leaned towards a dating sim, others towards a cake-baking sim,
+                but the other two developers and I pushed for a fighting game concept.
+            </p>
+            <p>
+                We had internal disagreements about orientation: some preferred landscape, others portrait.
+                One of our artists created a mockup for both concepts to present to the client for feedback.
+                Ultimately, we chose the fighting game in portrait mode — which fit the brief better and balanced dev and art workload.
+            </p>
 
             <div class="project-images">
                 <img src="img/CandyDandy/concepts_Mockup.png" alt="Visual Mockup of concept 1 vs concept 2">
-                <p class="project-text">
-                    Concept 1: Portrait style matching and fighting simultaneously<br>
-                    Concept 2: Landscape style matching utilizing full screen -> Transition into fighting cutscene based off matches made.
+                <p>
+                    Concept 1: Portrait — matching and fighting on the same screen.<br>
+                    Concept 2: Landscape — full-screen matching with a transition to fighting cutscenes.
                 </p>
             </div>
 
-            <!-- Begin Development Section -->
-            <h2 class="project-text">Development</h2>
-            <p class="project-text">
-                The chosen concept ended up being Concept 1 due to it fitting the briefing better.
-                Well starting off this development cycle, the artists took roles and we devs mainly set up the trello with userstories and a main focus on the core mechanics
-                I started on the Character classes and their hierarchy.
-                Our game would be centered around PvE combat so we needed a Player and an Enemy so i created the class Character.cs, and decided to use
-                inheritance so that both the player and enemy characters would be provided with base properties such as the ability to attack, health and die.
-                At the time there were no art assets for me to use since this was early on in the project so i resorted to
+            <h2>Development</h2>
+            <p>
+                Once our concept was clear, we organized the Trello board with user stories and prioritized the core mechanics.
+                I focused first on the character system. Since our game revolves around PvE combat, I designed a `Character` base class
+                to provide shared properties like health, attack, and death logic for both Player and Enemy classes.
             </p>
 
             <div class="project-images">
-                <img src="img/CandyDandy/CharacterSceneSS.png" alt="Screenshot of character scene used.">
+                <img src="img/CandyDandy/CharacterSceneSS.png" alt="Screenshot of Character Scene">
                 <p>
-                    In the Awake function of Character.cs the code checks for Attack- and HealthComponents.<br>
-                    If none are found, they are automatically assigned with default attributes set.
+                    The `Awake` method in `Character.cs` checks for `Attack` and `Health` components.
+                    If none exist, they’re assigned default settings automatically.
                 </p>
-                
-                 <img src="img/CandyDandy/PC_Awake.png" alt="Code Snippet 1"> 
+            </div>
+
+            <p>
+                Once the Health system was finished — which naturally includes damage logic — I could start replace all placeholder code in <code>Character.cs</code> to real, modular systems.
+                With this, every character that inherits from Character.cs can now take and deal damage through a shared HealthComponent logic, keeping things clean and reusable.
+            </p>
+
+            <p>
+                Next, I focused on the core of the Combat System: the <strong>AttackComponent</strong>.
+
+            <p>
+                The <code>AttackComponent.cs</code> started as a simple enemy AI — I gave each enemy a list of possible attacks (defined with ScriptableObjects) and logic to pick one at random on a timer.
+                Early on, this was hardcoded, but after discussing with my colleague who finished the Health system, I refactored it:
+                attacks became fully configurable, reusable assets.
+            </p>
+
+            <div class="project-images">
+                <img src="img/CandyDandy/MergedATK.png" alt="Attack properties in the Inspector.">
                 <p>
-                    AttackConfig is the configuration settings to define an attack<br>
-                    simply put view it like a recipe with interchangeable ingredients such as sound effects, visual effects and attack damage.
+                    The ScriptableObjects with Configuration settings for Health on the left. 
+                    Attack configurations on the right.
                 </p>
             </div>
             
-            <!-- Methaporical attempt at explaining attack system to non-technical people --> 
-            <p class="project-text">
-                About the Attack System, it's like a chain of violence and sensitive people. 
-                You could view it as both the Players and Enemies each having their own unique triggers.
-                If one of these is triggered it will cause a couple of things to happen in rapid succession like the butterfly effect.
-                For example if either of these is 'Taunted' they will relapse to their method of attacking.
-                In the case of the enemies its at random based on the available attacks it has learned (Predefined scriptableObjects in an Array)
-                In the case of the player, controlled by you, the actual player who can think through actions,
-                it picks the 1 attack we have available and perform that until we've warmed up enough to perform a special attack.
-                <br>
-                Now technically speaking both methods of attacking are valid and executed as follows:
-                1. Prepare to look cool (aka animator?.SetTrigger)
-                2. Let out your anger by releasing a grunt (aka audioSource.PlayOneShot(config.attackSfx)
-                3. Take aim at your target (targetOverride = explicitTarget;)
-                4. Make sure to pack a punch (calling the deal damage method)
-                <br>
-                Now for the aftermath of your devastating attack
-                1. the way you swing your weapon was so tough, it has to physically hurt
-                2. But we not done, it's time to leave our impact (vfx) and see where it hit em!
-                3. You've done it, you're finally done attacking.
-                Keep in mind our enemies won't stop until either you or they are dead.
-            </p>
-            <!-- End Development Section -->
 
-            <!-- Begin Conclusion Section -->
-            <h3 class="project-text">Conclusion</h3>
-            <p class="project-text">
-                <!-- Conclusion text here -->
+            <p>
+                This made it easy to tweak enemy behavior directly in the editor without rewriting code — adding new attacks is just a matter of creating a new <code>AttackConfig</code>.
+                For the player side, we connected the same system to the Match-3 grid: every match made triggers the player’s <code>Attack()</code> method.
             </p>
-            <!-- End Conclusion Section -->
 
+            <pre>
+// In GridManager.cs
+public event System.Action OnMatchMade;
+
+// When a match is detected:
+OnMatchMade?.Invoke();
+
+// In Player.cs
+private GridManager gridManager;
+
+private void Start()
+{
+    gridManager = FindObjectOfType&lt;GridManager&gt;();
+    if (gridManager != null)
+        gridManager.OnMatchMade += Attack;
+    else
+        Debug.LogError("GridManager not found!");
+}
+</pre>
+
+            <p>
+                The <code>VFXComponent</code> was added separately to handle visuals like hit effects, damage sparks, or impact flashes.
+                It’s not inherited directly by the base <code>Character</code> class, but attached only to characters that need it.
+                This keeps it modular and easy to disable or swap if needed.
+            </p>
+
+            <p>
+                Finally, for special attacks — which needed to sync normal attack logic with unique VFX and combo conditions — we pair programmed the <code>SpecialAttackController</code> to tie it all together.
+                My colleague handled most of its logic while I made sure it worked smoothly with my <code>AttackComponent</code> and <code>VFXComponent</code>.
+            </p>
+
+            <p>
+                <code>AttackConfig</code> works like a recipe: it defines damage values, visual effects, and sound effects, all swappable without touching the main logic.
+            </p>
+
+
+            <p>
+                The attack system works like a simple cause-and-effect chain.
+                Enemies pick from a small, predefined set of attacks at random, while the player’s attacks are tied to match-3 input.
+                Technically, an attack follows this flow:
+            </p>
+            <ol>
+                <li>Play an animation (`animator?.SetTrigger`)</li>
+                <li>Play an SFX (`audioSource.PlayOneShot`)</li>
+                <li>Target the opponent</li>
+                <li>Apply damage and spawn hit VFX</li>
+            </ol>
+            <p>
+                I used arrays instead of lists for enemy attacks since they have a fixed set (1–3 attacks each).
+                If we had more dynamic bosses, like a multi-phase Dark Souls enemy, a list would make sense for swapping attacks at runtime.
+            </p>
+
+            <div class="project-images">
+                <video width="480" height="720" autoplay muted loop>
+                    <source src="img/CandyDandy/playtest_versie_1.mp4" type="video/mp4">
+                </video>
+                <p>
+                    Early playtest version — no grid visuals yet. Originally, we used both a round timer and player health,
+                    but feedback showed that having both was distracting. We replaced the timer with a round manager displaying the current round instead.
+                </p>
+            </div>
+
+            <h2>Conclusion</h2>
+            <p>
+                Candy Dandy taught me a lot about working in a team without a strict lead and balancing tasks across disciplines.
+                It was my second attempt at mobile game development — and my first successful one.
+                A key takeaway was learning about Safe Areas on mobile devices and how to use Safe Area Handler scripts to handle them properly.
+                I also gained valuable insight into placing important UI elements so they stay functional and clear on small, portrait screens.
+            </p>
         </div>
     </div>
 </div>
 
-<footer id="Contact">
+<footer id="contact">
     <p>Contact: <a href="mailto:JahvaM_2005@outlook.com">JahvaM_2005@outlook.com</a></p>
 </footer>
 
