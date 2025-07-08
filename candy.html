@@ -81,76 +81,41 @@
             </div>
 
             <h2>Development</h2>
+            
             <p>
-                Once our concept was clear, we organized the Trello board with user stories and prioritized the core mechanics.
-                I focused first on the character system. Since our game revolves around PvE combat, I designed a `Character` base class
-                to provide shared properties like health, attack, and death logic for both Player and Enemy classes.
+                All characters in Candy Dandy (both Player and Enemies) share a common Character base class.
+                This base class provides core functionality every character needs, including
+                Variables, components, references & basic functions such as TakeDamage() and Die(). <a href="https://github.com/j5x/PvB2025/tree/develop/Assets/Script/CharacterSystem" target="_blank">Character System</a>
+            </p>
+            
+            <div class="project-images">
+                <img src="img/CandyDandy/ClassDiagram_characters.png" alt="Diagram of character classes">
+            </div>
+            
+            <p>
+                The AttackComponent manages how each character performs attacks using AttackConfig ScriptableObjects. 
+                Each AttackConfig holds the data for a unique attack — like name, damage, animation trigger, and delay — all tweakable directly in the Inspector.
+                Full code of Attack System can be found here: <a href="https://github.com/j5x/PvB2025/tree/develop/Assets/Script/AttackSystem" target="_blank">Attack System</a>
+                
             </p>
 
             <div class="project-images">
-                <img src="img/CandyDandy/CharacterSceneSS.png" alt="Screenshot of Character Scene">
+                <img src="img/CandyDandy/originalATK.png" alt="Attack properties in the Inspector.">
                 <p>
-                    The `Awake` method in `Character.cs` checks for `Attack` and `Health` components.
-                    If none exist, they’re assigned default settings automatically.
+                    Key Features: Flexible attack setup with reusable ScriptableObjects,
+                    Optional AI-controlled attack loop & 
+                    Easily switch or trigger attacks by index.
                 </p>
             </div>
-
-            <p>
-                Once the Health system was finished — which naturally includes damage logic — I could start replace all placeholder code in <code>Character.cs</code> to real, modular systems.
-                With this, every character that inherits from Character.cs can now take and deal damage through a shared HealthComponent logic, keeping things clean and reusable.
-            </p>
-            
-            <br>
-            
-            <p>
-                The AttackComponent class started as a simple enemy AI — I gave each enemy a list of doable / performable attacks and logic to pick one at random per interval.
-                Once it became clear enemies will have pre-defined attack patterns i switched out the List for an Array since its more performant in this case.
-                Early on, this was hardcoded to just enemies but after seeing how flexible the health system is with its component like hierarchy, I refactored it:
-                attacks became fully configurable, reusable assets in the form of ScriptableObjects as well.
-            </p>
-
-            <div class="project-images">
-                <img src="img/CandyDandy/MergedATK.png" alt="Attack properties in the Inspector.">
-                <p>
-                    The ScriptableObjects with Configuration settings for Health on the left. 
-                    Attack configurations on the right.
-                    <code>AttackConfig</code> works like a recipe: it defines damage values, visual effects, and sound effects which are the ingredients before its a complete dish.
-                </p>
-            </div>
-            
-
-            <p>
-                This made it easy to tweak enemy behavior directly in the editor without rewriting code — adding new attacks is just a matter of creating a new <code>AttackConfig</code>.
-                For the player side, it uses the same AttackComponent, it just has a different trigger to perform attacks : every match made triggers the player’s <code>Attack()</code> method.
-            </p>
             
             <div class="project-images">
                 <video width="720" height="720" autoplay muted loop>
                     <source src="img/CandyDandy/CD_S1_Clip_SquareRatio.mp4" type="video/mp4">
                 </video>
                 <p>
-                    Footage of Version 1.
+                    Footage of Version 1: This exposed scaling issues that needed to be tackled. Full feedback? <a href="https://github.com/j5x/PvB2025/wiki/Sprint-Reviews" target="_blank">Click Here</a>
                 </p>
             </div>
-            
-            <p>
-                The <code>VFXComponent</code> was added separately to handle visuals like hit effects, damage sparks, or impact flashes.
-                It’s not inherited directly by the base <code>Character</code> class, but attached only to characters that need it.
-                This keeps it modular and easy to disable or swap if needed.
-            </p>
-
-            <p>
-                Finally, for special attacks — which needed to sync normal attack logic with unique VFX and combo conditions — we pair programmed the <code>SpecialAttackController</code> to tie it all together.
-                My colleague handled most of its logic while I made sure it worked smoothly with my <code>AttackComponent</code> and <code>VFXComponent</code>.
-            </p>
-            
-            <p>
-                The attack system works like a simple cause-and-effect chain.
-                Enemies pick from a small, predefined set of attacks at random, while the player’s attacks are tied to match-3 input.
-                Technically, an attack follows this flow:
-            </p>
-
-            
 
             <h2>Conclusion</h2>
             <p>
