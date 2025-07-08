@@ -148,10 +148,21 @@
 
             <h2>Conclusion</h2>
             <p>
-                Finally, I worked on the VFX component, solving target placement challenges due to static characters. 
-                Placing manual target points resolved this. The canvas scaling work upgraded my technical UI knowledge, 
-                especially for multi-resolution mobile development. Thanks for reading — final build footage is at the top of the page!
+                <a href="https://github.com/j5x/PvB2025/blob/develop/Assets/Script/UI/SafeArea.cs"><strong>Safe Area Handler</strong></a>
+                This simple but crucial class makes sure that any UI element parented under this object always stays within the device’s safe screen boundaries (avoiding notches, rounded corners, or system bars).
+                ApplySafeArea() gets the device’s safe area (Screen.safeArea), converts its pixel coordinates into normalized anchor values (0–1), and sets these as the anchorMin and anchorMax of the attached RectTransform.
+                This means the UI panel will automatically resize and reposition itself to fit perfectly within the safe area on any screen — whether it’s an iPhone with a notch, a tablet, or an Android with soft keys.
             </p>
+            <br>
+            <div class="project-images">
+                <img src="img/CandyDandy/SafeArea_snippet.png" alt="Safe Area function">
+                <p class="project-text">
+                    This function ensures that everything inside this UI panel fits perfectly within the screen’s safe area,
+                    adapting to notches, rounded corners, or soft keys.
+                    It converts the safe area from pixels to normalized anchors,
+                    so the UI scales correctly on any resolution.
+                </p>
+            </div>
             <br>
             <p>
                 Candy Dandy taught me a lot about working in a team without a strict lead and balancing tasks across disciplines.
