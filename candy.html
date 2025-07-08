@@ -116,13 +116,48 @@
                     Footage of Version 1: This exposed scaling issues that needed to be tackled. Full feedback? <a href="https://github.com/j5x/PvB2025/wiki/Sprint-Reviews" target="_blank">Click Here</a>
                 </p>
             </div>
+            
+            <p>
+                After client feedback, I researched Unity's Canvas Scaler and Safe Area to ensure UI consistency across different resolutions.
+                I created a canvas with the following properties: 
+                Render Mode, Screen Space- Camera. 
+                Reference Resolution 1920x1080, also known as Full HD.
+            </p>
+            
+            <div class="project-images">
+                <img src="img/CandyDandy/mergedCropping.png" alt="Comparison of cropping issue">
+                <img src="img/CandyDandy/Xtrabg.png" alt="Showcase of extra art assets to fill in gaps">
+                <p>
+                    Initial implementation cropped gameplay inside SafeArea bounds,
+                    causing empty borders on larger screens.
+                    I solved this by mirroring art assets to fill excess space.
+                </p>
+            </div>
+            <br>
+            <p>
+                The EndGame Canvas displays the Victory or Defeat screens, always rendered on top due to its higher sorting layer.<br>
+                Final version with scaling fixes implemented, tested on multiple devices.
+            </p>
+            <br>
+            
+            <div class="project-images">
+                <video width="1280" height="720" autoplay muted loop>
+                    <source src="img/CandyDandy/CD_GameplayV2.mp4" type="video/mp4">
+                </video>
+            </div>
 
             <h2>Conclusion</h2>
+            <p>
+                Finally, I worked on the VFX component, solving target placement challenges due to static characters. 
+                Placing manual target points resolved this. The canvas scaling work upgraded my technical UI knowledge, 
+                especially for multi-resolution mobile development. Thanks for reading — final build footage is at the top of the page!
+            </p>
+            <br>
             <p>
                 Candy Dandy taught me a lot about working in a team without a strict lead and balancing tasks across disciplines.
                 It was my second attempt at mobile game development — and my first successful one.
                 A key takeaway was learning about Safe Areas on mobile devices and how to use Safe Area Handler scripts to handle them properly.
-                I also gained valuable insight into placing important UI elements so they stay functional and clear on small, portrait screens.
+                I also gained valuable insight into placing important UI elements, so they stay functional and clear on small, portrait screens.
             </p>
         </div>
     </div>
