@@ -1,3 +1,4 @@
+/* === Universal reset & base === */
 * {
   color: white;
   box-sizing: border-box;
@@ -12,47 +13,30 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   overflow-x: hidden;
-
 }
 
-#carto{
-  background-image: url(img/Carto/cartoThumbnail.jpg);
-}
+/* === Project specific backgrounds === */
+#carto { background-image: url(img/Carto/cartoThumbnail.jpg); }
+#space { background-image: url(img/BOSpace/spaceMainMenu.jpg); }
+#gs { background-image: url(img/GSthumb.png); }
+#urp { background-image: url(img/URP/thumburp.png); }
+#overlayMap { background-image: url(img/OverlayMap/mapScreenShot.png); }
+#candy { background-image: url(img/CandyDandy/BigBackground.png); }
 
-#space{
-  background-image: url(img/BOSpace/spaceMainMenu.jpg);
-}
-
-#gs{
-  background-image: url(img/GSthumb.png);
-}
-
-#urp{
-  background-image: url(img/URP/thumburp.png);
-}
-
-#overlayMap{
-  background-image: url(img/OverlayMap/mapScreenShot.png);
-}
-
-#candy{
-  background-image: url(img/CandyDandy/BigBackground.png);
-}
-
-/* Adjusted styles to make the navbar sticky */
+/* === Navbar === */
 nav {
-  left: 0;
-  top: 0;
-  text-transform: uppercase;
   position: sticky;
+  top: 0;
+  left: 0;
   z-index: 1;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  flex-direction: row;
   background: rgb(46, 46, 46);
   height: 4vw;
   margin-bottom: 2%;
+  text-transform: uppercase;
 }
 
 .name {
@@ -61,7 +45,7 @@ nav {
 }
 
 .name a {
-text-decoration: none;
+  text-decoration: none;
 }
 
 .menu {
@@ -70,7 +54,7 @@ text-decoration: none;
   gap: 30px;
 }
 
-.menu a{
+.menu a {
   margin-right: 1vw;
 }
 
@@ -91,79 +75,78 @@ text-decoration: none;
   background-color: #4e4e4eb7;
 }
 
+/* === Container === */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  
+  margin-bottom: 2%;
 }
 
+/* === Project content === */
 .project-header {
-  text-align: center; /* Align text to the center */ 
+  text-align: center;
   background-color: #141414bc;
   width: 70%;
   font-size: 20px;
   border-bottom: solid 2px white;
 }
 
-.project-title{
+.project-title {
   padding: 0;
-  margin-bottom:0;
+  margin-bottom: 0;
 }
 
-.my-features > h2{
-  font: 16px;
+.my-features > h2 {
+  font-size: 16px;
 }
 
 .project-details {
-  /* Adjusted width as specified */
   background-color: #141414bc;
   height: 50vw;
   width: 70%;
-  overflow: auto; /* Added overflow property to enable scrolling for overflowing content */
+  overflow: auto;
 }
 
 .project-text {
   text-align: center;
   padding-top: 1vw;
-  margin-left: 5.5vw;
-  margin-right: 5vw;;
+  margin: 0 5vw;
 }
-.project-stats{
+
+.project-stats {
   display: flex;
   flex-direction: row;
   padding-left: 4vw;
-  justify-content:  space-evenly;
+  justify-content: space-evenly;
 }
 
-.project-description{
+.project-description {
   padding: 2vw;
 }
 
-.project-description > .h2{
+.project-description > .h2 {
   font-size: 36px;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin: 20px 0 10px;
 }
 
-.project-description > .p{
+.project-description > .p {
   font-size: 14px;
 }
 
-.project-description > .subtitle{
+.project-description > .subtitle {
   font-size: 18px;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin: 20px 0 10px;
 }
 
-.project-images{
+.project-images {
   text-align: center;
   font-size: 14px;
   padding-top: 2vw;
-
 }
-.project-images > img{
+
+.project-images > img {
   width: 75%;
 }
 
@@ -177,7 +160,7 @@ img {
   margin: 0 auto;
 }
 
-
+/* === Code snippets === */
 div.code {
   white-space: pre;
 }
@@ -193,42 +176,38 @@ code.snippet {
   color: #a9b7c6;
 }
 
-/* Your existing CSS */
-
+/* === Utility classes === */
 .centered-list {
-  text-align: center; /* Center-align the list items within this specific ul element */
-  list-style: none;   /* Remove default list styles (bullets) */
-  padding: 3px;         /* Remove default padding for the list */
+  text-align: center;
+  list-style: none;
+  padding: 3px;
 }
 
-/* Your remaining CSS */
-
-
-
+/* === Contact and footer === */
 #contact {
   background-color: #2c2b2b;
   text-align: center;
   padding: 2%;
 }
 
-#contact>p {
+#contact > p {
   background-color: #2c2b2b;
 }
 
 footer {
-  background-color: #333333;
+  background-color: #333;
   text-align: center;
   padding: 2%;
-  display: block;
 }
 
-/* === Mobile-friendly adjustments === */
+/* === Mobile === */
 @media (max-width: 480px) {
   nav {
     flex-direction: column;
     height: auto;
     gap: 10px;
     padding: 10px;
+    margin-bottom: 8%;
   }
 
   .name {
@@ -239,14 +218,6 @@ footer {
   .menu {
     flex-direction: column;
     gap: 10px;
-  }
-
-  .container {
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 1rem; /* safe side gap */
-    box-sizing: border-box;
   }
 
   .project-header,
@@ -288,19 +259,28 @@ footer {
     font-size: 12px;
   }
 
-  .project-images video {
-    width: 100%;
-    height: auto;   /* Maintain aspect ratio */
-    max-width: 720px; /* Optional: cap max size */
-    display: block; /* removes inline whitespace */
-  }
-
   html, body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* prevent sideways scroll gap */
+    overflow-x: hidden;
   }
-
-
+  
+  footer{
+    margin-top: 8%;
+  }
 }
 
+/* === Tablet === */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .project-header,
+  .project-details {
+    width: 90%;
+    font-size: 18px;
+    height: auto; /* If needed, you can adjust this too */
+  }
+
+  .project-text {
+    margin: 0;
+    padding: 3% 0;
+  }
+}
