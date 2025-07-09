@@ -31,6 +31,15 @@ nav {
   margin-bottom: 2%;
 }
 
+/* Show hamburger only on small screens */
+.hamburger {
+  display: none;
+  font-size: 30px;
+  cursor: pointer;
+  padding: 1vw;
+  color: white;
+}
+
 .name {
   font-size: 80%;
   padding: 1vw;
@@ -244,7 +253,7 @@ section {
 }
 
 /* === Mobile === */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
   body {
     background: url("img/newBg.jpg") no-repeat fixed;
     background-size: cover;
@@ -254,11 +263,24 @@ section {
     height: auto;
     position: relative;
   }
+  
+  .hamburger {
+    display: block;
+  }
 
   .menu {
+    display: none;
     flex-direction: column;
-    align-items: center;
+    background: rgba(20, 20, 20, 0.95);
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    padding: 10px;
     gap: 10px;
+  }
+  
+  .menu.show{
+    display: flex;
   }
 
   .nav-items {
