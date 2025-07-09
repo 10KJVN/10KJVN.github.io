@@ -35,7 +35,7 @@
             <p>
                 <strong>Status:</strong> Finished <br>
                 <strong>Type:</strong> 2D Mobile Game <br>
-                <strong>Duration:</strong> 3 Months <br>
+                <strong>Duration:</strong> 9 ~ 12 weeks <br>
                 <strong>Engine:</strong> Unity <br>
                 <strong>Language:</strong> C# <br>
                 <strong>Roles:</strong> Programmer, Scrum Master <br>
@@ -49,8 +49,21 @@
                 Candy Dandy was our final exam project at Mediacollege, bringing together both Game Development and Game Art students under a real client brief.
                 The goal: create an innovative match-3 mobile game where the match-3 mechanic directly influences a secondary gameplay layer.
                 Our client, Ramses Di Perna — a Game Developer at Azerion and an alumnus of our college — guided us through the process.
-                <a href="https://github.com/j5x/PvB2025" target="_blank">View on GitHub</a>
+                <a href="https://github.com/j5x/PvB2025" target="_blank">View on GitHub</a> 
             </p>
+            <p>
+                <strong>Note:</strong> This game currently has an <a href="https://github.com/j5x/PvB2025/releases/tag/Releasebuild">Android build</a> available.
+                If you’d like to test it on PC, there’s also a <a href="https://github.com/j5x/PvB2025/releases/tag/WindowsBuild">Windows build</a>, but keep in mind it’s designed for mobile — so expect stretched visuals!
+            </p>
+
+            <div class="project-images">
+                <video width="720" height="720" controls>
+                    <source src="img/CandyDandy/Screen_Recording_PvB2025_Compressed.mp4" type="video/mp4">
+                </video>
+                <p class="project-text">
+                    The final product, gameplay starts at ~2:08
+                </p>
+            </div>
 
             <h2>My Features</h2>
             <ul>
@@ -61,15 +74,16 @@
 
             <h2>Project Kickoff</h2>
             <p>
-                The project started with a briefing from three external clients. After discussing preferences as a group, we got our first choice.
-                We reached out to our client, asked questions, and exchanged contact details to keep them updated.
-                On the first official day, our team brainstormed ideas. Some leaned towards a dating sim, others towards a cake-baking sim,
-                but the other two developers and I pushed for a fighting game concept.
+                The project began with a briefing from three external clients. After discussing our options as a team, we secured our first-choice client.
+                We then contacted them, asked clarifying questions, and exchanged contact details to maintain regular updates.
+                On the first day, our team brainstormed ideas: some leaned towards a dating sim, others a cake-baking sim, 
+                but the other two developers and I pushed for a unique fighting game concept.
             </p>
             <p>
-                We had internal disagreements about orientation: some preferred landscape, others portrait.
-                One of our artists created a mockup for both concepts to present to the client for feedback.
-                Ultimately, we chose the fighting game in portrait mode — which fit the brief better and balanced dev and art workload.
+                We debated the screen orientation: some preferred landscape, others portrait.
+                One of our artists created mockups for both versions to get the client’s input.
+                In the end, we went with the fighting game in portrait mode, 
+                as it best fit the brief and balanced development and art workload.
             </p>
 
             <div class="project-images">
@@ -116,14 +130,34 @@
                     Footage of Version 1: This exposed scaling issues that needed to be tackled. Full feedback? <a href="https://github.com/j5x/PvB2025/wiki/Sprint-Reviews" target="_blank">Click Here</a>
                 </p>
             </div>
-            
+            <br>
             <p>
                 After client feedback, I researched Unity's Canvas Scaler and Safe Area to ensure UI consistency across different resolutions.
                 I created a canvas with the following properties: 
-                Render Mode, Screen Space- Camera. 
+                Render Mode, Screen Space - Camera. 
                 Reference Resolution 1920x1080, also known as Full HD.
             </p>
-            
+
+            <div class="project-images">
+                <img src="img/CandyDandy/rgb_canvas.png" alt="Safe Area debug colors for Canvas setup">
+                <p>
+                    In the image above you see the initial new scene set-up. <br>
+                    Here I converted gameplay elements — both static and moving — to Rect Space, so their size is measured in pixels instead of meters. <br>
+                </p>
+            </div>
+            <br>
+            <p>
+                The colors represent different parts of the canvas:
+                <br><br>
+                <strong>Red</strong> marks the <em>Top Panel</em>, where the player and enemies spawn and battle with flashy effects.
+                <br>
+                <strong>Green</strong> marks the <em>Bottom Panel</em>. There’s not much UI here yet — the grid is its own entity — but this space is reserved for the Special Attack Meter and Pause button in the final version.
+                <br>
+                <strong>Blue</strong> is a larger fallback background to prevent empty borders on bigger screens like tablets and iPads.
+            </p>
+
+
+            <br>
             <div class="project-images">
                 <img src="img/CandyDandy/mergedCropping.png" alt="Comparison of cropping issue">
                 <img src="img/CandyDandy/Xtrabg.png" alt="Showcase of extra art assets to fill in gaps">
@@ -134,16 +168,16 @@
                 </p>
             </div>
             <br>
-            <p>
-                The EndGame Canvas displays the Victory or Defeat screens, always rendered on top due to its higher sorting layer.<br>
-                Final version with scaling fixes implemented, tested on multiple devices.
-            </p>
+          
             <br>
             
             <div class="project-images">
-                <video width="1280" height="720" autoplay muted loop>
+                <video width="720" height="400" autoplay muted loop>
                     <source src="img/CandyDandy/CD_GameplayV2.mp4" type="video/mp4">
                 </video>
+                <p class="project-text">
+                    Version 2: scaling fixes implemented, tested on multiple devices.
+                </p>
             </div>
 
             <h2>Conclusion</h2>
@@ -164,8 +198,21 @@
                 </p>
             </div>
             <br>
+            <div class="project-images">
+                <video width="720" height="400" autoplay muted loop>
+                    <source src="img/CandyDandy/presentationS3.mp4" type="video/mp4">
+                </video>
+                <p>
+                    All the visuals shown — especially the integration of Visual Effects and the technical implementation of Animations — were handled by me, 
+                    as the technical side of art was my main responsibility. 
+                    I also collaborated closely with each artist to ensure texture sizes and resolutions followed a Power-Of-Two format for optimal compression and performance. 
+                    For more technical details, see the
+                    <a href="https://github.com/j5x/PvB2025/tree/develop/Assets/Script/Vfx" target="_blank">VFX System</a>.
+                </p>
+
+            </div>
             <p>
-                Candy Dandy taught me a lot about working in a team without a strict lead and balancing tasks across disciplines.
+                Candy Dandy taught me a lot about working in a team without a concrete lead and balancing tasks across disciplines.
                 It was my second attempt at mobile game development — and my first successful one.
                 A key takeaway was learning about Safe Areas on mobile devices and how to use Safe Area Handler scripts to handle them properly.
                 I also gained valuable insight into placing important UI elements, so they stay functional and clear on small, portrait screens.
