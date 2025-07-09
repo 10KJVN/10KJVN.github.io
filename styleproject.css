@@ -272,6 +272,10 @@ footer {
 
 /* === Tablet === */
 @media (min-width: 481px) and (max-width: 1024px) {
+  nav {
+    margin-bottom: 4%
+  }
+  
   .project-header,
   .project-details {
     width: 90%;
@@ -283,4 +287,9 @@ footer {
     margin: 0;
     padding: 3% 0;
   }
+  
+  footer{
+    margin-top: 4%
+  }
+  
 }
