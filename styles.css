@@ -31,15 +31,6 @@ nav {
   margin-bottom: 2%;
 }
 
-/* Show hamburger only on small screens */
-.hamburger {
-  display: none;
-  font-size: 30px;
-  cursor: pointer;
-  padding: 1vw;
-  color: white;
-}
-
 .name {
   font-size: 80%;
   padding: 1vw;
@@ -262,6 +253,7 @@ section {
   nav {
     height: auto;
     position: sticky;
+    padding: 10px;
   }
   
   .hamburger {
