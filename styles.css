@@ -261,7 +261,7 @@ section {
 
   nav {
     height: auto;
-    position: relative;
+    position: sticky;
   }
   
   .hamburger {
