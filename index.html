@@ -7,7 +7,14 @@
     <link rel="stylesheet" href="styles.css">
     <title>Jahvairo's Portfolio</title>
   </head>
-
+  
+  <script>
+    function toggleMenu() {
+      const menu = document.querySelector('.menu');
+      menu.classList.toggle('show');
+    }
+  </script>
+    
   <body>
     <nav>
       <div class="name">
@@ -15,6 +22,12 @@
           <h1>Jahvairo Monkau</h1>
         </a>
       </div>
+
+      <!-- Hamburger icon for mobile -->
+      <div class="hamburger" onclick="toggleMenu()">
+        &#9776;
+      </div>
+      
       <div class="menu">
         <button class="nav-items" onclick="window.location.href='index.html'">Home</button>
         <button class="nav-items" onclick="window.location.href='#services'">Projects</button>
