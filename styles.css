@@ -31,15 +31,6 @@ nav {
   margin-bottom: 2%;
 }
 
-/* Show hamburger only on small screens */
-.hamburger {
-  display: none;
-  font-size: 30px;
-  cursor: pointer;
-  padding: 1vw;
-  color: white;
-}
-
 .name {
   font-size: 80%;
   padding: 1vw;
@@ -252,6 +243,15 @@ section {
   max-height: 500px;
 }
 
+/* === Hamburger size and placement === */
+.hamburger {
+  display: none;
+  font-size: 30px;
+  cursor: pointer;
+  padding: 1vw;
+  color: white;
+}
+
 /* === Mobile === */
 @media screen and (max-width: 768px) {
   body {
@@ -262,6 +262,7 @@ section {
   nav {
     height: auto;
     position: sticky;
+    padding: 10px;
   }
   
   .hamburger {
@@ -304,7 +305,7 @@ section {
 
   .text-content {
     width: 100%;
-    display: none; /* 👈 Hides the text content on mobile */
+    display: none; /* Hides the text content on mobile */
   }
 
   .prevButton,

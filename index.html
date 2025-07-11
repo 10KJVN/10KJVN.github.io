@@ -7,13 +7,6 @@
     <link rel="stylesheet" href="styles.css">
     <title>Jahvairo's Portfolio</title>
   </head>
-  
-  <script>
-    function toggleMenu() {
-      const menu = document.querySelector('.menu');
-      menu.classList.toggle('show');
-    }
-  </script>
     
   <body>
     <nav>
@@ -23,11 +16,8 @@
         </a>
       </div>
 
-      <!-- Hamburger icon for mobile -->
-      <div class="hamburger" onclick="toggleMenu()">
-        &#9776;
-      </div>
-      
+      <div class="hamburger">☰</div>
+
       <div class="menu">
         <button class="nav-items" onclick="window.location.href='index.html'">Home</button>
         <button class="nav-items" onclick="window.location.href='#services'">Projects</button>
@@ -157,7 +147,7 @@
         </a>
         <a href="" target="" class="image-link">
           <img src="img/placeholder-image.png" alt>
-          <div class="overlay">Digital Twin: The Extra Mile - Coming soon</div>
+          <div class="overlay">Shopify API - Coming soon</div>
         </a>
       </div>
     </div>
@@ -223,8 +213,8 @@
       </h3>
 
     </footer>
-
     <script src="script.js"></script>
+    <script src="hamburger.js"></script>
   </body>
 
 </html>
