@@ -69,7 +69,7 @@ function openTab(evt, tabName) {
 // =============================
 
 // Wait for DOM to be fully loaded
-document.addEventListener("DOMContentLoaded", function() {
+/* document.addEventListener("DOMContentLoaded", function() {
     const hamburger = document.querySelector('.hamburger');
     const menu = document.querySelector('.menu');
 
@@ -83,5 +83,5 @@ document.addEventListener("DOMContentLoaded", function() {
             hamburger.classList.toggle('is-active'); // for animation classes like 'hamburger--spin'
         });
     }
-});
+});*/
 

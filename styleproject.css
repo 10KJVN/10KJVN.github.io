@@ -24,16 +24,11 @@ body {
 #candy { background-image: url(img/CandyDandy/BigBackground.png); }
 
 /* === Navbar === */
-header.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
 nav {
   left: 0;
   top: 0;
   text-transform: uppercase;
+  position: sticky;
   z-index: 1;
   display: flex;
   flex-direction: row;
@@ -82,25 +77,10 @@ nav {
 /* === Hamburger === */
 .hamburger {
   display: none;
+  font-size: 30px;
   cursor: pointer;
   padding: 1vw;
   color: white;
-  width: 40px;   /* Or whatever size you prefer */
-  height: 30px;  /* Same here */
-  z-index: 2;    /* Stay above nav items if needed */
-}
-
-.hamburger .hamburger-box {
-  width: 100%;
-  height: 100%;
-  display: inline-block;
-  position: relative;
-}
-
-.hamburger .hamburger-inner {
-  display: block;
-  top: 50%;
-  margin-top: -2px; /* Center line vertically */
 }
 
 /* === Container === */
@@ -230,16 +210,11 @@ footer {
 
 /* === Mobile === */
 @media (max-width: 480px) {
-  header.navbar {
-    position: sticky;
-    top: 0;
-    z-index: 999;
-  }
   
   nav {
-    position: relative;
     height: auto;
     padding: 10px;
+    position: sticky;
     margin-bottom: 8%;
   }
   
@@ -247,28 +222,22 @@ footer {
     display: block;
   }
 
-  /*.name {
-    font-size: 14px;
-    padding: 2vw;
-  }*/
-
   .menu {
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 60px;
+    top: 80px;
     right: 10px;
     padding: 10px;
     gap: 10px;
-    background: rgba(20, 20, 20, 0.95); /* Or your nav background */
+    background: rgba(20, 20, 20, 0.95);
     z-index: 1;
   }
 
   .menu.show {
     display: flex;
   }
-
-
+  
   .project-header,
   .project-details {
     width: 100%;
@@ -322,12 +291,30 @@ footer {
 /* === Tablet === */
 @media (min-width: 481px) and (max-width: 1024px) {
   nav {
-    margin-bottom: 4%;
+    height: auto;
+    padding: 10px;
+    position: sticky;
+    margin-bottom: 8%;
   }
-  
-  .menu{
+
+  .hamburger {
+    display: block;
+  }
+
+  .menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 80px;
+    right: 10px;
+    padding: 10px;
+    gap: 10px;
+    background: rgba(20, 20, 20, 0.95);
+    z-index: 1;
+  }
+
+  .menu.show {
     display: flex;
-    flex-direction: row;  
   }
 
   .project-header,
