@@ -23,13 +23,18 @@ body {
 #overlayMap { background-image: url(img/OverlayMap/mapScreenShot.png); }
 #candy { background-image: url(img/CandyDandy/BigBackground.png); }
 
+/* === Desktop === */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
 /* === Navbar === */
 nav {
   left: 0;
   top: 0;
   text-transform: uppercase;
-  position: sticky;
-  z-index: 1;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -211,13 +216,6 @@ footer {
 /* === Mobile === */
 @media (max-width: 480px) {
   
-  nav {
-    height: auto;
-    padding: 10px;
-    position: sticky;
-    margin-bottom: 8%;
-  }
-  
   .hamburger {
     display: block;
   }
@@ -236,6 +234,12 @@ footer {
 
   .menu.show {
     display: flex;
+  }
+  
+  nav{
+    height: auto;
+    padding: 10px;
+    margin-bottom: 8%;
   }
   
   .project-header,
@@ -289,12 +293,6 @@ footer {
 
 /* === Tablet === */
 @media (min-width: 481px) and (max-width: 1024px) {
-  nav {
-    height: auto;
-    padding: 10px;
-    position: sticky;
-    margin-bottom: 8%;
-  }
 
   .hamburger {
     display: block;
@@ -314,6 +312,12 @@ footer {
 
   .menu.show {
     display: flex;
+  }
+
+  nav {
+    height: auto;
+    padding: 10px;
+    margin-bottom: 8%;
   }
 
   .project-header,
