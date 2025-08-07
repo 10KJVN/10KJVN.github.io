@@ -136,12 +136,22 @@
 
                             <div class="project-images">
                                 <p class="image-title">The Shaders:</p>
-                                <img src="img/URP/Shader3.png"
-                                    alt="Image 1">
+                                <img src="img/URP/Shader3.png" alt="Image 1">
                                 <img src="img/URP/Shader2.png" alt="Image 2">
+                                
                                 <p class="project-text">
-                                   These are the first and second version of my shaders.
+                                    <strong>Image 1: UV-Space Chromatic Aberration</strong><br>
+                                    This shader applies a UV-space chromatic aberration effect within the bounds of a 3D object,
+                                    rather than screen-wide. Each channel is manipulated based on altered UV input to simulate
+                                    color fringing in a localized, object-contained way.
                                 </p>
+
+                                <p class="project-text">
+                                    <strong>Image 2: Fullscreen Chromatic Aberration</strong><br>
+                                    Both implementations separately manipulate and recombine color channels to form new RGB vectors,
+                                    then blend those with a sampled source using a strength-controlled <code>EffectMultiply</code> parameter.
+                                </p>
+
                             </div>
 
                             <h2 class="project-text">Continuation</h2>
