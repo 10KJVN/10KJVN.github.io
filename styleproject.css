@@ -194,7 +194,18 @@ code.snippet {
   text-align: center;
   list-style: none;
   padding: 3px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
+
+.section-subtitle {
+  margin-top: 2px;
+  margin-bottom: 0.5em;
+  font-style: italic;
+  font-size: 0.9em;
+  text-align: center;
+}
+
 
 /* === Contact and footer === */
 #contact {

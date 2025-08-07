@@ -146,50 +146,46 @@
                     The ShaderGraph is split into three key sections, each responsible for a part of the stamina ring's visual behavior.
                 </p>
 
-                <h3 class="project-text"><strong>Middle – Base Color</strong></h3>
-                <p class="project-text">This section handles the visual texture of the ring:</p>
-                <ul class="centered-list project-text">
-                    <li>• We take the <code>MainTexture</code> and multiply its RGBA output with <code>MainColor</code>.</li>
-                    <li>• This combined result becomes the <strong>Base Color</strong>.</li>
-                </ul>
-                
+                <h3 class="project-text"><strong>Stamina Fade Logic - Top</strong></h3>
+                <p class="section-subtitle">This section manages fade-in and fade-out behavior based on stamina events.</p>
 
-                <h3 class="project-text"><strong>Top – Timing & Transparency</strong></h3>
-                <p class="project-text">
-                    This section manages fade-in and fade-out behavior based on stamina events.
-                </p>
-                <p class="project-text"><strong><i>Fade-In:</i></strong> </p>
+                <p class="project-text"><strong><i>Fade-In:</i></strong></p>
                 <ul class="centered-list project-text">
-                    <li>• Subtract <code>StaminaUpdateTime</code> from <code>Time</code>.</li>
-                    <li>• Apply <code>Sign</code> and <code>Saturate</code> to clamp the value.</li>
-                    <li>• This ensures the bar only becomes visible after stamina updates.</li>
+                    <li>• Subtract <code>StaminaUpdateTime</code> from <code>Time</code> to get the time since the last update.</li>
+                    <li>• Apply <code>Sign</code> and <code>Saturate</code> to convert it into a clean 0–1 fade-in value.</li>
+                    <li>• This ensures the bar only appears after stamina changes.</li>
                 </ul>
-               
+
                 <p class="project-text"><strong><i>Fade-Out:</i></strong></p>
                 <ul class="centered-list project-text">
-                    <li>• Calculate <code>(StaminaUpdateTime + MaxStaminaTime + FadeTime) - Time</code>.</li>
-                    <li>• Divide by <code>FadeTime</code> and apply <code>Sign</code> and <code>Saturate</code>.</li>
-                    <li>• This fades the bar out when stamina ends.</li>
+                    <li>• Subtract <code>Time</code> from <code>(StaminaUpdateTime + MaxStaminaTime + FadeTime)</code>.</li>
+                    <li>• Divide the result by <code>FadeTime</code>, then clamp using <code>Sign</code> and <code>Saturate</code>.</li>
+                    <li>• This value decreases over time, fading the bar out as stamina expires.</li>
                 </ul>
-               
+
                 <p class="project-text">
-                    We multiply both fade values to produce the final <strong>Alpha</strong>.
+                    We multiply the fade-in and fade-out values to produce the final <strong>Alpha</strong> visibility.
                 </p>
 
-                <h3 class="project-text"><strong>Bottom – Masking</strong></h3>
-                <p class="project-text">
-                    This section shapes the ring using a radial mask:
-                </p>
+                <h3 class="project-text"><strong>Texture Logic - Middle</strong></h3>
+                <p class="section-subtitle">This section handles the visual texture of the ring:</p>
+                <ul class="centered-list project-text">
+                    <li>• Multiply the <code>MainTexture</code>'s RGBA output with the <code>MainColor</code> parameter.</li>
+                    <li>• This combined result determines the final <strong>Base Color</strong> of the stamina ring.</li>
+                </ul>
+
+                <h3 class="project-text"><strong>Shape Logic - Bottom</strong></h3>
+                <p class="section-subtitle">This section shapes the ring using a radial threshold mask:</p>
                 <ul class="centered-list project-text">
                     <li>• Sample the R channel of <code>MaskTexture</code>, subtract <code>1.0</code>, and add <code>StaminaPercentage</code>.</li>
-                    <li>• This generates a stamina-based radial threshold.</li>
-                    <li>• Clamp with <code>Sign</code> and <code>Saturate</code>.</li>
-                    <li>• Multiply with <code>MainTexture</code>'s Alpha for soft edges.</li>
-                    <li>• Finally, multiply with the fade result from above to combine timing + shape masking.</li>
+                    <li>• Clamp the result with <code>Sign</code> and <code>Saturate</code> to create a clean radial cutoff.</li>
+                    <li>• Multiply this mask by the Alpha of the <code>MainTexture</code> to preserve soft edges.</li>
+                    <li>• Then multiply again with the fade value from earlier to blend shape and timing.</li>
+                    <li>• The result is a dynamic ring that cleanly fills and fades based on gameplay stamina.</li>
                 </ul>
 
                 <p class="project-text">
-                    <strong>Combined Result:</strong> These three sections together produce a clean radial stamina bar, with dynamic visibility, soft transitions, and clear cutoffs using the mask.
+                    <strong>Combined Result:</strong> These three sections work together to render a clean radial stamina bar, blending soft transitions, dynamic visibility, and clear mask-driven shaping.
                 </p>
 
             </div>
