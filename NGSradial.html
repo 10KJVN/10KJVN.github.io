@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
 <head>
     <meta charset="UTF-8">
@@ -137,9 +137,55 @@
                     <p class="image-title">The full Shadergraph:</p>
                     <img src="img/Radial/fullshader.png" alt="Image 1">
                     <p class="project-text">
-                        This shader has 3 significant things happening in the top, middle & bottom.
+                        This ShaderGraph uses a radial mask to visualize stamina, 
+                        with time-based fade logic and dynamic alpha blending based on gameplay inputs.
                     </p>
                 </div>
+                <h2 class="project-text">Shadergraph Breakdown</h2>
+                <p class="project-text">
+                    The Shadergraph is split into a few distinct functionalities,
+                    each handling different parts of the visual effect.
+                    The middle section deals with the base color output.
+                    We take the MainTexture,
+                    and multiply its RGBA outputs with a MainColor.
+                    This result becomes the <strong>Base Color</strong>.
+                    <br><br>
+                    <br>
+                    The top section calculates transparency,
+                    based on current stamina progress.
+                    First, we compute a <strong><i>fade-in</i></strong>:
+                    we subtract <strong><code>StaminaUpdateTime</code></strong> from <strong><code>Time</code></strong>,
+                    then apply  <strong><code>Sign</code></strong> and <strong><code>Saturate</code></strong>,
+                    this ensures the bar only becomes visible after an update.
+                    <br><br>
+                    Separately, we calculate <strong><i>fade-out</i></strong>:
+                    we subtract <code>Time</code> from
+                    <code>(StaminaUpdateTime + MaxStaminaTime + FadeTime)</code>.
+                    This gives us the stamina time left.
+                    We divide that result by <code>FadeTime</code>,
+                    apply <code>Sign</code> and <code>Saturate</code>.
+                    This value fades the bar out once stamina ends.
+                    <br><br>
+                    Finally, we multiply both the fade-in and fade-out values,
+                    resulting in the <strong>Alpha</strong> of the stamina bar.
+                    <br><br>
+                    <br>
+                    The bottom section applies a mask to shape the stamina ring.
+                    We sample the R channel of the <code>MaskTexture</code> and subtract <code>1.0</code> from it.
+                    Then, we add the current <code>StaminaPercentage</code> to this result.
+                    This creates a radial threshold effect based on stamina progress.
+                    We apply <code>Sign</code> and <code>Saturate</code> to cleanly clamp the result between 0 and 1.
+                    <br><br>
+                    Next, this masked value is multiplied by the Alpha of the <code>MainTexture</code>,
+                    allowing the ring shape to remain visually smooth and defined.
+                    <br><br>
+                    Finally, this masked alpha is multiplied with the result of the fade-in and fade-out logic,
+                    so both the <i>Timing</i> and <i>Masking</i> behaviors contribute to the final fragment's alpha output.
+                    <br><br>
+                    All three stages work together
+                    to display a clean radial stamina fill effect,
+                    with soft transitions and clear cutoffs using the mask.
+                </p>
 
             </div>
         </div>
