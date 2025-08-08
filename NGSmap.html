@@ -70,13 +70,12 @@
             </p>
 
             <div class="project-images">
-                <p class="image-title">The shadergraph</p>
+                <p class="image-title">Fog of War shader:</p>
                 <img src="img/OverlayMap/MapShader.png" alt="Image 1">
                 <p class="project-text">
-                    The initial shader we've put together with 3 inputs: <br><br>
-                    1: The Map. <br>
-                    2: The Fog. <br>
-                    3: The Mask. <br>
+                    The blend shader uses a Lerp to blend three layers: <br>
+                    the map itself, fog of war, and a drawing mask.
+                    This allowed us to create a dynamic overlay system with minimal UI.
                 </p>
             </div>
             <!--End Intro Section-->
@@ -110,7 +109,7 @@
 
             <div class="project-images">
                 <p class="image-title">A function derrived from the original Texture Drawer class.</p>
-                <img src="img/OverlayMap/OGdraw.png" alt="Image 1">
+                <img src="img/OverlayMap/drawSnippet.gif" alt="Draw() and update()">
                 <p class="project-text">
                     He told me i could possibly draw a texture upon the map itself instead of blitting the level. <br>
                     That's how i found out about render textures and blend materials existance.   
@@ -121,15 +120,7 @@
                 Creating a class that uses the draw function from the Texture Drawer, 
                 i could now clearly figure out how to create my contribution in this feature.
             </p>
-
-            <div>
-                <pre>
-                    <code class="snippet">
-                        drawPosition.x += 0.5f;
-                    </code>
-                </pre>  
-            </div>
-
+            
             <p class="project-text">                    
                 This single line of code uses the brush, in this case a custom blit shader to draw at it's destination.
                 The blend material in use is a perfect example of an efficient way to achieve what i tried by just using a regular blit.
@@ -142,21 +133,6 @@
                     Since this feature is intended to have the player act as the element that clears up the fog on the map, <br>
                     I linked the draw position to the player position.
                 </p>
-            </div>
-            
-            <div id="vertex_snippet">
-                <pre>
-                    <code class="snippet">
-                        v2f vert (appdata v)
-                        {
-                            v2f o;
-                            o.vertex = UnityObjectToClipPos(v.vertex);
-                            o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                            UNITY_TRANSFER_FOG(o,o.vertex);
-                            return o;
-                        }
-                    </code>
-                </pre>
             </div>
             
             <p class="project-text">
@@ -187,8 +163,7 @@
 
             <div class="project-images">
                 <p class="image-title">The source & the texture:</p>
-                <img src="img/OverlayMap/CustomTex.png">
-                <img src="img/OverlayMap/screenTex.png">
+                <img src="img/OverlayMap/texComp02.png">
                 <p>
                     All materials and backgrounds are stripped and screenshot.
                 </p>
@@ -222,8 +197,8 @@
             </p>
 
             <div class="project-images">
-                <p class="image-title">The players path:</p>
-                <img src="img/OverlayMap/drawnPlayer.png">
+                <p class="image-title">The players' path:</p>
+                <img src="img/OverlayMap/drawnPlayer.png" alt="">
                 <p>
                     Most of the code can found here:
                     <a href="https://github.com/10KJVN/URPShaders">Github</a>
