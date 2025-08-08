@@ -78,9 +78,8 @@
                 <p class="image-title">Fog of War ShaderGraph:</p>
                 <img src="img/OverlayMap/MapShader.png" alt="Image 1">
                 <p class="project-text">
-                    The shader blends three layers using a simple Lerp operation: <br>
-                    the base map, the fog layer and the player's drawing mask. <br>
-                    This setup was intended to dynamically reveal areas explored by the player.
+                    The shader uses a basic Lerp to blend three layers: <br>
+                    base map, fog, and player mask — revealing explored areas in real time.
                 </p>
             </div>
             <!--End Intro Section-->
@@ -89,103 +88,97 @@
 
             <h2 class="project-text">Development</h2>
             <p class="project-text">
-                After brainstorming with my teammates, we considered several methods for rendering the minimap and Fog of War.
+                During early brainstorming, we explored several ways to create the minimap.
+                I suggested using a secondary camera to render the entire level, and began experimenting with a technique I had just discovered: <strong>Blitting</strong> — a way to quickly copy pixel data from one texture to another, like taking a low-cost screenshot.
                 <br><br>
-                I wasn't yet sure how to do this, so i experimented with shader code and materials.
-                Through trial and error, i discovered the limitations of Camera.Blit in that context and pivoted toward an alternative:
-                drawing directly onto a texture using a brush and blend shader.
-                <br><br>
-                Each of us vaguely knew what had to be done, but which way would be the most effecient? 
-                I suggested setting up an extra camera that screenshots the whole map of each level through blitting.
-                The only issue with this was, i had no idea how to do this specifically, so i went on ahead and experimented a little.
-                <br><br>
-                I wrote some throwaway shader code that was supposed to get the Main Camera in the scene as a component,
-                then i litteraly wrote 'Camera.Blit' thinking that was a thing. 
-                It wasn't so at that point i hit a roadblock in my thinking process due to my limited knowledge at the time.
-
+                At first, I didn't fully understand how blitting or render targets worked. I even tried calling <code>Camera.Blit</code> directly, expecting it to just work — it didn’t.
+                That was my first big technical hurdle, and it taught me the importance of understanding Unity’s rendering pipeline more deeply.
             </p>
 
             <div class="project-images">
-                <p class="image-title">2 classes on the camera</p>
+                <p class="image-title">Two classes attached to the camera:</p>
                 <img src="img/OverlayMap/CamClasses.png" alt="Image 1">
                 <p class="project-text">
-                    After a lot of research and brainstorming, we asked our technical director for advice. <br>
-                    I explained to him i couldn't find out how to blit a whole level with the camera.
+                    After some failed attempts and more brainstorming,
+                    we reached out to our technical director for guidance.
+                    I explained I was struggling to blit the full level through the camera.
                 </p>
             </div>
 
-
             <div class="project-images">
-                <p class="image-title">A function derrived from the original Texture Drawer class.</p>
+                <p class="image-title">Function derived from the original Texture Drawer class:</p>
                 <img src="img/OverlayMap/drawSnippet.gif" alt="Draw() and update()">
                 <p class="project-text">
-                    He told me i could possibly draw a texture upon the map itself instead of blitting the level. <br>
-                    That's how i found out about render textures and blend materials existance.   
+                    He suggested skipping blitting altogether and instead drawing directly onto a texture — 
+                    that's when I first discovered the use of <strong>RenderTextures</strong> and <strong>blend materials</strong>.
                 </p>
             </div>
 
             <p class="project-text">
-                Creating a class that uses the draw function from the Texture Drawer, 
-                i could now clearly figure out how to create my contribution in this feature.
+                From that point, I created a new class built on the original <code>TextureDrawer</code> logic. 
+                This class utilized a brush texture and blend shader to paint directly onto a RenderTexture canvas.
             </p>
-            
-            <p class="project-text">                    
-                This single line of code uses the brush, in this case a custom blit shader to draw at it's destination.
-                The blend material in use is a perfect example of an efficient way to achieve what i tried by just using a regular blit.
+
+            <p class="project-text">
+                By using a custom blit shader and a simple one-line call to draw the brush onto the destination texture,
+                I was able to reproduce the behavior I originally intended with camera blitting—
+                only with more control and better performance.
             </p>
 
             <div class="project-images">
-                <p class="image-title">A gif of me drawing manually</p>
+                <p class="image-title">Manual drawing in action:</p>
                 <img src="img/OverlayMap/gif1.gif" alt="">
                 <p class="project-text">
-                    Since this feature is intended to have the player act as the element that clears up the fog on the map, <br>
-                    I linked the draw position to the player position.
+                    Since the goal was to clear fog dynamically as the player moved, 
+                    I linked the draw position directly to the player’s world position.
                 </p>
             </div>
-            
+
             <p class="project-text">
-                In the snippet shown above is a small piece of logic from the CustomBlit shader written for this feature. 
-                It ensures that the vertex position is converted from object space to clip space, allowing correct rendering in the camera's view. <br><br>
-                Simplified: the brush only draws within the borders of it's destination (the canvas).
+                The Custom Blit shader converts vertex positions from object space to clip space,
+                ensuring the brush only draws within the bounds of its target texture.
+                This gave the system the spatial accuracy I was aiming for.
             </p>
 
             <div class="project-images">
-                <p class="image-title">The drawn texture:</p>
+                <p class="image-title">Drawn texture result:</p>
                 <img src="img/OverlayMap/gif2.gif" alt="">
                 <p class="project-text">
-                    Thanks to the Custom Blit, the drawn texture saves on play and out of play. <br>
-                    Even when starting up the game again it's still there and will draw as usual.
+                    Thanks to this setup, the texture state persists between play sessions.
+                    Even after restarting the game, the drawn path remains and continues updating in real time.
                 </p>
-
             </div>
 
             <h3 class="project-text">Conclusion</h3>
             <p class="project-text">
-                Although the full Fog of War system wasn't completed during our time on the project, 
-                our work laid the groundwork for its future implementation. 
-                We built a functioning prototype capable of drawing to a canvas using a RenderTexture and a custom brush system.
-                <br><br>
-                This system allowed the player’s position to be dynamically painted onto the map each frame.
-                I also experimented with mapping world space coordinates to texture space, 
-                allowing for accurate player placement on the minimap across levels of different sizes.
-                While my scaling logic was not pixel-perfect, it achieved a visually effective result.
+                While we didn’t complete the full Fog of War system before handing off the project,
+                I managed to develop a functional and scalable prototype.
+                It featured a dynamic drawing system that could track and visualize player movement using shaders and GPU-accelerated rendering.
+            </p>
+
+            <p class="project-text">
+                I also implemented a world-to-texture coordinate conversion system to make sure player positions were mapped correctly to the RenderTexture canvas,
+                regardless of level size. 
+                Though it wasn’t 100% accurate due to resolution scaling limitations,
+                the result was visually solid and functional for gameplay prototyping.
             </p>
 
             <div class="project-images">
-                <p class="image-title">The players' path:</p>
+                <p class="image-title">Player path drawing in action:</p>
                 <img src="img/OverlayMap/drawnPlayer.png" alt="">
                 <p>
-                    The brush draws the player's trail in real-time using the GPU. Source code available on:
+                    The brush draws the player’s trail dynamically in real-time using GPU memory. Source code:
                     <a href="https://github.com/10KJVN/URPShaders/blob/main/Assets/Scripts/TestDrawer.cs">GitHub</a>
                 </p>
             </div>
 
             <p class="project-text">
-                This feature was eventually handed off to another developer,
-                who likely rebuilt the system using a different approach. Or might've expanded on it,
-                guess we'll never know.
-                Still, this prototype was a great opportunity to expand my understanding of shader-based rendering and render pipeline behavior — and it provided a hands-on experience with integrating multiple systems: shaders, textures, cameras, and gameplay logic.
+                Eventually, this system was passed on to the next team of developers—whether they rebuilt it or improved on it remains unknown.
+                Still, this task gave me a valuable, hands-on introduction to Unity’s rendering pipeline,
+                shader integration, and system architecture. 
+                It also strengthened my confidence in combining rendering logic with gameplay systems in a performant and maintainable way.
             </p>
+
 
         </div>
     </div>
