@@ -74,14 +74,14 @@
                         <li>Handled Canvas & UI scaling for mobile</li>
                     </ul>
         
-                    <h2>Project Kickoff</h2>
-                    <p>
+                    <h2 class="project-text">Project Kickoff</h2>
+                    <p class="project-text">
                         The project began with a briefing from three external clients. After discussing our options as a team, we secured our first-choice client.
                         We then contacted them, asked clarifying questions, and exchanged contact details to maintain regular updates.
                         On the first day, our team brainstormed ideas: some leaned towards a dating sim, others a cake-baking sim, 
                         but the other two developers and I pushed for a unique fighting game concept.
                     </p>
-                    <p>
+                    <p class="project-text">
                         We debated the screen orientation: some preferred landscape, others portrait.
                         One of our artists created mockups for both versions to get the client’s input.
                         In the end, we went with the fighting game in portrait mode, 
@@ -96,9 +96,9 @@
                         </p>
                     </div>
         
-                    <h2>Development</h2>
+                    <h2 class="project-text">Development</h2>
                     
-                    <p>
+                    <p class="project-text">
                         All characters in Candy Dandy (both Player and Enemies) share a common Character base class.
                         This base class provides core functionality every character needs, including
                         Variables, components, references & basic functions such as TakeDamage() and Die(). <a href="https://github.com/j5x/PvB2025/tree/develop/Assets/Script/CharacterSystem" target="_blank">Character System</a>
@@ -108,7 +108,7 @@
                         <img src="img/CandyDandy/ClassDiagram_characters.png" alt="Diagram of character classes">
                     </div>
                     
-                    <p>
+                    <p class="project-text">
                         The AttackComponent manages how each character performs attacks using AttackConfig ScriptableObjects. 
                         Each AttackConfig holds the data for a unique attack — like name, damage, animation trigger, and delay — all tweakable directly in the Inspector.
                         Full code of Attack System can be found here: <a href="https://github.com/j5x/PvB2025/tree/develop/Assets/Script/AttackSystem" target="_blank">Attack System</a>
@@ -133,7 +133,7 @@
                         </p>
                     </div>
                     <br>
-                    <p>
+                    <p class="project-text">
                         After client feedback, I researched Unity's Canvas Scaler and Safe Area to ensure UI consistency across different resolutions.
                         I created a canvas with the following properties: 
                         Render Mode, Screen Space - Camera. 
@@ -148,7 +148,7 @@
                         </p>
                     </div>
                     <br>
-                    <p>
+                    <p class="project-text">
                         The colors represent different parts of the canvas:
                         <br><br>
                         <strong>Red</strong> marks the <em>Top Panel</em>, where the player and enemies spawn and battle with flashy effects.
@@ -182,8 +182,8 @@
                         </p>
                     </div>
         
-                    <h2>Conclusion</h2>
-                    <p>
+                    <h2 class="project-text">Conclusion</h2>
+                    <p class="project-text">
                         <a href="https://github.com/j5x/PvB2025/blob/develop/Assets/Script/UI/SafeArea.cs"><strong>Safe Area Handler</strong></a>
                         This simple but crucial class makes sure that any UI element parented under this object always stays within the device’s safe screen boundaries (avoiding notches, rounded corners, or system bars).
                         ApplySafeArea() gets the device’s safe area (Screen.safeArea), converts its pixel coordinates into normalized anchor values (0–1), and sets these as the anchorMin and anchorMax of the attached RectTransform.
@@ -213,7 +213,7 @@
                         </p>
         
                     </div>
-                    <p>
+                    <p class="project-text">
                         Candy Dandy taught me a lot about working in a team without a concrete lead and balancing tasks across disciplines.
                         It was my second attempt at mobile game development — and my first successful one.
                         A key takeaway was learning about Safe Areas on mobile devices and how to use Safe Area Handler scripts to handle them properly.
