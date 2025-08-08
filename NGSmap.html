@@ -38,9 +38,9 @@
                 Project Type: Hybrid Learning Environment <br>
                 Project Duration: 3 ~ 4 weeks <br>
                 Software Used: Unity <br>
-                Languages Used: C#, ShaderLab <br>
+                Languages Used: C#, CG <br>
                 Primary Role(s): Game Developer<br>
-                Team: 2 devs <br>
+                Team: 3 devs <br>
             </p>
         </div>
 
@@ -64,18 +64,23 @@
             <!--Begin Intro Section-->
             <h2 class="project-text">Intro</h2>
             <p class="project-text">
-                The overlay map feature was supposed to act as a sort of mini-map to the player(s). 
-                Though we didn't get to finish it before our time at Neon Origins was over, it has been yet another great learning experience.
-                In this project i learned how to utilize blitting in multiple ways and i've discovered about render textures & blend materials.
+                This feature was originally planned as an overlay minimap with a Fog of War system, 
+                using a custom shader to manage three texture inputs: the base map, a fog texture,
+                and a mask texture to reveal explored areas. 
+                <br><br>
+                While we didn't manage to complete the system during our time on the project,
+                this ended up being a valuable learning opportunity where i explored render textures,
+                blend materials, and custom draw logic using the GPU. 
+                The work laid the technical foundation for a later team to implement the full system.
             </p>
 
             <div class="project-images">
-                <p class="image-title">Fog of War shader:</p>
+                <p class="image-title">Fog of War ShaderGraph:</p>
                 <img src="img/OverlayMap/MapShader.png" alt="Image 1">
                 <p class="project-text">
-                    The blend shader uses a Lerp to blend three layers: <br>
-                    the map itself, fog of war, and a drawing mask.
-                    This allowed us to create a dynamic overlay system with minimal UI.
+                    The shader blends three layers using a simple Lerp operation: <br>
+                    the base map, the fog layer and the player's drawing mask. <br>
+                    This setup was intended to dynamically reveal areas explored by the player.
                 </p>
             </div>
             <!--End Intro Section-->
@@ -84,8 +89,11 @@
 
             <h2 class="project-text">Development</h2>
             <p class="project-text">
-                During the initial design phase of this feature i had just worked on multiple shader related features before this one.
-                So i got together with my colleagues to discuss how we were going to handle this from a technical standpoint. 
+                After brainstorming with my teammates, we considered several methods for rendering the minimap and Fog of War.
+                <br><br>
+                I wasn't yet sure how to do this, so i experimented with shader code and materials.
+                Through trial and error, i discovered the limitations of Camera.Blit in that context and pivoted toward an alternative:
+                drawing directly onto a texture using a brush and blend shader.
                 <br><br>
                 Each of us vaguely knew what had to be done, but which way would be the most effecient? 
                 I suggested setting up an extra camera that screenshots the whole map of each level through blitting.
@@ -153,57 +161,31 @@
 
             <h3 class="project-text">Conclusion</h3>
             <p class="project-text">
-                After playing around with the TextureDrawer class and some more experimenting,
-                It was ready for me to bring it to the actual game instead of my prototype.
-                By the time i was done, my colleague also got his class together. <br><br>
-
-                His camera bounds class screenshots the level, 
-                and cuts out all uneccesairy elements needed for a map and automatically converts it to a texture.
-            </p>
-
-            <div class="project-images">
-                <p class="image-title">The source & the texture:</p>
-                <img src="img/OverlayMap/texComp02.png">
-                <p>
-                    All materials and backgrounds are stripped and screenshot.
-                </p>
-            </div>
-
-            <p class="project-text">
-                Until this point, the 3rd week of the development cycle.
-                After alot of head bashing and eye opening solutions to our code problems,
-                i had a last issue before my part of mapping the player worked.
+                Although the full Fog of War system wasn't completed during our time on the project, 
+                our work laid the groundwork for its future implementation. 
+                We built a functioning prototype capable of drawing to a canvas using a RenderTexture and a custom brush system.
                 <br><br>
-                Getting the players position mapped on the canvas accurately according to the world space & level size.
-                By implementing this, my class would be generic enough for levels of any size instead of just the one we used for testing.
-            </p>
-
-            <div class="project-images">
-                <p class="image-title">My final extension to the draw function.</p>
-                <img src="img/OverlayMap/FinalDraw.png">
-                <p class="project-text">
-                    I thought since the render texture the canvas uses can max be 2048x2048, so i'll scale by that. <br>
-                    Turned out the player gets drawn way more accurate than unscaled but sadly not 100%.
-                </p>
-            </div>
-
-            <p class="project-text">
-                As the player spawns in, my class automatically assigns a player to an array that serves as a list for the players.
-                Then my class draws the players position onto the map texture every frame.
-                This doesn't impact the performance of the game since shaders mainly run on the GPU memory.
-                <br><br>
-                By utilizing the Draw function utilizing the logic within the if statement behind the drawPosition variable,
-                you can customize this class however you like.
+                This system allowed the player’s position to be dynamically painted onto the map each frame.
+                I also experimented with mapping world space coordinates to texture space, 
+                allowing for accurate player placement on the minimap across levels of different sizes.
+                While my scaling logic was not pixel-perfect, it achieved a visually effective result.
             </p>
 
             <div class="project-images">
                 <p class="image-title">The players' path:</p>
                 <img src="img/OverlayMap/drawnPlayer.png" alt="">
                 <p>
-                    Most of the code can found here:
-                    <a href="https://github.com/10KJVN/URPShaders">Github</a>
+                    The brush draws the player's trail in real-time using the GPU. Source code available on:
+                    <a href="https://github.com/10KJVN/URPShaders/blob/main/Assets/Scripts/TestDrawer.cs">GitHub</a>
                 </p>
             </div>
+
+            <p class="project-text">
+                This feature was eventually handed off to another developer,
+                who likely rebuilt the system using a different approach. Or might've expanded on it,
+                guess we'll never know.
+                Still, this prototype was a great opportunity to expand my understanding of shader-based rendering and render pipeline behavior — and it provided a hands-on experience with integrating multiple systems: shaders, textures, cameras, and gameplay logic.
+            </p>
 
         </div>
     </div>
