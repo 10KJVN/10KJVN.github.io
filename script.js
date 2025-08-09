@@ -46,8 +46,9 @@ showSlide(0);
 // Tabs section on site
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("Service1").style.display = "block";
-    document.getElementById("Service2").style.display = "none"; // Hide Service2
-    document.getElementById("Service3").style.display = "none"; // Hide Service3
+    document.getElementById("Service2").style.display = "none";
+    document.getElementById("Service3").style.display = "none";
+    document.getElemyById("Service4").style.display = "none";
 });
 
 function openTab(evt, tabName) {
@@ -63,25 +64,3 @@ function openTab(evt, tabName) {
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
 }
-
-// =============================
-// Hamburger Menu Toggle
-// =============================
-
-// Wait for DOM to be fully loaded
-/* document.addEventListener("DOMContentLoaded", function() {
-    const hamburger = document.querySelector('.hamburger');
-    const menu = document.querySelector('.menu');
-
-    console.log('Hamburger:', hamburger);
-    console.log('Menu:', menu);
-
-    if (hamburger && menu) {
-        hamburger.addEventListener('click', function() {
-            console.log('Hamburger clicked');
-            menu.classList.toggle('show');
-            hamburger.classList.toggle('is-active'); // for animation classes like 'hamburger--spin'
-        });
-    }
-});*/
-
