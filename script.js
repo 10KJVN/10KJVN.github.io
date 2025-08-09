@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("Service1").style.display = "block";
     document.getElementById("Service2").style.display = "none";
     document.getElementById("Service3").style.display = "none";
-    document.getElemyById("Service4").style.display = "none";
+    document.getElementById("Service4").style.display = "none";
 });
 
 function openTab(evt, tabName) {
