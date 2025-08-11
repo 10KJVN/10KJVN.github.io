@@ -33,7 +33,7 @@
             <div class="project-details">
                 <div class="project-stats">
                     <p class="project-text">
-                        Project Status: Work in progress<br>
+                        Project Status: Finished<br>
                         Project Type: Solo<br>
                         Software Used: Unity <br>
                         Languages Used: C#, HLSL<br>
@@ -45,7 +45,12 @@
                     <p>
                         In this project i was given 8 weeks to pick any software of choice and specialize in it.
                         Since i've already worked with shaders 1 period before this,
-                        i thought to myself "Yeah that was cool, i'd love to know more about that."
+                        i thought to myself "Yeah that was cool, i'd love to know more about that." </p>
+                        <!-- Pick between 1 of these 2 descriptions or merge -->
+                        <p>
+                            In this elective, aspiring professionals delve into the software relevant to their professional practice and to specialize.
+                            They explore their (future) job market and determine which software is most relevant to them. They familiarize themselves with the software and apply this knowledge in an exam.
+                        </p>
             
                         <p>
 
@@ -111,13 +116,6 @@
                                    Here i've been playing around with Shader graph to create an chromatic aberration like effect.
                                 </p>
                             </div>
-                            <p class="project-text">
-                                The navmesh was tough to figure out, and in the
-                                end i didn't completely get it working with the
-                                enemies not moving from their position.
-                                At least i managed to figure out how the
-                                following Attack Function
-                            </p>
                             <div class="project-images">
                                 <p class="image-title">Fullscreen Aberration</p>
                                 <img src="img/URP/offset2.gif"
@@ -138,12 +136,22 @@
 
                             <div class="project-images">
                                 <p class="image-title">The Shaders:</p>
-                                <img src="img/URP/Shader3.png"
-                                    alt="Image 1">
+                                <img src="img/URP/Shader3.png" alt="Image 1">
                                 <img src="img/URP/Shader2.png" alt="Image 2">
+                                
                                 <p class="project-text">
-                                   These are the first and second version of my shaders.
+                                    <strong>Image 1: UV-Space Chromatic Aberration</strong><br>
+                                    This shader applies a UV-space chromatic aberration effect within the bounds of a 3D object,
+                                    rather than screen-wide. Each channel is manipulated based on altered UV input to simulate
+                                    color fringing in a localized, object-contained way.
                                 </p>
+
+                                <p class="project-text">
+                                    <strong>Image 2: Fullscreen Chromatic Aberration</strong><br>
+                                    Both implementations separately manipulate and recombine color channels to form new RGB vectors,
+                                    then blend those with a sampled source using a strength-controlled <code>EffectMultiply</code> parameter.
+                                </p>
+
                             </div>
 
                             <h2 class="project-text">Continuation</h2>
