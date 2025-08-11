@@ -7,7 +7,8 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
-  background-image: url(img/NeoN_Logo-wide-1024x374.jpg);
+  background-image: url(img/Backgrounds/NeoN_Logo-wide-1024x374.jpg);
+  background-color: #181818;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -18,11 +19,12 @@ body {
 /* === Project specific backgrounds === */
 #carto { background-image: url(img/Carto/cartoThumbnail.jpg); }
 #space { background-image: url(img/BOSpace/spaceMainMenu.jpg); }
-#gs { background-image: url(img/GSthumb.png); }
+#gs { background-image: url(img/Thumbnails/GSthumb.png); }
 #urp { background-image: url(img/URP/thumburp.png); }
 #overlayMap { background-image: url(img/OverlayMap/mapScreenShot.png); }
 #candy { background-image: url(img/CandyDandy/BigBackground.png); }
 #spark {background-image: url(img/FirstSpark/Final_map.png); }
+#geeked {background-image: url(img/DirtJam/Way2Terrain_Logo.png); }
 
 /* === Desktop === */
 header {
