@@ -51,7 +51,7 @@
             <h2>About Dirt Jam</h2>
             <p>
                 The <a href="https://itch.io/jam/acerola-dirt-jam" target="_blank">Dirt Jam</a>
-                is a community event run by Acerola to encourage participants to get started learning graphics and shader programming.
+                is a month-long community event run by Acerola to encourage participants to get started learning graphics and shader programming.
                 due to the low level nature of Godot compositor effects, 
                 you really get to understand graphics and shader programming without the assistance of commercial engines.
             </p>
@@ -70,56 +70,57 @@
             <!-- Key Features -->
             <h2 class="subtitle">Highlights</h2>
             <ul>
-                <li>Distance Fog</li>
                 <li>Shader Include Files</li>
-                <li>Texturing</li>
+                <li>Blinn-Phong Lighting</li>
+                <li>Texturing Mapping</li>
             </ul>
 
             <!-- Intro Section -->
             <h2 class="project-text">Intro</h2>
             <p class="project-text">
-                Way2Terrain was born from my curiosity about how far I could push Godot’s 3D environment tools to create something expressive rather than just realistic.
-                Instead of focusing on photorealism, I leaned into <strong>hyper-stylization</strong> —
-                breaking traditional rules of color theory and lighting to craft a world that that feels more like a 
-                <a href="https://en.wikipedia.org/wiki/Cloud_rap" target="_blank"><strong>Cloud Rap</strong></a> 
-                album cover than a simulation.
-                Inspired by the <a href="https://genius.com/albums/Kankan/Way2geeked" target="_blank"><strong>Way2Geeked</strong></a>
-                aesthetic, my visual goals centered around hazy, surreal, and ethereal moods.
+                Way2Terrain began as an entry for the <strong>Dirt Jam</strong>.
+                Around the start of this project, I was listening music as usual.
+                Letting YouTube play suggested songs for me, 
+                until I stumbled across the Way2Geeked Visualizer.
+                I thought to myself "those are some clean visuals fr fr"
                 <br><br>
-                - VISUAL: Concept moodboard -
             </p>
+
+            <div class="project-images">
+                <img src="img/DirtJam/16by9_moodboard.jpg" alt="Image 1">
+                <p class="project-text">Mood board</p>
+            </div>
 
             <!-- Development Section -->
             <h2 class="project-text">Development</h2>
             <p class="project-text">
                 Way2Terrain came together through a mix of procedural generation, custom shaders, and careful environment tuning.
-                While the end result feels dreamy and effortless, the technical journey was anything but —
-                full of trial, error, and a crash course in low-level rendering.
+                The dreamy look hid a journey of trial, error, and crash courses in low-level rendering.
             </p>
             <br>
             <h3 class="project-text">Core Technical Steps</h3>
             <ul class="centered-list project-text">
                 <li>
-                    • <strong>Procedural Terrain Base</strong>
+                    • <strong>Procedural Terrain</strong>
                     – Generated using layered noise functions (Fractional Brownian Motion) and heightmaps to sculpt organic landscapes. <br><br>
                     
-                    • <strong>Custom Cloud Layer</strong> 
+                    • <strong>Clouds</strong> 
                     – Combined Godot’s Sky3D volumetric clouds with hand-tuned 2D cumulus settings for depth and variety. <br><br>
                     
-                    • <strong>Lighting & Fog Balancing</strong>
+                    • <strong>Lighting</strong>
                     – Adjusted scattering, Mie intensity, and sun direction to avoid overexposure while preserving a glowing, ethereal look. <br><br>
 
-                    • <strong>Aesthetic World Environment</strong>
+                    • <strong>World Environment</strong>
                     – Applied the Way2Geeked palette, contrast tweaks, and atmospheric haze to match the intended vibe. <br><br>
                 </li>
             </ul>
             <br>
             <h3 class="project-text">Low-Level Rendering</h3>
             <p class="project-text">
-                Coming from a commercial engine background (Unity, Unreal),
-                I was used to luxuries like built-in shader includes and automatic shader recompilation.
+                While most engines have
+                luxuries like built-in shader includes and automatic shader recompilation.
                 Godot's lower-level approach forced me to understand what’s actually happening under the hood —
-                and just how much these “automatic” features hide from you.
+                and just how much these “automatic” features enhance the users' experience (UX).
             </p>
             <p class="project-text">
                 One of the biggest challenges was learning about Uniforms, 
@@ -145,14 +146,14 @@
             <br>
             <ul class="centered-list project-text">
                 <li>
-                    • <strong>Distance Fog Shader</strong>
+                    • <strong>Distance Fog</strong>
                     – Using Beer’s Law for a natural fade. <br><br>
 
                     • <strong>Water Shader</strong>
                     – Fragment-based displacement with Fresnel reflections integrated into Sky3D. <br><br>
 
                     • <strong>Post-Processing</strong>
-                    – Lens dirt, film grain, chromatic aberration, and fine-tuned tone mapping to push the mood without washing out detail. <br><br>
+                    – Lens dirt, film grain, and Filmic tone mapping to push the mood. <br><br>
                 </li>
             </ul>
             <p class="project-text">
@@ -165,16 +166,14 @@
             <p class="project-text">
                 Way2Terrain ended up being both a technical playground and a creative statement —
                 proof that a game engine can be just as much about expression as simulation.
-                While I originally set out to make a Cloud Rap–inspired dreamscape,
-                the project evolved into something more personal:
-                a living artwork built from shaders, noise, and 
-                <a href="https://jojowiki.com/Purple_Haze" target="_blank">Purple Haze</a>. 
+                However so the journey wasn’t without heartbreak...
+                most notably, I missed the official submission deadline due to an incomplete itch.io
+                page and a broken build. Still, I walked away with far more than screenshots:
             </p>
             
             <p class="project-text">
-                The journey wasn’t without heartbreak — 
-                most notably, I missed the official Dirt Jam submission deadline due to a draft-status itch.io
-                page and a broken build. Still, I walked away with far more than screenshots:
+                 
+                
             </p>
             
             <ul class="centered-list">
@@ -191,7 +190,8 @@
             <p class="project-text">
                 For the technical deep dives — 
                 from fog math to water shaders — 
-                see the closed pull requests in the GitHub repository. 
+                <a href="https://github.com/10KJVN/Godot-Terrain/pulls?q=is%3Apr+is%3Aclosed" target="_blank">
+                see the closed pull requests in the GitHub repository. </a>
                 They cover feature breakdowns, bug fixes, 
                 and shader logic in far more detail than would fit here.
             </p>
