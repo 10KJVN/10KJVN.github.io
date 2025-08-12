@@ -113,9 +113,54 @@
                     – Applied the Way2Geeked palette, contrast tweaks, and atmospheric haze to match the intended vibe. <br><br>
                 </li>
             </ul>
+            <br>
+            <h3 class="project-text">Low-Level Rendering</h3>
+            <p class="project-text">
+                Coming from a commercial engine background (Unity, Unreal),
+                I was used to luxuries like built-in shader includes and automatic shader recompilation.
+                Godot's lower-level approach forced me to understand what’s actually happening under the hood —
+                and just how much these “automatic” features hide from you.
+            </p>
+            <p class="project-text">
+                One of the biggest challenges was learning about Uniforms, 
+                Uniform Buffer Objects (UBOs), and the rules of data alignment and padding. 
+                I reached out to other graphics programmers in the Dirt Jam community,
+                and after a lot of back-and-forth, we landed on an analogy that finally clicked for me:
+            </p>
+            <br>
+            <blockquote class="project-text">
+                <i>
+                    “Think of UBO memory like an inventory grid.
+                    Each data type has its own slot size, and the row can only hold 4 slots.
+                    Bigger items (like vec3 and vec4) get VIP spots at the start of the row, and smaller items fill in the gaps.
+                    If the order changes on the CPU side, you have to re-pack the layout to match on the GPU side.”
+                </i>
+            </blockquote>
+            <br>
+            <p class="project-text">
+                That “inventory puzzle” understanding was a turning point.
+                From there, I could properly structure my UBOs, prevent GPU data corruption,
+                and finally move on to implementing features like:
+            </p>
+            <br>
+            <ul class="centered-list project-text">
+                <li>
+                    • <strong>Distance Fog Shader</strong>
+                    – Using Beer’s Law for a natural fade. <br><br>
 
+                    • <strong>Water Shader</strong>
+                    – Fragment-based displacement with Fresnel reflections integrated into Sky3D. <br><br>
+
+                    • <strong>Post-Processing</strong>
+                    – Lens dirt, film grain, chromatic aberration, and fine-tuned tone mapping to push the mood without washing out detail. <br><br>
+                </li>
+            </ul>
+            <p class="project-text">
+                VISUAL: Short GIF of terrain generation + atmospheric effects in motion<br>
+                CODE SNIPPET: Excerpt from water shader or fog implementation
+            </p>
             <!-- Conclusion -->
-            <h3 class="project-text">Conclusion</h3>
+            <h2 class="project-text">Conclusion</h2>
             <p class="project-text">
                 Wrap up the project with key learnings and results.
             </p>
