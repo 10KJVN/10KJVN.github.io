@@ -101,83 +101,43 @@
             <!-- Development Section -->
             <h2 class="project-text">Development</h2>
             <p class="project-text">
-                Way2Terrain came together through thugging it out and raw dogging any and every subject i had no pre-knowledge on.
-                To brighten the odds, commercial engines like Unity and Unreal come with the luxury of already integrated
-                pipelines that handle includes and automatic recompilation of shaders. Not to mention polished terrain systems.
-                <br><br>
-                Godot on the other hand does not.
-                Which results in me having to understand what's happening under the hood.
-                Take for example: Memory Layouts, Data Alignment and Pipeline Management.
+                Way2Terrain came together by diving headfirst into topics I’d never touched before.
+                Engines like Unity and Unreal have luxuries like built-in shader includes, auto shader recompilation, and polished terrain systems.
+                Godot… doesn’t — which meant I had to learn exactly what was happening under the hood.
             </p>
             <br>
             <h3 class="project-text">Technical Challenges</h3>
             <ul class="centered-list project-text">
                 <li>
-                    <!-- The following info is a summary from Google on 'Data Alignment' so not GPU specific -->
                     • <strong>GPU Data Alignment</strong>
-                    – Data alignment, in computer science, is the practice of arranging data in memory on specific byte boundaries to optimize data access and processing
+                    – I learned the hard way that forgetting to pad a struct to keep it 16-byte aligned can turn your shader uniforms into pure garbage.
+                    GPUs like data in vec4-sized chunks, so a vec3 needs a dummy float to fill the gap.
                     <br><br>
-                    <!-- The follow paragraph of text are my notes after i learned about the concept of Alignment by the dirt jam community -->
-                    messing up the order of data pushed to the Uniform Buffer or forgetting to add to padding to keep the struct 16-byte aligned
-                    will cause the gpu to read some data as Garbage
-                    GPU hardware wants data in chunks of 4 floats (vec4).
-                    So a vec3 → needs a dummy float to fill the last slot.
-                    <br><br>
-                    <!-- The hyperlinks implemented here are to their corespondent pull request with full technical details, comments and commit history. -->
-                    • <a href="https://github.com/10KJVN/Godot-Terrain/pull/2" target="_blank"> <strong>Shader Modularity</strong> </a>
-                    – I built a GDScript-driven GLSL include loader, saving ~500 lines of duplicated shader code (loc). <br><br>
                     
-                    • <a href="https://github.com/10KJVN/Godot-Terrain/pull/1" target="_blank"> <strong>Fog</strong> </a> 
-                    &
-                    <a href="https://github.com/10KJVN/Godot-Terrain/pull/4" target="_blank"> <strong>Lighting</strong> </a>
-                    – Implemented exponential fog using Beer's Law after failure using faulty math equations beforehand. <br><br>
-                    – Implementing a new lightning model (Blinn-Phong) proved difficult due to my limited knowledge of such low-level rendering logic. <br><br>
+                    • <a href="https://github.com/10KJVN/Godot-Terrain/pull/2" target="_blank"> <strong>Shader Modularity</strong> </a>
+                    – Built a GDScript-driven GLSL include loader, cutting ~500 lines of duplicated shader code. 
+                    <br><br>
+                    
+                    • <a href="https://github.com/10KJVN/Godot-Terrain/pull/1" target="_blank"> <strong>Fog</strong> </a> &
+                      <a href="https://github.com/10KJVN/Godot-Terrain/pull/4" target="_blank"> <strong>Lighting</strong> </a>
+                    – Implemented exponential fog using Beer's Law after a string of failed math experiments.
+                    Lighting got an upgrade too with a new Blinn-Phong model. 
+                    <br><br>
 
                     • <a href="https://github.com/10KJVN/Godot-Terrain/pull/6" target="_blank"> <strong>Texturing</strong> </a>
-                    – After several failed OpenGL/Vulkan binding attempts, a tip from another jam participant cracked the code on sampler binding and UV mapping. <br>
-                    This method implements Triplanar Mapping by adding Sampler Uniforms to Fragment shader only. <br><br>
-                    – I also implemented the allowance of multiple texture sizes to be mixed and matched. Tested from 128p up to 4k textures.
-                </li>
-            </ul>
-            <br>
-            <h3 class="project-text">Low-Level Rendering</h3>
-            <p class="project-text">
-                While most engines have
-                luxuries like built-in shader includes and automatic shader recompilation.
-                Godot's lower-level approach forced me to understand what’s actually happening under the hood —
-                and just how much these “automatic” features enhance the users' experience (UX).
-            </p>
-            <p class="project-text">
-                One of the biggest challenges was learning about Uniforms, 
-                Uniform Buffer Objects (UBOs), and the rules of data alignment and padding. 
-                I reached out to other graphics programmers in the Dirt Jam community,
-                and after a lot of back-and-forth, we landed on an analogy that finally clicked for me:
-            </p>
-            <br>
-            <blockquote class="project-text">
-                <i>
-                    “Think of UBO memory like an inventory grid.
-                    Each data type has its own slot size, and the row can only hold 4 slots.
-                    Bigger items (like vec3 and vec4) get VIP spots at the start of the row, and smaller items fill in the gaps.
-                    If the order changes on the CPU side, you have to re-pack the layout to match on the GPU side.”
-                </i>
-            </blockquote>
-            <br>
-            <p class="project-text">
-                That “inventory puzzle” understanding was a turning point.
-                From there, I could properly structure my UBOs, prevent GPU data corruption,
-                and finally move on to implementing features like:
-            </p>
-            <br>
-            <ul class="centered-list project-text">
-                <li>
-                    • <strong>Water Shader</strong>
-                    – Fragment-based displacement with Fresnel reflections integrated into Sky3D. <br><br>
+                    – After multiple failed OpenGL/Vulkan binding attempts,
+                    a tip from another jam dev unlocked proper sampler binding and UV mapping.
+                    End result: triplanar mapping, multiple texture size support (128p to 4K), and no more stretching issues.
+                    <br><br>
 
-                    • <strong>Post-Processing</strong>
-                    – Lens dirt, film grain, and Filmic tone mapping to push the mood. <br><br>
+                    • <a href="https://github.com/10KJVN/Godot-Terrain/pull/7" target="_blank"> <strong>Water Shader</strong> </a>
+                    – Fragment-based displacement with Fresnel reflections, integrated into Sky3D.
+                    <br><br>
+                    
+                    • <strong>Post-Processing</strong> – Lens dirt, film grain, and Filmic tone mapping to push the mood.
                 </li>
             </ul>
+            
             <p class="project-text">
                 CODE SNIPPET: Fog & Beers Law
                 GIF: How does fog work
