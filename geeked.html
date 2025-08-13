@@ -60,7 +60,7 @@
             <p><a href="https://github.com/10KJVN/Godot-Terrain/tree/develop" target="_blank">GitHub</a> | <a href="https://10kjvn.itch.io/way2terrain" target="_blank">Itch.io</a></p>
 
             <!-- Final Product Visual -->
-            <div class="project-visual">
+            <div class="project-images">
                 <p class="image-title">Final Product Visual</p>
                 <div style="width:100%; height:300px; background:#ccc; display:flex; align-items:center; justify-content:center; color:#555;">
                     Placeholder for video or image
@@ -70,7 +70,7 @@
             <!-- Key Features -->
             <h2 class="subtitle">Highlights</h2>
             <ul>
-                <li>Shader Include Files</li>
+                <li>Shader Include System</li>
                 <li>Blinn-Phong Lighting</li>
                 <li>Texturing Mapping</li>
             </ul>
@@ -110,41 +110,48 @@
             <ul class="centered-list project-text">
                 <li>
                     • <strong>GPU Data Alignment</strong>
-                    – I learned the hard way that forgetting to pad a struct to keep it 16-byte aligned can turn your shader uniforms into pure garbage.
-                    GPUs like data in vec4-sized chunks, so a vec3 needs a dummy float to fill the gap.
+                    – Learned that forgetting to pad a struct for 16-byte alignment can turn your shader uniforms into nonsense.
+                    GPUs read in vec4 chunks, so a vec3 needs a dummy float to keep the layout intact.
                     <br><br>
                     
                     • <a href="https://github.com/10KJVN/Godot-Terrain/pull/2" target="_blank"> <strong>Shader Modularity</strong> </a>
                     – Built a GDScript-driven GLSL include loader, cutting ~500 lines of duplicated shader code. 
                     <br><br>
-                    
-                    • <a href="https://github.com/10KJVN/Godot-Terrain/pull/1" target="_blank"> <strong>Fog</strong> </a> &
-                      <a href="https://github.com/10KJVN/Godot-Terrain/pull/4" target="_blank"> <strong>Lighting</strong> </a>
-                    – Implemented exponential fog using Beer's Law after a string of failed math experiments.
-                    Lighting got an upgrade too with a new Blinn-Phong model. 
-                    <br><br>
 
                     • <a href="https://github.com/10KJVN/Godot-Terrain/pull/6" target="_blank"> <strong>Texturing</strong> </a>
-                    – Took 7 restarts and 5 days, but the result is clean triplanar mapping, multi-res textures, and no stretching.
+                    – After 7 restarts and 5 days of trial and error,
+                    achieved clean triplanar mapping, supporting textures from all sizes mixed and matched.
                     <br><br>
 
                     • <a href="https://github.com/10KJVN/Godot-Terrain/pull/7" target="_blank"> <strong>Water Shader</strong> </a>
-                    – Fragment-based displacement with Fresnel reflections, integrated into Sky3D.
+                    – Vertex-based displacement with Fresnel reflections, integrated into Sky3D.
                     <br><br>
                     
-                    • <strong>Post-Processing</strong> – Lens dirt, film grain, and Filmic tone mapping to push the mood.
+                    • <a href="https://github.com/10KJVN/Godot-Terrain/pull/1" target="_blank"> <strong>Fog</strong> </a> &
+                    <a href="https://github.com/10KJVN/Godot-Terrain/pull/4" target="_blank"> <strong>Lighting</strong> </a>
+                    – Swapping to exponential fog revealed a blend issue where lit terrain flattened into the fog color.
+                    Lighting also got a Blinn–Phong upgrade for sharper highlights.
                 </li>
             </ul>
             
             <div class="project-images">
-                <p class="project-text"> <a href="https://en.wikipedia.org/wiki/Beer%E2%80%93Lambert_law" target="_blank"> Beer's Law </a> </p> <br>
+                <p class="image-title"> 
+                    <a href="https://cglearn.eu/pub/advanced-computer-graphics/volumetric-rendering#:~:text=At%20each%20sample%20we%20can%20take%20the%20length,through%20the%20volume.%20We%20call%20this%20percentage%20transmittance." target="_blank">Beer's Law</a>:
+                    the relationship between the absorption of light by a substance and its concentration and path length. 
+                </p> 
+                
                 <img src="img/DirtJam/BLSnippet.png" alt="Beer's Law">
-                <p class="project-text">describes the relationship between the absorption of light by a substance and its concentration and path length.</p>
+                <p class="project-text">
+                    GLSL implementation, with height-based density fade.
+                    <code>world_pos</code> is the pixel world position, <code>_TerrainHeight</code> is the max terrain Y.
+                     the GIF below further explains this, the code shows how to DIY.
+                </p>
             </div>
             <br>
             <div class="project-images">
+                <p class="project-text"> <a href="https://youtu.be/oQksg57qsRA?si=uunivFLk1rYETOH1&t=138" target="_blank">Fog theory</a> in ~30 seconds GIF</p> <br>
                 <img src="img/DirtJam/FogExplanation.gif" alt="Fog Logic">
-                <p class="project-text">Fog Theory explained in 4 steps. ~30 second Gif/Video switches panel every 7.5 seconds</p>
+                <p class="project-text">core parameters to linear vs exponential behavior. Connects the math to shader code.</p>
             </div>
             <!-- Conclusion -->
             <h2 class="project-text">Conclusion</h2>
