@@ -125,9 +125,7 @@
                     <br><br>
 
                     • <a href="https://github.com/10KJVN/Godot-Terrain/pull/6" target="_blank"> <strong>Texturing</strong> </a>
-                    – After multiple failed OpenGL/Vulkan binding attempts,
-                    a tip from another jam dev unlocked proper sampler binding and UV mapping.
-                    End result: triplanar mapping, multiple texture size support (128p to 4K), and no more stretching issues.
+                    – Took 7 restarts and 5 days, but the result is clean triplanar mapping, multi-res textures, and no stretching.
                     <br><br>
 
                     • <a href="https://github.com/10KJVN/Godot-Terrain/pull/7" target="_blank"> <strong>Water Shader</strong> </a>
@@ -155,24 +153,38 @@
                 proof that a game engine can be just as much about expression as simulation.
                 However so the journey wasn’t without heartbreak...
                 most notably, I missed the official submission deadline due to an incomplete itch.io
-                page and a broken build. Still, I walked away with far more than screenshots:
+                page and a broken build. FOMO hit harder than ever until I witnessed the submission count...
+                <br>
+                <b>69 ENTRIES</b>
+                <br>
+                but if i did manage to submit mine, it would be <b>6 7</b> due to 3 spam entries being removed as of currently.
+                welp call it a blessing and a curse
             </p>
             
             <p class="project-text">
-                 
-                
+                On a more serious note though i've learned a lot on core low level rendering concepts.
+                Take the aforementioned aside and add general graphics topics like custom render pipelines,
+                Vulkan's API, Compositor Effects, Uniforms and Buffers, how CPU and GPU data work together
+                and my favorite out of the bunch Alignment, due to the analogy i came up with during my time trying to understand it.
+                <br><br>
+                "Think of UBO memory like an inventory grid.
+                Each data type has its own slot size, and the row can only hold 4 slots.
+                Bigger items (like vec3 and vec4) get VIP spots at the start of the row, and smaller items fill in the gaps.
+                If the order changes on the CPU side, you have to re-pack the layout to match on the GPU side.”
+                <br><br>
+                hereby you too, understand Alignment. now ALL of US, do.
             </p>
             
-            <ul class="centered-list">
-                <li>Start builds and deployment testing early.</li>
-                <li>Respect the time sink of low-level systems; scope accordingly.</li>
-                <li>Sleep is a feature, not a bug.</li>
-            </ul>
-
             <p class="project-text">
-                VISUAL: Looping flythrough of the final scene <br>
-                VISUAL: Side-by-side of early terrain wireframe vs. final look <br>
+                In case you didn't find out yet but for more technicalities, and in-depth you're better off
+                checking the github repository. Like really take a look at the closed pull requests if you want to know so badly.
+                Hyperlinks are also scattered through the page if you did not notice that either... thanks for reading.
             </p>
+            
+            <div class="project-images">
+                <img src="img/DirtJam/Sunset.png" alt="Sunset">
+                <p class="project-text">Fun Fact: Way2Terrain's logo is based off this screenshot. See?</p>
+            </div>
 
             <p class="project-text">
                 For the technical deep dives — 
