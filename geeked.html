@@ -81,7 +81,7 @@
                 Way2Terrain began as an entry for the Dirt Jam.
                 I debated using Unity or Godot, but went with Godot —
                 it’s the recommended FOSS option, and the reference code was already written for it by 
-                <a href="https://github.com/GarrettGunnell/Godot-Terrain/blob/main/Scripts/draw_terrain.gd">Acerola</a>, 
+                <a href="https://github.com/GarrettGunnell/Godot-Terrain/blob/main/Scripts/draw_terrain.gd" target="_blank">Acerola</a>, 
                 complete with helpful comments.
                 <br><br>
                 I had two concept ideas: <br>
@@ -147,31 +147,36 @@
                      the GIF below further explains this, the code shows how to DIY.
                 </p>
             </div>
-            <br>
+            
             <div class="project-images">
                 <p class="project-text"> <a href="https://youtu.be/oQksg57qsRA?si=uunivFLk1rYETOH1&t=138" target="_blank">Fog theory</a> in ~30 seconds GIF</p> <br>
                 <img src="img/DirtJam/FogExplanation.gif" alt="Fog Logic">
                 <p class="project-text">core parameters to linear vs exponential behavior. Connects the math to shader code.</p>
             </div>
+            <br>
             <!-- Conclusion -->
             <h2 class="project-text">Conclusion</h2>
             <p class="project-text">
                 Way2Terrain became both a technical playground and a creative statement — proof that a game engine can be as much about expression as simulation.
                 The journey wasn’t without heartbreak: I missed the official submission deadline thanks to an incomplete itch.io page and a broken build.
                 FOMO hit hard… until I saw the final submission count:
-                <br><b>69 ENTRIES</b> (worth it)
+                <b>69 ENTRIES</b> <i>(worth it)</i>
             </p>
 
             <p class="project-text">
                 On the bright side, I learned a lot about core low-level rendering concepts —
-                from custom render pipelines and Vulkan’s API, to compositor effects, uniforms, buffers,
-                and my personal favorite: alignment.
+                from custom render pipelines and Vulkan’s API, to compositor effects, uniforms, buffers, and alignment.
+                While wrestling with that last one, i came up with an analogy that stuck:
                 <br><br>
-                <i>“Think of UBO memory like an inventory grid.
+                
+                <i>
+                    “Think of UBO memory like an inventory grid.
                     Each data type has its own slot size, and a row can only hold 4 slots.
                     Bigger items (like <code>vec3</code> and <code>vec4</code>) get VIP spots at the start of the row,
                     and smaller items fill in the gaps.
-                    If the order changes on the CPU side, you have to re-pack the layout to match on the GPU side.”</i>
+                    If the order changes on the CPU side, you have to re-pack the layout to match on the GPU side.”
+                </i>
+                
                 <br><br>
                 Safe to say <i>WE</i> all understand alignment now.
             </p>
