@@ -55,10 +55,8 @@
                 is a month-long community event run by Acerola to encourage participants to get started learning graphics and shader programming.
                 Due to the low-level nature of Godot compositor effects,
                 you get to explore rendering concepts hands-on without the safety net of fully featured commercial engines.
+                <a href="https://github.com/10KJVN/Godot-Terrain/tree/develop" target="_blank">GitHub</a> | <a href="https://10kjvn.itch.io/way2terrain" target="_blank">Itch.io</a>
             </p>
-
-            <!-- Optional Links -->
-            <p><a href="https://github.com/10KJVN/Godot-Terrain/tree/develop" target="_blank">GitHub</a> | <a href="https://10kjvn.itch.io/way2terrain" target="_blank">Itch.io</a></p>
 
             <!-- Final Product Visual -->
             <div class="project-images">
@@ -93,7 +91,6 @@
             <p class="project-text">
                 Engines like Unity and Unreal come with mature terrain systems and polished shader workflows.
                 Godot doesn’t — which made this an ideal challenge.
-                From building a modular shader include system, to fixing fog blending issues, to getting triplanar texturing working with mixed texture resolutions,
                 most of the work was about recreating conveniences we take for granted in bigger engines.
             </p>
             <br>
@@ -117,27 +114,25 @@
                     <a href="https://github.com/10KJVN/Godot-Terrain/pull/4" target="_blank"> <strong>Lighting</strong> </a>
                     – Switching to exponential fog revealed blend issues that flattened lit terrain.
                     Lighting was upgraded to Blinn–Phong for sharper highlights.
+                    
+                    <div class="project-images"><img src="img/DirtJam/BLSnippet.png" alt="Beer's Law"></div>
+                    <p class="project-text">
+                        <a href="https://cglearn.eu/pub/advanced-computer-graphics/volumetric-rendering#:~:text=At%20each%20sample%20we%20can%20take%20the%20length,through%20the%20volume.%20We%20call%20this%20percentage%20transmittance." target="_blank">Beer's Law</a>:
+                        The relationship between the absorption of light and its path length. <br>
+                        <code>world_pos</code> is the pixel's world position; <code>_TerrainHeight</code> is the max terrain Y.
+                    </p>
+                    
+                    <div class="project-images">
+                        <img src="img/DirtJam/FogExplanation.gif" alt="Fog Logic">
+                        <p class="project-text">
+                            Fog theory in ~30 seconds: key differences between linear and exponential. <br>
+                            Links the math to actual shader code. <a href="https://youtu.be/oQksg57qsRA?si=uunivFLk1rYETOH1&t=138" target="_blank"> Full video </a>
+                        </p>
+                    </div>
+                    
                 </li>
             </ul>
-
-            <div class="project-images">
-                <p class="image-title">Beer's Law in Action</p>
-                <img src="img/DirtJam/BLSnippet.png" alt="Beer's Law">
-                <p class="project-text">
-                    <a href="https://cglearn.eu/pub/advanced-computer-graphics/volumetric-rendering#:~:text=At%20each%20sample%20we%20can%20take%20the%20length,through%20the%20volume.%20We%20call%20this%20percentage%20transmittance." target="_blank">Beer's Law</a>:
-                    The relationship between the absorption of light and its path length. <br>
-                    <code>world_pos</code> is the pixel's world position; <code>_TerrainHeight</code> is the max terrain Y.
-                </p>
-            </div>
-
-            <div class="project-images">
-                <img src="img/DirtJam/FogExplanation.gif" alt="Fog Logic">
-                <p class="project-text">
-                    Fog theory in ~30 seconds: key differences between linear and exponential.
-                    Links the math to actual shader code. <a href="https://youtu.be/oQksg57qsRA?si=uunivFLk1rYETOH1&t=138" target="_blank"> Full video </a>
-                </p>
-            </div>
-            <br>
+            
             <!-- Conclusion -->
             <h2 class="project-text">Conclusion</h2>
             <p class="project-text">
@@ -154,8 +149,8 @@
             </p>
 
             <div class="project-images">
-                <img src="img/DirtJam/Sunset.png" alt="Sunset">
-                <p class="project-text">Fun Fact: Way2Terrain's logo is based off this screenshot. See?</p>
+                <img src="img/DirtJam/Mockup1.png" alt="Mockup">
+                <p class="project-text">Early Mockup: added post-processing after adding fog and improved lighting.</p>
             </div>
 
             <p class="project-text">
