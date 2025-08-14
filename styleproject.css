@@ -131,6 +131,39 @@ nav {
   margin: 0 5vw;
 }
 
+/*
+.project-text {
+  max-width: clamp(800px, 65%, 1200px);
+  margin-left: auto;
+  margin-right: auto;
+}  */
+
+.project-text p {
+  margin-bottom: 1.2em; /* More breathing room between paragraphs */
+  line-height: 1.6; /* Slightly taller lines */
+}
+
+.project-text h2,
+.project-text h3 {
+  margin-top: 1.8em; /* Clearer section separation */
+  margin-bottom: 0.6em;
+}
+
+.project-text hr {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  margin: 2em 0;
+}
+
+.project-text ul {
+  margin: 1em auto;
+  padding-left: 1.2em;
+}
+
+.project-text li {
+  margin-bottom: 0.6em;
+}
+
 .project-stats {
   display: flex;
   flex-direction: row;
