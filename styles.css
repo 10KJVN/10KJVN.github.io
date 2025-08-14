@@ -6,7 +6,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
   background-size: cover;
-  background: url("img/newBg.jpg") no-repeat fixed;
+  background: url("img/Backgrounds/newBg.jpg") no-repeat fixed;
+  background-color: #181818;
 }
 a {
   text-decoration: none;
@@ -255,7 +256,8 @@ section {
 /* === Mobile === */
 @media screen and (max-width: 768px) {
   body {
-    background: url("img/newBg.jpg") no-repeat fixed;
+    background: url("img/Backgrounds/newBg.jpg") no-repeat fixed;
+    background-color: #181818;
     background-size: cover;
   }
 

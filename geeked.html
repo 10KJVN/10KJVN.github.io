@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleproject.css">
+    <title>Project Title - Jahvairo's Portfolio</title>
+</head>
+
+<body id="geeked">
+<!-- Navigation -->
+<header class="navbar">
+    <nav>
+        <div class="name">
+            <a href="index.html">
+                <h1>Jahvairo Monkau</h1>
+            </a>
+        </div>
+        <div class="menu">
+            <button class="nav-items" onclick="window.location.href='index.html'">Home</button>
+            <button class="nav-items" onclick="window.location.href='index.html#services'">Projects</button>
+            <button class="nav-items" onclick="window.location.href='#contact'">Contact</button>
+            <a class="nav-items" href="pdf/Curriculum Vitae - July 2025 EN.pdf" target="_blank">CV</a>
+        </div>
+        <div class="hamburger">☰</div>
+    </nav>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <!-- Project Header -->
+    <div class="project-header">
+        <h1>WAY2TERRAIN</h1>
+    </div>
+
+    <!-- Project Details -->
+    <div class="project-details">
+        <div class="project-stats">
+            <p class="project-text">
+                <strong>Project Status:</strong> Finished <br>
+                <strong>Project Type:</strong> Game jam <br>
+                <strong>Project Duration:</strong> 21 Days <br>
+                <strong>Software Used:</strong> Godot 4<br>
+                <strong>Plugins Used:</strong> Sky3D <br>
+                <strong>Languages:</strong> GDScript, GDShader, GLSL <br>
+            </p>
+        </div>
+
+        <div class="project-description">
+            <!-- About -->
+            <h2>About Dirt Jam</h2>
+            <p>
+                The <a href="https://itch.io/jam/acerola-dirt-jam" target="_blank">Dirt Jam</a>
+                is a month-long community event run by Acerola to encourage participants to get started learning graphics and shader programming.
+                due to the low level nature of Godot compositor effects, 
+                you really get to understand graphics and shader programming without the assistance of commercial engines.
+            </p>
+
+            <!-- Optional Links -->
+            <p><a href="https://github.com/10KJVN/Godot-Terrain/tree/develop" target="_blank">GitHub</a> | <a href="https://10kjvn.itch.io/way2terrain" target="_blank">Itch.io</a></p>
+
+            <!-- Final Product Visual -->
+            <div class="project-images">
+                <p class="image-title">Final Product Visual</p>
+                <video controls>
+                    <source src="img/DirtJam/W2TShowcase.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <!-- Key Features -->
+            <h2 class="subtitle">Highlights</h2>
+            <ul>
+                <li>Shader Include System</li>
+                <li>Blinn-Phong Lighting</li>
+                <li>Texturing Mapping</li>
+            </ul>
+
+            <!-- Intro Section -->
+            <h2 class="project-text">Intro</h2>
+            <p class="project-text">
+                Way2Terrain began as an entry for the Dirt Jam.
+                I debated using Unity or Godot, but went with Godot —
+                it’s the recommended FOSS option, and the reference code was already written for it by 
+                <a href="https://github.com/GarrettGunnell/Godot-Terrain/blob/main/Scripts/draw_terrain.gd" target="_blank">Acerola</a>, 
+                complete with helpful comments.
+                <br><br>
+                I had two concept ideas: <br>
+                1) <b>Way2Geeked</b> — cloud rap vibes, experimental, geeked out. <br><br>
+                2) Hueco Mundo but I’m already tackling that in another Unity project, so I shelved it.
+                <br><br>
+                Naturally, I went with Way2Geeked and built this moodboard to lock in the aesthetic.
+                The spark came while I was listening to music and stumbled across the “Way2Geeked” visualizer on YouTube.
+                All I could say 'bout it: “this shit trim, luh twin.”
+            </p>
+
+            <div class="project-images">
+                <img src="img/DirtJam/16by9_moodboard.jpg" alt="Mood board">
+                <p class="project-text">Mood board</p>
+            </div>
+
+            <!-- Development Section -->
+            <h2 class="project-text">Development</h2>
+            <p class="project-text">
+                Way2Terrain came together by diving headfirst into topics I’d never touched before.
+                Engines like Unity and Unreal have luxuries like built-in shader includes, auto shader recompilation, and polished terrain systems.
+                Godot… doesn’t — which meant I had to learn exactly what was happening under the hood.
+            </p>
+            <br>
+            <h3 class="project-text">Technical Challenges</h3>
+            <ul class="centered-list project-text">
+                <li>
+                    • <strong>GPU Data Alignment</strong>
+                    – Learned that forgetting to pad a struct for 16-byte alignment can turn your shader uniforms into nonsense.
+                    GPUs read in vec4 chunks, so a vec3 needs a dummy float to keep the layout intact.
+                    <br><br>
+                    
+                    • <a href="https://github.com/10KJVN/Godot-Terrain/pull/2" target="_blank"> <strong>Shader Modularity</strong> </a>
+                    – Built a GDScript-driven GLSL include loader, cutting ~500 lines of duplicated shader code. 
+                    <br><br>
+
+                    • <a href="https://github.com/10KJVN/Godot-Terrain/pull/6" target="_blank"> <strong>Texturing</strong> </a>
+                    – After 7 restarts and 5 days of trial and error,
+                    achieved clean triplanar mapping, supporting textures from all sizes mixed and matched.
+                    <br><br>
+
+                    • <a href="https://github.com/10KJVN/Godot-Terrain/pull/7" target="_blank"> <strong>Water Shader</strong> </a>
+                    – Vertex-based displacement with Fresnel reflections, integrated into Sky3D.
+                    <br><br>
+                    
+                    • <a href="https://github.com/10KJVN/Godot-Terrain/pull/1" target="_blank"> <strong>Fog</strong> </a> &
+                    <a href="https://github.com/10KJVN/Godot-Terrain/pull/4" target="_blank"> <strong>Lighting</strong> </a>
+                    – Swapping to exponential fog revealed a blend issue where lit terrain flattened into the fog color.
+                    Lighting also got a Blinn–Phong upgrade for sharper highlights.
+                </li>
+            </ul>
+            
+            <div class="project-images">
+                <p class="image-title"> 
+                    <a href="https://cglearn.eu/pub/advanced-computer-graphics/volumetric-rendering#:~:text=At%20each%20sample%20we%20can%20take%20the%20length,through%20the%20volume.%20We%20call%20this%20percentage%20transmittance." target="_blank">Beer's Law</a>:
+                    the relationship between the absorption of light by a substance and its concentration and path length. 
+                </p> 
+                
+                <img src="img/DirtJam/BLSnippet.png" alt="Beer's Law">
+                <p class="project-text">
+                    GLSL implementation, with height-based density fade.
+                    <code>world_pos</code> is the pixel world position, <code>_TerrainHeight</code> is the max terrain Y.
+                     the GIF below further explains this, the code shows how to DIY.
+                </p>
+            </div>
+            
+            <div class="project-images">
+                <p class="image-title"> <a href="https://youtu.be/oQksg57qsRA?si=uunivFLk1rYETOH1&t=138" target="_blank">Fog theory</a> in ~30 seconds GIF</p>
+                <img src="img/DirtJam/FogExplanation.gif" alt="Fog Logic">
+                <p class="project-text">core parameters to linear vs exponential behavior. Connects the math to shader code.</p>
+            </div>
+            <br>
+            <!-- Conclusion -->
+            <h2 class="project-text">Conclusion</h2>
+            <p class="project-text">
+                Way2Terrain became both a technical playground and a creative statement — proof that a game engine can be as much about expression as simulation.
+                The journey wasn’t without heartbreak: I missed the official submission deadline thanks to an incomplete itch.io page and a broken build.
+                FOMO hit hard… until I saw the final submission count:
+                <b>69 ENTRIES</b> <i>(worth it)</i>
+            </p>
+
+            <p class="project-text">
+                On the bright side, I learned a lot about core low-level rendering concepts —
+                from custom render pipelines and Vulkan’s API, to compositor effects, uniforms, buffers, and alignment.
+                While struggling with that last one, I came up with an analogy:
+                <br><br>
+                
+                <i>
+                    “Think of UBO memory like an inventory grid.
+                    Each data type has its own slot size, and a row can only hold 4 slots.
+                    Bigger items (like <code>vec3</code> and <code>vec4</code>) get VIP spots at the start of the row,
+                    and smaller items fill in the gaps.
+                    If the order changes on the CPU side, you have to re-pack the layout to match on the GPU side.”
+                </i>
+                
+                <br><br>
+                Safe to say <i>WE</i> all understand alignment now.
+            </p>
+
+            <div class="project-images">
+                <img src="img/DirtJam/Sunset.png" alt="Sunset">
+                <p class="project-text">Fun Fact: Way2Terrain's logo is based off this screenshot. See?</p>
+            </div>
+            
+            <p class="project-text">
+                For the full technical deep dives — from fog math to water shaders —
+                <a href="https://github.com/10KJVN/Godot-Terrain/pulls?q=is%3Apr+is%3Aclosed" target="_blank">
+                    check the closed pull requests on GitHub</a>.
+                They cover feature breakdowns, bug fixes, and shader logic in far more detail than I could fit here.
+                Thanks for reading.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer id="Contact">
+    <p>Contact: <a href="mailto:JahvaM_2005@outlook.com">JahvaM_2005@outlook.com</a></p>
+</footer>
+
+<!-- Scripts -->
+<script src="hamburger.js"></script>
+</body>
+
+</html>
