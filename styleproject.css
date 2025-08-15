@@ -384,6 +384,20 @@ footer {
   }
 }
 
+@media screen and (min-width: 1600px) {
+  .project-details {
+    max-width: 55%;
+    font-size: 18px;
+    /*margin: 0 auto;*/
+    margin-bottom: 2%;
+  }
+  
+  .project-header{
+    max-width: 55%;
+  }
+  
+}
+
 /* === Lightbox Modal === */
 #lightboxModal {
   display: none;
