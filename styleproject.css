@@ -200,6 +200,13 @@ nav {
   width: 75%;
 }
 
+.project-images > video {
+  width: 75%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
 /* === Universal image and video scaling === */
 video,
 img {
@@ -346,6 +353,11 @@ footer {
   }
 
   .project-images > img {
+    width: 100%;
+    height: auto;
+  }
+
+  .project-images > video {
     width: 100%;
     height: auto;
   }
