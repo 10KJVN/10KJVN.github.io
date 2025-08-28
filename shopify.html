@@ -8,7 +8,7 @@
     <title>Shopify - Jahvairo's Portfolio</title>
 </head>
 
-<body id="urp">
+<body id="shopify">
 <!-- Navigation -->
 <header class="navbar">
     <nav>
@@ -133,6 +133,47 @@
             <p class="project-text"><b>Disclaimer: Not all visuals may fully represent the final product. 
                 Majority, of visuals showcased on here were in-development and behind the scenes :)</b>
             </p>
+            
+            <h2 class="project-text">Under the Hood</h2>
+            <p class="project-text">
+                While this page mainly shows the user-facing system, here’s a quick look at the underlying logic
+                that connects C++ back-end code to Blueprint-driven UI.
+            </p>
+
+            <p class="project-text">
+                The <b>ProductActor</b> (C++) acts as the parent class. Its Blueprint child,
+                <b>Child_ProductActor</b>, makes the system more easily extendable.
+                For example, each product instance spawns its own Product Widget, which then:
+            </p>
+            
+            <ul class="centered-list">
+                <li>- Checks for available variants</li>
+                <li>- Maps them to colors using a Color Map</li>
+                <li>- Generates a VariantBox Widget for each</li>
+                <li>- Communicates selections back through callbacks</li>
+            </ul>
+            
+            <!-- WBP_Product snippet -->
+            <div class="project-images">
+                <p class="">Blueprint Snippet – Product Widget</p>
+                <img src="img/Shopify/LptSSnipet.png" alt="Blueprint Logic Example">
+            </div>
+            <!-- Variant Box snippet -->
+            <div class="project-images">
+                <p class="">Blueprint Snippet – Variant Box Widget</p>
+                <img src="img/Shopify/VariantBox_Snippet.png" alt="Variant Logic Example">
+            </div>
+            <!-- My ProductActor snippet -->
+            <div class="project-images">
+                <p class="">Blueprint Snippet – Product Actor</p>
+                <img src="img/Shopify/ProdcutActor_Snippet.png" alt="Variant Logic Example">
+            </div>
+
+            <p class="project-text">
+                When a variant is selected, the callback chain notifies the parent actor:
+                <i>“Hey mesh, change color! Client has selected pink.”</i>
+            </p>
+            
             
         </div>
     </div>
