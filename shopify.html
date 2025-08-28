@@ -8,7 +8,7 @@
     <title>Shopify - Jahvairo's Portfolio</title>
 </head>
 
-<body id="urp">
+<body id="shopify">
 <!-- Navigation -->
 <header class="navbar">
     <nav>
@@ -29,7 +29,7 @@
 
 <!-- Main Content -->
 <div class="container">
-    <!-- Project Header -->
+
     <div class="project-header">
         <h1>Shopify API</h1>
     </div>
@@ -57,37 +57,124 @@
                 enabling users to interact with real Shopify products in a virtual space.
             </p>
             
-            <h4>It provides:</h4>
+            <h3>Highlights:</h3>
             <!-- Key Features -->
-            <ul class="project-text centered-list">
+            <ul class="">
                 <li><b>Real-time product data</b> from Shopify directly inside Unreal Engine.</li>
                 <li>A <b>scalable foundation</b> for next-gen e-commerce in 3D, VR, and mobile.</li>
-                <li>A system that turns console C++ API calls into user-friendly, interactive features</li>
+                <li>A system that turns API calls into user-friendly, interactive features</li>
             </ul>
+            
+            <div class="project-images">
+                <p class="">System Overview</p>
+                <img src="img/Shopify/SystemsChart.png" alt="Systems Diagram">
+                <p class="">Objects* | ProductActor*</p>
+            </div>
 
             <!-- Intro Section -->
             <h2 class="project-text">Intro</h2>
             <p class="project-text">
-                Short introduction and context for the project.
+                I joined after the core back-end functionality was built in cpp.
+                My colleague handled the raw API integration,
+                while I focused on making the system user-friendly.
+                I worked on optimizing logic, making the feature Blueprint-compatible,
+                and designing an intuitive UI, so it could be used effectively by non-programmers.
             </p>
+
+            <div class="project-images">
+                <p class=""></p>
+                <img src="img/Shopify/MixCollage-28-Aug-2025-02-44-AM-5159.jpg" alt="Systems Diagram">
+                <p class=""></p>
+            </div>
 
             <!-- Development Section -->
             <h2 class="project-text">Development</h2>
             <p class="project-text">
-                Talk about the technical process, tools, and challenges.
+                The early prototype worked, but was limited to console logs and obscure User Interface.
+                By collaborating with my colleague, I was able to bridge the system into Blueprints,
+                allowing seamless interaction with Unreal's Editor and UI.
+                I also optimized parts of the workflow that were more efficient to handle in Blueprints.
             </p>
+
+            <div class="project-images">
+                <p class=""></p>
+                <img src="img/Shopify/OldUI.png" alt="Systems Diagram">
+                <p class="">Old User Interface & Output Log containing details</p>
+            </div>
+            
+            <p class="project-text">
+                This collaboration gave me hands-on experience with integrating C++ back-end systems into accessible gameplay features.
+                It also taught me how to communicate across different specializations to make a feature both technically robust
+                and designer-friendly.
+            </p>
+
+            <div class="project-images">
+                <video controls>
+                    <source src="img/Shopify/NewUI.mp4" type="video/mp4">
+                </video>
+                <p>New User Interface | post real-time cart updates</p>
+            </div>
 
             <!-- Conclusion -->
-            <h3 class="project-text">Conclusion</h3>
+            <h2 class="project-text">Conclusion</h2>
             <p class="project-text">
-                Wrap up the project with key learnings and results.
+                The feature was delivered as a working tool with a polished interface,
+                ready for use  in production. This project showed me the importance of
+                balancing technical depth with usability, and highlighted
+                how teamwork between C++ and Blueprint developers can create a strong pipeline.
             </p>
 
-            <!-- Continuation -->
-            <h2 class="project-text">Continuation</h2>
-            <p class="project-text">
-                Optional section to talk about next steps or ongoing work.
+            <div class="project-images">
+                <p class=""></p>
+                <img src="img/Shopify/VariantStart.png" alt="Systems Diagram">
+                <p class="">Side by side comparison of actual web shop checkout vs. In game cart realtime</p>
+            </div>
+            
+            <p class="project-text"><b>Disclaimer:</b> <br><i> Not all visuals may fully represent the final product. 
+                Majority, of visuals showcased on here were in-development and behind the scenes :)</i>
             </p>
+            
+            <h2 class="project-text">Under the Hood</h2>
+            <p class="project-text">
+                While this page mainly shows the user-facing system, here’s a quick look at the underlying logic
+                that connects C++ back-end code to Blueprint-driven UI.
+            </p>
+
+            <p class="project-text">
+                The <b>ProductActor</b> (C++) acts as the parent class. Its Blueprint child,
+                <b>Child_ProductActor</b>, makes the system more easily extendable.
+                For example, each product instance spawns its own Product Widget, which then:
+            </p>
+            
+            <ul class="centered-list">
+                <li>- Checks for available variants</li>
+                <li>- Maps them to colors using a Color Map</li>
+                <li>- Generates a VariantBox Widget for each</li>
+                <li>- Communicates selections back through callbacks</li>
+            </ul>
+            
+            <!-- WBP_Product snippet -->
+            <div class="project-images">
+                <p class="">Blueprint Snippet – Product Widget</p>
+                <img src="img/Shopify/LptSSnipet.png" alt="Blueprint Logic Example">
+            </div>
+            <!-- Variant Box snippet -->
+            <div class="project-images">
+                <p class="">Blueprint Snippet – Variant Box Widget</p>
+                <img src="img/Shopify/VariantBox_Snippet.png" alt="Variant Logic Example">
+            </div>
+            <!-- My ProductActor snippet -->
+            <div class="project-images">
+                <p class="">Blueprint Snippet – Product Actor</p>
+                <img src="img/Shopify/ProdcutActor_Snippet.png" alt="Variant Logic Example">
+            </div>
+
+            <p class="project-text">
+                When a variant is selected, the callback chain notifies the parent actor:
+                <i>“Hey mesh, change color! Client has selected pink.”</i>
+            </p>
+            
+            
         </div>
     </div>
 </div>
