@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleproject.css">
+    <title>Way2Terrain</title>
+</head>
+
+<body id="geeked">
+<!-- Navigation -->
+<header class="navbar">
+    <nav>
+        <div class="name">
+            <a href="index.html">
+                <h1>Jahvairo Monkau</h1>
+            </a>
+        </div>
+        <div class="menu">
+            <button class="nav-items" onclick="window.location.href='index.html'">Home</button>
+            <button class="nav-items" onclick="window.location.href='index.html#services'">Projects</button>
+            <button class="nav-items" onclick="window.location.href='#contact'">Contact</button>
+            <a class="nav-items" href="pdf/Curriculum Vitae - July 2025 EN.pdf" target="_blank">CV</a>
+        </div>
+        <div class="hamburger">☰</div>
+    </nav>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <!-- Project Header -->
+    <div class="project-header">
+        <h1>WAY2TERRAIN</h1>
+    </div>
+
+    <!-- Project Details -->
+    <div class="project-details">
+        <div class="project-stats">
+            <p class="project-text">
+                <strong>Project Status:</strong> Finished <br>
+                <strong>Project Type:</strong> Game jam <br>
+                <strong>Project Duration:</strong> 21 Days <br>
+                <strong>Software Used:</strong> Godot 4.4<br>
+                <strong>Plugins Used:</strong> Sky3D <br>
+                <strong>Languages:</strong> GDScript, GDShader, GLSL <br>
+            </p>
+        </div>
+
+        <div class="project-description">
+            <!-- About -->
+            <h2>About Dirt Jam</h2>
+            <p>
+                The <a href="https://itch.io/jam/acerola-dirt-jam" target="_blank">Dirt Jam</a>
+                was a month-long community event run by <a href="https://www.youtube.com/@Acerola_t" target="_blank"> Acerola </a> 
+                to encourage participants to get started learning <b>graphics and shader programming</b>.
+                Making use of Godot's <a href="https://docs.godotengine.org/en/4.4/tutorials/rendering/compositor.html" target="_blank">Compositor</a>
+                effects. Due to nature of these,
+                you get to explore rendering concepts hands-on without the assistance of commercial engines.
+            </p>
+
+            <!-- Optional Links -->
+            <p>
+                <a href="https://github.com/10KJVN/Godot-Terrain/tree/develop" target="_blank">GitHub</a> | 
+                <a href="https://10kjvn.itch.io/way2terrain" target="_blank">Itch.io</a> |
+                <a href="https://github.com/10KJVN/Godot-Terrain/pulls?q=is%3Apr+is%3Aclosed" target="_blank">Technical PRs</a>
+            </p>
+
+            
+
+            <!-- Key Features -->
+            <h2 class="subtitle">Highlights</h2>
+            <ul>
+                <li>Shader Include System</li>
+                <li>Blinn–Phong Lighting</li>
+                <li>Triplanar Texture Mapping</li>
+            </ul>
+
+            <!-- Intro Section -->
+            <h2 class="project-text">Intro</h2>
+            <p class="project-text">
+                The goal was to make an improvement to the base class, no matter how little.
+                The idea behind it is to learn how terrain generation works. 
+                From terrain data to, rendering.
+            </p>
+
+            <div class="project-images">
+                <img src="img/DirtJam/Data_Render.png" alt="Mood board">
+                <p class="project-text">
+                    Methods for creating the terrain data range from hand sculpting landscapes in ZBrush or Blender.
+                    <!-- to complex erosion simulations. depending on the scale of your game lots of optimization techniques are required 
+                    for real-time rendering of very large detailed meshes. -->
+                    You can't have one without the other.
+                    If you can generate terrain data but can't see it,
+                    then the data is useless. 
+                    And if you can render it but don't have any data,
+                    then all you have is a flat plane.
+                </p>
+            </div>
+            <br>
+            <!-- Development Section -->
+            <h2 class="project-text">Development</h2>
+            <p class="project-text">
+                I started by analyzing the source code's structure and annotations, 
+                to understand the basics. Eventually implementing 6~7 features in total,
+                some 'Visual' some related to 'Tooling'.
+            </p>
+            
+            <div class="project-images">
+                <p>Rendering Fog</p>
+                <img src="img/DirtJam/FogExplanation.gif" alt="Rendering fog explained.">
+                <p>
+                    In this GIF, you'll get an overview of the logic required to render multiple types of 'Distance Fog'.
+                </p>
+            </div>
+            <p class="project-text">
+                Starting off with beginner challenges such as:
+                <b>Distance Fog, Shader Includes, Level of Detail</b> and improving <b>Lightning</b> model.
+            </p>
+            <br>
+            <div class="project-images">
+                <p>Code Snippet: Beer's Law</p>
+                <img src="img/DirtJam/BLSnippet.png" alt="Code snippet of applying fog.">
+                <p>
+                    The relationship between the absorption of light and its path length. <br>
+                    <code>world_pos</code> refers to the position in the world of a <b>pixel</b>. <br>
+                </p>
+            </div>
+            
+            <div class="project-images">
+                <p>IMAGE: Mockup 1</p>
+                <img src="img/DirtJam/Mockup1.png" alt="Mockup scene after base features.">
+                <p>
+                    Here you see Distance Fog, and the other 3 features applied to the terrain. <br>
+                    I also experimented with post-processing (image effects) to make it look prettier.
+                </p>
+            </div>
+            <br>
+            <p class="project-text">
+                For the other tasks, please refer to these links for further technical detail & breakdown:
+                PR: 2 <a href="https://github.com/10KJVN/Godot-Terrain/pull/2">Shader Include</a>,
+                PR: 3 <a href="https://github.com/10KJVN/Godot-Terrain/pull/3">Level of Detail</a>,
+                PR: 4 <a href="https://github.com/10KJVN/Godot-Terrain/pull/4">Lighting</a>,
+                PR: 5 <a href="https://github.com/10KJVN/Godot-Terrain/pull/5">PCG3D</a>. <br>
+                <br><br>
+                Now onto an intermediate feature: Texture Mapping, this one gave me lots of trouble.
+                At the cost of not losing my sanity after 4 different approaches to the problem,
+                I decided to seek help on the matter.
+            </p>
+            
+            <div class="project-images">
+                <img src="img/DirtJam/TexturedV1.gif" alt="GIF of 4 different textures">
+                <p>Here you see 4 different textures applied to the terrain.</p>
+            </div>
+            
+            
+            
+            <!-- Conclusion -->
+            <h2 class="project-text">Conclusion</h2>
+            <p class="project-text">
+                I've learned a lot during this project such as core concepts in the graphics field of programming.
+                To name a few: <br><br>
+                <ul class="centered-list project-text">
+                    <li>
+                        GPU Data Alignment <br>
+                        Generating Terrain Data <br>
+                        Rendering Terrain Data <br>
+                        Compositor Effects (Godot) <br>
+                        Graphics APIs (Vulkan, SPIR-V)
+                    </li>
+                </ul>
+            
+            <p class="project-text">
+                <i>
+                    “Think of UBO memory like an inventory grid.
+                    Each data type has its own slot size, and a row can only hold 4 slots.
+                    Bigger items (like <code>vec3</code> and <code>vec4</code>) get VIP spots at the start of the row,
+                    and smaller items fill in the gaps.
+                    If the order changes on the CPU side, you have to re-pack the layout to match on the GPU side.”
+                </i>
+            </p>
+            
+            <div class="project-images">
+                <img src="img/DirtJam/blackbeard.jpg" alt="Fire.">
+                <p>How I felt writing that, Source: <a href="https://www.deviantart.com/jen-and-kris/art/OP-The-map-336195211" target="_blank">Kris & Jen</a> </p>
+            </div>
+            
+            <br>
+            <p class="project-text">
+                But of course much more than that which I won't detail here other than the analogy,
+                I came up with trying to understand the concept of 'alignment'. Thanks for reading.
+            </p>
+            
+            <br>
+            <h2 class="project-text">Gallery</h2>
+            <p class="project-text">Collection of unused visuals that would only collect dust if not shown here!</p>
+
+            <div class="project-images">
+                <p class="">Linear Fog -> Specular Highlights</p>
+                <img src="img/DirtJam/LF2SH.gif" alt="Water">
+            </div>
+
+            <div class="project-images">
+                <p class="">Cloud experimentation</p>
+                <img src="img/DirtJam/cloudsTweaking.gif" alt="Clouds">
+            </div>
+
+            <div class="project-images">
+                <p class="">Glacial peaks at sunset</p>
+                <img src="img/DirtJam/IceySS.png" alt="Clouds">
+            </div>
+            
+            <div class="project-images">
+                <p class=""> Moodboard of 'Cloud Rap' & 'Underground' inspo </p>
+                <img src="img/DirtJam/16by9_moodboard.jpg" alt="">
+            </div>
+
+            <div class="project-images">
+                <p class="">All 3 logo designs based off background image</p>
+                <img src="img/DirtJam/W2T_logos.gif" alt="Clouds">
+                <p class="project-text">AI generated based off mood board and in-game scenes</p>
+            </div>
+            
+            <!-- Final Product Visual -->
+            <div class="project-images">
+                <video controls>
+                    <source src="img/DirtJam/W2TShowcase.mp4" type="video/mp4">
+                </video>
+                <p>Final Product Visual</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer -->
+<footer id="Contact">
+    <p>Contact: <a href="mailto:JahvaM_2005@outlook.com">JahvaM_2005@outlook.com</a></p>
+</footer>
+
+<!-- Scripts -->
+<script src="hamburger.js"></script>
+</body>
+
+</html>
