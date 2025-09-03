@@ -49,14 +49,13 @@
 
         <div class="project-description">
             <!-- About -->
-            <h2>About Dirt Jam</h2>
+            <h2 id="intro">About Dirt Jam</h2>
             <p>
-                The <a href="https://itch.io/jam/acerola-dirt-jam" target="_blank">Dirt Jam</a>
-                was a month-long community event run by <a href="https://www.youtube.com/@Acerola_t" target="_blank"> Acerola </a> 
-                Its goal was to encourage participants to get started exploring <b>graphics and shader programming</b>
-                through Godot's <a href="https://docs.godotengine.org/en/4.4/tutorials/rendering/compositor.html" target="_blank">Compositor</a> effects.
-                Because these are low-level, they let you work hands-on with rendering concepts rather than relying
-                on the "safety net" of fully-featured commercial engines.
+                The <a href="https://itch.io/jam/acerola-dirt-jam" target="_blank">Dirt Jam</a> was a month-long event by <a href="https://www.youtube.com/@Acerola_t" target="_blank">Acerola</a>
+                that encouraged exploring <b>graphics and shader programming</b> in Godot.
+                Instead of relying on built-in tools, I worked directly with low-level rendering concepts, learning how they shape visuals.
+                <br><br>
+                <i>This is a technical project — see the <a href="#glossary">Glossary</a> if any terms are unfamiliar.</i>
             </p>
 
             <!-- Optional Links -->
@@ -65,9 +64,7 @@
                 <a href="https://10kjvn.itch.io/way2terrain" target="_blank">Itch.io</a> |
                 <a href="https://github.com/10KJVN/Godot-Terrain/pulls?q=is%3Apr+is%3Aclosed" target="_blank">Technical PRs</a>
             </p>
-
             
-
             <!-- Key Features -->
             <h2 class="subtitle">Highlights</h2>
             <ul>
@@ -75,8 +72,6 @@
                 <li>Texture Mapping</li>
             </ul>
             
-            
-
             <!-- Intro Section -->
             <h2 class="project-text">Intro</h2>
             <p class="project-text">
@@ -87,8 +82,6 @@
                 <img src="img/DirtJam/Data_Render.png" alt="Mood board">
                 <p class="project-text">
                     Methods for creating the terrain data range from hand sculpting landscapes in ZBrush or Blender.
-                    <!-- to complex erosion simulations. depending on the scale of your game lots of optimization techniques are required 
-                    for real-time rendering of very large detailed meshes. -->
                     You can't have one without the other.
                     If you can generate terrain data but can't see it,
                     then the data is useless. 
@@ -114,18 +107,6 @@
                 </p>
             </div>
             <br>
-            <!-- This is text to add to under each image for the photo slider
-            <p class="project-text">
-                Fog was one of the first features I added.
-                It helps give the scene a sense of depth and atmosphere by making distant terrain blend gradually into the background.
-                Different strengths (none → light → dense) can completely change the mood.
-            </p>
-
-            <p class="project-text">
-                <i>Want the full breakdown of fog math (linear vs. exponential models)?
-                    Check the <a href="https://github.com/10KJVN/Godot-Terrain" target="_blank">GitHub README</a>.</i>
-            </p>
-            -->
             
             <!-- Beginner Features -->
             <p class="project-text">
@@ -246,7 +227,10 @@
                 <p>Final Product Visual</p>
             </div>
             <br>
-            <h2 class="subtitle">Glossary</h2>
+            <h2 class="subtitle" id="glossary">Glossary</h2>
+            <p class="">
+                <a href="#intro">⬆ Back to Intro</a>
+            </p>
             <ul>
                 <li><b>CPU:</b> The “brain” of the computer. Handles general tasks and logic but is slower at graphics. </li>
                 <br>
@@ -266,7 +250,7 @@
 
 
 <!-- Footer -->
-<footer id="Contact">
+<footer id="contact">
     <p>Contact: <a href="mailto:JahvaM_2005@outlook.com">JahvaM_2005@outlook.com</a></p>
 </footer>
 
