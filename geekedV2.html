@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleproject.css">
+    <title>Way2Terrain</title>
+</head>
+
+<body id="geeked">
+<!-- Navigation -->
+<header class="navbar">
+    <nav>
+        <div class="name">
+            <a href="index.html">
+                <h1>Jahvairo Monkau</h1>
+            </a>
+        </div>
+        <div class="menu">
+            <button class="nav-items" onclick="window.location.href='index.html'">Home</button>
+            <button class="nav-items" onclick="window.location.href='index.html#services'">Projects</button>
+            <button class="nav-items" onclick="window.location.href='#contact'">Contact</button>
+            <a class="nav-items" href="pdf/Curriculum Vitae - July 2025 EN.pdf" target="_blank">CV</a>
+        </div>
+        <div class="hamburger">☰</div>
+    </nav>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <!-- Project Header -->
+    <div class="project-header">
+        <h1>WAY2TERRAIN</h1>
+    </div>
+
+    <!-- Project Details -->
+    <div class="project-details">
+        <div class="project-stats">
+            <p class="project-text">
+                <strong>Project Status:</strong> Finished <br>
+                <strong>Project Type:</strong> Game jam <br>
+                <strong>Project Duration:</strong> 21 Days <br>
+                <strong>Software Used:</strong> Godot 4.4<br>
+                <strong>Plugins Used:</strong> Sky3D <br>
+                <strong>Languages:</strong> GDScript, GDShader, GLSL <br>
+            </p>
+        </div>
+
+        <div class="project-description">
+            <!-- About -->
+            <h2 id="intro">About Dirt Jam</h2>
+            <p>
+                The <a href="https://itch.io/jam/acerola-dirt-jam" target="_blank">Dirt Jam</a> was a month-long event by <a href="https://www.youtube.com/@Acerola_t" target="_blank">Acerola</a>
+                that encouraged exploring <b>graphics and shader programming</b> in Godot.
+                Instead of relying on built-in tools, I worked directly with low-level rendering concepts, learning how they shape visuals.
+                <br><br>
+                <i>This is a technical project — see the <a href="#glossary">Glossary</a> if any terms are unfamiliar.</i>
+            </p>
+
+            <!-- Optional Links -->
+            <p>
+                <a href="https://github.com/10KJVN/Godot-Terrain/tree/develop" target="_blank">GitHub</a> | 
+                <a href="https://10kjvn.itch.io/way2terrain" target="_blank">Itch.io</a> |
+                <a href="https://github.com/10KJVN/Godot-Terrain/pulls?q=is%3Apr+is%3Aclosed" target="_blank">Technical PRs</a>
+            </p>
+            
+            <!-- Key Features -->
+            <h2 class="subtitle">Highlights</h2>
+            <ul>
+                <li>Distance Fog</li>
+                <li>Texture Mapping</li>
+            </ul>
+            
+            <!-- Intro Section -->
+            <h2 class="project-text">Intro</h2>
+            <p class="project-text">
+                The goal was to improve the base class, even if only slightly. The idea was to learn how terrain generation works — from creating the data to rendering it.
+            </p>
+
+            <div class="project-images">
+                <img src="img/DirtJam/Data_Render.png" alt="Mood board">
+                <p class="project-text">
+                    Methods for creating the terrain data range from hand sculpting landscapes in ZBrush or Blender.
+                    You can't have one without the other.
+                    If you can generate terrain data but can't see it,
+                    then the data is useless. 
+                    And if you can render it but don't have any data,
+                    then all you have is a flat plane.
+                </p>
+            </div>
+            <br>
+            <!-- Development Section -->
+            <h2 class="project-text">Development</h2>
+            <p class="project-text">
+                I began by studying the source code's structure and comments.
+                From there, I gradually added about 6-7 features — some were purely visual, others focused on tooling.
+            </p>
+            
+            <div class="project-images">
+                <p>Rendering Fog - Light to Dense</p>
+                <img src="img/DirtJam/Fog.gif" alt="GIF showing the terrain transitioning from no fog to dense fog.">
+                <p class="project-text">
+                    Distance Fog was the first feature I added. 
+                    It gives the scene a sense of depth and atmosphere,
+                    by making distant terrain blend gradually into the background.
+                </p>
+            </div>
+            <br>
+            
+            <!-- Beginner Features -->
+            <p class="project-text">
+                Alongside fog, I also tackled other beginner-friendly graphics challenges:
+                <b>Shader Includes, Level of Detail (LOD),</b> and improvements to the <b>Lighting model</b>.
+            </p>
+            
+            <!--
+            <div class="project-images">
+                <p>Code Snippet: Beer's Law</p>
+                <img src="img/DirtJam/BLSnippet.png" alt="Code snippet of applying fog.">
+                <p>
+                    The relationship between the absorption of light and its path length. <br>
+                    <code>world_pos</code> refers to the position in the world of a <b>pixel</b>. <br>
+                </p>
+            </div>
+            -->
+            
+            <div class="project-images">
+                <p>Example Scene with Fog + Lightning</p>
+                <img src="img/DirtJam/Mockup1.png" alt="Mockup scene after base features.">
+                <p>
+                    This mockup shows all of these features combined.
+                    I also experimented with post-processing (image effects) to add polish.
+                </p>
+            </div>
+           
+
+            <!-- Texture Mapping -->
+            <p class="project-text">
+                Next came a much harder task: <b>Texture Mapping</b>.
+                Texture mapping is the process of covering terrain with different materials (grass, rock, snow) depending on slope or height.
+                After four failed approaches, I reached out for guidance — and eventually implemented a working version.
+            </p>
+            
+            <div class="project-images">
+                <img src="img/DirtJam/TexturedV1.gif" alt="GIF of 4 different textures">
+                <p>Here you see 4 different textures applied to the terrain.</p>
+            </div>
+
+            <p class="project-text">
+                If you want to see the technical details of each feature, here are the individual pull requests (code change logs):
+                <a href="https://github.com/10KJVN/Godot-Terrain/pull/1">Distance Fog</a>,
+                <a href="https://github.com/10KJVN/Godot-Terrain/pull/2">Shader Include</a>,
+                <a href="https://github.com/10KJVN/Godot-Terrain/pull/3">Level of Detail</a>,
+                <a href="https://github.com/10KJVN/Godot-Terrain/pull/4">Lighting</a>,
+                <a href="https://github.com/10KJVN/Godot-Terrain/pull/5">PCG3D</a>,
+                <a href="https://github.com/10KJVN/Godot-Terrain/pull/7">Water Shader</a>.
+            </p>
+            <br>
+            <!-- Conclusion -->
+            <h2 class="project-text">Conclusion</h2>
+            <p class="project-text">
+                This project was my crash course into graphics programming. <br>
+                To name a few: <br><br>
+                <ul class="centered-list project-text">
+                    <li>
+                        GPU Data Alignment <br>
+                        Generating Terrain Data <br>
+                        Rendering Terrain Data <br>
+                        Compositor Effects (Godot) <br>
+                        Graphics APIs (Vulkan, SPIR-V)
+                    </li>
+                </ul>
+            
+            <p class="project-text">
+                One analogy that helped me finally grasp GPU memory alignment: <br><br>
+                <i>
+                    “Think of UBO memory like an inventory grid.
+                    Each data type has its own slot size, and a row can only hold 4 slots.
+                    Bigger items (like <code>vec3</code> and <code>vec4</code>) get VIP spots at the start of the row,
+                    and smaller items fill in the gaps.
+                    If the order changes on the CPU side, you have to re-pack the layout to match on the GPU side.”
+                </i>
+            </p>
+            
+            <div class="project-images">
+                <img src="img/DirtJam/blackbeard.jpg" alt="Fire.">
+                <p>Image Source: <a href="https://www.deviantart.com/jen-and-kris/art/OP-The-map-336195211" target="_blank">Kris & Jen</a> </p>
+            </div>
+            
+            <br>
+            
+            <h2 class="project-text">Gallery</h2>
+            <p class="project-text">A collection of extra visuals and experiments that didn’t make it into the final build</p>
+            
+            <div class="project-images">
+                <p class="">Cloud experimentation</p>
+                <img src="img/DirtJam/cloudsTweaking.gif" alt="Clouds">
+            </div>
+
+            <div class="project-images">
+                <p class="">Glacial peaks at sunset</p>
+                <img src="img/DirtJam/IceySS.png" alt="Snow textured terrain with lens dirt and orange clouds with moon in the background, might be nice Featured Project image too.">
+            </div>
+            
+            <div class="project-images">
+                <p class=""> Moodboard: Cloud Rap & Underground inspirations</p>
+                <img src="img/DirtJam/16by9_moodboard.jpg" alt="">
+            </div>
+
+            <div class="project-images">
+                <p class="">Logo variations</p>
+                <img src="img/DirtJam/W2T_logos.gif" alt="Clouds">
+            </div>
+            
+            <!-- Final Product Visual -->
+            <div class="project-images">
+                <video controls>
+                    <source src="img/DirtJam/W2TShowcase.mp4" type="video/mp4">
+                </video>
+                <p>Final Showcase</p>
+            </div>
+            <br>
+            
+            <h2 class="subtitle" id="glossary">Glossary</h2>
+            <p><a href="#intro">⬆ Back to Intro</a></p>
+            <ul>
+                <li><b>CPU:</b> The “brain” of the computer. Handles general tasks and logic but is slower at graphics.</li>
+                <br>
+                <li><b>GPU:</b> Specialized hardware made for rendering images and running parallel calculations, crucial for games and 3D visuals.</li>
+                <br>
+                <li><b>Shader:</b> A small program that runs on the GPU to control how objects look — for example, their colors, lighting, or surface effects.</li>
+                <br>
+                <li><b>Uniform:</b> A shared setting that stays the same across many pixels or objects like a "global color" that all the shaders can use.</li>
+                <br>
+                <li><b>Buffer:</b> A block of GPU memory used to store data (like numbers, positions, or settings) so shaders can access it quickly.</li>
+                <br>
+                <li><b>UBO (Uniform Buffer Object):</b> A box of shared settings that multiple shaders can open and use at the same time.</li>
+                <br>
+                <li><b>GPU Data Alignment:</b> How data is arranged in memory so the GPU can read it efficiently. Misaligned data wastes memory or slows performance.</li>
+                <br>
+                <li><b>Texture Mapping:</b> Applying a 2D image (a “texture”) onto a 3D surface to add detail, like grass, rock, or water.</li>
+                <br>
+                <li><b>Low-level:</b> Similar to working directly with raw wood and nails instead of using IKEA furniture. You get more control, but it takes more effort.</li>
+                <br>
+                <li><b>PR (Pull Request):</b> A way of proposing changes in version control (like GitHub), used to review and merge code contributions.</li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer -->
+<footer id="contact">
+    <p>Contact: <a href="mailto:JahvaM_2005@outlook.com">JahvaM_2005@outlook.com</a></p>
+</footer>
+
+<!-- Scripts -->
+<script src="hamburger.js"></script>
+</body>
+
+</html>
