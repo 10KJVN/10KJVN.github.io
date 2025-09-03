@@ -53,10 +53,10 @@
             <p>
                 The <a href="https://itch.io/jam/acerola-dirt-jam" target="_blank">Dirt Jam</a>
                 was a month-long community event run by <a href="https://www.youtube.com/@Acerola_t" target="_blank"> Acerola </a> 
-                to encourage participants to get started learning <b>graphics and shader programming</b>.
-                Making use of Godot's <a href="https://docs.godotengine.org/en/4.4/tutorials/rendering/compositor.html" target="_blank">Compositor</a>
-                effects. Due to nature of these,
-                you get to explore rendering concepts hands-on without the assistance of commercial engines.
+                Its goal was to encourage participants to get started exploring <b>graphics and shader programming</b>
+                through Godot's <a href="https://docs.godotengine.org/en/4.4/tutorials/rendering/compositor.html" target="_blank">Compositor</a> effects.
+                Because these are low-level, they let you work hands-on with rendering concepts rather than relying
+                on the "safety net" of fully-featured commercial engines.
             </p>
 
             <!-- Optional Links -->
@@ -71,10 +71,11 @@
             <!-- Key Features -->
             <h2 class="subtitle">Highlights</h2>
             <ul>
-                <li>Shader Include System</li>
-                <li>Blinn–Phong Lighting</li>
-                <li>Triplanar Texture Mapping</li>
+                <li>Distance Fog</li>
+                <li>Texture Mapping</li>
             </ul>
+            
+            
 
             <!-- Intro Section -->
             <h2 class="project-text">Intro</h2>
@@ -101,9 +102,8 @@
             <!-- Development Section -->
             <h2 class="project-text">Development</h2>
             <p class="project-text">
-                I started by analyzing the source code's structure and annotations, 
-                to understand the basics. Eventually implementing 6~7 features in total,
-                some 'Visual' some related to 'Tooling'.
+                To get started, I carefully explored the source code’s structure and comments.
+                From there, I gradually added about 6-7 features — some were purely visual, others focused on tooling.
             </p>
             
             <div class="project-images">
@@ -113,11 +113,26 @@
                     In this GIF, you'll get an overview of the logic required to render multiple types of 'Distance Fog'.
                 </p>
             </div>
+            <!-- This is text to add to under each image for the photo slider
             <p class="project-text">
-                Starting off with beginner challenges such as:
-                <b>Distance Fog, Shader Includes, Level of Detail</b> and improving <b>Lightning</b> model.
+                Fog was one of the first features I added.
+                It helps give the scene a sense of depth and atmosphere by making distant terrain blend gradually into the background.
+                Different strengths (none → light → dense) can completely change the mood.
             </p>
-            <br>
+
+            <p class="project-text">
+                <i>Want the full breakdown of fog math (linear vs. exponential models)?
+                    Check the <a href="https://github.com/10KJVN/Godot-Terrain" target="_blank">GitHub README</a>.</i>
+            </p>
+            -->
+            
+            <!-- Beginner Features -->
+            <p class="project-text">
+                Alongside fog, I also tackled other beginner-friendly graphics challenges:
+                <b>Shader Includes, Level of Detail (LOD),</b> and improvements to the <b>Lighting model</b>.
+            </p>
+            
+            <!--
             <div class="project-images">
                 <p>Code Snippet: Beer's Law</p>
                 <img src="img/DirtJam/BLSnippet.png" alt="Code snippet of applying fog.">
@@ -126,39 +141,43 @@
                     <code>world_pos</code> refers to the position in the world of a <b>pixel</b>. <br>
                 </p>
             </div>
+            -->
             
             <div class="project-images">
-                <p>IMAGE: Mockup 1</p>
+                <p>Example Scene with Fog + Lightning</p>
                 <img src="img/DirtJam/Mockup1.png" alt="Mockup scene after base features.">
                 <p>
-                    Here you see Distance Fog, and the other 3 features applied to the terrain. <br>
-                    I also experimented with post-processing (image effects) to make it look prettier.
+                    This mockup shows all of these features combined.
+                    I also experimented with post-processing (image effects) to add polish.
                 </p>
             </div>
-            <br>
+           
+
+            <!-- Texture Mapping -->
             <p class="project-text">
-                For the other tasks, please refer to these links for further technical detail & breakdown:
-                PR: 2 <a href="https://github.com/10KJVN/Godot-Terrain/pull/2">Shader Include</a>,
-                PR: 3 <a href="https://github.com/10KJVN/Godot-Terrain/pull/3">Level of Detail</a>,
-                PR: 4 <a href="https://github.com/10KJVN/Godot-Terrain/pull/4">Lighting</a>,
-                PR: 5 <a href="https://github.com/10KJVN/Godot-Terrain/pull/5">PCG3D</a>. <br>
-                <br><br>
-                Now onto an intermediate feature: Texture Mapping, this one gave me lots of trouble.
-                At the cost of not losing my sanity after 4 different approaches to the problem,
-                I decided to seek help on the matter.
+                Next came a much harder task: <b>Texture Mapping</b>.
+                My goal was to blend multiple terrain textures (like rock, grass, and snow) together seamlessly.
+                After four failed approaches, I reached out for guidance — and eventually implemented a working version.
             </p>
             
             <div class="project-images">
                 <img src="img/DirtJam/TexturedV1.gif" alt="GIF of 4 different textures">
                 <p>Here you see 4 different textures applied to the terrain.</p>
             </div>
-            
-            
-            
+
+            <p class="project-text">
+                For more technical deep-dives into individual features, you can check my pull requests:
+                <a href="https://github.com/10KJVN/Godot-Terrain/pull/2">Shader Include</a>,
+                <a href="https://github.com/10KJVN/Godot-Terrain/pull/3">Level of Detail</a>,
+                <a href="https://github.com/10KJVN/Godot-Terrain/pull/4">Lighting</a>,
+                <a href="https://github.com/10KJVN/Godot-Terrain/pull/5">PCG3D</a>,
+                <a href="https://github.com/10KJVN/Godot-Terrain/pull/7">Water Shader</a>.
+            </p>
+            <br>
             <!-- Conclusion -->
             <h2 class="project-text">Conclusion</h2>
             <p class="project-text">
-                I've learned a lot during this project such as core concepts in the graphics field of programming.
+                This project was my crash course into graphics programming. <br>
                 To name a few: <br><br>
                 <ul class="centered-list project-text">
                     <li>
@@ -171,6 +190,7 @@
                 </ul>
             
             <p class="project-text">
+                One analogy that helped me finally grasp GPU memory alignment: <br><br>
                 <i>
                     “Think of UBO memory like an inventory grid.
                     Each data type has its own slot size, and a row can only hold 4 slots.
@@ -182,18 +202,13 @@
             
             <div class="project-images">
                 <img src="img/DirtJam/blackbeard.jpg" alt="Fire.">
-                <p>How I felt writing that, Source: <a href="https://www.deviantart.com/jen-and-kris/art/OP-The-map-336195211" target="_blank">Kris & Jen</a> </p>
+                <p>Image Source: <a href="https://www.deviantart.com/jen-and-kris/art/OP-The-map-336195211" target="_blank">Kris & Jen</a> </p>
             </div>
             
             <br>
-            <p class="project-text">
-                But of course much more than that which I won't detail here other than the analogy,
-                I came up with trying to understand the concept of 'alignment'. Thanks for reading.
-            </p>
             
-            <br>
             <h2 class="project-text">Gallery</h2>
-            <p class="project-text">Collection of unused visuals that would only collect dust if not shown here!</p>
+            <p class="project-text">A collection of extra visuals and experiments that didn’t make it into the final build</p>
 
             <div class="project-images">
                 <p class="">Linear Fog -> Specular Highlights</p>
@@ -228,6 +243,18 @@
                 </video>
                 <p>Final Product Visual</p>
             </div>
+            
+            <h2 class="subtitle">Glossary</h2>
+            <ul>
+                <li><b>CPU</b> (Central Processing Unit)</li>
+                The “brain” of the computer. <br>
+                <br>
+                <li><b>GPU</b> (Graphics Processing Unit)</li>
+                Specialized hardware made for rendering images and running parallel calculations, crucial for games and 3D visuals. <br>
+                <br>
+                <li><b>Shader</b></li>
+                A small program that runs on the GPU to control how objects look — for example, their colors, lighting, or surface effects.
+            </ul>
         </div>
     </div>
 </div>
