@@ -80,9 +80,7 @@
             <!-- Intro Section -->
             <h2 class="project-text">Intro</h2>
             <p class="project-text">
-                The goal was to make an improvement to the base class, no matter how little.
-                The idea behind it is to learn how terrain generation works. 
-                From terrain data to, rendering.
+                The goal was to improve the base class, even if only slightly. The idea was to learn how terrain generation works — from creating the data to rendering it.
             </p>
 
             <div class="project-images">
@@ -102,17 +100,20 @@
             <!-- Development Section -->
             <h2 class="project-text">Development</h2>
             <p class="project-text">
-                To get started, I carefully explored the source code’s structure and comments.
+                I began by studying the source code's structure and comments.
                 From there, I gradually added about 6-7 features — some were purely visual, others focused on tooling.
             </p>
             
             <div class="project-images">
-                <p>Rendering Fog</p>
-                <img src="img/DirtJam/FogExplanation.gif" alt="Rendering fog explained.">
-                <p>
-                    In this GIF, you'll get an overview of the logic required to render multiple types of 'Distance Fog'.
+                <p>Rendering Fog - Light to Dense</p>
+                <img src="img/DirtJam/Fog.gif" alt="GIF showing the terrain transitioning from no fog to dense fog.">
+                <p class="project-text">
+                    Distance Fog was the first feature I added. 
+                    It gives the scene a sense of depth and atmosphere,
+                    by making distant terrain blend gradually into the background.
                 </p>
             </div>
+            <br>
             <!-- This is text to add to under each image for the photo slider
             <p class="project-text">
                 Fog was one of the first features I added.
@@ -156,7 +157,7 @@
             <!-- Texture Mapping -->
             <p class="project-text">
                 Next came a much harder task: <b>Texture Mapping</b>.
-                My goal was to blend multiple terrain textures (like rock, grass, and snow) together seamlessly.
+                Texture mapping is the process of covering terrain with different materials (grass, rock, snow) depending on slope or height.
                 After four failed approaches, I reached out for guidance — and eventually implemented a working version.
             </p>
             
@@ -166,7 +167,8 @@
             </div>
 
             <p class="project-text">
-                For more technical deep-dives into individual features, you can check my pull requests:
+                If you want to see the technical details of each feature, here are the individual pull requests (code change logs):
+                <a href="https://github.com/10KJVN/Godot-Terrain/pull/1">Distance Fog</a>,
                 <a href="https://github.com/10KJVN/Godot-Terrain/pull/2">Shader Include</a>,
                 <a href="https://github.com/10KJVN/Godot-Terrain/pull/3">Level of Detail</a>,
                 <a href="https://github.com/10KJVN/Godot-Terrain/pull/4">Lighting</a>,
@@ -211,7 +213,7 @@
             <p class="project-text">A collection of extra visuals and experiments that didn’t make it into the final build</p>
 
             <div class="project-images">
-                <p class="">Linear Fog -> Specular Highlights</p>
+                <p class="">Linear Fog & Specular Highlights</p>
                 <img src="img/DirtJam/LF2SH.gif" alt="Water">
             </div>
 
@@ -243,17 +245,20 @@
                 </video>
                 <p>Final Product Visual</p>
             </div>
-            
+            <br>
             <h2 class="subtitle">Glossary</h2>
             <ul>
-                <li><b>CPU</b> (Central Processing Unit)</li>
-                The “brain” of the computer. <br>
+                <li><b>CPU:</b> The “brain” of the computer. Handles general tasks and logic but is slower at graphics. </li>
                 <br>
-                <li><b>GPU</b> (Graphics Processing Unit)</li>
-                Specialized hardware made for rendering images and running parallel calculations, crucial for games and 3D visuals. <br>
+                <li><b>GPU:</b> Specialized hardware made for rendering images and running parallel calculations, crucial for games and 3D visuals.</li>
                 <br>
-                <li><b>Shader</b></li>
-                A small program that runs on the GPU to control how objects look — for example, their colors, lighting, or surface effects.
+                <li><b>Shader: </b>A small program that runs on the GPU to control how objects look — for example, their colors, lighting, or surface effects.</li>
+                <br>
+                <li><b>Texture Mapping:</b> Applying a 2D image (a “texture”) onto a 3D surface to add detail, like grass, rock, or water.</li>
+                <br>
+                <li><b>PR (Pull Request): </b>A way of proposing changes in a version control (like GitHub), used to review and merge code contributions.</li>
+                <br>
+                <li><b>Low-level:</b> Close-to-the-hardware programming. Gives more control over how graphics are processed, but requires writing more code yourself instead of relying on built-in engine tools.</li>
             </ul>
         </div>
     </div>
