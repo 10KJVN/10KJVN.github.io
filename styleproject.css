@@ -240,7 +240,7 @@ img {
   margin: 2vw auto; /* centered, same spacing rhythm as images */
   border-radius: 12px; /* smooth rounded corners */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* subtle drop shadow */
-  background: #000; /* fallback background for load */
+  background: transparent; /* fallback background for load */
 }
 
 .video-container iframe {
