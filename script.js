@@ -27,7 +27,7 @@ function autoSlide() {
     nextSlide();
 }
 
-let slideInterval = setInterval(autoSlide, 3000); // Change slide every 3 seconds
+let slideInterval = setInterval(autoSlide, 5000); // Change slide every 5 seconds
 
 // Pause the slider when hovering over the slider area
 const sliderContainer = document.querySelector('.slider-container');
