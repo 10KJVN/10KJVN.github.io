@@ -26,6 +26,7 @@
         <a class="nav-items" href="pdf/Curriculum Vitae - July 2025 EN.pdf" target="_blank">CV</a>
       </div>
     </nav>
+    
     <div class="introHeader">
       <h1>Welcome to my Portfolio</h1>
       <h3>Graphics & Gameplay Developer</h3>
@@ -33,60 +34,58 @@
       <h4>Highlighted Projects</h4>
     </div>
 
-  <div class="slider-container">
-    <div class="slider-content">
-      <a href="geekedV2.html" target>
-        <div class="slide-content">
-          <img src="img/DirtJam/Mockup1.png" alt="Image 1">
-          <div class="text-content">
-            <h3>Way2Terrain</h3>
-            <p>
-              A custom terrain renderer built in Godot using the low-level RenderingDevice API.
-              This project showcases my specialization in graphics programming and shader development.
-            </p>
-          </div>
+    <!-- Highlighted Projects -->
+    <div class="slider" id="highlightSlider">
+      <div class="slider-container">
+        <div class="slider-content">
+          <a href="geekedV2.html">
+            <div class="slide-content">
+              <img src="img/DirtJam/Mockup1.png" alt="Way2Terrain">
+              <div class="text-content">
+                <h3>Way2Terrain</h3>
+                <p>A custom terrain renderer built in Godot. Focused on graphics programming and shader work.</p>
+              </div>
+            </div>
+          </a>
         </div>
-      </a>
-    </div>
-  </div>
-    
-  <div class="slider-container">
-    <div class="slider-content">
-      <a href="ensemble.html" target>
-        <div class="slide-content">
-          <img src="img/Ensemble/Ensemble02.jpg" alt="Image 1">
-          <div class="text-content">
-            <h3>The Ensemble</h3>
-            <p>
-              An interactive architectural visualization built in Unreal Engine.
-              It offers real-time simulation with multiple perspectives,
-              providing a dynamic alternative to static presentations.
-            </p>
-          </div>
+      </div>
+
+      <div class="slider-container">
+        <div class="slider-content">
+          <a href="ensemble.html">
+            <div class="slide-content">
+              <img src="img/Ensemble/Ensemble02.jpg" alt="The Ensemble">
+              <div class="text-content">
+                <h3>The Ensemble</h3>
+                <p>Interactive architectural visualization in Unreal Engine.</p>
+              </div>
+            </div>
+          </a>
         </div>
-      </a>
-    </div>
-  </div>
-    
-  <div class="slider-container">
-    <div class="slider-content">
-      <a href="NGSocto.html" target>
-        <div class="slide-content">
-          <img src="img/Thumbnails/ORC_HighlightImg2.png" alt="Image 1">
-          <div class="text-content">
-            <h3>Operation Starfall</h3>
-            <p>
-              In my time at Neon Origins, I gained hands-on experience in Gameplay and Agile Game Production.
-              I developed features like Octodrone and Radial Stamina,
-              while learning essential foundations such as design patterns, code structure, and documentation.
-            </p>
-          </div>
+      </div>
+
+      <div class="slider-container">
+        <div class="slider-content">
+          <a href="NGSocto.html">
+            <div class="slide-content">
+              <img src="img/Thumbnails/ORC_HighlightImg2.png" alt="Operation Starfall">
+              <div class="text-content">
+                <h3>Operation Starfall</h3>
+                <p>Gameplay features shipped during my time at Neon Origins.</p>
+              </div>
+            </div>
+          </a>
         </div>
-      </a>
+      </div>
+
+      <!-- Global controls -->
+      <div class="slider-controls">
+        <button id="prevSlideBtn" aria-label="Previous slide">&#10094;</button>
+        <button id="nextSlideBtn" aria-label="Next slide">&#10095;</button>
+      </div>
     </div>
-  </div>
-    
-  <section id="services">
+
+    <section id="services">
     <h2>Projects</h2>
     <div class="tab">
       <button class="tablinks" onclick="openTab(event, 'Service1')">Unity</button>
@@ -99,22 +98,28 @@
       <h3>Unity</h3>
       <p>Projects made in Unity</p>
       <div class="image-container">
+        
+        <!-- Archived, no longer matches my skill.
         <a href="space.html" target="" class="image-link">
           <img src="img/Thumbnails/space43.jpg" alt>
           <div class="overlay">Expanding Space</div>
-        </a>
+        </a> -->
+        
         <a href="urp.html" target="" class="image-link">
           <img src="img/Thumbnails/urp43.png" alt>
           <div class="overlay">Universal Render Pipeline</div>
         </a>
+        
         <a href="candy.html" target="" class="image-link">
           <img src="img/Thumbnails/candy43.png" alt>
           <div class="overlay">Candy Dandy</div>
         </a>
+        
         <a href="spark.html" target="" class="image-link">
           <img src="img/Thumbnails/spark43.png" alt>
           <div class="overlay">First Spark</div>
         </a>
+        
       </div>
     </div>
 
@@ -122,18 +127,23 @@
       <h3>Unreal</h3>
       <p>Projects made in Unreal Engine 5</p>
       <div class="image-container">
+        
+        <!-- Archived, no longer matches my skill.
         <a href="Godspeed.html" target="" class="image-link">
           <img src="img/Thumbnails/godspeed43.png" alt>
           <div class="overlay">Godspeed</div>
-        </a>
+        </a> -->
+        
         <a href="ensemble.html" target="" class="image-link">
           <img src="img/Thumbnails/ensemble43.jpg" alt>
           <div class="overlay">The Ensemble</div>
         </a>
+        
         <a href="shopify.html" target="" class="image-link">
           <img src="img/Thumbnails/shopify43.png" alt>
           <div class="overlay">Shopify API</div>
         </a>
+        
       </div>
     </div>
 
@@ -211,6 +221,7 @@
     </footer>
     <script src="script.js"></script>
     <script src="hamburger.js"></script>
+    <script src="sliderControls.js" ></script>
   </body>
 
 </html>

@@ -2,45 +2,47 @@ let currentSlide = 0;
 const slides = document.querySelectorAll('.slide-content');
 
 function showSlide(n) {
-    for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = 'none';
-    }
-    if (n >= slides.length) {
-        currentSlide = 0;
-    } else if (n < 0) {
-        currentSlide = slides.length - 1;
-    } else {
-        currentSlide = n;
-    }
+    slides.forEach(s => s.style.display = 'none');
+    if (n >= slides.length) currentSlide = 0;
+    else if (n < 0) currentSlide = slides.length - 1;
+    else currentSlide = n;
     slides[currentSlide].style.display = 'flex';
 }
 
-function prevSlide() {
-    showSlide(currentSlide - 1);
-}
+function prevSlide() { showSlide(currentSlide - 1); }
+function nextSlide() { showSlide(currentSlide + 1); }
 
-function nextSlide() {
-    showSlide(currentSlide + 1);
-}
+function autoSlide() { nextSlide(); }
 
-function autoSlide() {
-    nextSlide();
-}
+const SLIDE_MS = 5000;
+let slideInterval = setInterval(autoSlide, SLIDE_MS);
 
-let slideInterval = setInterval(autoSlide, 5000); // Change slide every 5 seconds
-
-// Pause the slider when hovering over the slider area
-const sliderContainer = document.querySelector('.slider-container');
-sliderContainer.addEventListener('mouseover', function() {
+function pauseSlider() {
     clearInterval(slideInterval);
+    slideInterval = null;
+}
+function resumeSlider() {
+    if (!slideInterval) slideInterval = setInterval(autoSlide, SLIDE_MS);
+}
+
+// Fix: bind to ALL containers (or the wrapper if present)
+const sliderWrapper = document.getElementById('highlightSlider');
+if (sliderWrapper) {
+    sliderWrapper.addEventListener('mouseenter', pauseSlider);
+    sliderWrapper.addEventListener('mouseleave', resumeSlider);
+} else {
+    document.querySelectorAll('.slider-container').forEach(el => {
+        el.addEventListener('mouseenter', pauseSlider);
+        el.addEventListener('mouseleave', resumeSlider);
+    });
+}
+
+// optional: pause when tab hidden
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) pauseSlider();
+    else resumeSlider();
 });
 
-// Resume the slider when not hovering
-sliderContainer.addEventListener('mouseout', function() {
-    slideInterval = setInterval(autoSlide, 3000);
-});
-
-// Call the showSlide function with initial value to display the first slide
 showSlide(0);
 
 // Tabs section on site
