@@ -141,6 +141,15 @@ nav {
   .slider-controls button { font-size: 1.6rem; padding: .4rem .7rem; }
 }
 
+@media (min-width: 1025px) {
+  .slider-controls button:first-child {
+    margin-left: 20%; /* move rightwards from page edge */
+  }
+  .slider-controls button:last-child {
+    margin-right: 20%; /* move leftwards from page edge */
+  }
+}
+
 .prevButton,
 .nextButton {
   position: absolute;
