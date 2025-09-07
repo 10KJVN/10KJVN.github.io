@@ -106,6 +106,41 @@ nav {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+/* Wrapper so controls can overlay slides */
+.slider {
+  position: relative;
+}
+
+/* Arrow controls */
+.slider-controls {
+  position: absolute;
+  inset: 0; /* fill wrapper */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none; /* let clicks pass through except on buttons */
+}
+
+.slider-controls button {
+  pointer-events: auto;
+  background: rgba(0,0,0,0.45);
+  border: 0;
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  padding: .5rem .9rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .2s, transform .1s;
+}
+
+.slider-controls button:hover { background: rgba(0,0,0,0.75); }
+.slider-controls button:active { transform: scale(0.96); }
+
+@media (max-width: 600px) {
+  .slider-controls button { font-size: 1.6rem; padding: .4rem .7rem; }
+}
+
 .prevButton,
 .nextButton {
   position: absolute;
