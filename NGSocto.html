@@ -48,7 +48,7 @@
         <div class="project-description">
             <h2>About Octodrone</h2>
             <p>
-                Octodrone was the first ground-based enemy developed for <em>Operation Starfall</em>.
+                Octodrone was the first ground-based enemy developed for <em>Operation Starfall</em>. <br>
                 Its design combined state-driven AI, animation cycles, and responsive attack logic.
             </p>
 
@@ -62,8 +62,8 @@
             <!-- Animator & Jump Cycle -->
             <h2 class="project-text">Animator & Jump Cycle</h2>
             <p class="project-text">
-                I integrated Unity Animator triggers with the enemy state machine, making sure Octo’s Idle,
-                Walking, Jumping, Attacking, and Fuzzy states transitioned smoothly. Unity Events were used to
+                I integrated Animator triggers with the enemy's state machine, making sure Octo’s Idle,
+                Walk, Jump, Attack, and Fuzzy states transitioned smoothly. Unity Events were used to
                 time animation transitions such as <em>JumpUp → JumpTop → JumpAttack</em>.
             </p>
 
@@ -75,15 +75,13 @@
                     Visuals and animations by <strong>Alex Kentie</strong>.
                 </p>
             </div>
-
+            <br>
             <!-- Patrolling & Detection Logic -->
             <h2 class="project-text">Patrolling & Detection Logic</h2>
             <p class="project-text">
-                I worked on the patrol and detection system through pair programming. The original patrol code
-                was tuned for flying enemies (A*-based pathfinding). We adapted that patrol logic to suit a
-                ground-based enemy—converting positional math and movement to ground-friendly vectors,
-                iterating prefabs and conditions, and debugging transitions like <em>Patrol → Detect → Attack</em>
-                using Unity Events and breakpoints.
+                Patrol and detection systems already existed in the codebase for flying enemies.
+                Together with the other dev, I refactored and extended this logic to support Octo as the first ground-based enemy.
+                Through pair programming, we adapted pathfinding and detection behavior, so it could handle grounded patrol routes reliably.
             </p>
 
             <div class="project-images">
@@ -103,13 +101,11 @@
                     Octo's orientation flips correctly thanks to the <code>UpdateWalkDirection</code> logic.
                 </p>
             </div>
-
+            <br>
             <!-- Prefab & Polish -->
             <h2 class="project-text">Prefab & Polish</h2>
             <p class="project-text">
-                Later I focused on refining Octo’s prefab—adjusting animator tile timings, adding Unity Events
-                for more reliable transitions, and removing redundant code. I collaborated with the technical
-                director and other devs on these changes (especially the patrol rewrite) to stabilize behavior.
+                Collaboration across the dev team meant we frequently supported each other once our own user stories were complete.
             </p>
 
             <div class="project-images">
@@ -120,7 +116,7 @@
                     to gameplay logic.
                 </p>
             </div>
-            
+            <br>
             <!-- Takeaway -->
             <h2 class="project-text">Takeaway</h2>
             <p class="project-text">
@@ -133,18 +129,19 @@
                 <p class="image-title">JumpState: Octo's unique attack state</p>
                 <img src="img/Octo/JumpSnippet.png" alt="JumpState attack snippet">
                 <p class="project-text">
-                    This script inherits from the base <code>AttackState.cs</code>. <br> Sequence overview:
+                    This script inherits from the base <code>AttackState.cs</code>. <br>
+                    <code>JumpState.cs</code> coordinates animation events & state transitions.
                 <ol class="centered-list">
                     <li>1. Disable gravity and apply an amplified upward force so Octo jumps.</li>
-                    <li>2. On a mid-air event (e.g. jump top), re-enable gravity and apply a forward force toward the player's position.</li>
+                    <li>2. On a midair event (e.g. jump top), re-enable gravity and apply a forward force toward the player's position.</li>
                 </ol>
-                The JumpState coordinates animation events and state transitions so the attack plays reliably.
-                </p>
             </div>
 
             <p class="project-text">
                 The hardest parts were understanding the ForceSystem and the state machine interactions. After lots
                 of debugging, iterations, and teamwork, Octo's behavior became stable and feels natural in-game.
+                Along the way I strengthened my grasp of Object-Oriented Programming, Unity Events, and writing
+                clean state-driven logic in a large existing codebase.
             </p>
 
             <div class="project-images">
