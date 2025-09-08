@@ -1,230 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Candy Dandy</title>
-        <link rel="stylesheet" href="styleproject.css"/>
-    </head>
-    
-    <body id="candy">
-    <header>
-        <nav>
-            <div class="name">
-                <a href="index.html">
-                    <h1>Jahvairo Monkau</h1>
-                </a>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Candy Dandy</title>
+    <link rel="stylesheet" href="styleproject.css"/>
+</head>
+
+<body id="candy">
+<header>
+    <nav>
+        <div class="name">
+            <a href="index.html">
+                <h1>Jahvairo Monkau</h1>
+            </a>
+        </div>
+        <div class="menu">
+            <button class="nav-items" onclick="window.location.href='index.html'">Home</button>
+            <button class="nav-items" onclick="window.location.href='index.html#services'">Projects</button>
+            <button class="nav-items" onclick="window.location.href='#contact'">Contact</button>
+            <a class="nav-items" href="pdf/Curriculum Vitae - July 2025 EN.pdf" target="_blank">CV</a>
+        </div>
+        <div class="hamburger">☰</div>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="project-header">
+        <h1>Candy Dandy</h1>
+    </div>
+
+    <div class="project-details">
+        <div class="project-stats">
+            <p class="project-text">
+                <strong>Project Status:</strong> Finished <br>
+                <strong>Project Type:</strong> 2D Mobile Game <br>
+                <strong>Project Duration:</strong> 9 ~ 12 weeks <br>
+                <strong>Game Engine:</strong> Unity <br>
+                <strong>Language Used:</strong> C# <br>
+                <strong>Primary Role(s):</strong> Programmer <br>
+                <strong>Team:</strong> 3 Developers, 5 Artists <br>
+            </p>
+        </div>
+
+        <div class="project-description">
+            <h2>About Candy Dandy</h2>
+            <p>
+                Candy Dandy was our final exam project at Mediacollege, created in collaboration with a real client.
+                The goal: develop a match-3 mobile game where matching tiles directly fuels a secondary fighting gameplay layer.
+                <a href="https://github.com/j5x/PvB2025/wiki/Documentation-Jahvairo" target="_blank">View on GitHub</a>
+            </p>
+            <p>
+                Builds are available for <a href="#">Android</a> and <a href="#">Windows</a>.
+                Since the game was designed for portrait mobile, expect stretched visuals on PC.
+            </p>
+
+            <!-- Final Product Visual -->
+            <div class="video-container">
+                <iframe
+                        src="https://www.youtube.com/embed/Qi8E0QrySEo?si=r8w8H9wZBEVLimvQ"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen>
+                </iframe>
             </div>
-                
-            <div class="menu">
-                <button class="nav-items" onclick="window.location.href='index.html'">Home</button>
-                <button class="nav-items" onclick="window.location.href='index.html#services'">Projects</button>
-                <button class="nav-items" onclick="window.location.href='#contact'">Contact</button>
-                <a class="nav-items" href="pdf/Curriculum Vitae - July 2025 EN.pdf" target="_blank">CV</a>
+            <p class="project-text">Gameplay showcase (starts at ~2:08)</p>
+
+            <h2>My Features</h2>
+            <ul>
+                <li>Designed and implemented Character Classes</li>
+                <li>Built the Combat System</li>
+                <li>Handled Canvas & UI scaling for mobile</li>
+                <li>Integrated VFX and optimized textures</li>
+            </ul>
+            <br>
+            <h2 class="project-text">Project Kickoff</h2>
+            <p class="project-text">
+                The project began with three external client pitches. After securing our first choice, we brainstormed concepts.
+                Options ranged from a dating sim to a cake-baking sim, but we pushed for a fighting game with match-3 integration.
+                Early mockups helped us and the client decide on a portrait layout to balance scope and usability.
+            </p>
+
+            <div class="project-images">
+                <img src="img/CandyDandy/concepts_Mockup.png" alt="Concept mockups portrait vs landscape">
+                <p>
+                    Concept 1: Portrait — matching and fighting combined. <br>
+                    Concept 2: Landscape — matching with cutscene transitions.
+                </p>
+            </div>
+            <br>
+            <h2 class="project-text">Development</h2>
+
+            <p class="project-text">
+                All characters (player and enemies) derive from a shared base class handling variables, components, and core functions.
+                <a href="https://github.com/j5x/PvB2025/tree/develop/Assets/Script/CharacterSystem">Character System</a>
+            </p>
+            <div class="project-images">
+                <img src="img/CandyDandy/ClassDiagram_characters.png" alt="Character class diagram">
             </div>
 
-            <div class="hamburger">☰</div>
-        </nav>
-    </header>
-        <div class="container">
-            <div class="project-header">
-                <h1>Candy Dandy</h1>
+            <p class="project-text">
+                Combat was built around <em>AttackConfig</em> ScriptableObjects, defining data like damage, animation, and delay.
+                This gave designers flexibility while keeping the system modular.
+                <a href="https://github.com/j5x/PvB2025/tree/develop/Assets/Script/AttackSystem">Attack System</a>
+            </p>
+            <div class="project-images">
+                <img src="img/CandyDandy/originalATK.png" alt="Attack properties in Inspector">
+                <p class="project-text">Attack setup via ScriptableObjects, tweakable directly in the Inspector.</p>
             </div>
-        
-            <div class="project-details">
-                <div class="project-stats">
-                    <p class="project-text">
-                        <strong>Project Status:</strong> Finished <br>
-                        <strong>Type:</strong> 2D Mobile Game <br>
-                        <strong>Duration:</strong> 9 ~ 12 weeks <br>
-                        <strong>Game Engine:</strong> Unity <br>
-                        <strong>Language:</strong> C# <br>
-                        <strong>Roles:</strong> Programmer, Scrum Master <br>
-                        <strong>Team:</strong> 3 Developers, 5 Artists <br>
-                    </p>
-                </div>
-        
-                <div class="project-description">
-                    <h2>About Candy Dandy</h2>
-                    <p>
-                        Candy Dandy was our final exam project at Mediacollege, bringing together both Game Development and Game Art students under a real client brief.
-                        The goal: create an innovative match-3 mobile game where the match-3 mechanic directly influences a secondary gameplay layer.
-                        Our client, Ramses Di Perna — a Game Developer at Azerion and an alumnus of our college — guided us through the process.
-                        <a href="https://github.com/j5x/PvB2025" target="_blank">View on GitHub</a> 
-                    </p>
-                    <p>
-                        <strong>Note:</strong> This game currently has an <a href="https://github.com/j5x/PvB2025/releases/tag/Releasebuild">Android build</a> available.
-                        If you’d like to test it on PC, there’s also a <a href="https://github.com/j5x/PvB2025/releases/tag/WindowsBuild">Windows build</a>, but keep in mind it’s designed for mobile — so expect stretched visuals!
-                    </p>
-        
-                    <div class="project-images">
-                        <video controls>
-                            <source src="img/CandyDandy/Screen_Recording_PvB2025_Compressed.mp4" type="video/mp4">
-                        </video>
-                        <p class="project-text">
-                            The final product, gameplay starts at ~2:08
-                        </p>
-                    </div>
-        
-                    <h2>My Features</h2>
-                    <ul>
-                        <li>Designed and implemented Character Classes</li>
-                        <li>Built the Combat System</li>
-                        <li>Handled Canvas & UI scaling for mobile</li>
-                    </ul>
-        
-                    <h2 class="project-text">Project Kickoff</h2>
-                    <p class="project-text">
-                        The project began with a briefing from three external clients. After discussing our options as a team, we secured our first-choice client.
-                        We then contacted them, asked clarifying questions, and exchanged contact details to maintain regular updates.
-                        On the first day, our team brainstormed ideas: some leaned towards a dating sim, others a cake-baking sim, 
-                        but the other two developers and I pushed for a unique fighting game concept.
-                    </p>
-                    <p class="project-text">
-                        We debated the screen orientation: some preferred landscape, others portrait.
-                        One of our artists created mockups for both versions to get the client’s input.
-                        In the end, we went with the fighting game in portrait mode, 
-                        as it best fit the brief and balanced development and art workload.
-                    </p>
-        
-                    <div class="project-images">
-                        <img src="img/CandyDandy/concepts_Mockup.png" alt="Visual Mockup of concept 1 vs concept 2">
-                        <p>
-                            Concept 1: Portrait — matching and fighting on the same screen.<br>
-                            Concept 2: Landscape — full-screen matching with a transition to fighting cutscenes.
-                        </p>
-                    </div>
-        
-                    <h2 class="project-text">Development</h2>
-                    
-                    <p class="project-text">
-                        All characters in Candy Dandy (both Player and Enemies) share a common Character base class.
-                        This base class provides core functionality every character needs, including
-                        Variables, components, references & basic functions such as TakeDamage() and Die(). <a href="https://github.com/j5x/PvB2025/tree/develop/Assets/Script/CharacterSystem" target="_blank">Character System</a>
-                    </p>
-                    
-                    <div class="project-images">
-                        <img src="img/CandyDandy/ClassDiagram_characters.png" alt="Diagram of character classes">
-                    </div>
-                    
-                    <p class="project-text">
-                        The AttackComponent manages how each character performs attacks using AttackConfig ScriptableObjects. 
-                        Each AttackConfig holds the data for a unique attack — like name, damage, animation trigger, and delay — all tweakable directly in the Inspector.
-                        Full code of Attack System can be found here: <a href="https://github.com/j5x/PvB2025/tree/develop/Assets/Script/AttackSystem" target="_blank">Attack System</a>
-                        
-                    </p>
-        
-                    <div class="project-images">
-                        <img src="img/CandyDandy/originalATK.png" alt="Attack properties in the Inspector.">
-                        <p class="project-text">
-                            Key Features: Flexible attack setup with reusable ScriptableObjects,
-                            Optional AI-controlled attack loop & 
-                            Easily switch or trigger attacks by index.
-                        </p>
-                    </div>
-                    
-                    <div class="project-images">
-                        <video autoplay muted loop>
-                            <source src="img/CandyDandy/CD_S1_Clip_SquareRatio.mp4" type="video/mp4">
-                        </video>
-                        <p>
-                            Footage of Version 1: This exposed scaling issues that needed to be tackled. Full feedback? <a href="https://github.com/j5x/PvB2025/wiki/Sprint-Reviews" target="_blank">Click Here</a>
-                        </p>
-                    </div>
-                    <br>
-                    <p class="project-text">
-                        After client feedback, I researched Unity's Canvas Scaler and Safe Area to ensure UI consistency across different resolutions.
-                        I created a canvas with the following properties: 
-                        Render Mode, Screen Space - Camera. 
-                        Reference Resolution 1920x1080, also known as Full HD.
-                    </p>
-        
-                    <div class="project-images">
-                        <img src="img/CandyDandy/rgb_canvas.png" alt="Safe Area debug colors for Canvas setup">
-                        <p class="project-text">
-                            In the image above you see the initial new scene set-up. <br>
-                            Here I converted gameplay elements — both static and moving — to Rect Space, so their size is measured in pixels instead of meters. <br>
-                        </p>
-                    </div>
-                    <br>
-                    <p class="project-text">
-                        The colors represent different parts of the canvas:
-                        <br><br>
-                        <strong>Red</strong> marks the <em>Top Panel</em>, where the player and enemies spawn and battle with flashy effects.
-                        <br>
-                        <strong>Green</strong> marks the <em>Bottom Panel</em>. There’s not much UI here yet — the grid is its own entity — but this space is reserved for the Special Attack Meter and Pause button in the final version.
-                        <br>
-                        <strong>Blue</strong> is a larger fallback background to prevent empty borders on bigger screens like tablets and iPads.
-                    </p>
-        
-        
-                    <br>
-                    <div class="project-images">
-                        <img src="img/CandyDandy/mergedCropping.png" alt="Comparison of cropping issue">
-                        <img src="img/CandyDandy/Xtrabg.png" alt="Showcase of extra art assets to fill in gaps">
-                        <p class="project-text">
-                            Initial implementation cropped gameplay inside SafeArea bounds,
-                            causing empty borders on larger screens.
-                            I solved this by mirroring art assets to fill excess space.
-                        </p>
-                    </div>
-                    <br>
-                  
-                    <br>
-                    
-                    <div class="project-images">
-                        <video autoplay muted loop>
-                            <source src="img/CandyDandy/CD_GameplayV2.mp4" type="video/mp4">
-                        </video>
-                        <p class="project-text">
-                            Version 2: scaling fixes implemented, tested on multiple devices.
-                        </p>
-                    </div>
-        
-                    <h2 class="project-text">Conclusion</h2>
-                    <p class="project-text">
-                        <a href="https://github.com/j5x/PvB2025/blob/develop/Assets/Script/UI/SafeArea.cs"><strong>Safe Area Handler</strong></a>
-                        This simple but crucial class makes sure that any UI element parented under this object always stays within the device’s safe screen boundaries (avoiding notches, rounded corners, or system bars).
-                        ApplySafeArea() gets the device’s safe area (Screen.safeArea), converts its pixel coordinates into normalized anchor values (0–1), and sets these as the anchorMin and anchorMax of the attached RectTransform.
-                        This means the UI panel will automatically resize and reposition itself to fit perfectly within the safe area on any screen — whether it’s an iPhone with a notch, a tablet, or an Android with soft keys.
-                    </p>
-                    <br>
-                    <div class="project-images">
-                        <img src="img/CandyDandy/SafeArea_snippet.png" alt="Safe Area function">
-                        <p class="project-text">
-                            This function ensures that everything inside this UI panel fits perfectly within the screen’s safe area,
-                            adapting to notches, rounded corners, or soft keys.
-                            It converts the safe area from pixels to normalized anchors,
-                            so the UI scales correctly on any resolution.
-                        </p>
-                    </div>
-                    <br>
-                    <div class="project-images">
-                        <video autoplay muted loop>
-                            <source src="img/CandyDandy/presentationS3.mp4" type="video/mp4">
-                        </video>
-                        <p class="project-text">
-                            All the visuals shown — especially the integration of Visual Effects and the technical implementation of Animations — were handled by me, 
-                            as the technical side of art was my main responsibility. 
-                            I also collaborated closely with each artist to ensure texture sizes and resolutions followed a Power-Of-Two format for optimal compression and performance. 
-                            For more technical details, see the
-                            <a href="https://github.com/j5x/PvB2025/tree/develop/Assets/Script/Vfx" target="_blank">VFX System</a>.
-                        </p>
-                    </div>
-                    <br>
-                    <p class="project-text">
-                        Candy Dandy taught me a lot about working in a team without a concrete lead and balancing tasks across disciplines.
-                        It was my second attempt at mobile game development — and my first successful one.
-                        A key takeaway was learning about Safe Areas on mobile devices and how to use Safe Area Handler scripts to handle them properly.
-                        I also gained valuable insight into placing important UI elements, so they stay functional and clear on small, portrait screens.
-                    </p>
-                </div>
+            <br>
+            <h2 class="project-text">Mobile UI & Safe Area</h2>
+            <p class="project-text">
+                A major challenge was scaling across devices. Using Unity’s Canvas Scaler and a custom
+                <a href="https://github.com/j5x/PvB2025/blob/develop/Assets/Script/UI/SafeArea.cs">Safe Area Handler</a>, I ensured UI panels adapt to notches, rounded corners, tablets, and Android soft keys.
+                This made the game consistently playable on a wide range of devices.
+            </p>
+            <div class="project-images">
+                <img src="img/CandyDandy/rgb_canvas.png" alt="Safe Area debug colors">
+                <p class="project-text">Debug overlay for safe areas during setup.</p>
+            </div>
+            <div class="project-images">
+                <img src="img/CandyDandy/mergedCropping.png" alt="Cropping issue">
+                <img src="img/CandyDandy/Xtrabg.png" alt="Extra assets to fill gaps">
+                <p class="project-text">Fixed initial cropping issues by adding mirrored assets on larger screens.</p>
+            </div>
+            <div class="project-images">
+                <video autoplay muted loop controls>
+                    <source src="img/CandyDandy/CD_GameplayV2.mp4" type="video/mp4">
+                </video>
+                <p class="project-text">Version 2 gameplay after scaling fixes, tested across multiple devices. </p>
+            </div>
+            <br>
+            <h2 class="project-text">Conclusion</h2>
+            <p class="project-text">
+                Candy Dandy taught me how to adapt UI for mobile screens and implement Safe Area handling — skills praised by our client as invaluable for future projects.
+                I also deepened my experience in character systems, combat mechanics, and technical art integration.
+                Most importantly, I learned to balance technical and artistic collaboration while working with a real client and a cross-discipline team.
+            </p>
+            <div class="project-images">
+                <video autoplay muted loop controls>
+                    <source src="img/CandyDandy/presentationS3.mp4" type="video/mp4">
+                </video>
+                <p class="project-text">Final presentation: VFX integration and technical animation support. <a href="https://github.com/j5x/PvB2025/tree/develop/Assets/Script/Vfx">VFX System</a> </p>
             </div>
         </div>
-        <footer id="contact">
-            <p>Contact: <a href="mailto:JahvaM_2005@outlook.com">JahvaM_2005@outlook.com</a></p>
-        </footer>
-        <script src="hamburger.js"></script>
-    </body>
+    </div>
+</div>
+
+<footer id="contact">
+    <p>Contact: <a href="mailto:JahvaM_2005@outlook.com">JahvaM_2005@outlook.com</a></p>
+</footer>
+<script src="hamburger.js"></script>
+</body>
 </html>
