@@ -47,9 +47,8 @@
         <div class="project-description">
             <h2>About Operation Starfall</h2>
             <p>
-                Our Unannounced Game as a Service is a 2D Metroidvania experience for local co-op play, inspired by beloved 1980s cartoons.
-                It operates as a constantly evolving game, offering an expanding open world, engaging storylines, and character customization.
-                Join up to 4 players as you embark on cooperative adventures and exciting missions, uncovering the mysteries of the game's world while customizing your characters with 1980s nostalgia.
+                Operation Starfall is a 2D local co-op Metroidvania inspired by 1980s cartoons. <br>
+                This prototype explored a Fog of War minimap system, using shaders and RenderTextures to reveal explored areas.
             <p>
 
                 <a href="https://www.neonorigins.com/">neonorigins.com</a>
@@ -64,14 +63,8 @@
             <!--Begin Intro Section-->
             <h2 class="project-text">Intro</h2>
             <p class="project-text">
-                This feature was originally planned as an overlay minimap with a Fog of War system, 
-                using a custom shader to manage three texture inputs: the base map, a fog texture,
-                and a mask texture to reveal explored areas. 
-                <br><br>
-                While we didn't manage to complete the system during our time on the project,
-                this ended up being a valuable learning opportunity where i explored render textures,
-                blend materials, and custom draw logic using the GPU. 
-                The work laid the technical foundation for a later team to implement the full system.
+                Though we didn’t finish the full system, this prototype taught me RenderTextures,
+                blend materials, and GPU-driven draw logic — laying groundwork for later development.
             </p>
 
             <div class="project-images">
@@ -83,16 +76,14 @@
                 </p>
             </div>
             <!--End Intro Section-->
-
+            <br>
             <!--Begin Development Section-->
-
             <h2 class="project-text">Development</h2>
             <p class="project-text">
                 During early brainstorming, we explored several ways to create the minimap.
                 I suggested using a secondary camera to render the entire level, and began experimenting with a technique I had just discovered: <strong>Blitting</strong> — a way to quickly copy pixel data from one texture to another, like taking a low-cost screenshot.
                 <br><br>
-                At first, I didn't fully understand how blitting or render targets worked. I even tried calling <code>Camera.Blit</code> directly, expecting it to just work — it didn’t.
-                That was my first big technical hurdle, and it taught me the importance of understanding Unity’s rendering pipeline more deeply.
+                I first attempted camera blitting with limited success, which pushed me to study Unity’s rendering pipeline more closely.
             </p>
 
             <div class="project-images">
@@ -173,12 +164,20 @@
             </div>
 
             <p class="project-text">
-                Eventually, this system was passed on to the next team of developers—whether they rebuilt it or improved on it remains unknown.
-                Still, this task gave me a valuable, hands-on introduction to Unity’s rendering pipeline,
-                shader integration, and system architecture. 
-                It also strengthened my confidence in combining rendering logic with gameplay systems in a performant and maintainable way.
+                In the end, I built a scalable prototype where player movement dynamically revealed map areas using shaders and RenderTextures.
+                While the full system was left for future teams, 
+                this gave me valuable hands-on experience with Unity’s rendering pipeline and integrating GPU logic into gameplay.
             </p>
-
+            <br>
+            <h2 class="subtitle" id="glossary">Glossary</h2>
+            <p><a href="#intro">⬆ Back to Intro</a></p>
+            <ul>
+                <li><strong>Render:</strong> Drawing images to the screen or to a texture.</li> <br>
+                <li><strong>Texture:</strong> An image stored in memory, used in shaders or as surfaces.</li> <br>
+                <li><strong>Shader:</strong> A small GPU program that controls how things are drawn.</li> <br>
+                <li><strong>Blit:</strong> Copying pixel data from one texture to another.</li> <br>
+                <li><strong>RenderTexture:</strong> A special texture Unity can draw onto in real time.</li>
+            </ul>
 
         </div>
     </div>
