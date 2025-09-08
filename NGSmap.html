@@ -45,13 +45,12 @@
         </div>
 
         <div class="project-description">
-            <h2>About Operation Starfall</h2>
+            <h2 id="intro">About Operation Starfall</h2>
             <p>
                 Operation Starfall is a 2D local co-op Metroidvania inspired by 1980s cartoons. <br>
                 This prototype explored a Fog of War minimap system, using shaders and RenderTextures to reveal explored areas.
             <p>
-
-                <a href="https://www.neonorigins.com/">neonorigins.com</a>
+            <a href="https://www.neonorigins.com/">neonorigins.com</a>
 
             <h2 class="subtitle">My Features</h2>
             <ul>
@@ -62,9 +61,10 @@
 
             <!--Begin Intro Section-->
             <h2 class="project-text">Intro</h2>
+            <p class="section-subtitle">This is a technical project — see the <a href="#glossary">Glossary</a> if any terms are unfamiliar.</p>
             <p class="project-text">
-                Though we didn’t finish the full system, this prototype taught me RenderTextures,
-                blend materials, and GPU-driven draw logic — laying groundwork for later development.
+                This prototype explored Fog of War using shaders and RenderTextures.
+                It didn’t ship, but it taught me GPU draw logic and laid groundwork for later teams.
             </p>
 
             <div class="project-images">
@@ -90,7 +90,7 @@
                 <p class="image-title">Two classes attached to the camera:</p>
                 <img src="img/OverlayMap/CamClasses.png" alt="Image 1">
                 <p class="project-text">
-                    After some failed attempts and more brainstorming,
+                    After a few failed attempts,
                     we reached out to our technical director for guidance.
                     I explained I was struggling to blit the full level through the camera.
                 </p>
@@ -139,21 +139,13 @@
                     Even after restarting the game, the drawn path remains and continues updating in real time.
                 </p>
             </div>
-
-            <h3 class="project-text">Conclusion</h3>
+            <br>
+            <h2 class="project-text">Conclusion</h2>
             <p class="project-text">
-                While we didn’t complete the full Fog of War system before handing off the project,
-                I managed to develop a functional and scalable prototype.
-                It featured a dynamic drawing system that could track and visualize player movement using shaders and GPU-accelerated rendering.
+                Though unfinished, this prototype introduced me to Unity’s rendering pipeline and GPU-accelerated systems.
+                I built a dynamic drawing system that revealed map areas in real-time, which later teams could build upon.
             </p>
-
-            <p class="project-text">
-                I also implemented a world-to-texture coordinate conversion system to make sure player positions were mapped correctly to the RenderTexture canvas,
-                regardless of level size. 
-                Though it wasn’t 100% accurate due to resolution scaling limitations,
-                the result was visually solid and functional for gameplay prototyping.
-            </p>
-
+            
             <div class="project-images">
                 <p class="image-title">Player path drawing in action:</p>
                 <img src="img/OverlayMap/drawnPlayer.png" alt="">
@@ -162,17 +154,12 @@
                     <a href="https://github.com/10KJVN/URPShaders/blob/main/Assets/Scripts/TestDrawer.cs">GitHub</a>
                 </p>
             </div>
-
-            <p class="project-text">
-                In the end, I built a scalable prototype where player movement dynamically revealed map areas using shaders and RenderTextures.
-                While the full system was left for future teams, 
-                this gave me valuable hands-on experience with Unity’s rendering pipeline and integrating GPU logic into gameplay.
-            </p>
+            
             <br>
             <h2 class="subtitle" id="glossary">Glossary</h2>
             <p><a href="#intro">⬆ Back to Intro</a></p>
             <ul>
-                <li><strong>Render:</strong> Drawing images to the screen or to a texture.</li> <br>
+                <li><strong>Render:</strong> Drawing images to the screen or a texture.</li> <br>
                 <li><strong>Texture:</strong> An image stored in memory, used in shaders or as surfaces.</li> <br>
                 <li><strong>Shader:</strong> A small GPU program that controls how things are drawn.</li> <br>
                 <li><strong>Blit:</strong> Copying pixel data from one texture to another.</li> <br>
