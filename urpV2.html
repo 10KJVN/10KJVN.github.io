@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleproject.css">
+    <title>Universal Render Pipeline</title>
+</head>
+
+<body id="urp">
+<header class="navbar">
+    <nav>
+        <div class="name">
+            <a href="index.html">
+                <h1>Jahvairo Monkau</h1>
+            </a>
+        </div>
+        <div class="menu">
+            <button class="nav-items" onclick="window.location.href='index.html'">Home</button>
+            <button class="nav-items" onclick="window.location.href='index.html#services'">Projects</button>
+            <button class="nav-items" onclick="window.location.href='#contact'">Contact</button>
+            <a class="nav-items" href="pdf/Curriculum Vitae - July 2025 EN.pdf" target="_blank">CV</a>
+        </div>
+        <div class="hamburger">☰</div>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="project-header">
+        <h1>Universal Render Pipeline (URP)</h1>
+    </div>
+
+    <div class="project-details">
+        <div class="project-stats">
+            <p class="project-text">
+                <strong>Project Status:</strong> Finished<br>
+                <strong>Project Type:</strong> Solo specialization<br>
+                <strong>Software:</strong> Unity (URP)<br>
+                <strong>Languages:</strong> C#, HLSL<br>
+            </p>
+        </div>
+
+        <div class="project-description">
+            <h2>About this project</h2>
+            <p>
+                For this elective I had 8 weeks to choose a tool and specialize in it. Since I had recently worked with
+                shaders, I decided to dive deeper into Unity’s <strong>Universal Render Pipeline (URP)</strong> and learn
+                how to extend it with custom effects.
+            </p>
+            
+            <p>
+                Source code is available here: <a href="https://github.com/10KJVN/URPShaders" target="_blank">GitHub</a>
+                You can also view my retro-styled pitch slides:
+                <a href="pdf/80s vibe HLO.pdf" target="_blank">Presentation</a>.
+            </p>
+
+            <h2 class="subtitle">Features implemented</h2>
+            <ul>
+                <li>Custom URP Volume Override system</li>
+                <li>Screen Tint (color & intensity controls)</li>
+                <li>Fullscreen Chromatic Aberration</li>
+                <li>Object-level Chromatic Aberration (UV-space)</li>
+            </ul>
+            <br>
+            <h2 class="project-text">Intro</h2>
+            <p class="project-text">
+                The assignment was connected to <a href="https://www.neonorigins.com/" target="_blank">Operation Starfall</a>.
+                One user story asked for the game to feel like watching an <em>80’s NTSC TV</em>. That became my focus:
+                building a shader-driven retro visual style using URP features.
+            </p>
+            <br>
+            <h2 class="project-text">Development</h2>
+            <p class="project-text">
+                To extend URP, I created custom renderer features and volume overrides. For example:
+            </p>
+            <div class="project-images">
+                <p class="image-title">Custom renderer pass setup:</p>
+                <img src="img/Snippet/addRTPasses.png" alt="Code snippet showing TintPass setup">
+                <p class="project-text">Creating and enqueuing a custom <code>TintPass</code> in URP.</p>
+            </div>
+
+            <div class="project-images">
+                <p class="image-title">Volume override in Inspector:</p>
+                <img src="img/URP/tintSnippet2.png" alt="Custom Volume Override inspector">
+                <p class="project-text">
+                    Added float & color parameters with toggles for on/off control.
+                </p>
+            </div>
+
+            <div class="project-images">
+                <p class="image-title">Early experiments</p>
+                <img src="img/URP/offset1.gif" alt="RGB offset effect">
+                <p class="project-text">Shader Graph prototype: RGB channel offset for chromatic aberration effect.</p>
+            </div>
+
+            <div class="project-images">
+                <p class="image-title">Fullscreen chromatic aberration</p>
+                <img src="img/URP/offset2.gif" alt="Fullscreen chromatic aberration">
+                <p class="project-text">
+                    Final implementation: RGB channels split with a customizable offset, applied to the entire screen.
+                </p>
+            </div>
+
+            <h2>Results</h2>
+            <div class="project-images">
+                <img src="img/URP/Shader3.png" alt="UV-Space Chromatic Aberration">
+                <img src="img/URP/Shader2.png" alt="Fullscreen Chromatic Aberration">
+                <p class="project-text">
+                    <strong>Left:</strong> Object-contained UV-space aberration.
+                    <strong>Right:</strong> Fullscreen aberration effect with adjustable strength.
+                </p>
+            </div>
+
+            <h2>Conclusion</h2>
+            <p class="project-text">
+                This project taught me how URP’s renderer features, passes, and volume overrides work together. I learned
+                not only how to write custom HLSL effects, but also how to integrate them cleanly into Unity’s pipeline.
+                I also discovered the importance of debugging pipeline setup — my tint shader was “broken” for two weeks
+                simply because I hadn’t added the renderer feature to the renderer.
+            </p>
+            <p class="project-text">
+                Overall, this deepened both my shader programming and technical art integration skills,
+                and gave me practical experience in extending URP for stylized effects.
+            </p>
+
+            <h2>Next steps</h2>
+            <p class="project-text">
+                After the 8-week period, I continued experimenting with rendering settings and RGB offset shaders.
+                This exploration is ongoing and may evolve into future personal R&D projects.
+            </p>
+        </div>
+    </div>
+</div>
+
+<footer id="contact">
+    <p>Contact: <a href="mailto:JahvaM_2005@outlook.com">JahvaM_2005@outlook.com</a></p>
+</footer>
+<script src="hamburger.js"></script>
+</body>
+</html>
