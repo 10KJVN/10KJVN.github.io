@@ -28,70 +28,81 @@
 
 <div class="container">
     <div class="project-header">
-        <h1>Universal Render Pipeline (URP)</h1>
+        <h1>Universal Render Pipeline v2</h1>
     </div>
 
     <div class="project-details">
         <div class="project-stats">
             <p class="project-text">
                 <strong>Project Status:</strong> Finished<br>
-                <strong>Project Type:</strong> Solo specialization<br>
-                <strong>Software:</strong> Unity (URP)<br>
-                <strong>Languages:</strong> C#, HLSL<br>
+                <strong>Project Type:</strong> Specialization<br>
+                <strong>Software Used:</strong> Unity<br>
+                <strong>Languages:</strong> C#, CG, HLSL<br>
+                <strong>Team: </strong> Solo
             </p>
         </div>
 
         <div class="project-description">
-            <h2>About this project</h2>
+            <h2>About Project</h2>
             <p>
-                For this elective I had 8 weeks to choose a tool and specialize in it. Since I had recently worked with
-                shaders, I decided to dive deeper into Unity’s <strong>Universal Render Pipeline (URP)</strong> and learn
-                how to extend it with custom effects.
-            </p>
-            
-            <p>
-                Source code is available here: <a href="https://github.com/10KJVN/URPShaders" target="_blank">GitHub</a>
-                You can also view my retro-styled pitch slides:
-                <a href="pdf/80s vibe HLO.pdf" target="_blank">Presentation</a>.
+                During my 'Verdieping Software' elective at Neon Origins,
+                I explored URP and shader programming while contributing indirectly to the studio project Operation Starfall.
+                View on <a href="https://github.com/10KJVN/URPShaders">Github</a>
             </p>
 
-            <h2 class="subtitle">Features implemented</h2>
+            <h2 class="subtitle">Highlights</h2>
             <ul>
-                <li>Custom URP Volume Override system</li>
-                <li>Screen Tint (color & intensity controls)</li>
-                <li>Fullscreen Chromatic Aberration</li>
-                <li>Object-level Chromatic Aberration (UV-space)</li>
+                <li>Custom Post-Processing</li>
+                <li>Chromatic Aberration Shaders</li>
             </ul>
             <br>
             <h2 class="project-text">Intro</h2>
             <p class="project-text">
-                The assignment was connected to <a href="https://www.neonorigins.com/" target="_blank">Operation Starfall</a>.
-                One user story asked for the game to feel like watching an <em>80’s NTSC TV</em>. That became my focus:
-                building a shader-driven retro visual style using URP features.
+                The initial task was inspired by an Userstory along the lines of
+                <em>"I want the game to feel like watching a 80s NTSC TV."</em>
+                This became my starting point for learning post-processing, 
+                experimenting with ShaderGraph, and studying shader fundamentals.
             </p>
+            
+            <div class="project-images">
+                <img src="img/URP/concept.png" alt="Slide 4 of presentation">
+            </div>
             <br>
             <h2 class="project-text">Development</h2>
             <p class="project-text">
-                To extend URP, I created custom renderer features and volume overrides. For example:
+                Implemented a <b>Tint Renderer Feature</b> with custom volume overrides.
+                This allowed designers to tint the entire screen with adjustable strength.
             </p>
+            
+            <!-- Gotta update these 2 visuals or replace -->
             <div class="project-images">
                 <p class="image-title">Custom renderer pass setup:</p>
-                <img src="img/Snippet/addRTPasses.png" alt="Code snippet showing TintPass setup">
+                <img src="img/Snippet/addRTPasses.png" alt="Code Snippet: TintPass">
                 <p class="project-text">Creating and enqueuing a custom <code>TintPass</code> in URP.</p>
             </div>
 
             <div class="project-images">
                 <p class="image-title">Volume override in Inspector:</p>
-                <img src="img/URP/tintSnippet2.png" alt="Custom Volume Override inspector">
+                <img src="img/URP/tintSnippet2.png" alt="Code Snippet: CustomPostScreenTint">
                 <p class="project-text">
                     Added float & color parameters with toggles for on/off control.
                 </p>
             </div>
+            
+            <p class="project-text">
+                Built a <b>fullscreen chromatic aberration effect</b> simulating RGB channel separation.
+                This started by experimenting in UV space at first.
+                Eventually evolving into a full post-processing pass with tweakable intensity.
+            </p>
 
             <div class="project-images">
                 <p class="image-title">Early experiments</p>
                 <img src="img/URP/offset1.gif" alt="RGB offset effect">
                 <p class="project-text">Shader Graph prototype: RGB channel offset for chromatic aberration effect.</p>
+            </div>
+            
+            <div class="project-images">
+                <img src="img/URP/4k_nglogo.png" alt="Old logo of NeoN Game Studio, clearly having Chromatic and color bleeding (or blur) applied.">
             </div>
 
             <div class="project-images">
@@ -101,8 +112,41 @@
                     Final implementation: RGB channels split with a customizable offset, applied to the entire screen.
                 </p>
             </div>
-
-            <h2>Results</h2>
+            <br>
+            <h3 class="project-text">Exploration</h3>
+            <p class="project-text">
+                After delivering the core features, I continued exploring shader techniques.
+                <b>Color Bleeding</b> via blurred offsets,
+                <b>Depth Testing</b> using normalized values,
+                <b>Multipass rendering</b>, and
+                <b>Color Spaces</b>. Manually converting between RGB and YUV.
+            </p>
+            
+            <div class="project-images">
+                <img src="" alt="Still need to create GIF of these.">
+                <p class="project-text">
+                    Most of these resulted in glitchy, trippy visuals — 
+                    but each experiment revealed something new about the rendering pipeline.
+                </p>
+            </div>
+            
+            <h3 class="project-text">Shader Curiosity</h3>
+            <p class="project-text">
+                Outside Unity, I studied shader languages and pipelines.
+                Explored CG, HLSL and GLSL, 
+                learned how ShaderLab structures SubShaders, Passes and HLSL includes. 
+                Collected notes on <b>shader stages</b> (vertex, fragment, geometry, etc.),
+                realizing i was only scratching the surface.
+            </p>
+            
+            <div class="project-images">
+                <img src="img/URP/guidev2.png" alt="A screenshot sample of my beginner template on writing shaders.">
+                <p class="project-text">
+                    This exploration gave me a foundation for moving from node-based workflows to handwritten shaders.
+                </p>
+            </div>
+            
+            <h2 class="project-text">Results</h2>
             <div class="project-images">
                 <img src="img/URP/Shader3.png" alt="UV-Space Chromatic Aberration">
                 <img src="img/URP/Shader2.png" alt="Fullscreen Chromatic Aberration">
@@ -112,22 +156,15 @@
                 </p>
             </div>
 
-            <h2>Conclusion</h2>
+            <h2 class="project-text">Takeaway</h2>
             <p class="project-text">
-                This project taught me how URP’s renderer features, passes, and volume overrides work together. I learned
-                not only how to write custom HLSL effects, but also how to integrate them cleanly into Unity’s pipeline.
-                I also discovered the importance of debugging pipeline setup — my tint shader was “broken” for two weeks
-                simply because I hadn’t added the renderer feature to the renderer.
+                This project was a turning point where I delivered two production ready URP features.
+                Gained practical experience with post-processing, custom renderer features and ShaderGraph.
+                Built shader programming fundamentals that continue to shape my path.
             </p>
             <p class="project-text">
-                Overall, this deepened both my shader programming and technical art integration skills,
-                and gave me practical experience in extending URP for stylized effects.
-            </p>
-
-            <h2>Next steps</h2>
-            <p class="project-text">
-                After the 8-week period, I continued experimenting with rendering settings and RGB offset shaders.
-                This exploration is ongoing and may evolve into future personal R&D projects.
+                It showed me how shader math, rendering theory and artistic direction come together
+                — and confirmed I wanted to keep exploring the technical art side of game development.
             </p>
         </div>
     </div>
