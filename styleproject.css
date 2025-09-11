@@ -28,6 +28,8 @@ body {
 #geeked {background-image: url(img/DirtJam/Sunset.png); }
 #shopify {background-image: url(img/Backgrounds/Blueprintbg.png); }
 #ensemble {background-image: url(img/Ensemble/HQ_EnsembleRender.jpg)}
+#octo {background-image: url(img/URP/4k_nglogo.png)}
+#radial {background-image: url(img/URP/4k_nglogo.png)}
 
 /* #ensemble { Uncomment for multiple backgrounds on page.
   background-image: url("img/Ensemble/EnsembleBG.jpg");
@@ -38,7 +40,25 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   transition: background-image 1.2s ease-in-out;
-} /*
+} /* */
+
+/* Phone-specific overrides for backgrounds */
+@media (max-width: 768px) {
+  body#urp2 {
+    background-image: url("img/URP/phoneBG.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  body#candy {
+    background-image: url("img/CandyDandy/smallBackground.png");
+  }
+  body#ensemble {
+    background-image: url("img/Ensemble/phoneEnsemble.jpg");
+  }
+}
+
 
 
 /* === Desktop === */
