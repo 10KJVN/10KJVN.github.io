@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleproject.css">
+    <title>Universal Render Pipeline</title>
+</head>
+
+<body id="urp2">
+<header class="navbar">
+    <nav>
+        <div class="name">
+            <a href="index.html">
+                <h1>Jahvairo Monkau</h1>
+            </a>
+        </div>
+        <div class="menu">
+            <button class="nav-items" onclick="window.location.href='index.html'">Home</button>
+            <button class="nav-items" onclick="window.location.href='index.html#services'">Projects</button>
+            <button class="nav-items" onclick="window.location.href='#contact'">Contact</button>
+            <a class="nav-items" href="pdf/Curriculum Vitae - July 2025 EN.pdf" target="_blank">CV</a>
+        </div>
+        <div class="hamburger">☰</div>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="project-header">
+        <h1>Universal Render Pipeline</h1>
+    </div>
+
+    <div class="project-details">
+        <div class="project-stats">
+            <p class="project-text">
+                <strong>Project Status:</strong> Finished<br>
+                <strong>Project Type:</strong> Specialization<br>
+                <strong>Software Used:</strong> Unity 2022.3<br>
+                <strong>Languages:</strong> C#, CG, HLSL<br>
+                <strong>Duration:</strong> 8 weeks<br>
+                <strong>Team: </strong> Solo
+            </p>
+        </div>
+
+        <div class="project-description">
+            <h2 id="intro">About Project</h2>
+            <p>
+                During my 'Verdieping Software' elective at Neon Origins,
+                I explored URP and shader programming. 
+                Contributing directly to the studio project <em>Operation Starfall</em>
+                through shader R&D and post-processing experiments.
+                <a href="https://github.com/10KJVN/URPShaders">Github</a>
+            </p>
+
+            <!-- Optional Links -->
+            <p><a href="#resources" target="_blank">Resources</a>
+
+            <h2 class="subtitle">Highlights</h2>
+            <ul>
+                <li>Custom Post-Processing System</li>
+                <li>Chromatic Aberration Shaders</li>
+            </ul>
+            <br>
+            <h2 class="project-text">Intro</h2>
+            <p class="project-text">
+                The project began from an Userstory along the lines of
+                <em>"I want the game to feel like watching a 80s NTSC TV."</em>
+                This became my starting point for learning post-processing, 
+                experimenting with ShaderGraph, and studying shader fundamentals.
+            </p>
+            
+            <div class="project-images">
+                <img src="img/URP/concept.png" alt="Slide 4 of presentation">
+            </div>
+            <br>
+            <h2 class="project-text">Development</h2>
+            <p class="project-text">
+                Implemented a <b>Tint Renderer Feature</b> with custom volume overrides.
+                This allowed designers to tint the entire screen with adjustable strength.
+            </p>
+            
+            <div class="project-images">
+                <p class="">Code Snippet: Tint Renderer</p>
+                <img src="img/URP/TintPass.png" alt="Code Snippet: TintPass">
+                <p class="project-text">Here you see the injection of the 'Pass' into the Graphics Pipeline.</p>
+            </div>
+
+            <div class="project-images">
+                <p class="">Code Snippet: Volume override</p>
+                <img src="img/URP/CPST.png" alt="Code Snippet: CustomPostScreenTint">
+                <p class="project-text">
+                    Accessible tint intensity & color in the Unity inspector.
+                </p>
+            </div>
+            <br>
+            <p class="project-text">
+                Built a <b>fullscreen chromatic aberration effect</b> simulating RGB channel separation.
+                This started by experimenting in UV space at first.
+                Eventually evolving into a full post-processing pass with tweakable intensity.
+            </p>
+
+            <div class="project-images">
+                <p class="">ShaderGraph prototype: RGB channel offset per object.</p>
+                <img src="img/URP/offset1.gif" alt="RGB offset effect">
+            </div>
+
+            <div class="project-images">
+                <img src="img/URP/offset2.gif" alt="Fullscreen chromatic aberration">
+                <p class="project-text">
+                    Fullscreen effect: RGB channels split across the entire screen with customizable offset.
+                </p>
+            </div>
+            <br>
+            <h3 class="project-text">Exploration</h3>
+            <p class="project-text">
+                After delivering the core features, I continued exploring shader techniques.
+                <b>Color Bleeding</b> via blurred offsets,
+                <b>Depth Testing</b> using normalized values,
+                <b>Multipass rendering</b>, and
+                <b>Color Spaces</b>. Manually converting between RGB and YUV.
+            </p>
+            
+            <div class="project-images">
+                <img src="img/URP/exploration.gif" alt="Still need to create GIF of these.">
+                <p class="project-text">
+                    Most of these resulted in glitchy, trippy visuals — 
+                    but each experiment revealed something new about the rendering pipeline.
+                </p>
+            </div>
+            <br>
+            <h3 class="project-text">Shader Curiosity</h3>
+            <p class="project-text">
+                Outside Unity, I studied shader languages and pipelines.
+                Explored CG, HLSL and GLSL, 
+                learned how ShaderLab structures SubShaders, Passes and HLSL includes. 
+                Collected notes on <b>shader stages</b> (vertex, fragment, geometry, etc.),
+                realizing I was only scratching the surface.
+            </p>
+            
+            <div class="project-images">
+                <img src="img/URP/guidev2.png" alt="A screenshot sample of my beginner template on writing shaders.">
+                <p class="project-text">
+                    This exploration gave me the foundation to move from node-based workflows into handwritten shaders
+                    — a skill I now apply across graphics projects.
+                </p>
+            </div>
+            <br>
+            <h2 class="project-text">Results</h2>
+            <div class="project-images">
+                <img src="img/URP/Cinema.png" alt="UV-Space Chromatic Aberration">
+                <p class="project-text">
+                    Localized UV-space chromatic aberration prototype.
+                </p>
+            </div>
+
+            <div class="project-images">
+                <img src="img/URP/photoshop.png" alt="Illustration of RGB blending with directional arrows">
+                <p class="project-text">
+                    Illustration of additive RGB blending in Photoshop. <br>
+                    Red and green combine as expected — but blue remains a mystery?
+                </p>
+            </div>
+            <br>
+            <h2 class="project-text">Takeaway</h2>
+            <p class="project-text">
+                This project was a turning point where I delivered two production-ready URP features.
+                Gained practical experience with post-processing, custom renderer features and ShaderGraph.
+                Built shader programming fundamentals that continue to shape my path.
+            </p>
+            <p class="project-text">
+                It showed me how shader math, rendering theory and artistic direction come together
+                — and confirmed I wanted to keep exploring the technical art side of game development.
+            </p>
+
+            <div class="project-images">
+                <img src="img/URP/AbsoluteCinema.png" alt="Fullscreen Chromatic Aberration">
+                <p class="project-text">
+                    Final fullscreen chromatic aberration effect.
+                    Annotated shader logic reveals how RGB channels were offset and recombined into a production-ready feature.
+                </p>
+            </div>
+            <br>
+            <br>
+            <h2 class="subtitle" id="resources">Resources</h2>
+            <p><a href="#intro">⬆ Back to Intro</a></p>
+
+            <p><b>Unity URP 14.0.X Documentation:</b><br>
+                <a href="https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@14.0/manual/" target="_blank">
+                    Official URP Manual
+                </a></p>
+
+            <p><b>Making a Chromatic Aberration Shader (YouTube Short):</b><br>
+                <a href="https://youtube.com/shorts/mWUjGaduj4o?si=PEyXU6dVyMLvV5u8" target="_blank">
+                    Video Tutorial
+                </a></p>
+
+            <p><b>A Review of Shader Languages (Blog):</b><br>
+                <a href="https://alain.xyz/blog/a-review-of-shader-languages" target="_blank">
+                    Article by Alain Galvan
+                </a></p>
+
+            <p><b>Specialization Pitch Presentation:</b><br>
+                <a href="pdf/HLO.pdf" target="_blank">
+                    My original kickoff presentation.
+                </a></p>
+
+            <p><b>NeoN Game Studio Logo (mentor reference):</b><br><br>
+                <img src="img/URP/4k_nglogo.png" alt="NeoN Game Studio logo with visible chromatic aberration.">
+                <p class="project-text">Chromatic aberration applied directly onto a 4K logo for study reference.</p>
+
+
+        </div>
+    </div>
+</div>
+
+<footer id="contact">
+    <p>Contact: <a href="mailto:JahvaM_2005@outlook.com">JahvaM_2005@outlook.com</a></p>
+</footer>
+<script src="hamburger.js"></script>
+</body>
+</html>

@@ -19,8 +19,9 @@ body {
 /* === Project specific backgrounds === */
 #carto { background-image: url(img/Carto/cartoThumbnail.jpg); }
 #space { background-image: url(img/BOSpace/spaceMainMenu.jpg); }
-#gs { background-image: url(img/Thumbnails/GSthumb.png); }
+#gs { background-image: url(img/Thumbnails/godspeed43.png); }
 #urp { background-image: url(img/URP/thumburp.png); }
+#urp2 {background-image: url(img/URP/NewURP_back.png); }
 #overlayMap { background-image: url(img/OverlayMap/mapScreenShot.png); }
 #candy { background-image: url(img/CandyDandy/BigBackground.png); }
 #spark {background-image: url(img/FirstSpark/Final_map.png); }
