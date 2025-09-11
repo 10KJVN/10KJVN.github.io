@@ -76,21 +76,20 @@
                 This allowed designers to tint the entire screen with adjustable strength.
             </p>
             
-            <!-- Gotta update these 2 visuals or replace -->
             <div class="project-images">
-                <p class="image-title">Custom renderer pass setup:</p>
-                <img src="img/Snippet/addRTPasses.png" alt="Code Snippet: TintPass">
-                <p class="project-text">Creating and enqueuing a custom <code>TintPass</code> in URP.</p>
+                <p class="">Code Snippet: Tint Renderer</p>
+                <img src="img/URP/TintPass.png" alt="Code Snippet: TintPass">
+                <p class="project-text">Here you see the injection of the 'Pass' into the Graphics Pipeline.</p>
             </div>
 
             <div class="project-images">
-                <p class="image-title">Volume override in Inspector:</p>
-                <img src="img/URP/tintSnippet2.png" alt="Code Snippet: CustomPostScreenTint">
+                <p class="">Code Snippet: Volume override</p>
+                <img src="img/URP/CPST.png" alt="Code Snippet: CustomPostScreenTint">
                 <p class="project-text">
-                    Added float & color parameters with toggles for on/off control.
+                    Accessible tint intensity & color in the Unity inspector.
                 </p>
             </div>
-            
+            <br>
             <p class="project-text">
                 Built a <b>fullscreen chromatic aberration effect</b> simulating RGB channel separation.
                 This started by experimenting in UV space at first.
@@ -98,20 +97,14 @@
             </p>
 
             <div class="project-images">
-                <p class="image-title">Early experiments</p>
+                <p class="">ShaderGraph prototype: RGB channel offset per object.</p>
                 <img src="img/URP/offset1.gif" alt="RGB offset effect">
-                <p class="project-text">Shader Graph prototype: RGB channel offset for chromatic aberration effect.</p>
-            </div>
-            
-            <div class="project-images">
-                <img src="img/URP/4k_nglogo.png" alt="Old logo of NeoN Game Studio, clearly having Chromatic and color bleeding (or blur) applied.">
             </div>
 
             <div class="project-images">
-                <p class="image-title">Fullscreen chromatic aberration</p>
                 <img src="img/URP/offset2.gif" alt="Fullscreen chromatic aberration">
                 <p class="project-text">
-                    Final implementation: RGB channels split with a customizable offset, applied to the entire screen.
+                    Fullscreen effect: RGB channels split across the entire screen with customizable offset.
                 </p>
             </div>
             <br>
@@ -125,20 +118,20 @@
             </p>
             
             <div class="project-images">
-                <img src="" alt="Still need to create GIF of these.">
+                <img src="img/URP/exploration.gif" alt="Still need to create GIF of these.">
                 <p class="project-text">
                     Most of these resulted in glitchy, trippy visuals — 
                     but each experiment revealed something new about the rendering pipeline.
                 </p>
             </div>
-            
+            <br>
             <h3 class="project-text">Shader Curiosity</h3>
             <p class="project-text">
                 Outside Unity, I studied shader languages and pipelines.
                 Explored CG, HLSL and GLSL, 
                 learned how ShaderLab structures SubShaders, Passes and HLSL includes. 
                 Collected notes on <b>shader stages</b> (vertex, fragment, geometry, etc.),
-                realizing i was only scratching the surface.
+                realizing I was only scratching the surface.
             </p>
             
             <div class="project-images">
@@ -148,20 +141,26 @@
                     — a skill I now apply across graphics projects.
                 </p>
             </div>
-            
+            <br>
             <h2 class="project-text">Results</h2>
             <div class="project-images">
-                <img src="img/URP/Shader3.png" alt="UV-Space Chromatic Aberration">
-                <img src="img/URP/Shader2.png" alt="Fullscreen Chromatic Aberration">
+                <img src="img/URP/Cinema.png" alt="UV-Space Chromatic Aberration">
                 <p class="project-text">
-                    <strong>Left:</strong> Object-contained UV-space aberration.
-                    <strong>Right:</strong> Fullscreen aberration effect with adjustable strength.
+                    Localized UV-space chromatic aberration prototype.
                 </p>
             </div>
 
+            <div class="project-images">
+                <img src="img/URP/photoshop.png" alt="Illustration of RGB blending with directional arrows">
+                <p class="project-text">
+                    Illustration of additive RGB blending in Photoshop. <br>
+                    Red and green combine as expected — but blue remains a mystery?
+                </p>
+            </div>
+            <br>
             <h2 class="project-text">Takeaway</h2>
             <p class="project-text">
-                This project was a turning point where I delivered two production ready URP features.
+                This project was a turning point where I delivered two production-ready URP features.
                 Gained practical experience with post-processing, custom renderer features and ShaderGraph.
                 Built shader programming fundamentals that continue to shape my path.
             </p>
@@ -169,6 +168,15 @@
                 It showed me how shader math, rendering theory and artistic direction come together
                 — and confirmed I wanted to keep exploring the technical art side of game development.
             </p>
+
+            <div class="project-images">
+                <img src="img/URP/AbsoluteCinema.png" alt="Fullscreen Chromatic Aberration">
+                <p class="project-text">
+                    Final fullscreen chromatic aberration effect.
+                    Annotated shader logic reveals how RGB channels were offset and recombined into a production-ready feature.
+                </p>
+            </div>
+
         </div>
     </div>
 </div>
