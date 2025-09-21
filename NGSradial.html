@@ -37,7 +37,7 @@
                     <strong>Project Status:</strong> Completed<br>
                     <strong>Project Type:</strong> Professional<br>
                     <strong>Project Duration:</strong> 4 Weeks <br>
-                    <strong>Software Used:</strong> Unity<br>
+                    <strong>Software Used:</strong> Unity 2022.3<br>
                     <strong>Languages Used:</strong> C#<br>
                     <strong>Primary Role(s):</strong> Game Developer<br>
                     <strong>Team:</strong> 2 Devs, 1 Artist<br>
@@ -48,8 +48,8 @@
                 <h2>About Radial Stamina</h2>
                 <p>
                     Radial Stamina was our replacement for the old stamina system in <em>Operation Starfall</em>. <br>
-                    Built using ShaderGraph, this was my first hands-on shader
-                    project, combining visual style with gameplay function.
+                    Built using <b>ShaderGraph</b>, this was my first hands-on shader
+                    project, combining visual style with gameplay functionality.
                 <p>
 
                 <a href="https://www.neonorigins.com/" target="_blank">neonorigins.com</a>
@@ -63,41 +63,36 @@
                 <!--Begin Intro Section-->
                 <h2 class="project-text">Intro</h2>
                 <p class="project-text">
-                    Creating this stamina system meant stepping out of my comfort zone and diving into ShaderGraph.
-                    Instead of a code-only approach, I learned how to express gameplay systems visually through a node-based workflow.
-                    I pair-programmed the stamina logic with the other developer, while our art director provided the radial texture.
-                    My main focus was mastering ShaderGraph to bring the stamina bar’s functionality to life.
+                    Creating this stamina system meant stepping out of my comfort zone and diving into <b>shaders</b>.
+                    Instead of a code-only approach, I explored how to build gameplay features through visual scripting.
+                    I pair-programmed parts of the stamina logic with another developer,
+                    while focusing on ShaderGraph with pointers from both the art and technical directors.
                 </p>
 
                 <div class="project-images">
                     <p class="image-title">Gif of the Radial</p>
                     <img src="img/Radial/radialprefabgif.gif" alt="Image 1">
                     <p class="project-text">
-                        In the gif above you can see the shape and size of the radial, as you can see it looks just
-                        like Zelda: Breath of the Wild!
+                        It was inspired by the stamina radial in Zelda: BotW.
                     </p>
                 </div>
-                <!--End Intro Section-->
-
-                <!--Begin Development Section-->
-
+                <br>
                 <h2 class="project-text">Development</h2>
                 <p class="project-text">
                     At first, grasping how shaders manipulate graphics was a challenge.
                     Trial, error, and lots of debugging slowly revealed how to control colors, masks, and timing.
-                    Eventually, ShaderGraph clicked: it felt less like abstract math and more like designing a visual system.
+                    Eventually, the system clicked: it felt less like abstract math and more like designing a visual feature.
                     Seeing the radial animate correctly in-game was a rewarding payoff for the effort.
                 </p>
 
                 <div class="project-images">
-                    <p class="image-title">A function from the script.</p>
+                    <p class="image-title">Functions from the script.</p>
                     <img src="img/Radial/StaminabarCode.png" alt="Image 1">
                     <p class="project-text">
-                        In the snippet above you can see the code of when the staminabar is depleted and how long it
+                        In the snippet above you can see the code of when the stamina bar is depleted and how long it
                         takes to regenerate the stamina back.
                     </p>
                 </div>
-
 
                 <div class="project-images">
                     <p class="image-title">How the radial would look in game</p>
@@ -107,23 +102,24 @@
                         animations and then regenerates the stamina back over time.<br>
                     </p>
                 </div>
-                <h3 class="project-text">Conclusion</h3>
+                <br>
+                <h2 class="project-text">Conclusion</h2>
                 <p class="project-text">
-                    By leveraging ShaderGraph, we created a stamina system that was both functional and visually aligned with the game’s style.
+                    By leveraging shaders, we created a stamina system that was both functional and visually aligned with the game’s style.
                     For me, this feature was a turning point — 
                     from seeing shaders as intimidating, to recognizing them as a powerful tool for gameplay and atmosphere.
                 </p>
 
                 <div class="project-images">
-                    <p class="image-title">The full Shadergraph:</p>
+                    <p class="image-title">Full Shader Graph Overview:</p>
                     <img src="img/Radial/fullshader.png" alt="Image 1">
                     <p class="project-text">
-                        This ShaderGraph uses a radial mask to visualize stamina, 
+                        This graph uses a radial mask to visualize stamina, 
                         with time-based fade logic and dynamic alpha blending based on gameplay inputs.
                     </p>
                 </div>
                 <br>
-                <h2 class="project-text">Shadergraph Breakdown</h2>
+                <h2 class="project-text">ShaderGraph Breakdown</h2>
                 <p class="project-text">
                     The Shader is split into three key sections, each responsible for a part of the stamina ring's visual behavior.
                 </p>
@@ -144,7 +140,9 @@
                     <li>• Divide the result by <code>FadeTime</code>, then clamp using <code>Sign</code> and <code>Saturate</code>.</li>
                     <li>• This value decreases over time, fading the bar out as stamina expires.</li>
                 </ul>
-
+                <div class="project-images">
+                    <img src="img/Radial/RadialFade.gif" alt="Gif of fading in Action.">
+                </div>
                 <p class="project-text">
                     We multiply the fade-in and fade-out values to produce the final <strong>Alpha</strong> visibility.
                 </p>
@@ -158,6 +156,11 @@
 
                 <h3 class="project-text"><strong>Shape Logic - Bottom</strong></h3>
                 <p class="section-subtitle">This section shapes the ring using a radial threshold mask:</p>
+                <div class="project-images">
+                    <p>Left: Radial gradient input mask provided by the artist. Right: The radial texture used for the stamina ring’s shape.</p>
+                    <img src="img/Radial/mask8p.jpg" alt="Mask textures">
+                </div>
+                <br>
                 <ul class="centered-list project-text">
                     <li>• Sample the R channel of <code>MaskTexture</code>, subtract <code>1.0</code>, and add <code>StaminaPercentage</code>.</li>
                     <li>• Clamp the result with <code>Sign</code> and <code>Saturate</code> to create a clean radial cutoff.</li>
