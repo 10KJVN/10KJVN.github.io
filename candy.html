@@ -20,7 +20,7 @@
             <button class="nav-items" onclick="window.location.href='index.html'">Home</button>
             <button class="nav-items" onclick="window.location.href='index.html#services'">Projects</button>
             <button class="nav-items" onclick="window.location.href='#contact'">Contact</button>
-            <a class="nav-items" href="pdf/Curriculum Vitae - July 2025 EN.pdf" target="_blank">CV</a>
+            <a class="nav-items" href="pdf/Curriculum Vitae (public) - Nov 2025 EN.pdf" target="_blank">CV</a>
         </div>
         <div class="hamburger">☰</div>
     </nav>
@@ -98,7 +98,7 @@
                 <a href="https://github.com/j5x/PvB2025/tree/develop/Assets/Script/CharacterSystem">Character System</a>
             </p>
             <div class="project-images">
-                <img src="img/CandyDandy/ClassDiagram_characters.png" alt="Character class diagram">
+                <img src="img/CandyDandy/CharacterDiagram01.png" alt="Character class diagram">
             </div>
 
             <p class="project-text">
@@ -114,24 +114,31 @@
             <h2 class="project-text">Mobile UI & Safe Area</h2>
             <p class="project-text">
                 A major challenge was scaling across devices. Using Unity’s Canvas Scaler and a custom
-                <a href="https://github.com/j5x/PvB2025/blob/develop/Assets/Script/UI/SafeArea.cs">Safe Area Handler</a>, I ensured UI panels adapt to notches, rounded corners, tablets, and Android soft keys.
-                This made the game consistently playable on a wide range of devices.
+                <a href="https://github.com/j5x/PvB2025/blob/develop/Assets/Script/UI/SafeArea.cs">Safe Area Handler</a>,
+                I ensured UI panels adapt to notches, rounded corners, tablets, and Android soft keys.
+                This made the game consistently playable across a wide range of devices.
             </p>
+
             <div class="project-images">
                 <img src="img/CandyDandy/rgb_canvas.png" alt="Safe Area debug colors">
-                <p class="project-text">Debug overlay for safe areas during setup.</p>
+                <p class="project-text">Debug overlay used to visualize and adjust safe areas during setup.</p>
             </div>
+
             <div class="project-images">
-                <img src="img/CandyDandy/mergedCropping.png" alt="Cropping issue">
-                <img src="img/CandyDandy/Xtrabg.png" alt="Extra assets to fill gaps">
-                <p class="project-text">Fixed initial cropping issues by adding mirrored assets on larger screens.</p>
+                <img src="img/CandyDandy/mergedCropping.png" alt="Cropping issue fix">
+                <p class="project-text">
+                    The safe area initially cropped the game view, leaving empty borders on taller screens.
+                    I fixed this by extending and mirroring background art to fill the space naturally.
+                </p>
             </div>
+
             <div class="project-images">
                 <video autoplay muted loop controls>
                     <source src="img/CandyDandy/CD_GameplayV2.mp4" type="video/mp4">
                 </video>
-                <p class="project-text">Version 2 gameplay after scaling fixes, tested across multiple devices. </p>
+                <p class="project-text">Sprint 2: gameplay after scaling fixes, verified across multiple device sizes.</p>
             </div>
+
             <br>
             <h2 class="project-text">Conclusion</h2>
             <p class="project-text">
