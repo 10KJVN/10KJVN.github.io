@@ -88,92 +88,148 @@
     <section id="services">
     <h2>Projects</h2>
     <div class="tab">
-      <button class="tablinks" onclick="openTab(event, 'Service1')">Unity</button>
-      <button class="tablinks" onclick="openTab(event, 'Service2')">Unreal</button>
-      <button class="tablinks" onclick="openTab(event, 'Service3')">Godot</button>
-      <button class="tablinks" onclick="openTab(event, 'Service4')">Starfall</button>
+      <button class="tablinks unity" onclick="openTab(event, 'Service1')">Unity</button>
+      <button class="tablinks unreal" onclick="openTab(event, 'Service2')">Unreal</button>
+      <button class="tablinks godot" onclick="openTab(event, 'Service3')">Godot</button>
+      <button class="tablinks other" onclick="openTab(event, 'Service4')">Starfall</button>
     </div>
 
     <div id="Service1" class="tabcontent">
-      <h3>Unity</h3>
-      <p>Projects made in Unity</p>
+      <!--<h3>Unity</h3>
+      <p>Projects made in Unity</p> -->
       <div class="image-container">
         
-        <!-- Archived, no longer matches my skill.
-        <a href="space.html" target="" class="image-link">
-          <img src="img/Thumbnails/space43.jpg" alt>
-          <div class="overlay">Expanding Space</div>
-        </a> -->
+        <!-- Archived, no longer matches my profile.
+        <a href="space.html"> -->
         
-        <a href="urpV2.html" target="" class="image-link">
-          <img src="img/Thumbnails/urp43.png" alt>
-          <div class="overlay">Universal Render Pipeline</div>
-        </a>
-        
-        <a href="candy.html" target="" class="image-link">
-          <img src="img/Thumbnails/candy43.png" alt>
-          <div class="overlay">Candy Dandy</div>
-        </a>
-        
-        <a href="spark.html" target="" class="image-link">
-          <img src="img/Thumbnails/spark43.png" alt>
-          <div class="overlay">First Spark</div>
-        </a>
+        <div class="project-card">
+          <a href="urpV2.html" target="" class="image-link">
+            <img src="img/Thumbnails/urp43.png" alt>
+            <div class="overlay">Universal Render Pipeline</div>
+          </a>
+            <div class="project-tags">
+              <span class="tag">Solo</span>
+              <span class="tag">Rendering</span>
+            </div>
+        </div>
+
+        <div class="project-card">
+          <a href="candy.html" target="" class="image-link">
+            <img src="img/Thumbnails/candy43.png" alt>
+            <div class="overlay">Candy Dandy</div>
+          </a>
+          <div class="project-tags">
+            <span class="tag">UI</span>
+            <span class="tag">Gameplay</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <a href="spark.html" target="" class="image-link">
+            <img src="img/Thumbnails/spark43.png" alt>
+            <div class="overlay">First Spark</div>
+          </a>
+          <div class="project-tags">
+            <span class="tag">Concept</span>
+            <span class="tag">Design</span>
+          </div>
+        </div>
         
       </div>
     </div>
 
     <div id="Service2" class="tabcontent">
-      <h3>Unreal</h3>
-      <p>Projects made in Unreal Engine 5</p>
+      <!-- <h3>Unreal</h3>
+      <p>Projects made in Unreal Engine 5</p> -->
       <div class="image-container">
         
-        <!-- Archived, no longer matches my skill.
-        <a href="Godspeed.html" target="" class="image-link">
-          <img src="img/Thumbnails/godspeed43.png" alt>
-          <div class="overlay">Godspeed</div>
-        </a> -->
-        
-        <a href="ensemble.html" target="" class="image-link">
-          <img src="img/Thumbnails/ensemble43.jpg" alt>
-          <div class="overlay">The Ensemble</div>
-        </a>
-        
-        <a href="shopify.html" target="" class="image-link">
-          <img src="img/Thumbnails/shopify43.png" alt>
-          <div class="overlay">Shopify API</div>
-        </a>
+        <!-- Archived, no longer matches my profile.
+        <a href="Godspeed.html" target="" class="image-link"> -->
+
+        <div class="project-card">
+          <a href="ensemble.html" target="" class="image-link">
+            <img src="img/Thumbnails/ensemble43.jpg" alt>
+            <div class="overlay">The Ensemble</div>
+          </a>
+          <div class="project-tags">
+            <span class="tag">Systems</span>
+            <span class="tag">UI</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <a href="shopify.html" target="" class="image-link">
+            <img src="img/Thumbnails/shopify43.png" alt>
+            <div class="overlay">Shopify API</div>
+          </a>
+          <div class="project-tags">
+            <span class="tag">C++</span>
+            <span class="tag">UI</span>
+          </div>
+        </div>
         
       </div>
     </div>
 
     <div id="Service3" class="tabcontent">
-      <h3>Godot</h3>
-      <p>Projects made in Godot</p>
+      <!-- <h3>Godot</h3>
+      <p>Projects made in Godot</p> -->
       <div class="image-container">
-        <a href="geekedV2.html" target="" class="image-link">
-          <img src="img/Thumbnails/terrain43.png" alt>
-          <div class="overlay">Dirt Jam</div>
-        </a>
+        
+        <div class="project-card">
+          <a href="geekedV2.html" target="" class="image-link">
+            <img src="img/Thumbnails/terrain43.png" alt>
+            <div class="overlay">Dirt Jam</div>
+          </a>
+          <div class="project-tags">
+            <span class="tag">Graphics</span>
+            <span class="tag">Game Jam</span>
+            <span class="tag">Solo</span>
+          </div>
+        </div>
+        
       </div>
     </div>
 
     <div id="Service4" class="tabcontent">
-      <h3>Starfall</h3>
-      <p>Features made in <a href="https://www.neonorigins.com/" target="_blank">Operation Starfall.</a></p>
+      <!-- <h3>Starfall</h3> 
+      <p>Features made in <a href="https://www.neonorigins.com/" target="_blank">Operation Starfall.</a></p> -->
       <div class="image-container">
-        <a href="NGSocto.html" target="" class="image-link">
-          <img src="img/Thumbnails/octo43.png" alt>
-          <div class="overlay">Octodrone</div>
-        </a>
-        <a href="NGSradial.html" target="" class="image-link">
-          <img src="img/Thumbnails/radial43.png" alt>
-          <div class="overlay">Radial Stamina</div>
-        </a>
-        <a href="NGSmap.html" target="" class="image-link">
-          <img src="img/Thumbnails/overlay43.png" alt>
-          <div class="overlay">Overlay Map</div>
-        </a>
+        
+        <div class="project-card">
+          <a href="NGSocto.html" target="" class="image-link">
+            <img src="img/Thumbnails/octo43.png" alt>
+            <div class="overlay">Octodrone</div>
+          </a>
+          <div class="project-tags">
+            <span class="tag">Gameplay</span>
+            <span class="tag">C#</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <a href="NGSradial.html" target="" class="image-link">
+            <img src="img/Thumbnails/radial43.png" alt>
+            <div class="overlay">Radial Stamina</div>
+          </a>
+          <div class="project-tags">
+            <span class="tag">Gameplay</span>
+            <span class="tag">Shaders</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <a href="NGSmap.html" target="" class="image-link">
+            <img src="img/Thumbnails/overlay43.png" alt>
+            <div class="overlay">Overlay Map</div>
+          </a>
+          <div class="project-tags">
+            <span class="tag">Prototype</span>
+            <span class="tag">Rendering</span>
+          </div>
+        </div>
+        
+        
       </div>
     </div>
   </section>
