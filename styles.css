@@ -207,7 +207,7 @@ nav {
 .project-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; /* centers EVERYTHING horizontally */
   text-align: center;
   width: 100%;
   max-width: 380px; /* Consistent card width */
@@ -254,10 +254,11 @@ nav {
 
 .project-tags {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-self: flex-start; /* Easy commenting */
   gap: 6px;
-  justify-content: center;
   margin-top: 10px;
+  padding-left: 4px; /* Alternative: 0.5rem; */
 }
 
 .tag {
@@ -277,7 +278,7 @@ nav {
 }
 
 section {
-  margin: 5%;
+  margin: 4% 6%;
 }
 
 #services {
@@ -296,6 +297,15 @@ section {
   gap: 8px;
   flex-wrap: wrap;
   padding: 1.2rem;
+}
+
+/* Tab content area */
+.tabcontent {
+  display: flex;
+  flex-wrap: wrap;
+  border-top: none;
+  overflow: hidden;
+  margin-top: 2rem; /* equals to 32px */
 }
 
 /* Base button styles */
@@ -340,9 +350,8 @@ section {
 
 /* Active: clearly selected */
 .tab button.active {
-  color: #5AFC97; /* Starfall accent green */
-  box-shadow: 0 0 10px #5AFC97;
   transform: translateY(-2px);
+  transition: all 0.4s ease, box-shadow 0.6s ease-in-out;
 }
 
 /* Unity */
@@ -385,15 +394,6 @@ section {
   background-color: #030405;
   border-color: #5AFC97;
   animation: glowPulse-green 2s infinite ease-in-out;
-}
-
-/* Tab content area */
-.tabcontent {
-  display: flex;
-  flex-wrap: wrap;
-  border-top: none;
-  overflow: hidden;
-  margin-top: 2rem; /* equals to 32px */
 }
 
 .about-me {
@@ -476,7 +476,7 @@ section {
   nav {
     height: auto;
     padding: 10px;
-    margin-bottom: 8%;
+    margin-bottom: 5%;
   }
 
   .text-content {
