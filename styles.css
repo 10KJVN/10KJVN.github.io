@@ -196,7 +196,7 @@ nav {
 .image-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Always 3 columns on desktop */
-  justify-items: start;
+  justify-items: center;
   align-items: start;
   gap: 2rem;
   width: 100%;
@@ -310,10 +310,25 @@ section {
   border-radius: 8px;
 }
 
-/* Cool pulse animation */
-@keyframes glowPulse {
+/* === Glow Variants per Engine === */
+@keyframes glowPulse-green {
   0%, 100% { box-shadow: 0 0 8px #5AFC97; }
-  50% { BOX-SHADOW: 0 0 16PX #5AFC97; }
+  50% { box-shadow: 0 0 16px #5AFC97; }
+}
+
+@keyframes glowPulse-blue {
+  0%, 100% { box-shadow: 0 0 8px #008FDE; }
+  50% { box-shadow: 0 0 16px #008FDE; }
+}
+
+@keyframes glowPulse-cyan {
+  0%, 100% { box-shadow: 0 0 8px #41C7F2; }
+  50% { box-shadow: 0 0 16px #41C7F2; }
+}
+
+@keyframes glowPulse-silver {
+  0%, 100% { box-shadow: 0 0 8px #C0C0C0; }
+  50% { box-shadow: 0 0 16px #C0C0C0; }
 }
 
 /* Hover: slightly brighten */
@@ -329,24 +344,24 @@ section {
   transform: translateY(-2px);
 }
 
-/* Unreal */
-.tab button.unreal {
-  background-color: #008FDE;
-}
-.tab button.unreal.active {
-  background-color: #00124A;
-  border-color: #5AFC97;
-  animation: glowPulse 2s infinite ease-in-out;
-}
-
 /* Unity */
 .tab button.unity {
   background-color: #4C4C4C;
 }
 .tab button.unity.active {
   background-color: #000;
-  border-color: #5AFC97;
-  animation: glowPulse 2s infinite ease-in-out;
+  border-color: #C0C0C0;
+  animation: glowPulse-silver 2s infinite ease-in-out;
+}
+
+/* Unreal */
+.tab button.unreal {
+  background-color: #008FDE;
+}
+.tab button.unreal.active {
+  background-color: #00124A;
+  border-color: #008FDE;
+  animation: glowPulse-blue 2s infinite ease-in-out;
 }
 
 /* Godot */
@@ -356,8 +371,8 @@ section {
 }
 .tab button.godot.active {
   background-color: #414042;
-  border-color: #5AFC97;
-  animation: glowPulse 2s infinite ease-in-out;
+  border-color: #41C7F2;
+  animation: glowPulse-cyan 2s infinite ease-in-out;
 }
 
 /* Starfall / Other */
@@ -368,7 +383,7 @@ section {
 .tab button.other.active {
   background-color: #030405;
   border-color: #5AFC97;
-  animation: glowPulse 2s infinite ease-in-out;
+  animation: glowPulse-green 2s infinite ease-in-out;
 }
 
 /* Tab content area */
@@ -486,6 +501,7 @@ section {
 
   .image-container {
     grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
   }
 
   .project-card {
