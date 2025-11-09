@@ -261,18 +261,19 @@ nav {
 }
 
 .tag {
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 6px;
   padding: 4px 10px;
   font-size: 0.8rem;
-  color: #fff;
+  color: #EAEAEA;
   backdrop-filter: blur(2px);
-  transition: background 0.3s;
+  transition: all 0.3s ease;
 }
 
 .tag:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(90, 252, 151, 0.2); /* green ish accent */
+  border-color: rgba(90, 525, 151, 0.4);
 }
 
 section {
