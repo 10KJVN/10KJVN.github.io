@@ -201,10 +201,31 @@ nav {
 
 .project-stats {
   display: flex;
-  flex-direction: row;
-  padding-left: 4vw;
-  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4em;
+  width: fit-content;
+  margin: 1.5em auto; /* Adds space above and below */
+  font-size: 1rem;
+  line-height: 1.7;
+  text-align: left;
 }
+
+.project-stats div {
+  display: flex;
+  gap: 0.5em;
+  min-width: 340px;
+  justify-content: flex-start;
+  padding-left: 2em; /* Subtle indent for structure */
+  text-align: right;
+}
+
+.project-stats strong {
+  font-weight: 600;
+  color: #fff;
+  text-align: right;
+}
+
 
 .project-description {
   padding: 2vw;
@@ -327,8 +348,7 @@ footer {
   padding: 2%;
 }
 
-/* === Mobile === */
-@media (max-width: 480px) {
+@media (max-width: 480px) { /* === Mobile === */
   
   .hamburger {
     display: block;
@@ -382,8 +402,27 @@ footer {
   }
 
   .project-stats {
-    flex-direction: column;
-    padding: 0;
+    font-size: 0.85rem;           /* Slightly smaller text */
+    gap: 0.25em;                  /* Tighter vertical spacing */
+    margin: 1em auto;
+    width: 95%;                   /* A bit more horizontal breathing room */
+    align-items: center;
+  }
+
+  .project-stats div {
+    min-width: unset;
+    width: 75%;                  /* Ensures consistent alignment */
+    /* justify-content: space-between; Messes up the styling i intended */
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    gap: 0.25em;
+    white-space: nowrap;          /* Prevents text from wrapping */
+  }
+
+  .project-stats strong {
+    font-weight: 600;
+    color: #fff;
+    flex-shrink: 0;
   }
 
   .project-images > img {
