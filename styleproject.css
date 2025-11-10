@@ -402,21 +402,20 @@ footer {
   }
 
   .project-stats {
-    font-size: 0.85rem;           /* Slightly smaller text */
-    gap: 0.25em;                  /* Tighter vertical spacing */
+    font-size: 0.85rem; /* Slightly smaller text */
+    gap: 0.25em; /* Tighter vertical spacing */
     margin: 1em auto;
-    width: 95%;                   /* A bit more horizontal breathing room */
+    width: 100%; /* A bit more horizontal breathing room */
+    display: flex;
     align-items: center;
   }
 
   .project-stats div {
-    min-width: unset;
-    width: 75%;                  /* Ensures consistent alignment */
-    /* justify-content: space-between; Messes up the styling i intended */
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-    gap: 0.25em;
-    white-space: nowrap;          /* Prevents text from wrapping */
+    width: 100%; /* Ensures consistent alignment */
+    max-width: 375px; /* Width of an Iphone SE, smalled emulated device by default presets */
+    margin: 0 auto;
+    padding: 0.1em 5em;
+    text-align: left;
   }
 
   .project-stats strong {
