@@ -214,7 +214,7 @@ nav {
 .project-stats div {
   display: flex;
   gap: 0.5em;
-  min-width: 340px;
+  min-width: 300px;
   justify-content: flex-start;
   padding-left: 2em; /* Subtle indent for structure */
   text-align: right;
@@ -243,6 +243,12 @@ nav {
 .project-description > .subtitle {
   font-size: 18px;
   margin: 20px 0 10px;
+}
+
+.project-note {
+  font-style: italic;
+  color: #aaa;
+  font-size: 0.95em;
 }
 
 .project-images {
