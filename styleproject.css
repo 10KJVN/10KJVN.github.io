@@ -201,10 +201,31 @@ nav {
 
 .project-stats {
   display: flex;
-  flex-direction: row;
-  padding-left: 4vw;
-  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4em;
+  width: fit-content;
+  margin: 1.5em auto; /* Adds space above and below */
+  font-size: 1rem;
+  line-height: 1.7;
+  text-align: left;
 }
+
+.project-stats div {
+  display: flex;
+  gap: 0.5em;
+  min-width: 300px;
+  justify-content: flex-start;
+  padding-left: 2em; /* Subtle indent for structure */
+  text-align: right;
+}
+
+.project-stats strong {
+  font-weight: 600;
+  color: #fff;
+  text-align: right;
+}
+
 
 .project-description {
   padding: 2vw;
@@ -222,6 +243,12 @@ nav {
 .project-description > .subtitle {
   font-size: 18px;
   margin: 20px 0 10px;
+}
+
+.project-note {
+  font-style: italic;
+  color: #aaa;
+  font-size: 0.95em;
 }
 
 .project-images {
@@ -327,8 +354,7 @@ footer {
   padding: 2%;
 }
 
-/* === Mobile === */
-@media (max-width: 480px) {
+@media (max-width: 480px) { /* === Mobile === */
   
   .hamburger {
     display: block;
@@ -382,8 +408,26 @@ footer {
   }
 
   .project-stats {
-    flex-direction: column;
-    padding: 0;
+    font-size: 0.85rem; /* Slightly smaller text */
+    gap: 0.25em; /* Tighter vertical spacing */
+    margin: 1em auto;
+    width: 100%; /* A bit more horizontal breathing room */
+    display: flex;
+    align-items: center;
+  }
+
+  .project-stats div {
+    width: 100%; /* Ensures consistent alignment */
+    max-width: 375px; /* Width of an Iphone SE, smalled emulated device by default presets */
+    margin: 0 auto;
+    padding: 0.1em 5em;
+    text-align: left;
+  }
+
+  .project-stats strong {
+    font-weight: 600;
+    color: #fff;
+    flex-shrink: 0;
   }
 
   .project-images > img {
