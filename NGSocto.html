@@ -39,15 +39,19 @@
             <div><strong>Project Duration:</strong> 8–12 weeks</div>
             <div><strong>Software Used:</strong> Unity 2022.3</div>
             <div><strong>Languages Used:</strong> C#</div>
-            <div><strong>Team:</strong> 2 Devs, 1 Artist</div>
-            <div><strong>Primary Role(s):</strong>Gameplay Programmer</div>
+            <div><strong>Team:</strong> 2 Devs</div>
+            <div><strong>Primary Role(s):</strong> Gameplay Programmer</div>
         </div>
 
         <div class="project-description">
             <h2>About Feature</h2>
             <p>
-                Octodrone was the first ground-based enemy developed for <em>Operation Starfall</em>. <br>
-                Its design combined state-driven AI, animation cycles, and responsive attack logic.
+                Octodrone was the first ground-based enemy developed for <em>Operation Starfall</em>.<br>
+                Its design combined state-driven AI, animation cycles, and responsive attack logic. <br>
+                This system was built collaboratively with <a href="https://github.com/J5X" target="_blank"><strong>J5X</strong></a>.
+            </p>
+            <p>
+                <a href="https://www.neonorigins.com/" target="_blank">neonorigins.com</a>
             </p>
 
             <h2 class="subtitle">My Features</h2>
@@ -60,7 +64,7 @@
             <!-- Animator & Jump Cycle -->
             <h2 class="project-text">Animator & Jump Cycle</h2>
             <p class="project-text">
-                I integrated Animator triggers with the enemy's state machine, making sure Octo’s Idle,
+                We integrated Animator triggers with the enemy’s state machine, ensuring Octo’s Idle,
                 Walk, Jump, Attack, and Fuzzy states transitioned smoothly. Unity Events were used to
                 time animation transitions such as <em>JumpUp → JumpTop → JumpAttack</em>.
             </p>
@@ -70,16 +74,19 @@
                 <img src="img/Octo/OctoAnim.gif" alt="Octo animations: idle, walk, jump, attack, fuzzy">
                 <p class="project-text">
                     In the gif above you can see Octo's Idle, Walking, Jumping, Attacking & Fuzzy animations.
-                    Visuals and animations by <strong>Alex Kentie</strong>.
+                    Visuals and animations by
+                    <a href="https://www.linkedin.com/in/alexkentie/" target="_blank"><strong>Alex Kentie</strong></a>, Creative Director at NeoN Origins.
                 </p>
             </div>
             <br>
+
             <!-- Patrolling & Detection Logic -->
             <h2 class="project-text">Patrolling & Detection Logic</h2>
             <p class="project-text">
                 Patrol and detection systems already existed in the codebase for flying enemies.
-                Together with the other dev, I refactored and extended this logic to support Octo as the first ground-based enemy.
-                Through pair programming, we adapted pathfinding and detection behavior, so it could handle grounded patrol routes reliably.
+                Together, we refactored and extended this logic to support Octo as the first ground-based enemy.
+                Through pair programming, we adapted pathfinding and detection behavior, allowing reliable
+                grounded patrol routes and smooth directional updates.
             </p>
 
             <div class="project-images">
@@ -100,11 +107,14 @@
                 </p>
             </div>
             <br>
+
             <!-- Prefab & Polish -->
             <h2 class="project-text">Prefab & Polish</h2>
             <p class="project-text">
-                I worked on prefab adjustments and polish, ensuring animations, colliders, and logic worked smoothly together.
-                Collaboration across the dev team meant we frequently supported each other once our own user stories were complete.
+                I handled final prefab adjustments and collider setup. We made sure animations,
+                collisions, and logic worked smoothly together.
+                Collaboration across the dev team meant we frequently supported each other once our
+                own user stories were complete.
             </p>
 
             <div class="project-images">
@@ -116,31 +126,32 @@
                 </p>
             </div>
             <br>
+
             <!-- Takeaway -->
             <h2 class="project-text">Takeaway</h2>
             <p class="project-text">
-                My main contribution was getting Octo to patrol, detect, and attack consistently while polishing prefab
+                Our main contribution was getting Octo to patrol, detect, and attack consistently while refining prefab
                 behavior and animation timing. The biggest challenge was understanding the ForceSystem and how it
-                interacted with the state machine, but after debugging and iterating together with the team, Octo’s
-                behavior became stable and feels natural in-game.
+                interacted with the state machine, but after debugging and iterating together, Octo’s behavior became
+                stable and feels natural in-game.
             </p>
 
             <div class="project-images">
                 <p class="image-title">JumpState: Octo's unique attack state</p>
                 <img src="img/Octo/JumpSnippet.png" alt="JumpState attack snippet">
                 <p class="project-text">
-                    This script inherits from the base <code>AttackState.cs</code>. <br>
+                    This script inherits from the base <code>AttackState.cs</code>.<br>
                     <code>JumpState.cs</code> coordinates animation events & state transitions.
+                </p>
                 <ol class="centered-list">
                     <li>1. Disable gravity and apply an amplified upward force so Octo jumps.</li>
                     <li>2. On a midair event (e.g. jump top), re-enable gravity and apply a forward force toward the player's position.</li>
                 </ol>
             </div>
-            
+
             <p class="project-text">
-                Along the way I learned about
-                Object-Oriented Programming, Unity Events, and writing clean state-driven logic in a large existing
-                codebase.
+                Along the way, we learned about Object-Oriented Programming, Unity Events, and writing clean,
+                state-driven logic within a large existing codebase.
             </p>
 
             <div class="project-images">
@@ -150,10 +161,6 @@
                     The diagram shows Octo's primary states and transitions (Patrol, Detect, Jump/Attack, Fuzzy).
                 </p>
             </div>
-
-            <p class="project-text">
-                Official website: <a href="https://www.neonorigins.com/" target="_blank">neonorigins.com</a>
-            </p>
 
         </div>
     </div>
