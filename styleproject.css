@@ -23,7 +23,7 @@ body {
 #urp { background-image: url(img/URP/thumburp.png); }
 #urp2 {background-image: url(img/URP/NewURP_back.png); }
 #overlayMap { background-image: url(img/OverlayMap/mapScreenShot.png); }
-#candy { background-image: url(img/CandyDandy/BigBackground.png); }
+#candy { background-image: url(img/CandyDandy/CandyBG3.jpg); }
 #spark {background-image: url(img/FirstSpark/Final_map.png); }
 #geeked {background-image: url(img/DirtJam/Sunset.png); }
 #shopify {background-image: url(img/Backgrounds/Blueprintbg.png); }
@@ -50,10 +50,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
   }
-
-  body#candy {
-    background-image: url("img/CandyDandy/smallBackground.png");
-  }
+  
   body#ensemble {
     background-image: url("img/Ensemble/phoneEnsemble.jpg");
   }
