@@ -152,9 +152,11 @@ nav {
 
 .project-details {
   background-color: #141414bc;
-  height: 50vw;
+  /* height: 50vw; */
+  max-height: none;
   width: 70%;
-  overflow: auto;
+  overflow: visible;
+  padding-bottom: 2vw;
 }
 
 .project-text {
