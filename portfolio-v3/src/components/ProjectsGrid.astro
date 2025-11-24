@@ -1,0 +1,17 @@
+---
+import ProjectCard from "./ProjectCard.astro";
+
+const { projects } = Astro.props;
+---
+
+<div class="grid md:grid-cols-2 gap-6">
+  {projects.map((project) => (
+    <ProjectCard 
+      title={project.title}
+      description={project.description}
+      image={project.image}
+      href={project.href}
+      highlight={project.highlight}
+    />
+  ))}
+</div>
