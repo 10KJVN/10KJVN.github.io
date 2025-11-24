@@ -59,6 +59,9 @@ node_modules/
 # Ignore build directories.
 /build
 /dist
+.env
+.cache/
+.DS_Store
 
 # ignore composer vendor directory
 /vendor
