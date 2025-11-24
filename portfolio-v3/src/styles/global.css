@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
-@import "tailwindcss/preflight";
-/* @import "tailwind/utilities"; */
+/* 
+tailwindcss/preflight,
+tailwind/utilities
+etc.
+Are deprecated since im using Tailwind 4.
+*/
 
 /* Je eigen custom CSS mag hieronder */
