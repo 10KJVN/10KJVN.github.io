@@ -4,29 +4,56 @@ import Hero from "../components/Hero.astro";
 import ProjectsGrid from "../components/ProjectsGrid.astro";
 
 const featuredProjects = [
-  {
-    title: "Way2Terrain",
-    description: "Godot RenderingDevice terrain system — SPIR-V shaders, GPU pipelines, custom noise, LOD, tooling.",
-    image: "/images/dirtjam-thumb.webp", // vervang later
-    href: "/projects/dirt-jam",
-    highlight: true
-  },
-  {
-    title: "Operation Starfall",
-    description: "Gameplay systems, shaders, rendering features & technical art contributions for a commercial project.",
-    image: "/images/starfall-thumb.webp", // vervang later
-    href: "/projects/starfall",
-    highlight: true
-  }
+	{
+		title: "Way2Terrain",
+		description:
+			"Godot RenderingDevice terrain system — SPIR-V shaders, GPU pipelines, custom noise, LOD, tooling.",
+		image: "/images/dirtjam-thumb.webp", // vervang later
+		href: "/projects/dirt-jam",
+		highlight: true,
+	},
+	{
+		title: "Operation Starfall",
+		description:
+			"Gameplay systems, shaders, rendering features & technical art contributions for a commercial project.",
+		image: "/images/starfall-thumb.webp", // vervang later
+		href: "/projects/starfall",
+		highlight: true,
+	},
+];
+
+const otherProjects = [
+	{
+		title: "URP — Rendering & Post-Processing",
+		description:
+			"Custom Unity URP render features, shaders, post-processing stack rewrite & visual experiments.",
+		image: "/images/urp-thumb.webp", // later vervangen
+		href: "/projects/urp",
+	},
+	{
+		title: "Candy Dandy",
+		description:
+			"Casual mobile game. Gameplay programming, tech art integration & client-based development.",
+		image: "/images/candydandy-thumb.webp",
+		href: "/projects/candy-dandy",
+	},
 ];
 ---
 
-<Layout title="Portfolio | 10KJVN - Jahvairo Monkau" description="Personal projects that showcase ideas and other technical achievements.">
-  <Hero />
+<Layout
+	title="Portfolio | 10KJVN - Jahvairo Monkau"
+	description="Personal projects that showcase ideas and other technical achievements."
+>
+	<Hero />
 
-  <section id="projects" class="mt-32">
-    <h2 class="text-3xl font-bold mb-6">Featured Work</h2>
-    
-	<ProjectsGrid projects={featuredProjects} />
-  </section>
+	<section id="projects" class="mt-32">
+		<h2 class="text-3xl font-bold mb-6">Featured Work</h2>
+
+		<ProjectsGrid projects={featuredProjects} />
+	</section>
+
+	<section class="mt-24">
+		<h2 class="text-3xl font-bold mb-6">More Projects</h2>
+		<ProjectsGrid projects={otherProjects} />
+	</section>
 </Layout>
