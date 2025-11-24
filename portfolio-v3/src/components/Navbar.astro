@@ -2,23 +2,47 @@
 // Je kunt later props, animations en active states toevoegen.
 ---
 
-<nav class="w-full fixed top-0 left-0 z-50 bg-transparent backdrop-blur-sm">
-  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-    
+<nav class="w-full fixed top-0 left-0 z-50 bg-white/10 backdrop-blur-lg">
+  <div class="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
+
     <!-- Left: Your Name -->
-    <a href="/" class="text-xl font-semibold tracking-wide">
+    <a 
+      href="/" 
+      class="text-xl font-semibold tracking-wide hover:opacity-80 transition"
+    >
       J.
     </a>
 
     <!-- Right: Navigation Links -->
-    <ul class="flex gap-8 text-sm">
-      <li><a href="/">Home</a></li>
-      <li><a href="/dirt-jam">Dirt Jam</a></li>
-      <li><a href="/operation-starfall">Operation Starfall</a></li>
-      <li><a href="/projects">Projects</a></li>
-      <li><a href="/about">About Me</a></li>
-      <li><a href="/resume">Resume</a></li>
+    <ul class="flex gap-10 text-sm uppercase tracking-wide">
+      <li><a class="nav-link" href="/">Home</a></li>
+      <li><a class="nav-link" href="/dirt-jam">Dirt Jam</a></li>
+      <li><a class="nav-link" href="/operation-starfall">Operation Starfall</a></li>
+      <li><a class="nav-link" href="/projects">Projects</a></li>
+      <li><a class="nav-link" href="/about">About Me</a></li>
+      <li><a class="nav-link" href="/resume">Resume</a></li>
     </ul>
 
   </div>
 </nav>
+
+<style>
+  .nav-link {
+    position: relative;
+    padding-bottom: 2px;
+    transition: color 0.2s ease;
+  }
+  .nav-link:hover::after {
+    width: 100%;
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 0;
+    height: 1px;
+    background: white;
+    transition: width 0.25s ease;
+  }
+</style>
