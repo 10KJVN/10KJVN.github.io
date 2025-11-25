@@ -1,7 +1,7 @@
 ---
-import "../styles/global.css";
 ---
 
+<!-- Versie 1 
 <section
   class="h-screen w-full flex flex-col items-center justify-center text-center px-4"
 >
@@ -12,4 +12,69 @@ import "../styles/global.css";
   <p class="text-lg sm:text-xl opacity-70 max-w-2xl leading-relaxed">
     Specialized in rendering, shaders, gameplay systems, and technical art.
   </p>
+</section> -->
+
+<!-- Versie 2: CSS Layered Gradients + Noise Texture  --
+<section
+  class="
+    h-screen w-full flex flex-col items-center justify-center text-center px-4
+    relative overflow-hidden
+    bg-[radial-gradient(ellipse_at_center,rgba(0,80,120,0.3),rgba(0,0,20,1))]
+  "
+  
+>
+  Light Rays --
+  <div class="absolute inset-0 pointer-events-none opacity-[0.35]
+              bg-[url('/images/light-rays.svg')] 
+              bg-cover mix-blend-screen animate-slow-drift"></div>
+
+  Noise shimmer --
+  <div class="absolute inset-0 pointer-events-none opacity-[0.08]
+              bg-[url('/images/noise02.png')]
+              bg-repeat mix-blend-overlay animate-slower-pan"></div>
+
+  <h1 class="glitch text-6xl font-bold" data-text="Jahvairo — Technical Artist">
+    Jahvairo — Technical Artist
+  </h1>
+
+  <p class="text-lg sm:text-xl opacity-70 max-w-2xl leading-relaxed">
+    Specialized in rendering, shaders, gameplay systems, and technical art.
+  </p>
+</section> -->
+
+<!-- Versie 3 
+<section class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none opacity-80">
+    <img src="/images/caustics.svg" alt="" class="w-full h-full object-cover"/>
+  </div>
+
+  <div class="relative z-10 px-6">
+    <h1 class="glitch text-6xl font-bold" data-text="Jahvairo — Technical Artist">Jahvairo — Technical Artist</h1>
+    <p class="mt-6 text-lg text-white/75">Specialized in rendering, shaders, gameplay systems.</p>
+  </div>
+
+  <div class="absolute inset-0 pointer-events-none opacity-[0.08]
+              bg-[url('/images/white-noise.png')]
+              bg-repeat mix-blend-overlay animate-slower-pan"></div>
 </section>
+-->
+
+<section class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none opacity-80">
+    <img src="/images/caustics.svg" alt="" class="w-full h-full object-cover"/>
+  </div>
+
+  <div class="relative z-10 px-6">
+    <h1 class="glitch text-6xl font-bold" data-text="Technical Artist">Technical Artist</h1>
+    <p class="mt-6 text-lg text-white/75">Where creativity meets code.</p>
+  </div>
+
+  <!-- Enhanced noise with multiple layers -->
+  <div class="absolute inset-0 pointer-events-none opacity-[0.08]
+              bg-[url('/images/white-noise.png')]
+              bg-repeat mix-blend-overlay animate-slower-pan"></div>
+  
+  <!-- Optional: subtle pulse overlay -->
+  <div class="absolute inset-0 pointer-events-none bg-white/5 animate-subtle-pulse mix-blend-overlay"></div>
+</section>
+ 

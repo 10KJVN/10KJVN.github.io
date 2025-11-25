@@ -55,3 +55,55 @@
     100% { transform: translate(0,0); clip-path: inset(80% 0 0 0); }
   }
 }
+
+/* CSS Layered Gradients + Noise Texture 
+@layer utilities {
+  @keyframes slow-drift {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-15%); }
+  }
+
+  @keyframes slower-pan {
+    from { transform: translate(0,0); }
+    to   { transform: translate(-5%, -5%); }
+  }
+
+  .animate-slow-drift { animation: slow-drift 14s linear infinite alternate; }
+  .animate-slower-pan { animation: slower-pan 25s linear infinite alternate; }
+}
+*/
+
+/* Enhanced CSS Layered Gradients + Noise Texture */
+@layer utilities {
+  @keyframes slow-drift {
+    0% { transform: translateY(0) translateX(0); }
+    33% { transform: translateY(-8%) translateX(-2%); }
+    66% { transform: translateY(-12%) translateX(1%); }
+    100% { transform: translateY(-15%) translateX(-1%); }
+  }
+
+  @keyframes slower-pan {
+    0% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(-2%, -3%) scale(1.02); }
+    50% { transform: translate(-5%, -5%) scale(1); }
+    75% { transform: translate(-3%, -2%) scale(1.01); }
+    100% { transform: translate(0, 0) scale(1); }
+  }
+
+  @keyframes subtle-pulse {
+    0%, 100% { opacity: 0.08; }
+    50% { opacity: 0.12; }
+  }
+
+  .animate-slow-drift { 
+    animation: slow-drift 18s ease-in-out infinite; 
+  }
+  
+  .animate-slower-pan { 
+    animation: slower-pan 30s ease-in-out infinite; 
+  }
+  
+  .animate-subtle-pulse {
+    animation: subtle-pulse 8s ease-in-out infinite;
+  }
+}

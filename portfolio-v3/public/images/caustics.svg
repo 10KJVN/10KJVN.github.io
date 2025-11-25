@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <!-- Enhanced godrays gradient -->
+    <radialGradient id="a" cx="50%" cy="20%" r="60%">
+      <stop offset="0%" stop-color="#fff" stop-opacity=".9"/>
+      <stop offset="50%" stop-color="#e6f7ff" stop-opacity=".4"/>
+      <stop offset="80%" stop-color="#b3e0ff" stop-opacity=".1"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    
+    <!-- Water surface gradient -->
+    <linearGradient id="c" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#c2f0ff" stop-opacity=".8"/>
+      <stop offset="30%" stop-color="#80dfff" stop-opacity=".6"/>
+      <stop offset="70%" stop-color="#29b8ff" stop-opacity=".3"/>
+      <stop offset="100%" stop-color="#003c5a" stop-opacity="0"/>
+    </linearGradient>
+    
+    <!-- Sparkle pattern for water surface -->
+    <pattern id="sparkle" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="10" r="0.5" fill="#ffffff" opacity="0">
+        <animate attributeName="opacity" values="0;0.8;0" dur="2s" begin="0s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="15" cy="5" r="0.3" fill="#ffffff" opacity="0">
+        <animate attributeName="opacity" values="0;0.6;0" dur="1.5s" begin="0.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="5" cy="15" r="0.4" fill="#ffffff" opacity="0">
+        <animate attributeName="opacity" values="0;0.7;0" dur="1.8s" begin="1s" repeatCount="indefinite"/>
+      </circle>
+    </pattern>
+    
+    <pattern id="d" width="6" height="6" patternUnits="userSpaceOnUse">
+      <path fill="rgba(255,255,255,0)" d="M0 0h6v6H0z"/>
+      <path fill="rgba(255,255,255,0.02)" d="M0 5h6v1H0z"/>
+    </pattern>
+    
+    <!-- Very subtle filter for still water -->
+    <filter id="b" x="-50%" y="-50%" width="200%" height="200%">
+      <feTurbulence baseFrequency="0.003 0.005" numOctaves="1" seed="5" type="fractalNoise" result="noise"/>
+      <feColorMatrix type="saturate" values="0" in="noise" result="mono"/>
+      <feGaussianBlur stdDeviation="1" in="mono" result="blurNoise"/>
+      <feDisplacementMap in="SourceGraphic" in2="blurNoise" scale="2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <path fill="#00213a" d="M0 0h1200v800H0z"/>
+  
+  <!-- Enhanced Godrays -->
+  <g style="mix-blend-mode:screen; opacity:.6">
+    <ellipse cx="600" cy="120" rx="580" ry="250" fill="url(#a)">
+      <animate attributeName="cx" dur="25s" values="550;650;580;620;550" repeatCount="indefinite"/>
+      <animate attributeName="cy" dur="30s" values="100;140;80;120;100" repeatCount="indefinite"/>
+      <animate attributeName="rx" dur="15s" values="580;620;560;600;580" repeatCount="indefinite"/>
+    </ellipse>
+  </g>
+  
+  <!-- Single layer of still water -->
+  <g filter="url(#b)" style="mix-blend-mode:screen; opacity:.85">
+    <rect x="0" y="0" width="1200" height="400" fill="url(#c)"/>
+    <!-- Sparkly water surface -->
+    <rect x="0" y="0" width="1200" height="150" fill="url(#sparkle)" opacity="0.3"/>
+  </g>
+  
+  <!-- Scanlines -->
+  <path fill="url(#d)" opacity=".03" style="mix-blend-mode:overlay" d="M0 0h1200v800H0z"/>
+  
+  <!-- Wobbling bubbles -->
+  <g fill="#e6f7ff" opacity=".45" style="mix-blend-mode:screen">
+    <circle cx="260" cy="700" r="12">
+      <animate attributeName="cy" dur="7s" values="700;350" repeatCount="indefinite"/>
+      <animate attributeName="cx" dur="3.5s" values="260;250;270;260" repeatCount="indefinite"/>
+      <animate attributeName="opacity" dur="7s" values="0;0.5;0" repeatCount="indefinite"/>
+      <animate attributeName="r" dur="7s" values="10;14;10" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="920" cy="760" r="16">
+      <animate attributeName="cy" dur="9s" values="760;300" repeatCount="indefinite"/>
+      <animate attributeName="cx" dur="4.5s" values="920;910;935;920" repeatCount="indefinite"/>
+      <animate attributeName="opacity" dur="9s" values="0;0.45;0" repeatCount="indefinite"/>
+      <animate attributeName="r" dur="9s" values="14;18;14" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="520" cy="740" r="11">
+      <animate attributeName="cy" dur="6s" values="740;400" repeatCount="indefinite"/>
+      <animate attributeName="cx" dur="3s" values="520;515;530;520" repeatCount="indefinite"/>
+      <animate attributeName="opacity" dur="6s" values="0;0.4;0" repeatCount="indefinite"/>
+      <animate attributeName="r" dur="6s" values="9;13;9" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="180" cy="720" r="9">
+      <animate attributeName="cy" dur="8s" values="720;380" repeatCount="indefinite"/>
+      <animate attributeName="cx" dur="4s" values="180;175;190;180" repeatCount="indefinite"/>
+      <animate attributeName="opacity" dur="8s" values="0;0.35;0" repeatCount="indefinite"/>
+    </circle>
+    <!-- Additional bubbles -->
+    <circle cx="400" cy="680" r="8">
+      <animate attributeName="cy" dur="5.5s" values="680;420" repeatCount="indefinite"/>
+      <animate attributeName="cx" dur="2.75s" values="400;395;408;400" repeatCount="indefinite"/>
+      <animate attributeName="opacity" dur="5.5s" values="0;0.3;0" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="750" cy="710" r="10">
+      <animate attributeName="cy" dur="7.5s" values="710;360" repeatCount="indefinite"/>
+      <animate attributeName="cx" dur="3.75s" values="750;745;760;750" repeatCount="indefinite"/>
+      <animate attributeName="opacity" dur="7.5s" values="0;0.4;0" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Color overlay -->
+  <path fill="rgba(0,30,60,0.1)" d="M0 0h1200v800H0z"/>
+</svg>
