@@ -1,10 +1,57 @@
 @import "tailwindcss";
 
-/* 
-tailwindcss/preflight,
-tailwind/utilities
-etc.
-Are deprecated since im using Tailwind 4.
-*/
+@layer utilities {
 
-/* Je eigen custom CSS mag hieronder */
+  /* OVERRIDE TAILWIND 4 PRESET */
+  .glitch::before,
+  .glitch::after {
+    --tw-content: attr(data-text);
+    content: var(--tw-content) !important;
+  }
+
+  .glitch {
+    position: relative;
+    display: inline-block;
+  }
+
+  .glitch::before,
+  .glitch::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    clip-path: inset(0 0 0 0);
+  }
+
+  .glitch::before {
+    color: #ff0033;
+    animation: glitchTop 2s infinite linear alternate-reverse;
+    z-index: -1;
+  }
+
+  .glitch::after {
+    color: #00ccff;
+    animation: glitchBottom 2s infinite linear alternate-reverse;
+    z-index: -2;
+  }
+
+  @keyframes glitchTop {
+    0% { transform: translate(0); clip-path: inset(0 0 80% 0); }
+    20% { transform: translate(-2px, -2px); clip-path: inset(10% 0 60% 0); }
+    40% { transform: translate(2px, 2px); clip-path: inset(5% 0 40% 0); }
+    60% { transform: translate(-1px, 1px); clip-path: inset(15% 0 20% 0); }
+    80% { transform: translate(1px, -1px); clip-path: inset(0 0 30% 0); }
+    100% { transform: translate(0, 0); clip-path: inset(0 0 80% 0); }
+  }
+
+  @keyframes glitchBottom {
+    0% { transform: translate(0); clip-path: inset(80% 0 0 0); }
+    20% { transform: translate(2px, 2px); clip-path: inset(60% 0 10% 0); }
+    40% { transform: translate(-2px, -2px); clip-path: inset(40% 0 5% 0); }
+    60% { transform: translate(1px, -1px); clip-path: inset(20% 0 15% 0); }
+    80% { transform: translate(-1px, 1px); clip-path: inset(30% 0 0 0); }
+    100% { transform: translate(0,0); clip-path: inset(80% 0 0 0); }
+  }
+}
