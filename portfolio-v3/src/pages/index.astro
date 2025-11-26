@@ -1,91 +1,106 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
+import SectionSplit from "../components/SectionSplit.astro";
+import SectionHeader from "../components/SectionHeader.astro";
 import ProjectsGrid from "../components/ProjectsGrid.astro";
 
 const featuredProjects = [
-	{
-		title: "Way2Terrain",
-		description:
-			"Godot RenderingDevice terrain system — SPIR-V shaders, GPU pipelines, custom noise, LOD, tooling.",
-		image: "/images/dirtjam-thumb.webp", // vervang later
-		href: "/projects/dirt-jam",
-		highlight: true,
-	},
-	{
-		title: "Operation Starfall",
-		description:
-			"Gameplay systems, shaders, rendering features & technical art contributions for a commercial project.",
-		image: "/images/starfall-thumb.webp", // vervang later
-		href: "/projects/starfall",
-		highlight: true,
-	},
+  {
+    title: "Way2Terrain",
+    description:
+      "Godot RenderingDevice terrain system — SPIR-V shaders, GPU pipelines, custom noise, LOD, tooling.",
+    image: "/images/dirtjam-thumb.webp",
+    href: "/projects/dirt-jam",
+    highlight: true,
+  },
+  {
+    title: "Operation Starfall",
+    description:
+      "Gameplay systems, shaders, rendering features & technical art contributions for a commercial project.",
+    image: "/images/starfall-thumb.webp",
+    href: "/projects/starfall",
+    highlight: true,
+  },
 ];
 
 const otherProjects = [
-	{
-		title: "URP — Rendering & Post-Processing",
-		description:
-			"Custom Unity URP render features, shaders, post-processing stack rewrite & visual experiments.",
-		image: "/images/urp-thumb.webp", // later vervangen
-		href: "/projects/urp",
-	},
-	{
-		title: "Candy Dandy",
-		description:
-			"Casual mobile game. Gameplay programming, tech art integration & client-based development.",
-		image: "/images/GameIcon.png",
-		href: "/projects/candy-dandy",
-	},
+  {
+    title: "URP — Rendering & Post-Processing",
+    description:
+      "Custom Unity URP render features, shaders, post-processing stack rewrite & visual experiments.",
+    image: "/images/urp-thumb.webp",
+    href: "/projects/urp",
+  },
+  {
+    title: "Candy Dandy",
+    description:
+      "Casual mobile game. Gameplay programming, tech art integration & client-based development.",
+    image: "/images/GameIcon.png",
+    href: "/projects/candy-dandy",
+  },
 ];
 ---
 
 <Layout
-	title="Portfolio | 10KJVN - Jahvairo Monkau"
-	description="Personal projects that showcase ideas and other technical achievements."
+  title="Portfolio | 10KJVN - Jahvairo Monkau"
+  description="Personal projects that showcase ideas and other technical achievements."
 >
-	<Hero />
-	<!-- 
-	<section class="pt-40 pb-32 max-w-5xl mx-auto px-6">
-		<h1 class="text-5xl font-bold leading-tight mb-4">
-			Tech Art & Game Dev
-		<p class="text-lg text-white/70 max-w-xl">
-			Fascinated by rendering, shaders and gameplay systems.
-		</p>
-	</section> -->
+  <Hero />
 
-	<!-- <ProjectsGrid projects={featuredProjects} /> -->
-	<section id="projects" class="py-28 bg-neutral-950 border-t border-white/10">
-  <div class="max-w-5xl mx-auto px-6">
-    <h2 class="text-3xl font-bold mb-10">Highlighted Projects</h2>
+  <!-- About Me (SectionSplit uses slot contents now) -->
+  <SectionSplit title="About Me" image="/images/hero-art.gif">
+    <p>
+      I'm a technical artist and game developer focusing on rendering,
+      shaders and gameplay systems. I create stylized visuals, experiment with
+      atmosphere, and enjoy pushing creative pipelines.
+    </p>
+    <p>
+      My work blends low-level graphics exploration with practical game-dev
+      problem solving.
+    </p>
+  </SectionSplit>
 
-    <div class="grid md:grid-cols-2 gap-8">
+  <!-- Features (reversed layout) -->
+  <SectionSplit title="Features" image="/images/features-visual.webp" reverse={true}>
+    <p>
+      A snapshot of the skills and specializations I bring to projects. From custom shader
+      pipelines to gameplay system architecture — all grounded in strong aesthetics and
+      technical foundations.
+    </p>
 
-      <!-- Dirt Jam -->
-      <a href="/projects/dirt-jam"
-         class="group block rounded-xl border border-white/10 p-6 bg-white/2 hover:bg-white/5 transition">
-        <h3 class="text-xl font-semibold mb-2">Dirt Jam</h3>
-        <p class="text-white/60">
-          Custom render pipeline, terrain system, SPIR-V shaders, and technical art experimentation.
-        </p>
-      </a>
+    <ul class="list-disc pl-6 space-y-2 mt-4 text-white/70">
+      <li>Rendering & shading (HLSL, GLSL, SPIR-V)</li>
+      <li>Custom pipelines & low-level graphics</li>
+      <li>Technical art workflows</li>
+      <li>Gameplay systems & prototyping</li>
+    </ul>
+  </SectionSplit>
 
-      <!-- Operation Starfall -->
-      <a href="/projects/operation-starfall"
-         class="group block rounded-xl border border-white/10 p-6 bg-white/2 hover:bg-white/5 transition">
-        <h3 class="text-xl font-semibold mb-2">Operation Starfall</h3>
-        <p class="text-white/60">
-          Gameplay systems, rendering optimization, shaders, and moment-to-moment combat design.
-        </p>
-      </a>
+  <!-- Highlighted Projects -->
+  <section class="py-28 bg-neutral-950 border-t border-white/10">
+    <div class="max-w-5xl mx-auto px-6">
+      <SectionHeader title="Projects" />
 
+      <div class="grid md:grid-cols-2 gap-8">
+        {featuredProjects.map((p) => (
+          <a
+            href={p.href}
+            class="group block rounded-xl border border-white/10 p-6 bg-white/2 hover:bg-white/5 transition"
+          >
+            <h3 class="text-xl font-semibold mb-2">{p.title}</h3>
+            <p class="text-white/60">{p.description}</p>
+          </a>
+        ))}
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-
-	<section class="mt-24">
-		<h2 class="text-3xl font-bold mb-6">More Projects</h2>
-		<ProjectsGrid projects={otherProjects} />
-	</section>
+  <!-- More Projects -->
+  <section class="mt-24">
+    <div class="max-w-5xl mx-auto px-6">
+      <SectionHeader title="More Projects" />
+      <ProjectsGrid projects={otherProjects} />
+    </div>
+  </section>
 </Layout>
