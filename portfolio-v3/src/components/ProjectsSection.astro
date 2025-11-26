@@ -1,0 +1,15 @@
+---
+import ProjectRail from "./ProjectRail.astro";
+const { projects } = Astro.props;
+---
+
+<section class="w-full py-32 relative">
+  <!-- Background: keep consistent with your site's existing style -->
+  <div class="absolute inset-0 bg-linear-to-b from-[#0a0a0c] to-[#0d0d10] pointer-events-none"></div>
+
+  <div class="relative max-w-7xl mx-auto px-6">
+    <h2 class="text-5xl font-extrabold tracking-tight mb-12">PROJECTS.</h2>
+
+    <ProjectRail projects={projects} />
+  </div>
+</section>

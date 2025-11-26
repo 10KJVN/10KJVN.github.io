@@ -1,7 +1,15 @@
 ---
 import ProjectCard from "./ProjectCard.astro";
 
-const { projects } = Astro.props;
+interface Project {
+  title: string;
+  description: string;
+  image: string;
+  href: string;
+  highlight?: boolean;
+}
+
+const { projects } = Astro.props as { projects: Project[] };
 ---
 
 <div class="grid md:grid-cols-2 gap-6">

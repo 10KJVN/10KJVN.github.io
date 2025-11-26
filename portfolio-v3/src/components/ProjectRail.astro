@@ -1,0 +1,18 @@
+---
+import ProjectCard from "./ProjectCard.astro";
+const { projects } = Astro.props;
+---
+
+<div class="flex gap-6 overflow-x-auto pb-3">
+  {projects.map((project) => (
+    <div class="min-w-[300px] md:min-w-[380px]">
+      <ProjectCard
+        title={project.title}
+        description={project.description}
+        image={project.image}
+        href={project.href}
+        highlight={project.highlight}
+      />
+    </div>
+  ))}
+</div>
