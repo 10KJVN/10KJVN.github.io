@@ -1,34 +1,31 @@
 ---
-// Props:
-//
-// title: string
-// text: string | Astro component
-// image: string (optional)
-// reverse: boolean (optional, swaps image/text sides)
-
-const { title, text, image, reverse = false } = Astro.props;
+const { title, image, reverse = false } = Astro.props;
 ---
 
 <section class="py-32 bg-[#0d1117]">
-  <div class={`max-w-6xl mx-auto grid md:grid-cols-2 gap-20 px-6 
-      ${reverse ? "md:flex-row-reverse" : ""}`}
-  >
-    <!-- Text -->
-    <div class="flex flex-col justify-center">
+  <div class={`max-w-6xl mx-auto px-6 md:flex md:items-center md:gap-20 
+    ${reverse ? "md:flex-row-reverse" : "md:flex-row"}`}>
+
+    <!-- TEXT -->
+    <div class="flex-1">
       <h2 class="text-5xl font-semibold mb-8 font-serif tracking-tight">
         {title}
       </h2>
 
       <div class="text-white/70 leading-relaxed space-y-4 text-lg">
-        {text}
+        <slot />
       </div>
     </div>
 
-    <!-- Image -->
-    {image && (
-      <div class="rounded-2xl overflow-hidden shadow-xl">
-        <img src={image} alt={title} class="w-full h-auto object-cover" />
-      </div>
-    )}
+    <!-- IMAGE / MEDIA -->
+    <div class="flex-1 mt-10 md:mt-0">
+      <slot name="media">
+        {image && (
+          <div class="rounded-2xl overflow-hidden shadow-xl">
+            <img src={image} alt={title} class="w-full h-auto object-cover" />
+          </div>
+        )}
+      </slot>
+    </div>
   </div>
 </section>

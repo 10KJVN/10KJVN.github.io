@@ -10,7 +10,7 @@ const featuredProjects = [
     title: "Way2Terrain",
     description:
       "Godot RenderingDevice terrain system — SPIR-V shaders, GPU pipelines, custom noise, LOD, tooling.",
-    image: "/images/dirtjam-thumb.webp",
+    image: "/images/DirtJamThumb.png",
     href: "/projects/dirt-jam",
     highlight: true,
   },
@@ -18,7 +18,7 @@ const featuredProjects = [
     title: "Operation Starfall",
     description:
       "Gameplay systems, shaders, rendering features & technical art contributions for a commercial project.",
-    image: "/images/starfall-thumb.webp",
+    image: "/images/OctoThumb.png",
     href: "/projects/starfall",
     highlight: true,
   },
@@ -29,14 +29,14 @@ const otherProjects = [
     title: "URP — Rendering & Post-Processing",
     description:
       "Custom Unity URP render features, shaders, post-processing stack rewrite & visual experiments.",
-    image: "/images/urp-thumb.webp",
+    image: "/images/urp43.png",
     href: "/projects/urp",
   },
   {
     title: "Candy Dandy",
     description:
       "Casual mobile game. Gameplay programming, tech art integration & client-based development.",
-    image: "/images/GameIcon.png",
+    image: "/images/candy43.png",
     href: "/projects/candy-dandy",
   },
 ];
@@ -48,34 +48,48 @@ const otherProjects = [
 >
   <Hero />
 
-  <!-- About Me (SectionSplit uses slot contents now) -->
-  <SectionSplit title="About Me" image="/images/hero-art.gif">
-    <p>
-      I'm a technical artist and game developer focusing on rendering,
-      shaders and gameplay systems. I create stylized visuals, experiment with
-      atmosphere, and enjoy pushing creative pipelines.
-    </p>
-    <p>
-      My work blends low-level graphics exploration with practical game-dev
-      problem solving.
-    </p>
-  </SectionSplit>
+<!-- About Me -->
+<SectionSplit title="About Me" image="/images/abtme.jpg">
+  <p>I'm a technical artist and game developer focusing on rendering,
+  shaders and gameplay systems.</p>
+  <p>My work blends low-level graphics exploration with practical
+  game-dev problem solving.</p>
+</SectionSplit>
 
-  <!-- Features (reversed layout) -->
-  <SectionSplit title="Features" image="/images/features-visual.webp" reverse={true}>
-    <p>
-      A snapshot of the skills and specializations I bring to projects. From custom shader
-      pipelines to gameplay system architecture — all grounded in strong aesthetics and
-      technical foundations.
-    </p>
+<!-- Features (reverse layout) -->
+<SectionSplit title="Gameplay Features" image="/images/octo-radialThumb.png" reverse={true}>
+  <p>
+	Contributions made during my time at NeoN Origins!
+  </p>
 
-    <ul class="list-disc pl-6 space-y-2 mt-4 text-white/70">
-      <li>Rendering & shading (HLSL, GLSL, SPIR-V)</li>
-      <li>Custom pipelines & low-level graphics</li>
-      <li>Technical art workflows</li>
-      <li>Gameplay systems & prototyping</li>
-    </ul>
-  </SectionSplit>
+  <ul class="list-disc pl-6 space-y-2 mt-4 text-white/70">
+    <li>Co-developed the first ground-based enemy</li>
+    <li>Converted the stamina system to a shader</li>
+    <li>Worked on a minimap prototype</li>
+  </ul>
+</SectionSplit>
+
+<!-- Project (text left, media right with hover video) -->
+<SectionSplit title="Tech Art">
+  <p>Participated in a Game Jam about Terrain Generation!</p>
+  <p>Here i learned to work in low-level environments through graphics and shader programming in Godot.</p>
+
+  <div slot="media" class="relative group rounded-2xl overflow-hidden shadow-xl">
+    <img
+      src="/images/DirtJamThumb.png"
+      class="w-full h-auto object-cover transition-opacity duration-300 group-hover:opacity-0"
+    />
+
+    <video
+      src="/videos/Patrolling.mp4"
+      autoplay
+      muted
+      loop
+      class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+    ></video>
+  </div>
+</SectionSplit>
+
 
   <!-- Highlighted Projects -->
   <section class="py-28 bg-neutral-950 border-t border-white/10">
