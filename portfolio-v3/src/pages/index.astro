@@ -45,6 +45,33 @@ const featuredFeatures = [
     href: "/projects/starfall#octodrone",
   },
 ];
+
+const skills = {
+  Engine: [
+    { name: "Unity", duration: "4 year" },
+    { name: "Unreal", duration: "2 year" },
+    { name: "Godot", duration: "1 month" },
+  ],
+  Language: [
+    { name: "C#", duration: "4 year" },
+    { name: "C++", duration: "0.5 year" },
+    { name: "HLSL/GLSL", duration: "0.5 year" },
+  ],
+  Tools: [
+    { name: "Git", duration: "5 year" },
+    { name: "Rider", duration: "4 year" },
+    { name: "Visual Studio Code", duration: "4 year" },
+  ],
+  Productivity: [
+    { name: "Trello", duration: "4 year" },
+    { name: "ChatGPT", duration: "3 year" },
+    { name: "Obsidian", duration: "1 month" },
+  ],
+  Creative: [
+    { name: "Blender", duration: "0.5 year" },
+    { name: "Photoshop", duration: "0.5 year" },
+  ],
+};
 ---
 
 <Layout
@@ -109,9 +136,21 @@ const featuredFeatures = [
   <section class="py-28 border-t border-white/10">
     <div class="max-w-5xl mx-auto px-6">
       <SectionHeader title="Skills" />
-      <p class="text-white/50 text-sm mt-4">
-        Placeholder
-      </p>
+
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-10 mt-8">
+        {Object.entries(skills).map(([category, items]) => (
+            <div>
+              <h3 class="text-sm uppercase tracking-wide text-white/50 mb-3">{category}</h3>
+              <div class="flex flex-wrap gap-2">
+                {items.map((item) => (
+                    <span class="text-xs px-3 py-1 rounded-full border border-white/15 text-white/70">
+                  {item.name} <span class="text-white/40">- {item.duration}</span>
+                </span>
+                ))}
+              </div>
+            </div>
+        ))}
+      </div>
     </div>
   </section>
 </Layout>
