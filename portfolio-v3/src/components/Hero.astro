@@ -61,19 +61,47 @@
 
 <section class="relative h-screen flex items-center justify-center text-center overflow-hidden">
   <div class="absolute inset-0 pointer-events-none opacity-80">
-    <img src="/images/caustics.svg" alt="" class="w-full h-full object-cover"/>
+    <img src="/images/caustics.svg" alt="" class="w-full h-full object-cover" />
   </div>
 
-  <div class="relative z-10 px-6">
-    <h1 class="glitch text-6xl font-bold" data-text="Technical Artist">Technical Artist</h1>
-    <p class="mt-6 text-lg text-white/75">Where creativity meets code.</p>
+  <div class="relative z-10 px-6 flex flex-col items-center">
+    <!-- Role badges -->
+    <div class="flex flex-wrap justify-center gap-2 mb-6">
+      {["Game Developer", "Gameplay Programmer", "UI Programmer", "Technical Artist"].map((role) => (
+          <span class="text-xs uppercase tracking-wide px-3 py-1 rounded-full border border-white/20 bg-white/5 text-white/70">
+          {role}
+        </span>
+      ))}
+    </div>
+
+    <h1 class="glitch text-6xl font-bold" data-text="Game Developer">
+      Game Developer
+    </h1>
+
+    <p class="mt-4 text-lg sm:text-xl text-white/70">
+      Specializing in Technical Art &amp; Graphics Programming
+    </p>
+
+    <p class="mt-4 max-w-xl text-white/50 leading-relaxed">
+      Gameplay-first, built with a growing focus on shaders, rendering, and the
+      visual craft that makes a game feel alive.
+    </p>
+
+    <div class="mt-8 flex gap-4">
+      <a href="/projects" class="px-5 py-2 rounded-md bg-sky-500 hover:bg-sky-400 transition text-sm font-medium">
+        View My Work
+      </a>
+      <a href="/contact" class="px-5 py-2 rounded-md border border-white/20 hover:bg-white/10 transition text-sm font-medium">
+        Contact
+      </a>
+    </div>
   </div>
 
   <!-- Enhanced noise with multiple layers -->
   <div class="absolute inset-0 pointer-events-none opacity-[0.08]
               bg-[url('/images/white-noise.png')]
               bg-repeat mix-blend-overlay animate-slower-pan"></div>
-  
+
   <!-- Optional: subtle pulse overlay -->
   <div class="absolute inset-0 pointer-events-none bg-white/5 animate-subtle-pulse mix-blend-overlay"></div>
 </section>
