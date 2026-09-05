@@ -74,7 +74,7 @@
       ))}
     </div>
 
-    <h1 class="glitch text-6xl font-bold" data-text="Game Developer">
+    <h1 id="hero-title" class="glitch text-6xl font-bold" data-text="Game Developer">
       Game Developer
     </h1>
 
@@ -105,4 +105,19 @@
   <!-- Optional: subtle pulse overlay -->
   <div class="absolute inset-0 pointer-events-none bg-white/5 animate-subtle-pulse mix-blend-overlay"></div>
 </section>
+
+<script>
+  const terms = ["Game Developer", "Technical Artist"];
+  let index = 0;
+
+  const heading = document.getElementById("hero-title");
+
+  if (heading) {
+    setInterval(() => {
+      index = (index + 1) % terms.length;
+      heading.textContent = terms[index];
+      heading.dataset.text = terms[index];
+    }, 4000);
+  }
+</script>
  
