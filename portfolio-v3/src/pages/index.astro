@@ -3,8 +3,6 @@ import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import SectionSplit from "../components/SectionSplit.astro";
 import SectionHeader from "../components/SectionHeader.astro";
-import ProjectsGrid from "../components/ProjectsGrid.astro";
-import ProjectsSection from "../components/ProjectsSection.astro";
 
 const featuredProjects = [
   {
@@ -28,24 +26,23 @@ const featuredProjects = [
   {
     title: "The Ensemble",
     description: "interactive architectural visualization in Unreal Engine.",
+    href: "/projects/ensemble",
     highlight: true,
   }
 ];
 
-const otherProjects = [
+const featuredFeatures = [
   {
-    title: "URP — Rendering & Post-Processing",
+    title: "Shopify API",
     description:
-      "Custom Unity URP render features, shaders, post-processing stack rewrite & visual experiments.",
-    image: "/images/urp43.png",
-    href: "/projects/urp",
+        "Custom Shopify API integration built during an internship — duo project, C++.",
+    href: "/features/shopify-api",
   },
   {
-    title: "Candy Dandy",
+    title: "Octodrone",
     description:
-      "Casual mobile game. Gameplay programming, tech art integration & client-based development.",
-    image: "/images/candy43.png",
-    href: "/projects/candy-dandy",
+        "Pair-programmed gameplay & shader feature shipped within Operation Starfall.",
+    href: "/projects/starfall#octodrone",
   },
 ];
 ---
@@ -56,88 +53,65 @@ const otherProjects = [
 >
   <Hero />
 
-  <!-- About Me -->
+  <!-- Highlighted Work -->
+  <section class="py-28 border-t border-white/10">
+    <div class="max-w-6xl mx-auto px-6">
+      <SectionHeader title="Highlighted Work" />
+
+      <div class="grid md:grid-cols-2 gap-12 mt-8">
+        <!-- Projects column -->
+        <div>
+          <h3 class="text-sm uppercase tracking-wide text-white/50 mb-4">Projects</h3>
+          <div class="flex flex-col gap-4">
+            {featuredProjects.map((p) => (
+
+              <a href={p.href}
+              class="group block rounded-xl border border-white/10 p-6 bg-white/2 hover:bg-white/5 transition"
+                  >
+                  <h4 class="text-lg font-semibold mb-1">{p.title}</h4>
+                  <p class="text-white/60 text-sm">{p.description}</p>
+              </a>
+              ))}
+          </div>
+        </div>
+
+        <!-- Features column -->
+        <div>
+          <h3 class="text-sm uppercase tracking-wide text-white/50 mb-4">Features</h3>
+          <div class="flex flex-col gap-4">
+            {featuredFeatures.map((f) => (
+
+              <a href={f.href}
+              class="group block rounded-xl border border-white/10 p-6 bg-white/2 hover:bg-white/5 transition"
+                  >
+                  <h4 class="text-lg font-semibold mb-1">{f.title}</h4>
+                  <p class="text-white/60 text-sm">{f.description}</p>
+              </a>
+              ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Me (short teaser — full bio lives on /about) -->
   <SectionSplit title="About Me" image="/images/abtme.jpg">
     <p>
       I'm a technical artist and game developer focusing on rendering, shaders
       and gameplay systems.
     </p>
-    <p>
-      My work blends low-level graphics exploration with practical game-dev
-      problem solving.
-    </p>
+    <a href="/about" class="inline-block mt-4 text-sky-400 hover:text-sky-300 text-sm">
+      Read more about me &rarr;
+    </a>
   </SectionSplit>
 
-  <!-- Features (reverse layout) -->
-  <SectionSplit
-    title="Gameplay Features"
-    image="/images/octo-radialThumb.png"
-    reverse={true}
-  >
-    <p>Contributions made during my time at NeoN Origins!</p>
-
-    <ul class="list-disc pl-6 space-y-2 mt-4 text-white/70">
-      <li>Co-developed the first ground-based enemy</li>
-      <li>Converted the stamina system to a shader</li>
-      <li>Worked on a minimap prototype</li>
-    </ul>
-  </SectionSplit>
-
-  <!-- Project (text left, media right with hover video) -->
-  <SectionSplit title="Tech Art">
-    <p>Participated in a Game Jam about Terrain Generation!</p>
-    <p>
-      Here i learned to work in low-level environments through graphics and
-      shader programming in Godot.
-    </p>
-
-    <div
-      slot="media"
-      class="relative group rounded-2xl overflow-hidden shadow-xl"
-    >
-      <img
-        src="/images/DirtJamThumb.png"
-        class="w-full h-auto object-cover transition-opacity duration-300 group-hover:opacity-0"
-       alt=""/>
-
-      <video
-        src="/videos/Patrolling.mp4"
-        autoplay
-        muted
-        loop
-        class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-      ></video>
-    </div>
-  </SectionSplit>
-
-  <!-- Highlighted Projects -->
-  <section class="py-28 bg-neutral-950 border-t border-white/10">
+  <!-- Skills -->
+  <section class="py-28 border-t border-white/10">
     <div class="max-w-5xl mx-auto px-6">
-      <SectionHeader title="Projects" />
-
-      <div class="grid md:grid-cols-2 gap-8">
-        {
-          featuredProjects.map((p) => (
-            <a
-              href={p.href}
-              class="group block rounded-xl border border-white/10 p-6 bg-white/2 hover:bg-white/5 transition"
-            >
-              <h3 class="text-xl font-semibold mb-2">{p.title}</h3>
-              <p class="text-white/60">{p.description}</p>
-            </a>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- <ProjectsSection projects={[...featuredProjects, ...otherProjects]} /> -->
-
-  <!-- More Projects -->
-  <section class="mt-24">
-    <div class="max-w-5xl mx-auto px-6">
-      <SectionHeader title="More Projects" />
-      <ProjectsGrid projects={otherProjects} />
+      <SectionHeader title="Skills" />
+      <p class="text-white/50 text-sm mt-4">
+        Placeholder
+      </p>
     </div>
   </section>
 </Layout>
