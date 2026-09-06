@@ -1,0 +1,27 @@
+---
+interface LinkItem {
+    label: string;
+    url: string;
+}
+
+interface Props {
+    links?: LinkItem[];
+}
+
+const { links = [] } = Astro.props;
+---
+
+{links.length > 0 && (
+<div class="flex flex-wrap gap-3 mb-10">
+    {links.map((link) => (
+
+        <a href={link.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-sm px-4 py-2 rounded-full border border-white/15 text-white/70 hover:bg-white/5 transition"
+            >
+            {link.label} &nearr;
+        </a>
+        ))}
+</div>
+    )}

@@ -1,13 +1,23 @@
 ---
+interface Heading {
+    depth: number;
+    slug: string;
+    text: string;
+}
+
+interface Props {
+    headings?: Heading[];
+}
+
 const { headings = [] } = Astro.props;
-const sections = headings.filter((h: { depth: number; }) => h.depth === 2);
+const sections = headings.filter((h) => h.depth === 2);
 ---
 
 {sections.length > 0 && (
 <nav class="border border-white/10 rounded-2xl p-4 mb-8">
     <p class="text-xs uppercase tracking-wide text-white/40 mb-3">Jump to Section</p>
     <ul class="flex flex-wrap gap-x-4 gap-y-2 text-sm">
-        {sections.map((h: { slug: any; text: unknown; }) => (
+        {sections.map((h) => (
                 <li>
                     <a href={`#${h.slug}`} class="text-sky-400 hover:text-sky-300 transition">
                         {h.text}
