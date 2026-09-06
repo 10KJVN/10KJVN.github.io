@@ -1,7 +1,41 @@
 ---
 title: "Way2Terrain"
-thumbnail: "/images/dirtjam-thumb.png"
-date: "2025-01-01"
-tags: ["Godot","Shaders","Terrain"]
+description: "A month-long shader and graphics programming deep dive into Godot's low-level rendering and terrain generation."
+thumbnail: "/images/DirtJamThumb.png"
+tags: ["Godot", "Shaders", "Terrain"]
+highlight: true
+order: 1
+
+year: 2025
+duration: "3 weeks"
+engine: "Godot"
+language: "GDScript, GLSL"
+teamSize: "Solo"
+role: "Graphics Programmer"
+
+links:
+  - label: "GitHub Repo"
+    url: "https://github.com/10KJVN/Godot-Terrain/tree/develop"
+  - label: "Itch Page"
+    url: "https://10kjvn.itch.io/way2terrain"
+  - label: "Technical PRs"
+    url: "https://github.com/10KJVN/Godot-Terrain/pulls?q=is%3Apr+is%3Aclosed"
 ---
-Hier komt de description, GIFs, code snippets, etc.
+
+## Overview
+
+The Dirt Jam is a month-long community event run by Acerola to encourage participants to get started learning graphics and shader programming. Due to the low-level nature of Godot's compositor effects, you get to explore rendering concepts hands-on without the safety net of fully featured commercial engines.
+
+## Post Mortem
+
+This project was my crash course into graphics programming. Where I learned about concepts such as:
+
+- GPU Data Alignment
+- Generating Terrain Data
+- Rendering Terrain Data
+- Compositor Effects (Godot)
+- Graphics APIs (Vulkan, SPIR-V)
+
+To make sure I really understood GPU memory alignment, I came up with my own analogy:
+
+> Think of UBO memory like an inventory grid. Each data type has its own slot size, and a row can only hold 4 slots. Bigger items (like `vec3` and `vec4`) get VIP spots at the start of the row, and smaller items fill in the gaps. If the order changes on the CPU side, you have to re-pack the layout to match on the GPU side.
