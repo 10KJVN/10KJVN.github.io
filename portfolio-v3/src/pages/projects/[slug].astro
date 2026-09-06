@@ -1,0 +1,136 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ProjectInfo from "../../components/ProjectInfo.astro";
+import TableOfContents from "../../components/TableOfContents.astro";
+import ProjectLinks from "../../components/ProjectLinks.astro";
+import BackToTop from "../../components/BackToTop.astro";
+import { getCollection, render, type CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+    const projects = await getCollection("projects");
+    return projects.map((project) => ({
+        params: { slug: project.id },
+        props: { project },
+    }));
+}
+
+interface Props {
+    project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+const { Content, headings } = await render(project);
+---
+
+<Layout
+        title={`${project.data.title} | Portfolio`}
+        description={project.data.description}
+>
+    <article class="max-w-3xl mx-auto px-6 py-20">
+        <a href="/projects" class="text-white/50 hover:text-white transition text-sm">
+            &larr; Back to projects
+        </a>
+
+        <h1 class="text-4xl md:text-5xl font-semibold tracking-tight mt-6 mb-8">
+            {project.data.title}
+        </h1>
+
+        <img
+                src={project.data.thumbnail}
+                alt={project.data.title}
+                class="w-full h-auto rounded-2xl mb-10 shadow-xl"
+        />
+
+        <ProjectInfo
+                year={project.data.year}
+                duration={project.data.duration}
+                engine={project.data.engine}
+                language={project.data.language}
+                teamSize={project.data.teamSize}
+                role={project.data.role}
+                description={project.data.description}
+        />
+
+        <TableOfContents headings={headings} />
+
+        <ProjectLinks links={project.data.links} />
+
+        <div class="mdx-content">
+            <Content />
+        </div>
+    </article>
+
+    <BackToTop />
+</Layout>
+
+<style>
+    .mdx-content :global(h2) {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.9);
+        margin-top: 3rem;
+        margin-bottom: 1rem;
+        padding-top: 0.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .mdx-content :global(h3) {
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.85);
+        margin-top: 2rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .mdx-content :global(p) {
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.75;
+        margin-bottom: 1rem;
+    }
+
+    .mdx-content :global(ul),
+    .mdx-content :global(ol) {
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.75;
+        margin-bottom: 1rem;
+        padding-left: 1.5rem;
+    }
+
+    .mdx-content :global(ul) {
+        list-style: disc;
+    }
+
+    .mdx-content :global(a) {
+        color: rgb(56, 189, 248);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+
+    .mdx-content :global(img),
+    .mdx-content :global(video) {
+        border-radius: 1rem;
+        margin: 1.5rem 0;
+        max-width: 100%;
+    }
+
+    .mdx-content :global(code) {
+        background: rgba(255, 255, 255, 0.08);
+        padding: 0.15rem 0.4rem;
+        border-radius: 0.35rem;
+        font-size: 0.85em;
+    }
+
+    .mdx-content :global(pre) {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 0.75rem;
+        padding: 1rem;
+        overflow-x: auto;
+        margin-bottom: 1.5rem;
+    }
+
+    .mdx-content :global(pre code) {
+        background: none;
+        padding: 0;
+    }
+</style>
