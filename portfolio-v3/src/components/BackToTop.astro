@@ -1,0 +1,27 @@
+---
+
+---
+
+<button
+        id="back-to-top"
+        aria-label="Back to top"
+        class="fixed bottom-6 right-6 px-4 py-2 rounded-full border border-white/15 bg-black/60 backdrop-blur text-sm text-white/70 hover:bg-white/10 transition opacity-0 pointer-events-none"
+>
+    ↑ Top
+</button>
+
+<script>
+    const btn = document.getElementById("back-to-top");
+
+    if (btn) {
+        window.addEventListener("scroll", () => {
+            const show = window.scrollY > 600;
+            btn.classList.toggle("opacity-0", !show);
+            btn.classList.toggle("pointer-events-none", !show);
+        });
+
+        btn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    }
+</script>

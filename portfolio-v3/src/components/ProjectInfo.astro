@@ -1,0 +1,41 @@
+---
+interface Props {
+    year?: number;
+    duration?: string;
+    engine?: string;
+    language?: string;
+    teamSize?: string;
+    role?: string;
+    description?: string;
+}
+
+interface Stat {
+    label: string;
+    value: string | number;
+}
+
+const { year, duration, engine, language, teamSize, role, description } = Astro.props;
+
+const stats: Stat[] = (
+    [
+        { label: "Year", value: year },
+        { label: "Duration", value: duration },
+        { label: "Engine", value: engine },
+        { label: "Language", value: language },
+        { label: "Team Size", value: teamSize },
+        { label: "Role", value: role },
+    ] as { label: string; value: string | number | undefined }[]
+).filter((s): s is Stat => Boolean(s.value));
+---
+
+<section class="border border-white/10 rounded-2xl p-6 mb-8">
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 mb-6">
+        {stats.map((s) => (
+                <div>
+                    <p class="text-xs uppercase tracking-wide text-white/40 mb-1">{s.label}</p>
+                    <p class="text-sm text-white/80">{s.value}</p>
+                </div>
+        ))}
+    </div>
+    {description && <p class="text-white/70 leading-relaxed">{description}</p>}
+</section>

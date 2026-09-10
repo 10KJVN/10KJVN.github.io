@@ -4,7 +4,7 @@ const { projects } = Astro.props;
 ---
 
 <div class="flex gap-6 overflow-x-auto pb-3">
-  {projects.map((project) => (
+  {projects.map((project: { title: unknown; description: unknown; image: unknown; href: unknown; highlight: unknown; }) => (
     <div class="min-w-[300px] md:min-w-[380px]">
       <ProjectCard
         title={project.title}
