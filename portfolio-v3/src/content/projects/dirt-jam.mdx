@@ -26,9 +26,61 @@ links:
 
 The Dirt Jam is a month-long community event run by Acerola to encourage participants to get started learning graphics and shader programming. Due to the low-level nature of Godot's compositor effects, you get to explore rendering concepts hands-on without the safety net of fully featured commercial engines.
 
+The goal wasn't to ship a game — it was to treat the 21-day window as both a technical playground and a creative statement, pushing Godot's terrain and shader pipeline further than its built-in tools allow. The project shipped finished, with roughly 6–7 features layered on top of the base terrain class.
+
+## Process
+
+Engines like Unity and Unreal ship with mature terrain systems and polished shader workflows. Godot doesn't — which is exactly what made this a good challenge. Most of the work was recreating conveniences bigger engines give you for free.
+
+I started by studying the base terrain generator's source and structure, then added features in roughly this order: Distance Fog, a Shader Include system, Level of Detail, an upgraded lighting model, and Triplanar Texture Mapping.
+
+### Technical challenges
+
+- **GPU Data Alignment** — forgetting to pad a struct for 16-byte alignment turns your shader uniforms into nonsense. GPUs read in `vec4` chunks, so a lone `vec3` needs a dummy float to keep the layout intact.
+- **Shader Modularity** — built a GDScript-driven GLSL include loader, cutting ~500 lines of duplicated shader code across effects.
+- **Texturing** — five days of trial and error to get clean triplanar mapping working, supporting multi-resolution textures without stretching.
+- **Fog & Lighting** — switching to exponential fog exposed a blending issue that flattened lit terrain. Fixed by upgrading the lighting model to Blinn–Phong for sharper highlights. [Beer's Law](https://cglearn.eu/pub/advanced-computer-graphics/volumetric-rendering) ended up being the key bit of theory tying the fog math together.
+
+Illustrating the alignment issue conceptually — this isn't lifted from the actual shader, just the shape of the problem:
+
+```glsl
+// Naive layout — a lone vec3 breaks 16-byte alignment
+layout(std140) uniform Params {
+    vec3 lightDir;   // GPU pads this to 16 bytes anyway
+    float intensity; // ends up sharing a slot you didn't plan for
+};
+```
+
+Full breakdowns for each feature — fog math, shader logic, bug fixes — are in the closed PRs linked above under **Technical PRs**.
+
+## Resources
+
+- [Beer's Law — volumetric rendering theory](https://cglearn.eu/pub/advanced-computer-graphics/volumetric-rendering)
+- [Fog theory walkthrough (video)](https://youtu.be/oQksg57qsRA?si=uunivFLk1rYETOH1&t=138)
+
+**Glossary** — a few terms if you're newer to graphics programming:
+
+- **CPU** — the computer's general-purpose "brain." Handles logic and game state, but is slower at graphics work.
+- **GPU** — specialized hardware for rendering and parallel calculations, essential for games and 3D visuals.
+- **Shader** — a small program that runs on the GPU to control how something looks: color, lighting, surface effects.
+- **Uniform** — a shared setting that stays constant across many pixels or objects, like a global color every shader can read.
+- **Buffer** — a block of GPU memory used to store data so shaders can access it quickly.
+- **Uniform Buffer Object (UBO)** — a shared "box of settings" (colors, lights, camera info) multiple shaders can read at once.
+- **Data Alignment** — how data is arranged in memory so it fits the slots hardware expects. Misaligned data wastes memory or slows things down.
+- **Texture Mapping** — applying a 2D image onto a 3D surface to add detail like grass, rock, or water.
+- **Low-level** — working with raw materials instead of prebuilt furniture. More control, more effort.
+
+## Gallery
+
+A few experiments and unused visuals from along the way — cloud studies, lighting moods, and logo variations explored before landing on the final look.
+
+<img src="/images/DirtJamThumb.png" alt="Way2Terrain gallery placeholder" class="rounded-xl" />
+
+*(Placeholder — swap in your actual gallery images: cloud experimentation, glacial peaks at sunset, moodboards, logo variations, final showcase.)*
+
 ## Post Mortem
 
-This project was my crash course into graphics programming. Where I learned about concepts such as:
+This project was my crash course into graphics programming, where I learned about concepts such as:
 
 - GPU Data Alignment
 - Generating Terrain Data
@@ -36,6 +88,6 @@ This project was my crash course into graphics programming. Where I learned abou
 - Compositor Effects (Godot)
 - Graphics APIs (Vulkan, SPIR-V)
 
-To make sure I really understood GPU memory alignment, I came up with my own analogy:
+My favorite takeaway was figuring out GPU memory alignment — and coming up with my own analogy to really understand it:
 
 > Think of UBO memory like an inventory grid. Each data type has its own slot size, and a row can only hold 4 slots. Bigger items (like `vec3` and `vec4`) get VIP spots at the start of the row, and smaller items fill in the gaps. If the order changes on the CPU side, you have to re-pack the layout to match on the GPU side.

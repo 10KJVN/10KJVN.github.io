@@ -6,7 +6,6 @@ interface Props {
     language?: string;
     teamSize?: string;
     role?: string;
-    description?: string;
 }
 
 interface Stat {
@@ -37,5 +36,4 @@ const stats: Stat[] = (
                 </div>
         ))}
     </div>
-    {description && <p class="text-white/70 leading-relaxed">{description}</p>}
 </section>

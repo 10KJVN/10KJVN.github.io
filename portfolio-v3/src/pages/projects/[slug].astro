@@ -27,9 +27,6 @@ const { Content, headings } = await render(project);
         description={project.data.description}
 >
     <article class="max-w-3xl mx-auto px-6 py-20">
-        <a href="/projects" class="text-white/50 hover:text-white transition text-sm">
-            &larr; Back to projects
-        </a>
 
         <h1 class="text-4xl md:text-5xl font-semibold tracking-tight mt-6 mb-8">
             {project.data.title}
@@ -48,7 +45,6 @@ const { Content, headings } = await render(project);
                 language={project.data.language}
                 teamSize={project.data.teamSize}
                 role={project.data.role}
-                description={project.data.description}
         />
 
         <TableOfContents headings={headings} />
