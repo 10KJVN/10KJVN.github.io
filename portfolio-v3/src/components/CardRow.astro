@@ -1,0 +1,18 @@
+---
+interface Props {
+    reverse?: boolean;
+    single?: boolean;
+}
+
+const { reverse = false, single = false } = Astro.props;
+---
+
+{single ? (
+<div class="max-w-md mx-auto my-10">
+    <slot />
+</div>
+    ) : (
+<div class={`flex flex-col md:flex-row gap-8 md:gap-12 my-10 ${reverse ? "md:flex-row-reverse" : ""}`}>
+    <slot />
+</div>
+    )}

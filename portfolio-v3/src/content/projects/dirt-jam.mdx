@@ -23,6 +23,8 @@ links:
 ---
 
 import ContentSplit from "../../components/ContentSplit.astro";
+import CardRow from "../../components/CardRow.astro";
+import ProcessCard from "../../components/ProcessCard.astro";
 
 ## Overview
 
@@ -36,42 +38,56 @@ Engines like Unity and Unreal ship with mature terrain systems and polished shad
 Godot doesn't — which is exactly what made this a good challenge.
 Most of the work was recreating conveniences bigger engines give you for free.
 
-I started by studying the base terrain generator's source and structure,
-then added features in roughly this order: Distance Fog, a Shader Include system, Level of Detail, an upgraded lighting model, and Triplanar Texture Mapping.
+I started by studying the base terrain generator's source and structure.
+From there I added features in roughly this order: Distance Fog, a Shader Include system, Level of Detail, an upgraded lighting model, and Triplanar Texture Mapping.
 
-<ContentSplit title="GPU Data Alignment" reverse={false}>
-    <p>
-        Forgetting to pad a struct for 16-byte alignment turns your shader uniforms into nonsense...
-    </p>
+<CardRow>
+    <ProcessCard title="GPU Data Alignment">
+        <Fragment slot="media">
+            ```glsl
+            // Naive layout — a lone vec3 breaks 16-byte alignment
+            layout(std140) uniform Params {
+            vec3 lightDir;   // GPU pads this to 16 bytes anyway
+            float intensity; // ends up sharing a slot you didn't plan for
+        };
+            ```
+        </Fragment>
+        <p>
+            Forgetting to pad a struct for 16-byte alignment turns your shader uniforms into nonsense.
+            GPUs read in `vec4` chunks, so a lone `vec3` needs a dummy float to keep the layout intact.
+        </p>
+    </ProcessCard>
 
-    <Fragment slot="media">
-        ```glsl
-        layout(std140) uniform Params {
-            vec3 lightDir;
-            float intensity;
-    };
-        ```
-    </Fragment>
-</ContentSplit>
+    <ProcessCard title="Shader Modularity">
+        <p>
+            Built a GDScript-driven GLSL include loader, cutting ~500 lines of duplicated shader code across effects.
+            Full breakdown in the <a href="https://github.com/10KJVN/Godot-Terrain/pulls?q=is%3Apr+is%3Aclosed">closed PRs</a>.
+        </p>
+    </ProcessCard>
+</CardRow>
 
-### Technical challenges
+<CardRow reverse>
+    <ProcessCard title="Texturing">
+        <Fragment slot="media">
+            <img src="/images/DirtJamThumb.png" alt="Way2Terrain gallery placeholder" class="rounded-xl" />
+        </Fragment>
+        <p>
+            Five days of trial and error to get clean triplanar mapping working.
+            Ended up supporting multi-resolution textures without stretching.
+        </p>
+    </ProcessCard>
 
-- **GPU Data Alignment** — forgetting to pad a struct for 16-byte alignment turns your shader uniforms into nonsense. GPUs read in `vec4` chunks, so a lone `vec3` needs a dummy float to keep the layout intact.
-- **Shader Modularity** — built a GDScript-driven GLSL include loader, cutting ~500 lines of duplicated shader code across effects.
-- **Texturing** — five days of trial and error to get clean triplanar mapping working, supporting multi-resolution textures without stretching.
-- **Fog & Lighting** — switching to exponential fog exposed a blending issue that flattened lit terrain. Fixed by upgrading the lighting model to Blinn–Phong for sharper highlights. [Beer's Law](https://cglearn.eu/pub/advanced-computer-graphics/volumetric-rendering) ended up being the key bit of theory tying the fog math together.
-
-Illustrating the alignment issue conceptually — this isn't lifted from the actual shader, just the shape of the problem:
-
-```glsl
-// Naive layout — a lone vec3 breaks 16-byte alignment
-layout(std140) uniform Params {
-    vec3 lightDir;   // GPU pads this to 16 bytes anyway
-    float intensity; // ends up sharing a slot you didn't plan for
-};
-```
-
-Full breakdowns for each feature — fog math, shader logic, bug fixes — are in the closed PRs linked above under **Technical PRs**.
+    <ProcessCard title="Fog & Lighting">
+        <Fragment slot="media">
+            <img src="/images/DirtJamThumb.png" alt="Way2Terrain gallery placeholder" class="rounded-xl" />
+        </Fragment>
+        <p>
+            Switching to exponential fog exposed a blending issue that flattened lit terrain.
+            Fixed by upgrading the lighting model to Blinn–Phong for sharper highlights.
+            [Beer's Law](https://cglearn.eu/pub/advanced-computer-graphics/volumetric-rendering) ended up being the key bit of theory tying the fog math together.
+        </p>
+    </ProcessCard>
+</CardRow>
 
 ## Resources
 
