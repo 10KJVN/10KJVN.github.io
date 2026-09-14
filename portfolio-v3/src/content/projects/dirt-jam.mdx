@@ -22,6 +22,8 @@ links:
     url: "https://github.com/10KJVN/Godot-Terrain/pulls?q=is%3Apr+is%3Aclosed"
 ---
 
+import ContentSplit from "../../components/ContentSplit.astro";
+
 ## Overview
 
 The Dirt Jam is a month-long community event run by Acerola to encourage participants to get started learning graphics and shader programming. Due to the low-level nature of Godot's compositor effects, you get to explore rendering concepts hands-on without the safety net of fully featured commercial engines.
@@ -30,9 +32,27 @@ The goal wasn't to ship a game — it was to treat the 21-day window as both a t
 
 ## Process
 
-Engines like Unity and Unreal ship with mature terrain systems and polished shader workflows. Godot doesn't — which is exactly what made this a good challenge. Most of the work was recreating conveniences bigger engines give you for free.
+Engines like Unity and Unreal ship with mature terrain systems and polished shader workflows.
+Godot doesn't — which is exactly what made this a good challenge.
+Most of the work was recreating conveniences bigger engines give you for free.
 
-I started by studying the base terrain generator's source and structure, then added features in roughly this order: Distance Fog, a Shader Include system, Level of Detail, an upgraded lighting model, and Triplanar Texture Mapping.
+I started by studying the base terrain generator's source and structure,
+then added features in roughly this order: Distance Fog, a Shader Include system, Level of Detail, an upgraded lighting model, and Triplanar Texture Mapping.
+
+<ContentSplit title="GPU Data Alignment" reverse={false}>
+    <p>
+        Forgetting to pad a struct for 16-byte alignment turns your shader uniforms into nonsense...
+    </p>
+
+    <Fragment slot="media">
+        ```glsl
+        layout(std140) uniform Params {
+            vec3 lightDir;
+            float intensity;
+    };
+        ```
+    </Fragment>
+</ContentSplit>
 
 ### Technical challenges
 

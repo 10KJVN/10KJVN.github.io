@@ -26,17 +26,11 @@ const { Content, headings } = await render(project);
         title={`${project.data.title} | Portfolio`}
         description={project.data.description}
 >
-    <article class="max-w-3xl mx-auto px-6 py-20">
+    <article class="max-w-5xl mx-auto px-6 py-20">
 
         <h1 class="text-4xl md:text-5xl font-semibold tracking-tight mt-6 mb-8">
             {project.data.title}
         </h1>
-
-        <img
-                src={project.data.thumbnail}
-                alt={project.data.title}
-                class="w-full h-auto rounded-2xl mb-10 shadow-xl"
-        />
 
         <ProjectInfo
                 year={project.data.year}
@@ -82,6 +76,18 @@ const { Content, headings } = await render(project);
         color: rgba(255, 255, 255, 0.7);
         line-height: 1.75;
         margin-bottom: 1rem;
+    }
+
+    .mdx-content :global(p) {
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.75;
+        margin-bottom: 1rem;
+        max-width: 68ch;
+    }
+
+    .mdx-content :global(ul),
+    .mdx-content :global(ol) {
+        max-width: 68ch;
     }
 
     .mdx-content :global(ul),

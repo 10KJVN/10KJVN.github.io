@@ -1,0 +1,24 @@
+---
+interface Props {
+    title: string;
+    thumbnail?: string;
+}
+
+const { title, thumbnail } = Astro.props;
+---
+
+<div class="flex items-start gap-6 py-6 border-t border-white/10 first:border-t-0 first:pt-0">
+    {thumbnail && (
+            <img
+                    src={thumbnail}
+                    alt={title}
+                    class="w-24 h-24 object-cover rounded-lg flex-shrink-0"
+            />
+    )}
+    <div class="flex-1">
+        <h4 class="text-lg font-semibold mb-2 text-white/90">{title}</h4>
+        <div class="text-white/70 leading-relaxed text-sm space-y-2">
+            <slot />
+        </div>
+    </div>
+</div>
