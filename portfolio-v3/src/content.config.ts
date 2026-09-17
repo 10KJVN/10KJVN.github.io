@@ -1,3 +1,10 @@
+/**
+ * Defines the structure and validation rules for portfolio content.
+ *
+ * Projects and features are loaded from MDX files and validated
+ * against these schemas when Astro builds the site.c
+ */
+
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 

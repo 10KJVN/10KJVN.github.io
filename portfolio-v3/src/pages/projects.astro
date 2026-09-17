@@ -53,6 +53,14 @@ const allTags = Array.from(new Set(projects.flatMap((p) => p.tags))).sort();
 </Layout>
 
 <script>
+
+    /*
+     * Client-side filtering for the project grid.
+     *
+     * This intentionally uses vanilla JS instead of React/state
+     * because filtering only changes the visibility of existing cards.
+     */
+
     const buttons = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
     const cards = document.querySelectorAll<HTMLAnchorElement>("#projects-grid > a");
 
