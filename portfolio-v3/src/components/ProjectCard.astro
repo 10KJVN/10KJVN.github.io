@@ -1,16 +1,26 @@
 ---
+interface Props {
+    title: string;
+    description: string;
+    image: string;
+    href: string;
+    tags?: string[];
+    highlight?: boolean;
+}
+
 const {
-  title,
-  description,
-  image,
-  href,
-  highlight = false
+    title,
+    description,
+    image,
+    href,
+    tags = [],
+    highlight = false
 } = Astro.props;
 ---
 
-<a 
-  href={href}
-  class={`group block rounded-xl overflow-hidden transition border 
+<a href={href}
+   data-tags={tags.join(",")}
+   class={`group block rounded-xl overflow-hidden transition border
     ${highlight 
       ? "border-white/20 bg-white/5 hover:bg-white/10" 
       : "border-white/10 bg-white/5 hover:bg-white/10"
@@ -26,6 +36,16 @@ const {
 
   <div class="p-4">
     <h3 class="text-xl font-semibold mb-2">{title}</h3>
-    <p class="opacity-70 text-sm leading-relaxed">{description}</p>
+      <p class="opacity-70 text-sm leading-relaxed mb-3">{description}</p>
+
+      {tags.length > 0 && (
+              <div class="flex flex-wrap gap-1.5">
+                  {tags.map((tag) => (
+                          <span class="text-[11px] uppercase tracking-wide px-2 py-0.5 rounded-full border border-white/15 text-white/60">
+            {tag}
+          </span>
+                  ))}
+              </div>
+      )}
   </div>
 </a>
