@@ -43,7 +43,7 @@ From there I added features in roughly this order: Distance Fog, a Shader Includ
 
 <CardRow>
     <ProcessCard title="GPU Data Alignment">
-        <Fragment slot="media">
+        {/* <Fragment slot="media">
             ```glsl
             // Naive layout — a lone vec3 breaks 16-byte alignment
             layout(std140) uniform Params {
@@ -51,7 +51,7 @@ From there I added features in roughly this order: Distance Fog, a Shader Includ
             float intensity; // ends up sharing a slot you didn't plan for
         };
             ```
-        </Fragment>
+        </Fragment> */}
         <p>
             Forgetting to pad a struct for 16-byte alignment turns your shader uniforms into nonsense.
             GPUs read in `vec4` chunks, so a lone `vec3` needs a dummy float to keep the layout intact.
