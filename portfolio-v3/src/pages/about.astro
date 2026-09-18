@@ -1,0 +1,116 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+import Timeline from "../components/Timeline.astro";
+
+const timeline = [
+    {
+        year: "2025",
+        entries: [
+            {
+                title: "HKU",
+                description:
+                    "Applied last-minute after realizing I was dealing with serious imposter syndrome and didn't feel ready to job-hunt yet. Decided to start over with more passion and motivation, and shape my path on my own terms this time.",
+            },
+            {
+                title: "First Game Jam — The Dirt Jam",
+                description:
+                    "Entered after feedback that reviewers had let me into HKU but lacked solo work to judge what I could actually produce alone. Took it as a personal challenge and learned terrain generation and Godot in the process.",
+                link: { label: "Way2Terrain", url: "/projects/dirt-jam" },
+            },
+            {
+                title: "MBO Diploma",
+                description:
+                    "Passed after a resit — the first round of user testing didn't meet the exam criteria, so I ran more sessions and got proper footage. Somewhere in my 3rd year I'd started \"vibe coding,\" believing it would speed up production and teach me more. It did neither — I could put games together, but without real meaning, passion, or design intent behind them.",
+            },
+            {
+                title: "MBO Exams",
+                description:
+                    "Three companies pitched real assignments — Linx Interactive, Azerion, and the Dutch Navy. Got my preferred client.",
+                link: { label: "Candy Dandy", url: "/projects/candy-dandy" },
+            },
+        ],
+    },
+    {
+        year: "2024",
+        entries: [
+            {
+                title: "Veldboom Studios Internship",
+                description:
+                    "Focused on Game Mechanics and Architectural Visualization. Introduced SCRUM alongside a colleague at the same studio. Learned 3D scanning, Photoshop texturing, and did UI programming for a Shopify feature inside Unreal Engine.",
+            },
+            {
+                title: "Aspekt Internship — Loznica, Serbia",
+                description:
+                    "My first internship abroad, working with Media Designers on an iteration of the Bee Project — a game raising awareness of bees' role in the ecosystem. Also freelancing and job-hunting on the side, while building cultural and social self-sufficiency.",
+            },
+        ],
+    },
+    {
+        year: "2023",
+        entries: [
+            {
+                title: "Freelance Work — The Ensemble",
+                description:
+                    "Referred by a friend, starting with a website, then game mechanics, and eventually a real client project called The Ensemble — worked on and off for about 2 years.",
+                link: { label: "LinkedIn post", url: "https://linkedin.com/example-post" },
+            },
+            {
+                title: "NeoN Origin",
+                description:
+                    "A hybrid learning environment where I truly honed my game development skills over the course of a year.",
+                link: { label: "NeoN Origin", url: "https://example.com/neon-origin" },
+            },
+        ],
+    },
+    {
+        year: "2022",
+        entries: [
+            {
+                title: "First Unity Game",
+                description:
+                    "First cross-discipline collaboration, working with Game Artists on an 8-week space-themed game for an exposition. The damage system wasn't finished in time, so I faked it live by manually pressing a button.",
+            },
+        ],
+    },
+    {
+        year: "2021",
+        entries: [
+            {
+                title: "Media College Amsterdam",
+                description:
+                    "Started as a Software Development course covering Python and basic web development. From the 2nd semester, students could specialize into Game Development or Fullstack Development.",
+            },
+            {
+                title: "First Game — Pac-Man Clone",
+                description:
+                    "Built a barely-functional Pac-Man clone on Scratch in a day — no wall collision, but you could actually win or lose. Used it to enroll at Media College Amsterdam.",
+            },
+        ],
+    },
+];
+---
+
+<Layout
+        title="About | Portfolio"
+        description="Who I am and how I got here."
+>
+    <section class="py-24">
+        <div class="max-w-3xl mx-auto px-6">
+            <SectionHeader title="About Me" />
+
+            <div class="text-white/70 leading-relaxed space-y-4 mb-16 max-w-2xl">
+                <p>
+                    I'm a 20-year-old game developer from Amsterdam, The Netherlands.
+                </p>
+                <p>
+                    At the core, I'm a generalist Game Developer with expertise in gameplay and UI programming — games are meant to be played first, which is why gameplay comes before graphics for me.
+                    That said, I'm working toward a specialization somewhere between Technical Artist and Graphics Programmer, drawn in by shaders and the visual side of rendering.
+                </p>
+            </div>
+
+            <SectionHeader title="My Story" />
+            <Timeline groups={timeline} />
+        </div>
+    </section>
+</Layout>

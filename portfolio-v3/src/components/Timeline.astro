@@ -1,0 +1,43 @@
+---
+interface TimelineEntry {
+    title: string;
+    description: string;
+    link?: { label: string; url: string };
+}
+
+interface TimelineGroup {
+    year: string;
+    entries: TimelineEntry[];
+}
+
+interface Props {
+    groups: TimelineGroup[];
+}
+
+const { groups } = Astro.props;
+---
+
+<div class="relative pl-8">
+    <div class="absolute left-2 top-0 bottom-0 w-px bg-white/15"></div>
+
+    {groups.map((group) => (
+            <div class="mb-12 relative">
+                <div class="absolute -left-[26px] top-1 w-3 h-3 rounded-full bg-sky-400"></div>
+                <p class="text-sm uppercase tracking-wide text-white/40 mb-4">{group.year}</p>
+
+                <div class="flex flex-col gap-8">
+                    {group.entries.map((entry) => (
+                            <div>
+                                <h3 class="text-lg font-semibold text-white/90 mb-1">{entry.title}</h3>
+                                <p class="text-white/70 leading-relaxed text-sm">{entry.description}</p>
+                                {entry.link && (
+                                        <a href={entry.link.url} class="inline-block mt-2 text-sky-400 hover:text-sky-300 text-sm">
+                                            {entry.link.label} &rarr;
+                                        </a>
+                                )}
+                            </div>
+                    ))}
+                </div>
+            </div>
+    ))}
+</div>
