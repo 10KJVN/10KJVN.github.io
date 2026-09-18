@@ -1,0 +1,12 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SectionHeader from "./index.astro"
+import ProjectsGrid from "../components/ProjectsGrid.astro"
+import { getCollection } from "astro:content";
+
+const allFeatures = await getCollection("features")
+---
+
+<Layout title="Features | Portfolio">
+
+</Layout>
