@@ -56,23 +56,6 @@
   }
 }
 
-/* CSS Layered Gradients + Noise Texture 
-@layer utilities {
-  @keyframes slow-drift {
-    from { transform: translateY(0); }
-    to   { transform: translateY(-15%); }
-  }
-
-  @keyframes slower-pan {
-    from { transform: translate(0,0); }
-    to   { transform: translate(-5%, -5%); }
-  }
-
-  .animate-slow-drift { animation: slow-drift 14s linear infinite alternate; }
-  .animate-slower-pan { animation: slower-pan 25s linear infinite alternate; }
-}
-*/
-
 /* Enhanced CSS Layered Gradients + Noise Texture */
 @layer utilities {
   @keyframes slow-drift {
