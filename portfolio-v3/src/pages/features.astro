@@ -5,8 +5,45 @@ import ProjectsGrid from "../components/ProjectsGrid.astro"
 import { getCollection } from "astro:content";
 
 const allFeatures = await getCollection("features")
+
+const sorted = [...allFeatures].sort(
+    (a, b) => (a.data.order ?? Infinity) - (b.data.order ?? Infinity)
+);
+
+const features = sorted.map((entry) => ({
+    title: entry.data.title,
+    description: entry.data.description,
+    image: entry.data.thumbnail,
+    href: `/features/${entry.id}`,
+    tags: entry.data.tags,
+}));
+
+const allTags = Array.from(new Set(features.flatMap((p) => p.tags))).sort();
 ---
 
 <Layout title="Features | Portfolio">
+    <section class="py-24">
+        <div class="max-w-5xl mx-auto px-6">
+            <SectionHeader title="All Projects" />
 
+            <div class="flex flex-wrap gap-2 mb-10">
+                <button
+                        data-tag="all"
+                        class="filter-btn active text-xs uppercase tracking-wide px-3 py-1.5 rounded-full border border-white/20 bg-white/10"
+                >
+                    All
+                </button>
+                {allTags.map((tag) => (
+                        <button
+                                data-tag={tag}
+                                class="filter-btn text-xs uppercase tracking-wide px-3 py-1.5 rounded-full border border-white/15 text-white/60 hover:bg-white/5"
+                        >
+                            {tag}
+                        </button>
+                ))}
+            </div>
+
+            <ProjectsGrid projects={features} />
+        </div>
+    </section>
 </Layout>

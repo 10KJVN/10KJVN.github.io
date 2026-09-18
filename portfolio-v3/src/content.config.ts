@@ -46,6 +46,7 @@ const features = defineCollection({
         description: z.string(),
         thumbnail: z.string(),
         tags: z.array(z.string()).default([]),
+        order: z.number().optional(),
 
         // Standalone feature -> gets its own /features/[slug] page.
         // Feature tied to a project -> resolves to /projects/{projectSlug}#{anchorId} instead.
