@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import SectionHeader from "./index.astro"
+import SectionHeader from "../components/SectionHeader.astro";
 import ProjectsGrid from "../components/ProjectsGrid.astro"
 import { getCollection } from "astro:content";
 
@@ -14,7 +14,11 @@ const features = sorted.map((entry) => ({
     title: entry.data.title,
     description: entry.data.description,
     image: entry.data.thumbnail,
-    href: `/features/${entry.id}`,
+    href:
+        entry.data.externalUrl ??
+        (entry.data.projectSlug
+            ? `/projects/${entry.data.projectSlug}#${entry.data.anchorId}`
+            : `/features/${entry.id}`),
     tags: entry.data.tags,
 }));
 
@@ -24,7 +28,7 @@ const allTags = Array.from(new Set(features.flatMap((p) => p.tags))).sort();
 <Layout title="Features | Portfolio">
     <section class="py-24">
         <div class="max-w-5xl mx-auto px-6">
-            <SectionHeader title="All Projects" />
+            <SectionHeader title="Features" />
 
             <div class="flex flex-wrap gap-2 mb-10">
                 <button
@@ -47,3 +51,35 @@ const allTags = Array.from(new Set(features.flatMap((p) => p.tags))).sort();
         </div>
     </section>
 </Layout>
+
+<script>
+
+/*
+* Client-side filtering for the project grid.
+*
+* This intentionally uses vanilla JS instead of React/state
+* because filtering only changes the visibility of existing cards.
+*/
+
+const buttons = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
+    const cards = document.querySelectorAll<HTMLAnchorElement>("#projects-grid > a");
+
+        buttons.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const selected: string = btn.dataset.tag ?? "all";
+
+                buttons.forEach((b) => {
+                    b.classList.remove("active", "border-white/20", "bg-white/10");
+                    b.classList.add("border-white/15", "text-white/60");
+                });
+                btn.classList.add("active", "border-white/20", "bg-white/10");
+                btn.classList.remove("border-white/15", "text-white/60");
+
+                cards.forEach((card) => {
+                    const tags: string[] = card.dataset.tags?.split(",") ?? [];
+                    const show = selected === "all" || tags.includes(selected);
+                    card.style.display = show ? "" : "none";
+                });
+            });
+        });
+</script>

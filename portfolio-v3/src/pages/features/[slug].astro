@@ -1,0 +1,76 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ProjectInfo from "../../components/ProjectInfo.astro";
+import ProjectLinks from "../../components/ProjectLinks.astro";
+import { getCollection, render, type CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+    const features = await getCollection("features");
+
+    // Only standalone features get a real page — anchored and external ones resolve elsewhere.
+    const standalone = features.filter(
+        (f) => !f.data.projectSlug && !f.data.externalUrl
+    );
+
+    return standalone.map((feature) => ({
+        params: { slug: feature.id },
+        props: { feature },
+    }));
+}
+
+interface Props {
+    feature: CollectionEntry<"features">;
+}
+
+const { feature } = Astro.props;
+const { Content } = await render(feature);
+---
+
+<Layout
+        title={`${feature.data.title} | Portfolio`}
+        description={feature.data.description}
+>
+    <article class="max-w-3xl mx-auto px-6 py-20">
+        <a href="/features" class="text-white/50 hover:text-white transition text-sm">
+            &larr; Back to features
+        </a>
+
+        <h1 class="text-4xl md:text-5xl font-semibold tracking-tight mt-6 mb-8">
+            {feature.data.title}
+        </h1>
+
+        <p class="text-white/70 leading-relaxed mb-10">
+            {feature.data.description}
+        </p>
+
+        <ProjectInfo
+                year={feature.data.year}
+                duration={feature.data.duration}
+                engine={feature.data.engine}
+                language={feature.data.language}
+                teamSize={feature.data.teamSize}
+                role={feature.data.role}
+        />
+
+        <ProjectLinks links={feature.data.links} />
+
+        <div class="mdx-content">
+            <Content />
+        </div>
+    </article>
+</Layout>
+
+<style>
+    .mdx-content :global(p) {
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.75;
+        margin-bottom: 1rem;
+        max-width: 68ch;
+    }
+
+    .mdx-content :global(a) {
+        color: rgb(56, 189, 248);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+</style>
