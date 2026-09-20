@@ -3,41 +3,14 @@ import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import SectionSplit from "../components/SectionSplit.astro";
 import SectionHeader from "../components/SectionHeader.astro";
+import {getCollection} from "astro:content";
 
-const featuredProjects = [
-  {
-    title: "Way2Terrain",
-    description:
-      "Godot RenderingDevice terrain system — SPIR-V shaders, GPU pipelines, custom noise, LOD, tooling.",
-    image: "/images/DirtJamThumb.png",
-    href: "/projects/dirt-jam",
-    highlight: true,
-  },
+const featuredProjects = (await getCollection("projects"))
+    .filter((project) => project.data.highlight)
+    .sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999));
 
-  {
-    title: "Operation Starfall",
-    description:
-      "Gameplay systems, shaders, rendering features & technical art contributions for a commercial project.",
-    image: "/images/OctoThumb.png",
-    href: "/projects/operation-starfall",
-    highlight: true,
-  },
-];
-
-const featuredFeatures = [
-  {
-    title: "Shopify API",
-    description:
-        "Custom Shopify API integration built during an internship — duo project, C++.",
-    href: "/features/shopify-api",
-  },
-  {
-    title: "Octodrone",
-    description:
-        "Pair-programmed gameplay & shader feature shipped within Operation Starfall.",
-    href: "/projects/starfall#octodrone",
-  },
-];
+const featuredFeatures = (await getCollection("features"))
+    .filter((feature) => feature.data.highlight)
 
 const skills = {
   Engine: [
@@ -83,13 +56,13 @@ const skills = {
         <div>
           <h3 class="text-sm uppercase tracking-wide text-white/50 mb-4">Projects</h3>
           <div class="flex flex-col gap-4">
-            {featuredProjects.map((p) => (
+            {featuredProjects.map((project) => (
 
-              <a href={p.href}
+              <a href={project.id}
               class="group block rounded-xl border border-white/10 p-6 bg-white/2 hover:bg-white/5 transition"
                   >
-                  <h4 class="text-lg font-semibold mb-1">{p.title}</h4>
-                  <p class="text-white/60 text-sm">{p.description}</p>
+                  <h4 class="text-lg font-semibold mb-1">{project.data.title}</h4>
+                  <p class="text-white/60 text-sm">{project.data.description}</p>
               </a>
               ))}
           </div>
@@ -99,13 +72,13 @@ const skills = {
         <div>
           <h3 class="text-sm uppercase tracking-wide text-white/50 mb-4">Features</h3>
           <div class="flex flex-col gap-4">
-            {featuredFeatures.map((f) => (
+            {featuredFeatures.map((feature) => (
 
-              <a href={f.href}
+              <a href={feature.id}
               class="group block rounded-xl border border-white/10 p-6 bg-white/2 hover:bg-white/5 transition"
                   >
-                  <h4 class="text-lg font-semibold mb-1">{f.title}</h4>
-                  <p class="text-white/60 text-sm">{f.description}</p>
+                  <h4 class="text-lg font-semibold mb-1">{feature.data.title}</h4>
+                  <p class="text-white/60 text-sm">{feature.data.description}</p>
               </a>
               ))}
           </div>
