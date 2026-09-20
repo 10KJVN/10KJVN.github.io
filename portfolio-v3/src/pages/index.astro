@@ -58,7 +58,7 @@ const skills = {
           <div class="flex flex-col gap-4">
             {featuredProjects.map((project) => (
 
-              <a href={project.id}
+              <a href={`/projects/${project.id}`}
               class="group block rounded-xl border border-white/10 p-6 bg-white/2 hover:bg-white/5 transition"
                   >
                   <h4 class="text-lg font-semibold mb-1">{project.data.title}</h4>
@@ -72,15 +72,34 @@ const skills = {
         <div>
           <h3 class="text-sm uppercase tracking-wide text-white/50 mb-4">Features</h3>
           <div class="flex flex-col gap-4">
-            {featuredFeatures.map((feature) => (
 
-              <a href={feature.id}
-              class="group block rounded-xl border border-white/10 p-6 bg-white/2 hover:bg-white/5 transition"
+            <!-- Hardcoded test solution for now -->
+            {featuredFeatures.map((feature) => {
+              let href;
+
+              if (feature.data.externalUrl) {
+                href = feature.data.externalUrl;
+              } else if (feature.data.projectSlug && feature.data.anchorId) {
+                href = `/projects/${feature.data.projectSlug}#${feature.data.anchorId}`;
+              } else {
+                href = `/features/${feature.id}`;
+              }
+
+              return (
+                  <a
+                      href={href}
+                      class="group block rounded-xl border border-white/10 p-6 bg-white/2 hover:bg-white/5 transition"
                   >
-                  <h4 class="text-lg font-semibold mb-1">{feature.data.title}</h4>
-                  <p class="text-white/60 text-sm">{feature.data.description}</p>
-              </a>
-              ))}
+                    <h4 class="text-lg font-semibold mb-1">
+                      {feature.data.title}
+                    </h4>
+                    <p class="text-white/60 text-sm">
+                      {feature.data.description}
+                    </p>
+                  </a>
+              );
+            })}
+
           </div>
         </div>
       </div>

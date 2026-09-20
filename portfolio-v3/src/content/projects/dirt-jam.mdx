@@ -129,4 +129,6 @@ This project was my crash course into graphics programming, where I learned abou
 
 My favorite takeaway was figuring out GPU memory alignment — and coming up with my own analogy to really understand it:
 
-> Think of UBO memory like an inventory grid. Each data type has its own slot size, and a row can only hold 4 slots. Bigger items (like `vec3` and `vec4`) get VIP spots at the start of the row, and smaller items fill in the gaps. If the order changes on the CPU side, you have to re-pack the layout to match on the GPU side.
+> Think of UBO memory like an inventory grid. Each data type has its own slot size, and a row can only hold 4 slots.
+Bigger items (like `vec3` and `vec4`) get VIP spots at the start of the row, and smaller items fill in the gaps.
+If the order changes on the CPU side, you have to re-pack the layout to match on the GPU side.
