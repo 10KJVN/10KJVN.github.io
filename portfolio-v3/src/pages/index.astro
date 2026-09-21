@@ -59,14 +59,13 @@ const skills = {
           <h3 class="text-sm uppercase tracking-wide text-white/50 mb-4">Projects</h3>
           <div class="flex flex-col gap-4">
             {featuredProjects.map((project) => (
-
-              <a href={`/projects/${project.id}`}
-              class="group block rounded-xl border border-white/10 p-6 bg-white/2 hover:bg-white/5 transition"
-                  >
-                  <h4 class="text-lg font-semibold mb-1">{project.data.title}</h4>
-                  <p class="text-white/60 text-sm">{project.data.description}</p>
-              </a>
-              ))}
+                <ProjectCard
+                    title={project.data.title}
+                    description={project.data.description}
+                    href={`/projects/${project.id}`}
+                    image={project.data.thumbnail}
+                />
+            ))}
           </div>
         </div>
 
