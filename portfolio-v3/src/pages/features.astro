@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import ProjectsGrid from "../components/ProjectsGrid.astro"
 import { getCollection } from "astro:content";
+import { resolveFeatureHref } from "../lib/resolveFeatureHref";
 
 const allFeatures = await getCollection("features")
 
@@ -14,11 +15,7 @@ const features = sorted.map((entry) => ({
     title: entry.data.title,
     description: entry.data.description,
     image: entry.data.thumbnail,
-    href:
-        entry.data.externalUrl ??
-        (entry.data.projectSlug
-            ? `/projects/${entry.data.projectSlug}#${entry.data.anchorId}`
-            : `/features/${entry.id}`),
+    href: resolveFeatureHref(entry),
     tags: entry.data.tags,
 }));
 
