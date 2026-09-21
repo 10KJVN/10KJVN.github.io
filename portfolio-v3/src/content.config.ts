@@ -8,7 +8,7 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
-// Shared by both collections — everything needed to render a card.
+// Shared by both collections, everything needed to render a card.
 const cardFields = {
     title: z.string(),
     description: z.string(),
@@ -19,7 +19,7 @@ const cardFields = {
     order: z.number().optional(), // manual sort order
 };
 
-// Project Information stats + quick links — shared because a standalone
+// Project Information stats + quick links
 const infoFields = {
     year: z.number().optional(),
     duration: z.string().optional(),
@@ -40,10 +40,7 @@ const projects = defineCollection({
     }),
 });
 
-// A feature resolves its card link one of three ways, checked in this order:
-// 1. externalUrl set               -> links straight out (e.g. a YouTube video, GitHub Repo)
-// 2. projectSlug + anchorId set    -> links into a specific section of that project's page.
-// 3. neither set                   -> gets its own standalone /features/[slug] page.
+// A feature can resolve in 3 ways, see 'src\lib\resolveFeatureHref.ts'
 const features = defineCollection({
     loader: glob({ pattern: "**/*.mdx", base: "./src/content/features" }),
     schema: z.object({
