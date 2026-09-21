@@ -75,9 +75,11 @@ const skills = {
 
             <!-- Hardcoded test solution for now -->
             {featuredFeatures.map((feature) => {
+              const isExternal = !!feature.data.externalUrl;
+
               let href;
 
-              if (feature.data.externalUrl) {
+              if (isExternal) {
                 href = feature.data.externalUrl;
               } else if (feature.data.projectSlug && feature.data.anchorId) {
                 href = `/projects/${feature.data.projectSlug}#${feature.data.anchorId}`;
@@ -88,6 +90,8 @@ const skills = {
               return (
                   <a
                       href={href}
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noopener noreferrer" : undefined}
                       class="group block rounded-xl border border-white/10 p-6 bg-white/2 hover:bg-white/5 transition"
                   >
                     <h4 class="text-lg font-semibold mb-1">

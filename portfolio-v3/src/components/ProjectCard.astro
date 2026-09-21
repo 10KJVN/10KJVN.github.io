@@ -16,9 +16,13 @@ const {
     tags = [],
     highlight = false
 } = Astro.props;
+
+const isExternal = href.startsWith("http");
 ---
 
 <a href={href}
+   target={isExternal ? "_blank" : undefined}
+   rel={isExternal ? "noopener noreferrer" : undefined}
    data-tags={tags.join(",")}
    class={`group block rounded-xl overflow-hidden transition border
     ${highlight 
