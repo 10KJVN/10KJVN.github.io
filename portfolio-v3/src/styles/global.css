@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --color-border-strong: rgba(255, 255, 255, 0.35);
+}
+
 @layer utilities {
 
   /* OVERRIDE TAILWIND 4 PRESET */

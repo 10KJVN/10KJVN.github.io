@@ -49,7 +49,7 @@ const skills = {
   <Hero />
 
   <!-- Highlighted Work -->
-  <section class="py-28 border-t border-white/75" id="featured">
+  <section class="py-28 border-t border-border-strong" id="featured">
     <div class="max-w-6xl mx-auto px-6">
       <SectionHeader title="Highlighted Work" />
 
@@ -90,18 +90,20 @@ const skills = {
   </section>
 
   <!-- About Me (short teaser — full bio lives on /about) -->
-  <SectionSplit title="About Me" image="/images/abtme.jpg">
-    <p>
-      I'm a technical artist and game developer focusing on rendering, shaders
-      and gameplay systems.
-    </p>
-    <a href="/about" class="inline-block mt-4 text-sky-400 hover:text-sky-300 text-sm">
-      Read more about me &rarr;
-    </a>
-  </SectionSplit>
-
+  <section class="py-28 border-t border-border-strong">
+    <SectionSplit title="About Me" image="/images/abtme.jpg">
+      <p>
+        I'm a technical artist and game developer focusing on rendering, shaders
+        and gameplay systems.
+      </p>
+      <a href="/about" class="inline-block mt-4 text-sky-400 hover:text-sky-300 text-sm">
+        Read more about me &rarr;
+      </a>
+    </SectionSplit>
+  </section>
+  
   <!-- Skills -->
-  <section class="py-28 border-t border-white/10">
+  <section class="py-28 border-t border-border-strong">
     <div class="max-w-5xl mx-auto px-6">
       <SectionHeader title="Skills" />
 
