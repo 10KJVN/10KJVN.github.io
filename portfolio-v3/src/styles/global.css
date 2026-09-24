@@ -5,6 +5,14 @@
 }
 
 @layer utilities {
+  .full-bleed {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+  }
+}
+
+@layer utilities {
 
   /* OVERRIDE TAILWIND 4 PRESET */
   .glitch::before,
