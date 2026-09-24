@@ -49,30 +49,35 @@ const skills = {
   <Hero />
 
   <!-- Highlighted Work -->
-  <section class="py-28 border-t border-border-strong" id="featured">
+  <section class="full-bleed py-28 border-t border-border-strong" id="featured">
     <div class="max-w-6xl mx-auto px-6">
       <SectionHeader title="Highlighted Work" />
 
-      <div class="grid md:grid-cols-2 gap-12 mt-8">
+      <div class="grid md:grid-cols-1 gap-12 mt-8">
         <!-- Projects column -->
         <div>
           <h3 class="text-sm uppercase tracking-wide text-white/50 mb-4">Projects</h3>
-          <div class="flex flex-row gap-4">
+          <div class="flex flex-col md:flex-row md:flex-wrap gap-4">
             {featuredProjects.map((project) => (
                 <ProjectCard
-                    title={project.data.title}
+                    title={project.data.title}  
                     description={project.data.description}
                     href={`/projects/${project.id}`}
                     image={project.data.thumbnail}
+                    tags={project.data.tags}
+                    class="flex-1 min-w-[220px]"
                 />
             ))}
           </div>
         </div>
 
+        <hr> <!-- regular Horizontal Rule -->
+        <!-- <hr class="full-bleed border-white/10 my-12"> Horizontal Rule is a crazy useful tag tbh -->
+        
         <!-- Features column -->
         <div>
           <h3 class="text-sm uppercase tracking-wide text-white/50 mb-4">Features</h3>
-          <div class="flex flex-row gap-4">
+          <div class="flex flex-col md:flex-row md:flex-wrap gap-4">
             {featuredFeatures.map((feature) => (
                 <ProjectCard
                     title={feature.data.title}
@@ -80,6 +85,7 @@ const skills = {
                     image={feature.data.thumbnail}
                     href={resolveFeatureHref(feature)}
                     tags={feature.data.tags}
+                    class="flex-1 min-w-[220px]"
                 />
             ))}
           </div>
@@ -90,7 +96,7 @@ const skills = {
   </section>
 
   <!-- About Me (short teaser — full bio lives on /about) -->
-  <section class="py-28 border-t border-border-strong">
+  <section class="full-bleed py-28 border-t border-border-strong">
     <SectionSplit title="About Me" image="/images/abtme.jpg">
       <p>
         I'm a technical artist and game developer focusing on rendering, shaders
@@ -103,7 +109,7 @@ const skills = {
   </section>
   
   <!-- Skills -->
-  <section class="py-28 border-t border-border-strong">
+  <section class="full-bleed py-28 border-t border-border-strong">
     <div class="max-w-5xl mx-auto px-6">
       <SectionHeader title="Skills" />
 
