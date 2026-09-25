@@ -1,7 +1,7 @@
 ---
 ---
 
-<section class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+<section class="relative left-1/2 -translate-x-1/2 w-screen h-screen flex items-center justify-center text-center overflow-hidden">
   <div class="absolute inset-0 pointer-events-none opacity-80">
     <img src="/images/caustics.svg" alt="" class="w-full h-full object-cover" />
   </div>
@@ -40,7 +40,7 @@
   </div>
 
   <!-- Enhanced noise with multiple layers -->
-  <div class="absolute inset-0 pointer-events-none opacity-[0.08]
+  <div class="absolute -inset-[10%] pointer-events-none opacity-[0.08] transform-[translateZ(0)] will-change-transform
               bg-[url('/images/white-noise.png')]
               bg-repeat mix-blend-overlay animate-slower-pan"></div>
 
