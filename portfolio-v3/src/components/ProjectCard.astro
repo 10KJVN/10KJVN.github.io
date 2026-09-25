@@ -6,6 +6,7 @@ interface Props {
     href: string;
     tags?: string[];
     highlight?: boolean;
+    class? : string;
 }
 
 const {
@@ -14,7 +15,8 @@ const {
     image,
     href,
     tags = [],
-    highlight = false
+    highlight = false,
+    class: className = ""
 } = Astro.props;
 
 const isExternal = href.startsWith("http");
@@ -28,11 +30,11 @@ const isExternal = href.startsWith("http");
     ${highlight 
       ? "border-white/20 bg-white/5 hover:bg-white/10" 
       : "border-white/10 bg-white/5 hover:bg-white/10"
-    }`}
+    } ${className}`}
 >
   <div class="aspect-video overflow-hidden">
-    <img 
-      src={image} 
+    <img
+      src={image}
       alt={title}
       class="w-full h-full object-cover transition duration-300 group-hover:scale-105"
     />
