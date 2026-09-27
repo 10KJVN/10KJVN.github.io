@@ -1,4 +1,19 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@theme {
+  --font-sans: "Geist", sans-serif;
+  --font-display: "Oswald", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --color-background: #F4F9FC;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #E8F1F8;
+  --color-text: #1A2B3C;
+  --color-primary: #6ABEDC;
+  --color-ice: #A6E1FA;
+  --color-chrome: #C0C0C0;
+}
 
 @theme {
   --color-border-strong: rgba(255, 255, 255, 0.35);
