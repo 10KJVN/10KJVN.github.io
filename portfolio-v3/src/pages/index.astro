@@ -8,10 +8,16 @@ import { resolveFeatureHref } from "../lib/resolveFeatureHref";
 
 const featuredProjects = (await getCollection("projects"))
     .filter((project) => project.data.highlight)
-    .sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999));
 
 const featuredFeatures = (await getCollection("features"))
     .filter((feature) => feature.data.highlight)
+
+const sortedProjects = (await getCollection("projects"))
+    .sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999));
+
+const extraProjects = sortedProjects
+    .filter((project) => !project.data.highlight)
+    .slice(0, 2);
 
 const skills = {
   Engine: [
@@ -70,25 +76,49 @@ const skills = {
           </div>
         </div>
 
-        <hr class="border-chrome/50"> <!-- regular Horizontal Rule -->
+        <!-- index.astro, new block inside the Projects column, after the featured flex container -->
+        <div class="grid md:grid-cols-3 gap-4 mt-4">
+          {extraProjects.map((project) => (
+              <ProjectCard
+                  title={project.data.title}
+                  description={project.data.description}
+                  href={`/projects/${project.id}`}
+                  image={project.data.thumbnail}
+                  tags={project.data.tags}
+              />
+          ))}
+
+          <!-- All projects CTA tile -->
+
+          <a href="/projects"
+          class="group flex flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-chrome/60 bg-surface-alt/50 p-8 text-center transition hover:bg-surface-alt"
+          >
+          <span class="font-display text-2xl uppercase">All projects</span>
+          <span class="font-mono text-xs text-text/60 transition group-hover:translate-x-1">
+            View the full catalogue →
+          </span>
+          </a>
+        </div>
+
+        <!--<hr class="border-chrome/50"> &lt;!&ndash; regular Horizontal Rule &ndash;&gt;-->
         <!-- <hr class="full-bleed border-white/10 my-12"> Horizontal Rule is a crazy useful tag tbh -->
         
         <!-- Features column -->
-        <div>
-          <h3 class="text-sm uppercase tracking-wide text-text/50 mb-4">Features</h3>
-          <div class="flex flex-col md:flex-row md:flex-wrap gap-4">
-            {featuredFeatures.map((feature) => (
-                <ProjectCard
-                    title={feature.data.title}
-                    description={feature.data.description}
-                    image={feature.data.thumbnail}
-                    href={resolveFeatureHref(feature)}
-                    tags={feature.data.tags}
-                    class="flex-1 min-w-[220px]"
-                />
-            ))}
-          </div>
-        </div>
+        <!--<div>-->
+        <!--  <h3 class="text-sm uppercase tracking-wide text-text/50 mb-4">Features</h3>-->
+        <!--  <div class="flex flex-col md:flex-row md:flex-wrap gap-4">-->
+        <!--    {featuredFeatures.map((feature) => (-->
+        <!--        <ProjectCard-->
+        <!--            title={feature.data.title}-->
+        <!--            description={feature.data.description}-->
+        <!--            image={feature.data.thumbnail}-->
+        <!--            href={resolveFeatureHref(feature)}-->
+        <!--            tags={feature.data.tags}-->
+        <!--            class="flex-1 min-w-[220px]"-->
+        <!--        />-->
+        <!--    ))}-->
+        <!--  </div>-->
+        <!--</div>-->
 
       </div>
     </div>

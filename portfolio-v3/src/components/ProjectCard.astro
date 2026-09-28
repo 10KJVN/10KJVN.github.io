@@ -26,7 +26,7 @@ const isExternal = href.startsWith("http");
    target={isExternal ? "_blank" : undefined}
    rel={isExternal ? "noopener noreferrer" : undefined}
    data-tags={tags.join(",")}
-   class={`group block rounded-xl overflow-hidden transition border
+   class={`group block rounded-xl overflow-hidden transition border glow-soft
     ${highlight 
       ? "border-primary/40 bg-surface hover:bg-surface-alt" 
       : "border-border bg-surface hover:bg-surface-alt"
