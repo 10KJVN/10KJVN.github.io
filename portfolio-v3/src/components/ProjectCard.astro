@@ -28,8 +28,8 @@ const isExternal = href.startsWith("http");
    data-tags={tags.join(",")}
    class={`group block rounded-xl overflow-hidden transition border
     ${highlight 
-      ? "border-white/20 bg-white/5 hover:bg-white/10" 
-      : "border-white/10 bg-white/5 hover:bg-white/10"
+      ? "border-primary/40 bg-surface hover:bg-surface-alt" 
+      : "border-border bg-surface hover:bg-surface-alt"
     } ${className}`}
 >
   <div class="aspect-video overflow-hidden">
@@ -40,14 +40,14 @@ const isExternal = href.startsWith("http");
     />
   </div>
 
-  <div class="p-4">
+  <div class="p-5">
     <h3 class="text-xl font-semibold mb-2">{title}</h3>
       <p class="opacity-70 text-sm leading-relaxed mb-3">{description}</p>
 
       {tags.length > 0 && (
               <div class="flex flex-wrap gap-1.5">
                   {tags.map((tag) => (
-                          <span class="text-[11px] uppercase tracking-wide px-2 py-0.5 rounded-full border border-white/15 text-white/60">
+                          <span class="text-[11px] uppercase tracking-wide px-2 py-0.5 rounded-full border border-chrome/15 text-text/60">
             {tag}
           </span>
                   ))}

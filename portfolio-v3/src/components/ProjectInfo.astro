@@ -27,12 +27,12 @@ const stats: Stat[] = (
 ).filter((s): s is Stat => Boolean(s.value));
 ---
 
-<section class="border border-white/10 rounded-2xl p-6 mb-8">
+<section class="border border-chrome rounded-2xl p-6 mb-8">
     <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 mb-6">
         {stats.map((s) => (
                 <div>
-                    <p class="text-xs uppercase tracking-wide text-white/40 mb-1">{s.label}</p>
-                    <p class="text-sm text-white/80">{s.value}</p>
+                    <p class="text-xs uppercase tracking-wide text-text/80 font-mono mb-1">{s.label}</p>
+                    <p class="text-sm text-text/80 font-mono">{s.value}</p>
                 </div>
         ))}
     </div>
