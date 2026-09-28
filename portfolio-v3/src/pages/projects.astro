@@ -33,14 +33,14 @@ const allTags = Array.from(new Set(projects.flatMap((p) => p.tags))).sort();
             <div class="flex flex-wrap gap-2 mb-10">
                 <button
                         data-tag="all"
-                        class="filter-btn active text-xs uppercase tracking-wide px-3 py-1.5 rounded-full border border-white/20 bg-white/10"
+                        class="filter-btn active text-xs uppercase tracking-wide px-3 py-1.5 rounded-full border border-chrome/20 bg-background"
                 >
                     All
                 </button>
                 {allTags.map((tag) => (
                         <button
                                 data-tag={tag}
-                                class="filter-btn text-xs uppercase tracking-wide px-3 py-1.5 rounded-full border border-white/15 text-white/60 hover:bg-white/5"
+                                class="filter-btn text-xs uppercase tracking-wide px-3 py-1.5 rounded-full border border-chrome/15 text-text/60 hover:bg-/5"
                         >
                             {tag}
                         </button>
@@ -69,11 +69,11 @@ const allTags = Array.from(new Set(projects.flatMap((p) => p.tags))).sort();
             const selected: string = btn.dataset.tag ?? "all";
 
             buttons.forEach((b) => {
-                b.classList.remove("active", "border-white/20", "bg-white/10");
-                b.classList.add("border-white/15", "text-white/60");
+                b.classList.remove("active", "border-chrome/20", "bg-background/10");
+                b.classList.add("border-chrome/15", "text-text/60");
             });
-            btn.classList.add("active", "border-white/20", "bg-white/10");
-            btn.classList.remove("border-white/15", "text-white/60");
+            btn.classList.add("active", "border-chrome/20", "bg-background/10");
+            btn.classList.remove("border-chrome/15", "text-text/60");
 
             cards.forEach((card) => {
                 const tags: string[] = card.dataset.tags?.split(",") ?? [];
