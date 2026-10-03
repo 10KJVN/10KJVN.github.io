@@ -64,6 +64,7 @@ The Animator was connected to these states using animation triggers and Unity Ev
 `JumpUp → JumpTop → JumpAttack`
 
 [//]: # (<!-- Octodrone animation GIF -->)
+<img src="/videos/starfall/OctoAnim.gif" alt="A GIF of octo's animations" class="rounded-xl" />
 
 ### Implementation
 
@@ -72,10 +73,38 @@ One of the more interesting parts of the feature was working with the existing F
 The system controlled much of the movement behavior in the existing codebase, so understanding how forces interacted with the enemy state machine was an important part of getting Octodrone working reliably.
 
 [//]: # (<!-- Octodrone code snippet -->)
+``` csharp
+protected override void Attack()
+{
+    base.Attack();
+    EnemyAI.TargetLookAt(stepToPlayer);
+    EnemyAI.forceBody.onCollisionEvent.AddListener(OnLand);
+    var moveDirection = movementForce.Direction;
+    moveDirection.x = stepToPlayer.x;
+    movementForce.Duration = attackForce.Duration * 2;
+    movmentForce.Direction = moveDirection;
+
+    EnemyAI.forceBody.Add(attackForce, new CallbackConfig()
+        {
+            OnFinish = OnJumpPeak,
+            OnCancel = AttackFinished
+        }
+    );
+
+    EnemyAI.forceBody.Add(movementForce, new CallbackConfig()
+        {
+            OnFinish = OnJumpFinish,
+            OnCancel = AttackFinished
+        }
+    );
+}
+```
 
 The final jump attack combined state transitions, animation events and force application to temporarily disable gravity, launch Octodrone upward and then apply forward force towards the player's position.
 
-[//]: # (<!-- Octodrone state machine diagram -->)
+[//]: # (<!-- Octodrone attacking w/ visible animator switching states.  -->)
+[//]: # (<!-- Gif is for whatever reason only 450x250 so scaling it up is appropriate here. -->)
+<img src="/videos/starfall/OctoAttack.gif" alt="A GIF of octo's animations" class="rounded-xl" />
 
 [Read the full Octodrone breakdown →](/features/octodrone)
 
