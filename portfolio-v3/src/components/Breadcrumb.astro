@@ -1,0 +1,25 @@
+---
+interface Crumb {
+    label: string;
+    href?: string;
+}
+
+interface Props {
+    trail: Crumb[];
+}
+
+const { trail } = Astro.props;
+---
+
+<nav class="flex flex-wrap items-center gap-2 text-xs uppercase tracking-wide text-chrome mb-6">
+    {trail.map((crumb, i) => (
+            <Fragment>
+                {crumb.href ? (
+                        <a href={crumb.href} class="hover:text-text transition">{crumb.label}</a>
+                ) : (
+                        <span class="text-text">{crumb.label}</span>
+                )}
+                {i < trail.length - 1 && <span>/</span>}
+            </Fragment>
+    ))}
+</nav>
