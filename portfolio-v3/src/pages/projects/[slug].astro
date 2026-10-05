@@ -8,11 +8,11 @@
     */
 
 import Layout from "../../layouts/Layout.astro";
-import ProjectInfo from "../../components/ProjectInfo.astro";
-import TableOfContents from "../../components/TableOfContents.astro";
-import ProjectLinks from "../../components/ProjectLinks.astro";
-import BackToTop from "../../components/BackToTop.astro";
+import ProjectLinks from "../../components/ProjectLinks.astro"; /* <- Double check to remove */
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import FeatureHighlightCard from "../../components/FeatureHighlightCard.astro";
 import { getCollection, render, type CollectionEntry } from "astro:content";
+import { resolveFeatureHref } from "../../lib/resolveFeatureHref";
 
 export async function getStaticPaths() {
     const projects = await getCollection("projects");
@@ -27,38 +27,118 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { Content, headings } = await render(project);
+
+const { Content } = await render(project)
+
+// Feature Highlights: up to 2 features that belong to this project, per the brief's "start symmetrical" rule.
+const allFeatures = await getCollection("features");
+
+const projectFeatures = allFeatures
+    .filter((f) => f.data.projectSlug === project.id)
+    .sort((a, b) => (a.data.order ?? Infinity) - (b.data.order ?? Infinity))
+    .slice(0, 2);
+
+// Identity strip: whichever of these exist, shown compactly — no forced 6-stat grid.
+const stats = [project.data.duration, project.data.teamSize, project.data.role, project.data.engine]
+    .filter(Boolean);
 ---
 
 <Layout
         title={`${project.data.title} | Jahva's Portfolio`}
         description={project.data.description}
 >
-    <article class="max-w-5xl mx-auto px-6 py-20">
+    <article class="mx-auto max-w-[1600px] px-8 py-16 lg:px-12 xl:px-16">
 
-        <h1 class="text-4xl md:text-5xl font-semibold tracking-tight mt-6 mb-8">
-            {project.data.title}
-        </h1>
+        <Breadcrumb trail={[{ label: "Projects", href: "/projects" }, { label: project.data.title }]} />
 
-        <ProjectInfo
-                year={project.data.year}
-                duration={project.data.duration}
-                engine={project.data.engine}
-                language={project.data.language}
-                teamSize={project.data.teamSize}
-                role={project.data.role}
-        />
+        <!-- Project Header -->
+        <header class="mx-auto max-w-5xl text-center">
 
-        <TableOfContents headings={headings} />
+            <p class="font-mono text-[10px] uppercase tracking-[0.25em] opacity-45">
+                Project · {project.data.year}
+            </p>
+
+            <h1 class="mt-4 text-5xl font-semibold tracking-tight md:text-7xl">
+                {project.data.title}
+            </h1>
+
+            <p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed opacity-65 md:text-lg">
+                {project.data.description}
+            </p>
+
+            <!-- verbosity duplication, curate myself later -->
+            <!--{stats.length > 0 && (-->
+            <!--        <p class="mt-6 font-mono text-[10px] uppercase tracking-[0.2em] opacity-55">-->
+            <!--            {stats.join(" · ")}-->
+            <!--        </p>-->
+            <!--)}-->
+
+            <!-- Compact metadata -->
+            <div class="mt-4 flex flex-wrap justify-center gap-2">
+                {project.data.tags.map((tag) => (
+                        <span class="rounded-full border border-border px-3 py-1.5 font-mono text-[10px] uppercase tracking-wide opacity-65">
+                        {tag}
+                    </span>
+                ))}
+            </div>
+
+        </header>
+
+
+        <!-- Hero -->
+        <figure class="mt-14 overflow-hidden rounded-2xl border border-border">
+            <img
+                    src={project.data.thumbnail}
+                    alt={project.data.title}
+                    class="w-full"
+            />
+        </figure>
+
+
+        <!-- Feature Showcase -->
+        {projectFeatures.length > 0 && (
+                <section class="mt-16">
+
+                    <div class="mb-8 flex items-end justify-between">
+                        <div>
+                            <p class="font-mono text-[10px] uppercase tracking-[0.25em] opacity-45">
+                                Selected Contributions
+                            </p>
+
+                            <h2 class="mt-2 text-3xl font-semibold tracking-tight">
+                                What I built
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div class="grid gap-6 lg:grid-cols-2">
+                        {projectFeatures.map((feature) => (
+                                <FeatureHighlightCard
+                                        title={feature.data.title}
+                                        description={feature.data.description}
+                                        image={feature.data.thumbnail}
+                                        href={resolveFeatureHref(feature)}
+                                        tags={feature.data.tags}
+                                        eyebrow={
+                                            feature.data.tags[0]
+                                        }
+                                />
+                        ))}
+                    </div>
+
+                </section>
+        )}
+
+
+        <!-- Takeaway -->
+        <!-- About (and optional Takeaway, if the project's .mdx includes a ## Takeaway heading) -->
+        <div class="mdx-content mx-auto mt-16 max-w-2xl">
+            <Content />
+        </div>
 
         <ProjectLinks links={project.data.links} />
 
-        <div class="mdx-content">
-            <Content />
-        </div>
     </article>
-
-    <BackToTop />
 </Layout>
 
 <style>
