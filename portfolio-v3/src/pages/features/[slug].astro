@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import ProjectInfo from "../../components/ProjectInfo.astro";
 import ProjectLinks from "../../components/ProjectLinks.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
@@ -9,7 +10,7 @@ export async function getStaticPaths() {
 
     // Only standalone features get a real page — anchored and external ones resolve elsewhere.
     const standalone = features.filter(
-        (f) => !f.data.projectSlug && !f.data.externalUrl
+        (f) => !f.data.externalUrl && !(f.data.projectSlug && f.data.anchorId)
     );
 
     return standalone.map((feature) => ({
@@ -31,15 +32,14 @@ const { Content } = await render(feature);
         description={feature.data.description}
 >
     <article class="max-w-3xl mx-auto px-6 py-20">
-        <a href="/features" class="text-text/50 hover:text-text transition text-sm">
-            &larr; Back to features
-        </a>
+
+        <Breadcrumb trail={[{ label: "Features", href: "/features" }, { label: feature.data.title }]} />
 
         <h1 class="text-4xl md:text-5xl font-display tracking-tight mt-6 mb-8">
             {feature.data.title}
         </h1>
 
-        <p class="text-white/70 leading-relaxed mb-10">
+        <p class="text-text/70 leading-relaxed mb-10">
             {feature.data.description}
         </p>
 
@@ -57,6 +57,10 @@ const { Content } = await render(feature);
         <div class="mdx-content">
             <Content />
         </div>
+
+        <a href="/features" class="text-text/50 hover:text-text transition text-sm">
+            &larr; Back to ... <!-- Context dependant; could be project, could be projects page or features page. -->
+        </a>
     </article>
 </Layout>
 
