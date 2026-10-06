@@ -58,41 +58,38 @@ const stats = [project.data.duration, project.data.teamSize, project.data.role, 
                 Project · {project.data.year}
             </p>
 
-            <h1 class="mt-4 text-5xl font-semibold tracking-tight md:text-7xl">
+            <h1 class="mt-4 font-display text-5xl uppercase tracking-wide md:text-7xl">
                 {project.data.title}
             </h1>
+
+            <!--<p class="mt-3 text-sm opacity-50">-->
+            <!--    Neon Game Studio-->
+            <!--</p>-->
 
             <p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed opacity-65 md:text-lg">
                 {project.data.description}
             </p>
 
-            <!-- verbosity duplication, curate myself later -->
-            <!--{stats.length > 0 && (-->
-            <!--        <p class="mt-6 font-mono text-[10px] uppercase tracking-[0.2em] opacity-55">-->
-            <!--            {stats.join(" · ")}-->
-            <!--        </p>-->
-            <!--)}-->
-
-            <!-- Compact metadata -->
-            <div class="mt-4 flex flex-wrap justify-center gap-2">
-                {project.data.tags.map((tag) => (
-                        <span class="rounded-full border border-border px-3 py-1.5 font-mono text-[10px] uppercase tracking-wide opacity-65">
-                        {tag}
-                    </span>
-                ))}
-            </div>
-
-        </header>
-
-
         <!-- Hero -->
-        <figure class="mt-14 overflow-hidden rounded-2xl border border-border">
+        <figure class="mx-auto mt-14 max-w-6xl overflow-hidden rounded-2xl border border-border">
             <img
                     src={project.data.thumbnail}
                     alt={project.data.title}
                     class="w-full"
             />
         </figure>
+
+        <div class="mt-6 flex flex-wrap justify-center gap-2">
+            {project.data.tags.map((tag) => (
+                    <span
+                            class="rounded-full border border-border px-3 py-1.5 font-mono text-[10px] uppercase tracking-wide opacity-65"
+                    >
+                {tag}
+            </span>
+            ))}
+        </div>
+
+        </header>
 
 
         <!-- Feature Showcase -->
@@ -130,13 +127,24 @@ const stats = [project.data.duration, project.data.teamSize, project.data.role, 
         )}
 
 
-        <!-- Takeaway -->
-        <!-- About (and optional Takeaway, if the project's .mdx includes a ## Takeaway heading) -->
-        <div class="mdx-content mx-auto mt-16 max-w-2xl">
-            <Content />
-        </div>
+        <!-- Post Mortem -->
+        <section class="mx-auto mt-32 max-w-3xl border-t border-border pt-12">
+            <div class="mb-10">
+                <p class="font-mono text-[10px] uppercase tracking-[0.25em] opacity-45">
+                    Project Notes
+                </p>
 
-        <ProjectLinks links={project.data.links} />
+                <h2 class="mt-2 font-display text-3xl uppercase tracking-wide">
+                    Collaboration & Process
+                </h2>
+            </div>
+
+            <div class="mdx-content">
+                <Content />
+            </div>
+
+            <ProjectLinks links={project.data.links} />
+        </section>
 
     </article>
 </Layout>
@@ -145,7 +153,7 @@ const stats = [project.data.duration, project.data.teamSize, project.data.role, 
     .mdx-content :global(h2) {
         font-size: 1.5rem;
         font-weight: 600;
-        color: #1A2B3C;
+        color: var(--color-text);
         margin-top: 3rem;
         margin-bottom: 1rem;
         padding-top: 0.5rem;
@@ -155,13 +163,13 @@ const stats = [project.data.duration, project.data.teamSize, project.data.role, 
     .mdx-content :global(h3) {
         font-size: 1.15rem;
         font-weight: 600;
-        color: #1A2B3C;
+        color: var(--color-text);
         margin-top: 2rem;
         margin-bottom: 0.75rem;
     }
 
     .mdx-content :global(p) {
-        color: rgba(26, 43, 60, 0.7);
+        color: var(--color-text);
         line-height: 1.75;
         margin-bottom: 1rem;
         max-width: 68ch;
@@ -169,7 +177,7 @@ const stats = [project.data.duration, project.data.teamSize, project.data.role, 
 
     .mdx-content :global(ul),
     .mdx-content :global(ol) {
-        color: rgba(26, 43, 60, 0.7);
+        color: var(--color-text);
         line-height: 1.75;
         margin-bottom: 1rem;
         padding-left: 1.5rem;
@@ -181,7 +189,7 @@ const stats = [project.data.duration, project.data.teamSize, project.data.role, 
     }
 
     .mdx-content :global(a) {
-        color: #438BA8;
+        color: var(--color-text);
         text-decoration: underline;
         text-underline-offset: 2px;
     }

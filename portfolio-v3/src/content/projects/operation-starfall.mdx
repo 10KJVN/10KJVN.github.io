@@ -1,6 +1,6 @@
 ---
 title: "Operation Starfall"
-description: "Neon Game Studio"
+description: "A 2.5D Metroidvania Couch Co-op based on 80's Sci-Fi cartoons."
 thumbnail: "/images/octo-radialThumb.png"
 tags: ["Unity", "Gameplay", "Shaders"]
 highlight: true
@@ -17,148 +17,42 @@ role: "Gameplay Programmer / Technical Artist"
 import CardRow from "../../components/CardRow.astro";
 import ProcessCard from "../../components/ProcessCard.astro";
 
-# Operation Starfall
+[//]: # (# Operation Starfall)
 
-My work focused on both gameplay programming and visual systems,
-including a ground-based enemy with state-driven AI and a shader-driven stamina system.
+[//]: # ()
+[//]: # (My work focused on both gameplay programming and visual systems,)
 
----
+[//]: # (including a ground-based enemy with state-driven AI and a shader-driven stamina system.)
 
-## Overview
+[//]: # ()
+[//]: # (---)
 
-I worked together with another developer to extend an existing Unity codebase with new gameplay and visual features.
+[//]: # (## Overview)
 
-Rather than building systems from scratch,
-much of the work involved understanding and extending existing systems such as the ForceSystem,
-enemy AI and state machine architecture.
+[//]: # ()
+[//]: # (I worked together with another developer to extend an existing Unity codebase with new gameplay and visual features.)
 
-Two features I contributed to were **Octodrone**,
-a ground-based enemy with patrol, detection and attack behavior, and **Radial Stamina**,
-a shader-driven stamina display built with ShaderGraph.
+[//]: # ()
+[//]: # (Rather than building systems from scratch,)
 
----
+[//]: # (much of the work involved understanding and extending existing systems such as the ForceSystem,)
 
-## Octodrone
+[//]: # (enemy AI and state machine architecture.)
 
-Octodrone was the first ground-based enemy developed for Operation Starfall.
+[//]: # ()
+[//]: # (Two features I contributed to were **Octodrone**,)
 
-The feature combined state-driven AI, animation cycles and attack behavior.
-Existing patrol and detection systems had originally been built around flying enemies,
-so we adapted and extended this logic to support grounded movement.
+[//]: # (a ground-based enemy with patrol, detection and attack behavior, and **Radial Stamina**,)
 
-### Gameplay & AI
+[//]: # (a shader-driven stamina display built with ShaderGraph.)
 
-Through pair programming,
-we refactored the existing enemy behavior to support reliable ground patrols,
-detection and directional movement.
-
-Octodrone's state machine controls states including:
-
-- Patrol
-- Detect
-- Jump / Attack
-- Fuzzy
-
-The Animator was connected to these states using animation triggers and Unity Events, allowing transitions such as:
-
-`JumpUp → JumpTop → JumpAttack`
-
-[//]: # (<!-- Octodrone animation GIF -->)
-<img src="/videos/starfall/OctoAnim.gif" alt="A GIF of octo's animations" class="rounded-xl" />
-
-### Implementation
-
-One of the more interesting parts of the feature was working with the existing ForceSystem.
-
-The system controlled much of the movement behavior in the existing codebase, so understanding how forces interacted with the enemy state machine was an important part of getting Octodrone working reliably.
-
-[//]: # (<!-- Octodrone code snippet -->)
-``` csharp
-protected override void Attack()
-{
-    base.Attack();
-    EnemyAI.TargetLookAt(stepToPlayer);
-    EnemyAI.forceBody.onCollisionEvent.AddListener(OnLand);
-    var moveDirection = movementForce.Direction;
-    moveDirection.x = stepToPlayer.x;
-    movementForce.Duration = attackForce.Duration * 2;
-    movmentForce.Direction = moveDirection;
-
-    EnemyAI.forceBody.Add(attackForce, new CallbackConfig()
-        {
-            OnFinish = OnJumpPeak,
-            OnCancel = AttackFinished
-        }
-    );
-
-    EnemyAI.forceBody.Add(movementForce, new CallbackConfig()
-        {
-            OnFinish = OnJumpFinish,
-            OnCancel = AttackFinished
-        }
-    );
-}
-```
-
-The final jump attack combined state transitions, animation events and force application to temporarily disable gravity, launch Octodrone upward and then apply forward force towards the player's position.
-
-[//]: # (<!-- Octodrone attacking w/ visible animator switching states.  -->)
-[//]: # (<!-- Gif is for whatever reason only 450x250 so scaling it up is appropriate here. -->)
-<img src="/videos/starfall/OctoAttack.gif" alt="A GIF of octo's animations" class="rounded-xl" />
-
-[Read the full Octodrone breakdown →](/features/octodrone)
-
----
-
-## Radial Stamina
-
-Radial Stamina replaced the old stamina system in Operation Starfall.
-
-This feature was built collaboratively with another developer and became my first hands-on shader project using ShaderGraph.
-
-### From Gameplay to Visuals
-
-Instead of representing stamina through a conventional UI bar, we created a radial display inspired by the stamina system in *The Legend of Zelda: Breath of the Wild*.
-
-The system combines gameplay state with a shader-driven visual representation:
-
-- stamina percentage controls the radial fill
-- gameplay events control visibility
-- time-based logic handles fading
-- a radial mask defines the shape of the ring
-
-[//]: # (<!-- Radial stamina GIF -->)
-
-### ShaderGraph
-
-The shader is divided into three main parts:
-
-**Fade Logic**
-Controls when the stamina radial appears and fades away after a stamina update.
-
-**Texture Logic**
-Combines the radial texture with its color.
-
-**Shape Logic**
-Uses a radial mask and stamina percentage to determine how much of the ring is visible.
-
-[//]: # (<!-- ShaderGraph overview -->)
-
-[Read the full Radial Stamina breakdown →](/features/radial-stamina)
-
----
-
-## Collaboration & Process
+[//]: # (## Collaboration & Process)
 
 Both features were developed collaboratively through pair programming.
 
 Working inside an existing codebase meant that a significant part of the development process involved understanding systems that had already been established by the team.
-
 For Octodrone, this meant learning how the existing ForceSystem and enemy architecture interacted before extending it for ground-based behavior.
-
-For Radial Stamina, it meant stepping outside of my usual code-focused workflow and learning how gameplay data could drive a visual system through ShaderGraph.
-
----
+For Radial Stamina, it meant stepping outside my usual code-focused workflow and learning how gameplay data could drive a visual system through ShaderGraph.
 
 ## Takeaway
 
@@ -167,8 +61,6 @@ Operation Starfall gave me experience working inside a larger existing Unity cod
 Octodrone strengthened my understanding of state-driven gameplay, animation integration and working with existing systems. Radial Stamina introduced me to ShaderGraph and showed me how shaders can become part of gameplay features rather than purely visual effects.
 
 Together, the two features represent the two sides of my work I enjoy most: **building gameplay systems and using graphics to give them a stronger visual identity.**
-
----
 
 ## Resources
 

@@ -25,42 +25,129 @@ interface Props {
 
 const { feature } = Astro.props;
 const { Content } = await render(feature);
+
+const projects = await getCollection("projects");
+
+const parentProject = feature.data.projectSlug
+    ? projects.find((project) => project.id === feature.data.projectSlug)
+    : undefined;
 ---
 
 <Layout
         title={`${feature.data.title} | Jahva's Portfolio`}
         description={feature.data.description}
 >
-    <article class="max-w-3xl mx-auto px-6 py-20">
+    <article class="mx-auto max-w-[1200px] px-8 py-16 lg:px-12">
 
-        <Breadcrumb trail={[{ label: "Features", href: "/features" }, { label: feature.data.title }]} />
-
-        <h1 class="text-4xl md:text-5xl font-display tracking-tight mt-6 mb-8">
-            {feature.data.title}
-        </h1>
-
-        <p class="text-text/70 leading-relaxed mb-10">
-            {feature.data.description}
-        </p>
-
-        <ProjectInfo
-                year={feature.data.year}
-                duration={feature.data.duration}
-                engine={feature.data.engine}
-                language={feature.data.language}
-                teamSize={feature.data.teamSize}
-                role={feature.data.role}
+        <Breadcrumb
+                trail={
+                    parentProject
+                        ? [
+                            { label: "Projects", href: "/projects" },
+                            {
+                                label: parentProject.data.title,
+                                href: `/projects/${parentProject.id}`
+                            },
+                            { label: feature.data.title }
+                        ]
+                        : [
+                            { label: "Features", href: "/features" },
+                            { label: feature.data.title }
+                        ]
+                }
         />
 
-        <ProjectLinks links={feature.data.links} />
+        <header class="mx-auto max-w-4xl">
+            <p class="font-mono text-[10px] uppercase tracking-[0.25em] opacity-45">
+                Feature · {feature.data.year}
+            </p>
+
+            <h1 class="mt-4 font-display text-5xl uppercase tracking-wide md:text-7xl">
+                {feature.data.title}
+            </h1>
+
+            <!-- This might need refactoring into a component so i can optionally leave out certain metadata per unique feature case.-->
+            <div class="mt-8 flex flex-wrap gap-x-6 gap-y-2 border-y border-border py-4">
+            <span class="font-mono text-[10px] uppercase opacity-50">
+                {feature.data.year}
+            </span>
+
+                {feature.data.duration && (
+                        <span class="font-mono text-[10px] uppercase opacity-50">
+                            {feature.data.duration}
+                        </span>
+                )}
+
+                <!-- Octo and Radial don't need this for example, its sort of the child feature of a project tagged with Unity -->
+                {feature.data.engine && (
+                        <span class="font-mono text-[10px] uppercase opacity-50">
+                            {feature.data.engine}
+                        </span>
+                )}
+
+                {feature.data.language && (
+                        <span class="font-mono text-[10px] uppercase opacity-50">
+                            {feature.data.language}
+                        </span>
+                )}
+
+                {feature.data.teamSize && (
+                        <span class="font-mono text-[10px] uppercase opacity-50">
+                            {feature.data.teamSize}
+                        </span>
+                )}
+
+                {feature.data.role && (
+                        <span class="font-mono text-[10px] uppercase opacity-50">
+                            {feature.data.role}
+                        </span>
+                )}
+            </div>
+
+            <p class="mt-4 max-w-2xl text-base leading-relaxed opacity-60 md:text-lg">
+                {feature.data.description}
+            </p>
+
+            <!-- Hero -->
+            <figure class="mx-auto mt-14 max-w-6xl overflow-hidden rounded-2xl border border-border">
+                <img
+                        src={feature.data.thumbnail}
+                        alt={feature.data.title}
+                        class="w-full"
+                />
+            </figure>
+
+            <!--<ProjectInfo-->
+            <!--        duration={feature.data.duration}-->
+            <!--        teamSize={feature.data.teamSize}-->
+            <!--        role={feature.data.role}-->
+            <!--/>-->
+
+        </header>
+
+
+        <!--<ProjectLinks links={feature.data.links} />-->
 
         <div class="mdx-content">
             <Content />
         </div>
 
-        <a href="/features" class="text-text/50 hover:text-text transition text-sm">
-            &larr; Back to ... <!-- Context dependant; could be project, could be projects page or features page. -->
-        </a>
+        {parentProject ? (
+                <a
+                        href={`/projects/${parentProject.id}`}
+                        class="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.15em] opacity-50 transition hover:opacity-100"
+                >
+                    ← Back to {parentProject.data.title}
+                </a>
+        ) : (
+                <a
+                        href="/features"
+                        class="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.15em] opacity-50 transition hover:opacity-100"
+                >
+                    ← Back to Features
+                </a>
+        )}
+
     </article>
 </Layout>
 
