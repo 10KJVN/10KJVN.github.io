@@ -15,30 +15,152 @@ teamSize: "2 devs"
 role: "Gameplay Programmer"
 ---
 
-# Octodrone
+## Overview
 
 Octodrone was the first ground-based enemy developed for Operation Starfall.
+Its behavior combines state-driven AI, animation transitions, patrol and detection logic, and a custom jump attack.
 
-## State Machine
+The feature was developed through pair programming with
+[Jason Siegersma](https://j5x.github.io/projectgame3.html), with both of us working across the AI and animation systems throughout development.
 
-...
+[//]: # (This should definetely be increased in size or something, its only 480x250px cause i lost the og vid.)
+<img src="/videos/starfall/octoattackingfinal.gif" alt="Octodrone detecting and attacking the player" class="rounded-xl" />
+
+## State Machine & Animation
+
+Octo's behavior is driven by the existing enemy state machine.
+We extended the system to support the states needed for a ground-based enemy:
+
+- Patrol
+- Detect
+- Jump / Attack
+- Fuzzy
+
+The Animator was connected to these states using triggers and Unity Events.
+This allowed gameplay states to control animation transitions while keeping
+the timing of the jump attack synchronized with the animation.
+
+<img src="/videos/starfall/OctoAnim.gif" alt="Octodrone animation states" />
+
+**Visuals & animations:** [Alex Kentie](https://nl.linkedin.com/in/alexkentie), Creative Director at Neon Origins.
 
 ## Patrol & Detection
 
-...
+The existing patrol and detection systems had originally been built around
+flying enemies. Octo needed to operate on the ground, so we adapted
+the existing behavior rather than building a separate system from scratch.
+
+Through pair programming, we extended the enemy logic to handle grounded
+patrol routes and directional movement.
+
+### Directional Movement
+
+One small but important part of the implementation was keeping Octo's
+movement direction synchronized with its position.
+
+```csharp
+private void UpdateWalkDirection()
+{
+    var distance = _currentWayPoint.transform.positon - transform.position;
+
+    var walkForceDirection = walkForce.Direction;
+    walkForceDirection.x = Mathf.Abs(walkForceDirection.x) * Mathf.Sign(distance.x);
+
+    walkForce.Direction = walkForceDirection;
+    var transformLocalScale = transform.localScale;
+    transformLocalScale.x = Mathf.Sign(distance.x);
+    transform.localScale = transformLocalScale;
+}
+```
+
+The `UpdateWalkDirection` logic adjusts the direction of the walk force
+based on Octo's position, allowing the enemy to turn around and
+continue following its patrol correctly.
+
+<img src="/videos/starfall/Patrolling.gif" alt="Octodrone patrolling" />
+Octodrone correctly changes orientation when reaching the end of its patrol direction.
 
 ## Jump Attack
 
-...
+Octo's attack was built around a two-stage jump.
 
-## ForceSystem
+When the attack begins, gravity is temporarily disabled and an upward
+force launches Octo into the air. Once the animation reaches its
+jump peak, gravity is restored and a second force moves Octo toward
+the player's position.
 
-...
+### Implementation
 
-## Animation Integration
+The attack state inherits from the existing `AttackState` and coordinates
+the animation events, state transitions, and forces required for the jump.
 
-...
+```csharp
+protected override void Attack()
+{
+    base.Attack();
+    EnemyAI.TargetLookAt(stepToPlayer);
+    EnemyAI.forceBody.onCollisionEvent.AddListener(OnLand);
+    var moveDirection = movementForce.Direction;
+    moveDirection.x = stepToPlayer.x;
+    movementForce.Duration = attackForce.Duration * 2;
+    movmentForce.Direction = moveDirection;
+
+    EnemyAI.forceBody.Add(attackForce, new CallbackConfig()
+        {
+            OnFinish = OnJumpPeak,
+            OnCancel = AttackFinished
+        }
+    );
+
+    EnemyAI.forceBody.Add(movementForce, new CallbackConfig()
+        {
+            OnFinish = OnJumpFinish,
+            OnCancel = AttackFinished
+        }
+    );
+}
+```
+
+<img src="/videos/starfall/OctoAttack.gif" alt="Octodrone performing its jump attack" />
+
+The animation state and gameplay forces are triggered together,
+allowing the attack to transition from the initial jump into the forward strike.
+
+**` The interesting part was learning how Octodrone's states interacted with the existing ForceSystem. `**
+
+## Collaboration
+
+Octodrone was developed through pair programming with [Jason Siegersma](https://j5x.github.io/projectgame3.html).
+
+We worked across the feature together, regularly switching between
+implementation and debugging. J5X took a stronger role in the underlying
+gameplay code, while I focused more heavily on integrating the Animator,
+state transitions, prefab configuration, colliders, and gameplay behavior.
+
+This overlap was intentional: working together meant we could debug the
+interaction between the existing AI, animation, and ForceSystem rather
+than treating them as separate systems.
 
 ## Takeaway
 
-...
+The main challenge was understanding how the existing ForceSystem interacted
+with the enemy state machine.
+Rather than building a new movement system, 
+we had to read through documentation,
+to understand and extend the architecture that was already being
+used by the flying enemies.
+
+Here I learned about concepts such as Refactoring, Unity Events and of course State Machines.
+
+[//]: # (Working through this as a duo gave me a much better)
+
+[//]: # (understanding of State machiens, Unity Events, and integrating)
+
+[//]: # (animation with existing gameplay systems.)
+
+[//]: # ()
+[//]: # (For my part, the feature was especially valuable because it combined)
+
+[//]: # (gameplay logic with the more visual side of implementation: animation)
+
+[//]: # (transitions, prefab setup, colliders, and gameplay feedback.)
