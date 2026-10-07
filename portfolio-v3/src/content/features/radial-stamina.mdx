@@ -1,6 +1,6 @@
 ---
 title: "Radial Stamina"
-description: "Shader-driven stamina UI developed as part of Operation Starfall."
+description: "Shader-driven stamina UI built for Operation Starfall."
 thumbnail: "/images/starfall/RadialThumb.png"
 tags: ["Shaders", "UI", "Gameplay"]
 projectSlug: "operation-starfall"
@@ -15,30 +15,89 @@ teamSize: "2 devs"
 role: "Technical Artist"
 ---
 
-# Radial Stamina
+## Overview
 
-...
+Radial Stamina replaced the original stamina display in Operation Starfall.
+This feature combines Unity gameplay logic with a ShaderGraph-based radial UI,
+inspired by the stamina system in *The Legend of Zelda: Breath of the Wild*.
 
-## Gameplay → Shader
+It was developed collaboratively with another developer,
+with my focus shifting toward the ShaderGraph implementation and the visual side of the feature.
 
-...
+<img src="/videos/starfall/radialplayergif.gif" alt="Radial stamina system in-game" class="rounded-xl" />
+
+## From Gameplay to Shader
+
+The existing stamina system already handled the underlying stamina behavior.
+I worked with the gameplay logic and Unity Events while developing the visual representation in ShaderGraph.
+
+This was my first hands-on shader project,
+with guidance from the art and technical directors while I learned how to work with masks, timing, color, and alpha inside a shader.
+
+## Gameplay Logic
+
+The stamina events determine when the radial appears, updates, and fades.
+
+The Unity-side logic handles stamina depletion and regeneration,
+while the shader receives the values required to control its visual state.
+
+[//]: # (<!-- Insert relevant code snippet here -->)
+
+<img src="/images/starfall/unityradialevents.png" alt="Snippet screenshot of OnStamina UnityEvents." class="rounded-xl" />
+
+When stamina is consumed, the radial updates with the current stamina percentage.
+After the update, the display fades out and reappears when stamina changes again.
 
 ## ShaderGraph
 
-...
+The ShaderGraph is split into three main sections: fade logic, texture logic, and shape logic.
 
-## Fade Logic
+[//]: # (<!-- Full ShaderGraph screenshot -->)
 
-...
+<img src="/images/starfall/fullshader.png" alt="Snippet screenshot of OnStamina UnityEvents." class="rounded-xl" />
 
-## Radial Mask
+### Fade Logic
 
-...
+The fade section controls the visibility of the radial over time.
 
-## Result
+The graph calculates the time since the last stamina update,
+producing a fade-in value and a separate fade-out value based on the configured display and fade durations.
 
-...
+The resulting values are multiplied together to produce the final visibility of the stamina ring.
+
+[//]: # (<!-- Fade section screenshot / GIF -->)
+
+<img src="/videos/starfall/RadialFade.gif" alt="GIF of the radial UI fading in/out" class="rounded-xl" />
+
+### Texture Logic
+
+The texture section combines the ring texture with its color.
+
+The texture's RGBA output is multiplied by the configured color before being passed into the final shader output.
+
+[//]: # (<!-- Texture section screenshot. Edit: don't really need one? Unless a zoomed in screenshot of the 2 nodes it exists from is useful to make up for the lack of gif/vid media on page. -->)
+
+### Shape Logic
+
+The radial shape is controlled using a gradient mask and the current stamina percentage.
+
+The mask's red channel is offset by the stamina value and clamped to create the radial cutoff.
+The resulting mask is combined with the texture's alpha and the fade value.
+
+[//]: # (<!-- Mask + radial texture collage -->)
+
+<img src="/images/starfall/mask8p.jpg" alt="A collage image of the mask and gradient textures" class="rounded-xl" />
+
+This produces a ring that fills and fades dynamically with the player's stamina.
+
+## Collaboration
+
+The feature was developed collaboratively with [Jason Siegersma](https://j5x.github.io/projectgame3.html).
+
+J5X and I worked together on the gameplay-side logic and wiring the existing stamina system into the new UI behavior. My main focus was the ShaderGraph implementation and understanding how the gameplay values could drive its visual output.
 
 ## Takeaway
 
-...
+Radial Stamina was my first hands-on shader project and a major step toward combining gameplay programming with graphics programming.
+
+It gave me practical experience with ShaderGraph, radial masks, time-based animation, alpha blending, and connecting gameplay state to a visual shader system.
