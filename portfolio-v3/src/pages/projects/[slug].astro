@@ -46,6 +46,7 @@ const stats = [project.data.duration, project.data.teamSize, project.data.role, 
 <Layout
         title={`${project.data.title} | Jahva's Portfolio`}
         description={project.data.description}
+        width="wide"
 >
     <article class="mx-auto max-w-[1600px] px-8 py-16 lg:px-12 xl:px-16">
 
@@ -139,7 +140,7 @@ const stats = [project.data.duration, project.data.teamSize, project.data.role, 
                 </h2>
             </div>
 
-            <div class="mdx-content">
+            <div class="mdx-content mt-16">
                 <Content />
             </div>
 
@@ -148,77 +149,3 @@ const stats = [project.data.duration, project.data.teamSize, project.data.role, 
 
     </article>
 </Layout>
-
-<style>
-    .mdx-content :global(h2) {
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: var(--color-text);
-        margin-top: 3rem;
-        margin-bottom: 1rem;
-        padding-top: 0.5rem;
-        border-top: 1px solid rgba(26, 43, 60, 0.15);
-    }
-
-    .mdx-content :global(h3) {
-        font-size: 1.15rem;
-        font-weight: 600;
-        color: var(--color-text);
-        margin-top: 2rem;
-        margin-bottom: 0.75rem;
-    }
-
-    .mdx-content :global(p) {
-        color: var(--color-text);
-        line-height: 1.75;
-        margin-bottom: 1rem;
-        max-width: 68ch;
-    }
-
-    .mdx-content :global(ul),
-    .mdx-content :global(ol) {
-        color: var(--color-text);
-        line-height: 1.75;
-        margin-bottom: 1rem;
-        padding-left: 1.5rem;
-        max-width: 68ch;
-    }
-
-    .mdx-content :global(ul) {
-        list-style: disc;
-    }
-
-    .mdx-content :global(a) {
-        color: var(--color-text);
-        text-decoration: underline;
-        text-underline-offset: 2px;
-    }
-
-    .mdx-content :global(img),
-    .mdx-content :global(video) {
-        border-radius: 1rem;
-        margin: 1.5rem 0;
-        max-width: 100%;
-    }
-
-    .mdx-content :global(code) {
-        background: rgba(26, 43, 60, 0.08);
-        padding: 0.15rem 0.4rem;
-        border-radius: 0.35rem;
-        font-size: 0.85em;
-    }
-
-    .mdx-content :global(pre) {
-        background: #E8F1F8;
-        border: 1px solid rgba(26, 43, 60, 0.12);
-        border-radius: 0.75rem;
-        padding: 1rem;
-        overflow-x: auto;
-        margin-bottom: 1.5rem;
-    }
-
-    .mdx-content :global(pre code) {
-        background: none;
-        padding: 0;
-    }
-</style>

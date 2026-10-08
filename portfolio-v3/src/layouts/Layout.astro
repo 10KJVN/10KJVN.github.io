@@ -3,10 +3,24 @@ import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 
+interface Props {
+	title?: string;
+	description?: string;
+	/** "standard" = readable page width (default). "wide" = documentation canvas. */
+	width?: "standard" | "wide";
+}
+
 const {
 	title = "Portfolio",
 	description = "Technical Artist & Game Developer",
+	width = "standard",
 } = Astro.props;
+
+// Full literal class strings so Tailwind can detect them.
+const mainWidth = {
+	standard: "max-w-5xl px-6",
+	wide: "max-w-[1600px] px-0",
+}[width];
 ---
 
 <!doctype html>
@@ -25,7 +39,7 @@ const {
 			<Navbar />
 		</div>
 
-		<main class="mx-auto max-w-5xl px-6 py-10">
+		<main class={`mx-auto ${mainWidth} py-10`}>
 			<slot />
 		</main>
 

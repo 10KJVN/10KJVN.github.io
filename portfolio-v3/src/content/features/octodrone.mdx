@@ -53,7 +53,7 @@ A small but important part of the implementation was keeping Octo facing the dir
 ```csharp
 private void UpdateWalkDirection()
 {
-    var distance = _currentWayPoint.transform.positon - transform.position;
+    var distance = _currentWayPoint.transform.position - transform.position;
 
     var walkForceDirection = walkForce.Direction;
     walkForceDirection.x = Mathf.Abs(walkForceDirection.x) * Mathf.Sign(distance.x);
@@ -90,7 +90,7 @@ protected override void Attack()
     var moveDirection = movementForce.Direction;
     moveDirection.x = stepToPlayer.x;
     movementForce.Duration = attackForce.Duration * 2;
-    movmentForce.Direction = moveDirection;
+    movementForce.Direction = moveDirection;
 
     EnemyAI.forceBody.Add(attackForce, new CallbackConfig()
         {
@@ -127,18 +127,3 @@ This overlap was especially useful when debugging the interaction between the AI
 The main challenge was understanding how the existing Force System interacted with the enemy state machine.
 Working through that architecture gave me a stronger understanding of state machines,
 Unity Events, Refactoring, and integrating animation with gameplay logic.
-
-[//]: # (Octodrone was also one of my first experiences working closely inside an existing gameplay codebase rather than developing a system in isolation.)
-
-[//]: # (Working through this as a duo gave me a much better)
-
-[//]: # (understanding of State machiens, Unity Events, and integrating)
-
-[//]: # (animation with existing gameplay systems.)
-
-[//]: # ()
-[//]: # (For my part, the feature was especially valuable because it combined)
-
-[//]: # (gameplay logic with the more visual side of implementation: animation)
-
-[//]: # (transitions, prefab setup, colliders, and gameplay feedback.)
