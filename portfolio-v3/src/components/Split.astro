@@ -1,0 +1,29 @@
+---
+interface Props {
+    /** Width of first child : second child. */
+    ratio?: "1:1" | "2:3" | "3:2" | "1:2" | "2:1";
+    /** Swaps sides on desktop (ratio swaps with them). Mobile order is unchanged. */
+    reverse?: boolean;
+    align?: "start" | "center";
+}
+
+const { ratio = "1:1", reverse = false, align = "start" } = Astro.props;
+
+// Literal class strings so Tailwind can detect them.
+const columns = {
+    "1:1": { normal: "lg:grid-cols-[1fr_1fr]", reversed: "lg:grid-cols-[1fr_1fr]" },
+    "2:3": { normal: "lg:grid-cols-[2fr_3fr]", reversed: "lg:grid-cols-[3fr_2fr]" },
+    "3:2": { normal: "lg:grid-cols-[3fr_2fr]", reversed: "lg:grid-cols-[2fr_3fr]" },
+    "1:2": { normal: "lg:grid-cols-[1fr_2fr]", reversed: "lg:grid-cols-[2fr_1fr]" },
+    "2:1": { normal: "lg:grid-cols-[2fr_1fr]", reversed: "lg:grid-cols-[1fr_2fr]" },
+}[ratio];
+
+const alignment = { start: "items-start", center: "items-center" }[align];
+const flip = reverse ? "lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1" : "";
+---
+
+<div
+        class={`my-10 grid grid-cols-1 gap-8 lg:gap-12 ${alignment} ${reverse ? columns.reversed : columns.normal} ${flip} [&>*]:min-w-0 [&>*>:first-child]:mt-0 [&>*>:last-child]:mb-0 [&>img]:my-0 [&>img]:w-full [&>pre]:mb-0`}
+>
+    <slot />
+</div>

@@ -15,32 +15,44 @@ teamSize: "2 devs"
 role: "Gameplay Programmer"
 ---
 
+import Split from "../../components/Split.astro";
+
 ## Overview
 
-Octodrone was the first ground-based enemy developed for Operation Starfall.
-Its behavior combines state-driven AI, patrol and detection logic, and a custom jump attack.
+<Split ratio="2:3" align="center">
+    <div>
 
-I worked on this feature together with my co-worker [Jason Siegersma](https://j5x.github.io/projectgame3.html).
+        Octodrone was the first ground-based enemy developed for Operation Starfall.
+        Its behavior combines state-driven AI, patrol and detection logic, and a custom jump attack.
 
-[//]: # (with both of us working across the AI and animation systems.)
+        I worked on this feature together with my co-worker [Jason Siegersma](https://j5x.github.io/projectgame3.html).
 
-<img src="/videos/starfall/octoattackingfinal.gif" alt="Octodrone detecting and attacking the player" class="rounded-xl" />
+        [//]: # (with both of us working across the AI and animation systems.)
+
+    </div>
+    <img src="/videos/starfall/octoattackingfinal.gif" alt="Octodrone detecting and attacking the player" class="rounded-xl" />
+</Split>
 
 ## State Machine & Animation
 
-Octo's behavior is driven by the existing enemy state machine.
-We extended it with the states required for its behavior:
+<Split ratio="3:2" reverse>
+    <div>
 
-- Patrol
-- Detect
-- Jump / Attack
-- Fuzzy
+        Octo's behavior is driven by the existing enemy state machine.
+        We extended it with the states required for its behavior:
 
-The Animator was connected to these states using triggers and Unity Events. This synchronized gameplay states with animation transitions, particularly during the jump attack.
+        - Patrol
+        - Detect
+        - Jump / Attack
+        - Fuzzy
 
-<img src="/videos/starfall/OctoAnim.gif" alt="Octodrone animation states" />
+        The Animator was connected to these states using triggers and Unity Events. This synchronized gameplay states with animation transitions, particularly during the jump attack.
 
-**Visuals & animations:** [Alex Kentie](https://nl.linkedin.com/in/alexkentie), Creative Director at Neon Origins.
+        **Visuals & animations:** [Alex Kentie](https://nl.linkedin.com/in/alexkentie), Creative Director at Neon Origins.
+
+    </div>
+    <img src="/videos/starfall/OctoAnim.gif" alt="Octodrone animation states" />
+</Split>
 
 ## Patrol & Detection
 
@@ -50,26 +62,31 @@ The existing patrol and detection systems had originally been built around flyin
 
 A small but important part of the implementation was keeping Octo facing the direction of its current waypoint.
 
-```csharp
-private void UpdateWalkDirection()
-{
-    var distance = _currentWayPoint.transform.position - transform.position;
+<Split ratio="3:2">
+    <div>
 
-    var walkForceDirection = walkForce.Direction;
-    walkForceDirection.x = Mathf.Abs(walkForceDirection.x) * Mathf.Sign(distance.x);
+        ```csharp
+        private void UpdateWalkDirection()
+        {
+            var distance = _currentWayPoint.transform.positon - transform.position;
 
-    walkForce.Direction = walkForceDirection;
+            var walkForceDirection = walkForce.Direction;
+            walkForceDirection.x = Mathf.Abs(walkForceDirection.x) * Mathf.Sign(distance.x);
 
-    var transformLocalScale = transform.localScale;
-    transformLocalScale.x = Mathf.Sign(distance.x);
-    transform.localScale = transformLocalScale;
-}
-```
+            walkForce.Direction = walkForceDirection;
 
-`UpdateWalkDirection` adjusts the walk force and local scale based on the waypoint's position,
-allowing Octo to turn around correctly while patrolling.
+            var transformLocalScale = transform.localScale;
+            transformLocalScale.x = Mathf.Sign(distance.x);
+            transform.localScale = transformLocalScale;
+        }
+        ```
 
-<img src="/videos/starfall/Patrolling.gif" alt="Octodrone patrolling" />
+        `UpdateWalkDirection` adjusts the walk force and local scale based on the waypoint's position,
+        allowing Octo to turn around correctly while patrolling.
+
+    </div>
+    <img src="/videos/starfall/Patrolling.gif" alt="Octodrone patrolling" />
+</Split>
 
 ## Jump Attack
 
@@ -81,34 +98,39 @@ The attack state inherits from the existing `AttackState` and coordinates the an
 
 ### Implementation
 
-```csharp
-protected override void Attack()
-{
-    base.Attack();
-    EnemyAI.TargetLookAt(stepToPlayer);
-    EnemyAI.forceBody.onCollisionEvent.AddListener(OnLand);
-    var moveDirection = movementForce.Direction;
-    moveDirection.x = stepToPlayer.x;
-    movementForce.Duration = attackForce.Duration * 2;
-    movementForce.Direction = moveDirection;
+<Split ratio="1:1" align="center">
+    <div>
 
-    EnemyAI.forceBody.Add(attackForce, new CallbackConfig()
+        ```csharp
+        protected override void Attack()
+        {
+            base.Attack();
+            EnemyAI.TargetLookAt(stepToPlayer);
+            EnemyAI.forceBody.onCollisionEvent.AddListener(OnLand);
+            var moveDirection = movementForce.Direction;
+            moveDirection.x = stepToPlayer.x;
+            movementForce.Duration = attackForce.Duration * 2;
+            movmentForce.Direction = moveDirection;
+
+            EnemyAI.forceBody.Add(attackForce, new CallbackConfig()
         {
             OnFinish = OnJumpPeak,
             OnCancel = AttackFinished
         }
-    );
+            );
 
-    EnemyAI.forceBody.Add(movementForce, new CallbackConfig()
+            EnemyAI.forceBody.Add(movementForce, new CallbackConfig()
         {
             OnFinish = OnJumpFinish,
             OnCancel = AttackFinished
         }
-    );
-}
-```
+            );
+        }
+        ```
 
-<img src="/videos/starfall/OctoAttack.gif" alt="Octodrone performing its jump attack" />
+    </div>
+    <img src="/videos/starfall/OctoAttack.gif" alt="Octodrone performing its jump attack" />
+</Split>
 
 The attack state ties the animation timing and Force System together,
 allowing the jump to transition into the forward strike.

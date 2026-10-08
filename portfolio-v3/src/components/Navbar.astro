@@ -3,7 +3,7 @@
 ---
 
 <nav class="w-full fixed top-0 left-0 z-50 bg-background/75 backdrop-blur-lg border-b border-border">
-  <div class="mx-auto px-14 py-5 flex items-center justify-between">
+  <div class="mx-auto px-6 md:px-14 py-5 flex items-center justify-between">
 
     <!-- Left: Your Name -->
     <a 
@@ -14,8 +14,11 @@
       JVN
     </a>
 
-    <!-- Right: Navigation Links -->
-    <ul class="flex gap-6 text-sm uppercase tracking-wide">
+    <!-- Navigation links: dropdown under md, inline row from md up -->
+    <ul
+        id="nav-links"
+        class="absolute left-0 top-full hidden w-full flex-col gap-4 border-b border-border bg-background px-6 py-6 text-sm uppercase tracking-wide md:static md:flex md:w-auto md:flex-row md:gap-6 md:border-0 md:bg-transparent md:p-0"
+    >
       <li><a class="nav-link" href="/">Home</a></li>
       <li><a class="nav-link" href="/about">About</a></li>
       <li><a class="nav-link" href="/features">Features</a></li>
@@ -23,8 +26,44 @@
       <li><a class="nav-link" href="/contact">Contact</a></li>
     </ul>
 
+    <!-- Hamburger: only under md -->
+    <button
+        id="nav-toggle"
+        type="button"
+        class="-mr-2 p-2 md:hidden"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+        aria-controls="nav-links"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+
   </div>
 </nav>
+
+<script>
+  const toggle = document.getElementById("nav-toggle");
+  const links = document.getElementById("nav-links");
+
+  if (toggle && links) {
+    const setOpen = (open: boolean): void => {
+      links.classList.toggle("hidden", !open);
+      links.classList.toggle("flex", open);
+      toggle.setAttribute("aria-expanded", String(open));
+    };
+
+    toggle.addEventListener("click", () => {
+      setOpen(toggle.getAttribute("aria-expanded") !== "true");
+    });
+
+    // Close the menu after picking a link (matters for same-page anchors like /#featured).
+    links.querySelectorAll("a").forEach((a: HTMLAnchorElement) => {
+      a.addEventListener("click", () => setOpen(false));
+    });
+  }
+</script>
 
 <style>
   .nav-link {

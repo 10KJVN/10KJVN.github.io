@@ -15,17 +15,24 @@ teamSize: "2 devs"
 role: "Technical Artist"
 ---
 
+import Split from "../../components/Split.astro";
+
 ## Overview
 
-Radial Stamina replaced the original stamina display in Operation Starfall.
+<Split ratio="2:3" align="center">
+    <div>
 
-The feature combines the existing stamina system with a ShaderGraph-based radial UI,
-inspired by the stamina system in *The Legend of Zelda: Breath of the Wild*.
+        Radial Stamina replaced the original stamina display in Operation Starfall.
 
-I worked with another developer on the gameplay-side logic and Unity Events,
-while focusing primarily on the ShaderGraph implementation and visual behavior.
+        The feature combines the existing stamina system with a ShaderGraph-based radial UI,
+        inspired by the stamina system in *The Legend of Zelda: Breath of the Wild*.
 
-<img src="/videos/starfall/radialplayergif.gif" alt="Radial stamina system in-game" class="rounded-xl" />
+        I worked with another developer on the gameplay-side logic and Unity Events,
+        while focusing primarily on the ShaderGraph implementation and visual behavior.
+
+    </div>
+    <img src="/videos/starfall/radialplayergif.gif" alt="Radial stamina system in-game" class="rounded-xl" />
+</Split>
 
 ## From Gameplay to Shader
 
@@ -43,15 +50,20 @@ became an opportunity to explore how the same gameplay information could drive a
 
 ## Gameplay Logic
 
-The stamina events determine when the radial appears, updates, and fades.
+<Split ratio="2:3" reverse>
+    <div>
 
-The Unity-side logic handles stamina depletion and regeneration,
-while the relevant values are passed into the shader to control its visual state.
+        The stamina events determine when the radial appears, updates, and fades.
 
-<img src="/images/starfall/unityradialevents.png" alt="Unity Events used to control the stamina radial" class="rounded-xl" />
+        The Unity-side logic handles stamina depletion and regeneration,
+        while the relevant values are passed into the shader to control its visual state.
 
-When stamina is consumed, the radial updates with the current stamina percentage.
-After the update, the display fades out and reappears when the stamina changes again.
+        When stamina is consumed, the radial updates with the current stamina percentage.
+        After the update, the display fades out and reappears when the stamina changes again.
+
+    </div>
+    <img src="/images/starfall/unityradialevents.png" alt="Unity Events used to control the stamina radial" class="rounded-xl" />
+</Split>
 
 ## ShaderGraph
 
@@ -61,14 +73,19 @@ The ShaderGraph is split into three main sections: fade logic, texture logic, an
 
 ### Fade Logic
 
-The fade section controls the visibility of the radial over time.
+<Split ratio="2:3" align="center">
+    <div>
 
-The graph calculates the time since the last stamina update,
-producing fade-in and fade-out values based on the configured display and fade durations.
+        The fade section controls the visibility of the radial over time.
 
-These values are combined to produce the final visibility of the stamina ring.
+        The graph calculates the time since the last stamina update,
+        producing fade-in and fade-out values based on the configured display and fade durations.
 
-<img src="/videos/starfall/RadialFade.gif" alt="Radial stamina fading in and out" class="rounded-xl" />
+        These values are combined to produce the final visibility of the stamina ring.
+
+    </div>
+    <img src="/videos/starfall/RadialFade.gif" alt="Radial stamina fading in and out" class="rounded-xl" />
+</Split>
 
 ### Texture Logic
 
@@ -80,14 +97,19 @@ The texture's RGBA output is multiplied by the color before being passed into th
 
 ### Shape Logic
 
-The radial shape is controlled using a gradient mask and the current stamina percentage.
+<Split ratio="2:3" reverse>
+    <div>
 
-The mask's red channel is offset by the stamina value and clamped to create the radial cutoff.
-The resulting mask is combined with the texture's alpha and the fade value.
+        The radial shape is controlled using a gradient mask and the current stamina percentage.
 
-<img src="/images/starfall/mask8p.jpg" alt="The gradient and radial mask textures used by the shader" class="rounded-xl" />
+        The mask's red channel is offset by the stamina value and clamped to create the radial cutoff.
+        The resulting mask is combined with the texture's alpha and the fade value.
 
-This produces a ring that fills and fades dynamically with the player's stamina.
+        This produces a ring that fills and fades dynamically with the player's stamina.
+
+    </div>
+    <img src="/images/starfall/mask8p.jpg" alt="The gradient and radial mask textures used by the shader" class="rounded-xl" />
+</Split>
 
 ## Collaboration
 
