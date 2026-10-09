@@ -1,11 +1,10 @@
 ---
 title: "The Kermis"
-description: "A fairground experience about temporary moments, nostalgia, and the memories we leave with."
+description: "A game concept about themes such ephemeral beauty, atmosphere, and the memories we leave with."
 thumbnail: "/images/caustics.svg"
 tags: ["Unity", "C#", "Concept", "Design", "Gameplay"]
 highlight: false
 order: 8
-
 year: 2026
 # TODO: links (repo, gameplay video)
 ---
@@ -20,19 +19,38 @@ import Media from "../../components/Media.astro";
 
         *"The fair won't be here forever."*
 
-        The Kermis is a game concept set at a Dutch fairground.
+        The Kermis is a solo game concept set at a Dutch fairground.
         It began with a fascination for temporary experiences: the idea that a moment's limited lifespan is part of what makes it meaningful.
 
-        The original concept was to let players experience a world filled with small attractions before it eventually disappeared,
-        leaving them with the memories they had made.
+        In the Netherlands, a kermis is a temporary fair: it arrives, runs for a few days, and then disappears.
+        The original concept was to let players experience a world filled with small attractions before it eventually vanished, leaving them with the memories they had made.
 
-        {/* TODO: one or two sentences on the pitch of the whole game, and how it follows on from Weather Report */}
+        During development, I narrowed that idea into a vertical slice: one playable attraction, the shooting gallery, built to test whether a short fairground game could carry the same feeling.
+
+        {/* TODO: 1–2 sentences on how this follows on from Weather Report. */}
 
     </div>
-    <Media src="/images/caustics.svg" alt="The shooting gallery stall" caption="Shooting gallery, work in progress" />
+    <Media src="/images/caustics.svg" alt="The Kermis — representative in-game screenshot" caption="The fairground, work in progress" />
 </Split>
 
-## Research / From Concept to Vertical Slice
+## The experience
+
+<Split ratio="2:3" align="center">
+    <div>
+
+        The current slice centres on the shooting gallery: a familiar fairground attraction that gives the player something immediate to engage with.
+
+        The player explores the fair, interacts with the attraction, and tries to earn as many points as possible before time runs out.
+        Afterwards, the experience continues towards its ending sequence.
+
+        The shooting gallery became the project's main gameplay focus.
+        It offered a concrete place to experiment with aiming, shooting, feedback, and the rhythm of a short minigame.
+
+    </div>
+    <Media src="/images/caustics.svg" alt="Gameplay GIF from the shooting gallery" caption="Shooting gallery gameplay" />
+</Split>
+
+## From concept to vertical slice
 
 <Split ratio="1:1">
     <div>
@@ -40,39 +58,48 @@ import Media from "../../components/Media.astro";
         I started by researching real fairground attractions, with a focus on shooting-stall variations:
 
         - Shooting nails, where the nails move
-        - An RNG game: cutting for 2 euros
+        - An RNG game: cutting for €2
         - Shooting fingers: the whole finger has to come off, otherwise it doesn't count
         - A boxing-ball game for inspiration
 
-        However, the initial ambition was broader, with multiple carnival attractions contributing to the experience.
+        The initial ambition was broader, with multiple carnival attractions contributing to the experience.
         As development progressed, I reconsidered how much of that scope was necessary to demonstrate the game's core idea.
 
     </div>
     <div>
 
-        After comparing them I chose the shooting gallery, then worked out the stall model and its in-engine setup, and wrote model specifications and art outsourcing requests.
+        After comparing them, I chose the shooting gallery.
+        I blocked out the stall model and its in-engine setup, then wrote model specifications and art outsourcing requests.
 
-        If the stall is large enough for three sections, I can make three variations, each with one open spot.
-        In the first, left and right are occupied so you shoot in the middle, and so on.
-        The prize is a bear, made into a prefab.
+        If the stall was large enough for three sections, I could make three variations, each with one open spot:
+        in the first, left and right are occupied so you shoot in the middle, and so on.
 
-        However I chose to concentrate on one playable attraction instead.
-        That gave me more room to iterate on the gameplay itself, test it with other people, and respond to what made the experience enjoyable.
-
+        However, I chose to concentrate on one playable attraction instead. That gave me more room to iterate on the gameplay itself, test it with other people, and respond to what made the experience enjoyable.
 
     </div>
 </Split>
 
-## The Shooting Gallery
+<Split ratio="1:1">
+    <div>
+
+        ### What changed after testing?
+
+        - **Scope:** A larger collection of attractions became a focused vertical slice.
+        - **Priorities:** More attention went towards making the central gameplay enjoyable.
+        - **Narrative:** The relationship between the playable experience and the original fascination remained an area to develop further.
+
+    </div>
+    <Media src="/images/caustics.svg" alt="An earlier iteration of The Kermis" caption="Earlier iteration" />
+</Split>
+
+## The shooting gallery
 
 <Split ratio="2:3" align="center">
     <div>
 
-        The shooting gallery became the project's main gameplay focus.
-        It offered a concrete place to experiment with aiming, shooting, feedback, and the rhythm of a short minigame.
+        The shooting gallery became the project's main gameplay focus. It offered a concrete place to experiment with aiming, shooting, feedback, and the rhythm of a short minigame.
 
-        I made the star targets breakable in Blender and tested them in game.
-        The first version that sort of worked only aimed linearly, so you couldn't really aim at anything except the middle.
+        I made the star targets breakable in Blender and tested them in game. The first version that worked only aimed linearly, so you couldn't really aim at anything except the middle.
 
         My checklist for a playtest MVP (29 May):
 
@@ -84,14 +111,8 @@ import Media from "../../components/Media.astro";
         - Collisions for the stall
         - Maybe let the cans fall when shot
 
-        ### What changed after testing?
-
-        - **Scope:** A larger collection of attractions became a focused vertical slice.
-        - **Priorities:** More attention went towards making the central gameplay enjoyable.
-        - **Narrative:** The relationship between the playable experience and the original fascination remained an area to develop further.
-
     </div>
-    <Media src="/images/caustics.svg" alt="Breakable star targets" caption="Breakable stars" />
+    <Media src="/images/caustics.svg" alt="Breakable star targets" caption="Breakable stars, work in progress" />
 </Split>
 
 <Split ratio="1:1">
@@ -110,8 +131,7 @@ import Media from "../../components/Media.astro";
 
         ### Difficulty
 
-        Difficulty modifiers come from the targets' Rigidbody: mass, and potentially gravity.
-        I managed 2000 points, and reached 2600 more easily with less mass.
+        Difficulty modifiers come from the targets' Rigidbody: mass, and potentially gravity. I managed 2000 points, and reached 2600 more easily with less mass.
 
         - Mass 1.0: hard
         - Mass 0.8: medium
@@ -129,18 +149,15 @@ import Media from "../../components/Media.astro";
 
         ### Interaction
 
-        For an object to be interactable it needs a box collider, because that is what the player raycasts against.
-        Without colliders on the model, the mouse-world raycast went straight through the building and tried to aim into the skybox, where my max reach of 300 made it fail.
-        Placing proper colliders fixed it.
+        For an object to be interactable it needs a box collider, because that is what the player raycasts against. Without colliders on the model, the mouse-world raycast went straight through the building and tried to aim into the skybox, where my max reach of 300 made it fail. Placing proper colliders fixed it.
 
     </div>
     <div>
 
         ### Camera and game modes
 
-        A main camera with a `CinemachineBrain` blends to any virtual camera it finds at runtime.
-        Enabling the shoot camera switches to it, and disabling it switches back to the dominant camera.
-        That was a temporary, manual solution, and automating it is next.
+        A main camera with a `CinemachineBrain` blends to any virtual camera it finds at runtime. Enabling the shoot camera switches to it, and disabling it switches back to the dominant camera. That was a temporary, manual solution, and automating it is next.
+
         When the timer reaches 0, a Unity Event exits shooting mode and re-enters explore mode.
 
         To stop the player walking off into the void if disabled mid-input, I plan to call `ClearState()` in `PlayerController.OnDisable`.
@@ -148,11 +165,10 @@ import Media from "../../components/Media.astro";
     </div>
 </Split>
 
-### HUD thinking
+### HUD and feedback
 
-The ammo meter was a placement puzzle.
-Under the aim marker doesn't work with this point of view, so I considered under the timer (since you're watching the time anyway) and bottom right next to the weapon, possibly as a vertical meter.
-I wanted to ask someone who plays a lot of shooters, or a UI/UX artist, where they'd expect it.
+The ammo meter was a placement puzzle. Under the aim marker doesn't work with this point of view, so I considered under the timer — since you're watching the time anyway — and bottom right next to the weapon, possibly as a vertical meter. I wanted to ask someone who plays a lot of shooters, or a UI/UX artist, where they'd expect it.
+
 The exploration HUD is intentionally minimal: coins, a time-of-day indication with hard-coded times (16:00, 18:00, 20:00), and maybe a pause button.
 
 ## Dev log
@@ -165,9 +181,22 @@ The exploration HUD is intentionally minimal: coins, a time-of-day indication wi
 - 1 Jun: core shooting functionality and UI working (7h)
 - 3 Jun: park layout blockout and cutscene storyboarding (6h)
 
-{/* TODO: Takeaway */}
+## Earlier experiments
+
+The Kermis didn't emerge in isolation. Inside Out was an earlier technical experiment that explored atmospheric systems and helped inform the work that followed. It belongs in the project's background rather than as a separate case study here.
+
+{/* TODO: replace with real link */}
+[Browse the Inside Out archive on GitHub](https://github.com/your-handle/inside-out)
+
+## Reflection
+
+The biggest design lesson was learning to distinguish between the idea I wanted to communicate and the experience I could realistically build.
+
+Reducing the scope gave the gameplay the attention it needed, but it also made the remaining gap between the original concept and the finished slice more apparent. The project reinforced the value of testing the actual experience early, then using those results to decide what deserves further development.
 
 The Kermis remains an exploration of how gameplay, atmosphere, and narrative can work together to make a brief experience feel meaningful.
+
+Next, I would automate the camera and game-mode switching, finish the ending sequence, and develop the narrative framing around arrival and departure so the shooting gallery feels like one memory inside a larger temporary place.
 
 ## Resources
 
