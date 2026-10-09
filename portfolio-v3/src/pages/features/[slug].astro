@@ -1,9 +1,9 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import ProjectInfo from "../../components/ProjectInfo.astro";
 import ProjectLinks from "../../components/ProjectLinks.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import { getCollection, render, type CollectionEntry } from "astro:content";
+import BackToTop from "../../components/BackToTop.astro";
 
 export async function getStaticPaths() {
     const features = await getCollection("features");
@@ -38,7 +38,7 @@ const parentProject = feature.data.projectSlug
         description={feature.data.description}
         width="wide"
 >
-    <article class="mx-auto max-w-[1200px] px-8 py-16 lg:px-12">
+    <article class="mx-auto max-w-[1600px] px-8 py-16 lg:px-12 xl:px-16">
 
         <Breadcrumb
                 trail={
@@ -109,29 +109,18 @@ const parentProject = feature.data.projectSlug
                 {feature.data.description}
             </p>
 
-            <!-- Hero -->
-            <figure class="mx-auto mt-14 max-w-6xl overflow-hidden rounded-2xl border border-border">
-                <img
-                        src={feature.data.thumbnail}
-                        alt={feature.data.title}
-                        class="w-full"
-                />
-            </figure>
-
-            <!--<ProjectInfo-->
-            <!--        duration={feature.data.duration}-->
-            <!--        teamSize={feature.data.teamSize}-->
-            <!--        role={feature.data.role}-->
-            <!--/>-->
-
         </header>
 
+        <!-- Keep the title and summary readable while allowing the hero and MDX compositions to use the wider canvas. -->
+        <figure class="mx-auto mt-14 max-w-[1440px] overflow-hidden rounded-2xl border border-border">
+            <img src={feature.data.thumbnail} alt={feature.data.title} class="w-full" />
+        </figure>
 
-        <!--<ProjectLinks links={feature.data.links} />-->
-
-        <div class="mdx-content">
+        <div class="mdx-content mt-16">
             <Content />
         </div>
+
+        <ProjectLinks links={feature.data.links} />
 
         {parentProject ? (
                 <a href={`/projects/${parentProject.id}`}
@@ -140,10 +129,12 @@ const parentProject = feature.data.projectSlug
                 </a>
         ) : (
                 <a href="/features"
-                   class="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.15em] opacity-50 transition hover:opacity-100">
+                   class="mt-16 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.15em] opacity-50 transition hover:opacity-100">
                     ← Back to Features
                 </a>
         )}
 
     </article>
+
+    <BackToTop />
 </Layout>

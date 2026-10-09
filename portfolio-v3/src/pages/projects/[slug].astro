@@ -8,7 +8,7 @@
     */
 
 import Layout from "../../layouts/Layout.astro";
-import ProjectLinks from "../../components/ProjectLinks.astro"; /* <- Double check to remove */
+import ProjectLinks from "../../components/ProjectLinks.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import FeatureHighlightCard from "../../components/FeatureHighlightCard.astro";
 import { getCollection, render, type CollectionEntry } from "astro:content";
@@ -30,17 +30,13 @@ const { project } = Astro.props;
 
 const { Content } = await render(project)
 
-// Feature Highlights: up to 2 features that belong to this project, per the brief's "start symmetrical" rule.
+// Show every feature explicitly associated with this project, in its chosen order.
+// The route should not silently hide content when a project has more than two features.
 const allFeatures = await getCollection("features");
 
 const projectFeatures = allFeatures
-    .filter((f) => f.data.projectSlug === project.id)
-    .sort((a, b) => (a.data.order ?? Infinity) - (b.data.order ?? Infinity))
-    .slice(0, 2);
-
-// Identity strip: whichever of these exist, shown compactly — no forced 6-stat grid.
-const stats = [project.data.duration, project.data.teamSize, project.data.role, project.data.engine]
-    .filter(Boolean);
+    .filter((feature) => feature.data.projectSlug === project.id)
+    .sort((a, b) => (a.data.order ?? Infinity) - (b.data.order ?? Infinity));
 ---
 
 <Layout
@@ -55,7 +51,7 @@ const stats = [project.data.duration, project.data.teamSize, project.data.role, 
         <!-- Project Header -->
         <header class="mx-auto max-w-5xl text-center">
 
-            <p class="font-mono text-[10px] uppercase tracking-[0.25em] opacity-45">
+            <p class="mt-3 font-mono text-[12px] uppercase tracking-[0.25em] opacity-55">
                 Project · {project.data.year}
             </p>
 
@@ -63,21 +59,15 @@ const stats = [project.data.duration, project.data.teamSize, project.data.role, 
                 {project.data.title}
             </h1>
 
-            <!--<p class="mt-3 text-sm opacity-50">-->
-            <!--    Neon Game Studio-->
-            <!--</p>-->
-
             <p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed opacity-65 md:text-lg">
                 {project.data.description}
             </p>
 
-        <!-- Hero -->
-        <figure class="mx-auto mt-14 max-w-6xl overflow-hidden rounded-2xl border border-border">
-            <img
-                    src={project.data.thumbnail}
-                    alt={project.data.title}
-                    class="w-full"
-            />
+        </header>
+
+        <!-- Hero sits outside the header so it can use the wide canvas instead of the header's max-w-5xl. -->
+        <figure class="mx-auto mt-14 max-w-[1440px] overflow-hidden rounded-2xl border border-border">
+            <img src={project.data.thumbnail} alt={project.data.title} class="w-full" />
         </figure>
 
         <div class="mt-6 flex flex-wrap justify-center gap-2">
@@ -85,13 +75,10 @@ const stats = [project.data.duration, project.data.teamSize, project.data.role, 
                     <span
                             class="rounded-full border border-border px-3 py-1.5 font-mono text-[10px] uppercase tracking-wide opacity-65"
                     >
-                {tag}
-            </span>
+                    {tag}
+                </span>
             ))}
         </div>
-
-        </header>
-
 
         <!-- Feature Showcase -->
         {projectFeatures.length > 0 && (
@@ -128,24 +115,12 @@ const stats = [project.data.duration, project.data.teamSize, project.data.role, 
         )}
 
 
-        <!-- Post Mortem -->
-        <section class="mx-auto mt-32 max-w-3xl border-t border-border pt-12">
-            <div class="mb-10">
-                <p class="font-mono text-[10px] uppercase tracking-[0.25em] opacity-45">
-                    Project Notes
-                </p>
+        <!-- Project narrative is authored in MDX so each project can choose its own structure. -->
+        <div class="mdx-content mt-20">
+            <Content />
+        </div>
 
-                <h2 class="mt-2 font-display text-3xl uppercase tracking-wide">
-                    Collaboration & Process
-                </h2>
-            </div>
-
-            <div class="mdx-content mt-16">
-                <Content />
-            </div>
-
-            <ProjectLinks links={project.data.links} />
-        </section>
+        <ProjectLinks links={project.data.links} />
 
     </article>
 </Layout>

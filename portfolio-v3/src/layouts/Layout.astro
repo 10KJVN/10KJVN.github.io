@@ -55,6 +55,11 @@ const mainWidth = {
 		margin: 0;
 		width: 100%;
 		height: 100%;
+	}
+
+	/* html only: with overflow-x on body too, body becomes its own scroll container
+       and window scroll events (BackToTop) stop firing. */
+	html {
 		overflow-x: hidden;
 	}
 </style>
