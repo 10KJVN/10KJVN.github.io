@@ -1,10 +1,86 @@
 ---
-title: "Parachute"
-description: "Refactored Unity parachute project — gameplay and design, made in first year at HKU."
-thumbnail: "/images/caustics.svg"
-tags: ["Unity", "C#", "Gameplay", "Design"]
-highlight: false
-order: 7
+title: "Parachute Panic"
+description: "Iterating on a Unity game through peer feedback, code restructuring, and a persistent highscore system."
+year: "2026"
+duration: "Coursework iteration"
+engine: "Unity"
+language: "C#"
+teamSize: "Solo"
+role: "Gameplay Programming, Software Design"
+tags: ["Unity", "C#", "Code Quality", "Systems Design"]
+links:
+  - label: "GitHub"
+    url: "REPLACE_WITH_GITHUB_URL"
 ---
 
-Write-up coming soon.
+import Split from "../../components/Split.astro";
+import Media from "../../components/Media.astro";
+
+*Parachute Panic* is a Unity game I revisited to improve an existing project through iterative development, peer feedback, and more deliberate code design.
+
+The gameplay centres on navigating falling objects and obstacles while earning or losing points based on the player's actions. In my version, avoiding obstacles became a stronger focus than catching parachutists.
+
+For this iteration, I chose to build a persistent highscore system. This gave me a concrete feature to develop while improving the structure and maintainability of the existing codebase.
+
+<Media
+    src="/images/caustics.svg"
+    alt="Parachute Panic — replace with a representative gameplay screenshot"
+/>
+
+## Iterating on an existing game
+
+The work began with the core gameplay loop: player movement, object spawning, scoring, and the UI flow between the menu, gameplay, and game-over states.
+
+With that foundation in place, I could focus on the next problem: improving the project beyond simply getting the game to run.
+
+Peer feedback and code review became part of that process. Instead of treating the highscore system as an isolated addition, I used the feature to reconsider responsibilities, improve code structure, and make the implementation easier to extend.
+
+## A persistent leaderboard
+
+The highscore system stores the best scores alongside player names and displays them in the UI. Scores are saved locally so that the leaderboard persists between play sessions.
+
+<Media
+    src="/images/caustics.svg"
+    alt="The persistent highscore leaderboard"
+/>
+
+The feature involved more than displaying a list of numbers. The system needed to handle score data, save and load it, and present the results to the player.
+
+The implementation uses JSON serialization for persistence. Keeping the stored data separate from gameplay and presentation responsibilities also gave the system a clearer structure and made its behaviour easier to reason about.
+
+<Split>
+    <div>
+        ### Data and persistence
+
+        The leaderboard's data needs to survive beyond the current session. JSON provides a straightforward way to serialize the highscore data for local storage and reconstruct it when the game starts again.
+    </div>
+    <div>
+        ### Responsibilities
+
+        The highscore feature also served as an opportunity to separate data handling from the gameplay and UI code that uses it, reducing the amount of unrelated work each part needs to manage.
+    </div>
+</Split>
+
+## Code quality through feedback
+
+A central part of the assignment was improving an existing feature or system through coding conventions, independent research, lesson material, and code-review feedback.
+
+That shifted my focus from whether a feature worked to how it was structured. Encapsulation, reusable code, and clearer responsibilities became important considerations while developing the leaderboard.
+
+I also explored C# generics and delegates as part of the wider implementation and research process. These concepts helped me think more carefully about reusable systems and how different parts of a codebase communicate.
+
+The goal was to make the implementation easier to understand and extend, rather than adding abstraction for its own sake.
+
+## Limitations
+
+The core gameplay and highscore functionality were implemented, but not every part of the project reached the same level of completion.
+
+I kept the remaining limitations in mind when evaluating the result. A working feature is useful evidence of progress, but it doesn't automatically mean the surrounding code or the overall game is finished.
+
+## Takeaways
+
+Parachute Panic gave me a practical reason to revisit code I had already written and improve it with a more deliberate approach.
+
+The most valuable part was connecting feedback and research to an actual implementation. Rather than studying code quality as a collection of isolated rules, I could see how decisions about structure, data ownership, and responsibilities affected a real game feature.
+
+It also reinforced a useful distinction: getting something working is one milestone; making it understandable and maintainable is another.

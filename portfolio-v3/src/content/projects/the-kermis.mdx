@@ -1,10 +1,82 @@
 ---
 title: "The Kermis"
-description: "Concept, design, and gameplay project made in first year at HKU."
+description: "A carnival experience about temporary moments, nostalgia, and the memories we leave with."
 thumbnail: "/images/caustics.svg"
-tags: ["Concept", "Design", "Gameplay"]
+tags: ["Unity", "C#", "Design", "Gameplay"]
 highlight: false
 order: 8
+
+year: "2026"
+links:
+  - label: "Play the Game"
+    url: "https://github.com/10KJVN/REPO-NAME" # TODO: real URL
+  - label: "GitHub"
+    url: "https://www.youtube.com" # TODO: real URL (starts at ~2:08)
 ---
 
-Write-up coming soon.
+import Split from "../../components/Split.astro";
+import Media from "../../components/Media.astro";
+
+The fair won't be here forever.
+
+*The Kermis* began with a fascination for temporary experiences: the idea that a moment's limited lifespan is part of what makes it meaningful. The original concept was to let players experience a world filled with small attractions before it eventually disappeared, leaving them with the memories they had made.
+
+The project evolved considerably from that initial idea. Rather than attempting to build every attraction in the original concept, I shifted towards a vertical slice, concentrating on making one attraction enjoyable to play while finding a way to carry the original fascination through the experience.
+
+<Media
+    src="/images/caustics.svg"
+    alt="The Kermis — replace with a representative in-game screenshot"
+/>
+
+## The experience
+
+The current slice centres on the shooting gallery: a familiar fairground attraction that gives the player something immediate to engage with.
+
+The player explores the fair, interacts with the attraction, and tries to earn as many points as possible before time runs out. Afterwards, the experience continues towards its ending sequence.
+
+The shooting gallery became the project's main gameplay focus. It offered a concrete place to experiment with aiming, shooting, feedback, and the rhythm of a short minigame.
+
+<Media
+    src="/images/caustics.svg"
+    alt="Gameplay from the shooting gallery"
+/>
+
+## From concept to vertical slice
+
+The initial ambition was broader, with multiple carnival attractions contributing to the experience. As development progressed, I reconsidered how much of that scope was necessary to demonstrate the game's core idea.
+
+I chose to concentrate on one playable attraction instead. That gave me more room to iterate on the gameplay itself, test it with other people, and respond to what made the experience enjoyable.
+
+The result is a more focused slice, but it also exposed a challenge: **the gameplay had become more developed than the narrative framing around it.**
+
+My original fascination was about appreciating temporary moments and the memories they leave behind. A cutscene alone wasn't necessarily communicating that idea clearly enough. I had to reconsider how the beginning and ending could establish the player's perspective and give the experience a stronger narrative context.
+
+<Split>
+    <Media
+        src="/images/caustics.svg"
+        alt="An earlier iteration of The Kermis"
+    />
+    <div>
+        ### What changed
+
+        - **Scope:** A larger collection of attractions became a focused vertical slice.
+        - **Priorities:** More attention went towards making the central gameplay enjoyable.
+        - **Narrative:** The relationship between the playable experience and the original fascination remained an area to develop further.
+    </div>
+</Split>
+
+## Earlier experiments
+
+The Kermis didn't emerge in isolation. *Inside Out* was an earlier technical experiment that explored atmospheric systems and helped inform the work that followed.
+
+It belongs in the project's background rather than as a separate case study here.
+
+[Browse the Inside Out archive on GitHub](REPLACE_WITH_INSIDE_OUT_GITHUB_URL).
+
+## Reflection
+
+The biggest design lesson was learning to distinguish between the idea I wanted to communicate and the experience I could realistically build.
+
+Reducing the scope gave the gameplay the attention it needed, but it also made the remaining gap between the original concept and the finished slice more apparent. The project reinforced the value of testing the actual experience early, then using those results to decide what deserves further development.
+
+The Kermis remains an exploration of how gameplay, atmosphere, and narrative can work together to make a brief experience feel meaningful.
