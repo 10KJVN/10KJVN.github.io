@@ -13,6 +13,7 @@ import Breadcrumb from "../../components/Breadcrumb.astro";
 import FeatureHighlightCard from "../../components/FeatureHighlightCard.astro";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import { resolveFeatureHref } from "../../lib/resolveFeatureHref";
+import BackToTop from "../../components/BackToTop.astro";
 
 export async function getStaticPaths() {
     const projects = await getCollection("projects");
@@ -123,4 +124,6 @@ const projectFeatures = allFeatures
         <ProjectLinks links={project.data.links} />
 
     </article>
+
+    <BackToTop />
 </Layout>

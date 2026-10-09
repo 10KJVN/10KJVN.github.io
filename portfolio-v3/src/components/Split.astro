@@ -22,8 +22,10 @@ const alignment = { start: "items-start", center: "items-center" }[align];
 const flip = reverse ? "lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1" : "";
 ---
 
-<div
-        class={`my-10 grid grid-cols-1 gap-8 lg:gap-12 ${alignment} ${reverse ? columns.reversed : columns.normal} ${flip} [&>*]:min-w-0 [&>*>:first-child]:mt-0 [&>*>:last-child]:mb-0 [&>img]:my-0 [&>img]:w-full [&>pre]:mb-0`}
+<div class={`my-10 grid grid-cols-1 gap-8 lg:gap-12 
+            ${alignment} ${reverse ? columns.reversed : columns.normal} ${flip} 
+            *:min-w-0 [&>*>:first-child]:mt-0 [&>*>:last-child]:mb-0
+             [&>img]:my-0 [&>figure]:my-0 [&>img]:w-full [&>pre]:mb-0`}
 >
     <slot />
 </div>
