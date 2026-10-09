@@ -2,9 +2,114 @@
 title: "First Spark"
 description: "Concept and design project — application piece for HKU."
 thumbnail: "/images/caustics.svg"
-tags: ["Concept", "Design"]
+tags: ["Unity", "HLSL", "Concept", "Design"]
 highlight: false
 order: 6
+
+year: 2025
+links:
+  - label: "GitHub Repo"
+    url: "https://github.com/10KJVN/REPO-NAME" # TODO: real URL
 ---
 
-Write-up coming soon.
+import Split from "../../components/Split.astro";
+import Media from "../../components/Media.astro";
+
+## Concept
+
+<Split ratio="2:3" align="center">
+    <div>
+
+        First Spark is a short experimental game inspired by the concept of Homo Ludens — "the playing human."
+        The game invites players to explore without explicit instructions, relying purely on instinct and environmental cues.
+
+        You begin as a primitive human inside a dark cave, your fire extinguished.
+        The world is obscured in shadow and mist, pushing you to move forward guided only by faint glimmers of light.
+        This gradual transition — from almost complete darkness to a blindingly bright finale — is intentional, reflecting the idea of finding the "light" within yourself.
+
+        *Trigger warning: volume might be loud.*
+
+    </div>
+    <Media src="/images/caustics.svg" alt="The first spark" caption="The First Spark" />
+</Split>
+
+## Design Pillars
+
+The concept was born from the metaphor of losing something essential and instinctively searching to reclaim it — just as ancient humans would guard their fire.
+This primal urge is paired with modern design sensibilities to create a layered, symbolic experience.
+
+<Split ratio="2:3" align="center">
+    <div>
+
+        ### Environmental level design
+
+        Instead of tutorials or UI markers, the game uses light, shadow, and subtle visual hints to guide the player.
+
+    </div>
+    <Media src="/images/caustics.svg" alt="Environmental level design" caption="Environmental level design" />
+</Split>
+
+<Split ratio="2:3" reverse align="center">
+    <div>
+
+        ### Visibility as narrative
+
+        The player's vision expands throughout the game, creating a physical and emotional journey from obscurity to clarity.
+
+    </div>
+    <Media src="/images/caustics.svg" alt="Visibility expanding through the game" caption="Visibility as narrative" />
+</Split>
+
+<Split ratio="2:3" align="center">
+    <div>
+
+        ### Open interpretation
+
+        Entities encountered in the mist carry no fixed meaning — players are free to interpret their role in the story.
+
+    </div>
+    <Media src="/images/caustics.svg" alt="Entities in the mist" caption="Open interpretation" />
+</Split>
+
+## Technical Work
+
+<Split ratio="1:1">
+    <div>
+
+        ### Build
+
+        - Designed dynamic lighting setups to subtly lead the player's movement.
+        - Created and tuned volumetric fog to evoke mystery and depth.
+        - Built the game loop with a simple timer and entity collection system, with restart/quit functionality for quick replayability.
+
+    </div>
+    <div>
+
+        ### Research & inspiration
+
+        - Studied environmental storytelling to remove the need for tutorials.
+        - Experimented with Unity's lighting and fog systems to balance atmosphere with performance.
+
+    </div>
+</Split>
+
+## Reflection
+
+First Spark is aimed at players who enjoy atmospheric, symbolic experiences and are willing to explore without being told exactly what to do.
+
+<Split ratio="2:3" align="center">
+    <div>
+
+        If I had more time, I would:
+
+        - Add a main menu and more refined transitions.
+        - Create disappearance effects for the mist entities.
+        - Expand the playable area with additional content tied to the theme.
+
+    </div>
+    <div>
+
+        First Spark is a small but complete prototype — museum-worthy in its symbolism and design intent — and a personal exploration of how play, instinct, and meaning intersect.
+
+    </div>
+</Split>

@@ -2,9 +2,156 @@
 title: "The Ensemble"
 description: "Interactive architectural visualization built in Unreal Engine."
 thumbnail: "/images/caustics.svg"
-tags: ["Unreal", "ArchViz", "UI"]
+tags: ["Unreal", "Blueprints", "ArchViz", "UI"]
 highlight: false
 order: 5
+
+year: 2023 # start year; the project ran to 2025
+links:
+  - label: "Ensemble | Veldboom Studios"
+    url: "https://www.veldboomstudios.com" # TODO: real URL
 ---
 
-Write-up coming soon.
+import Split from "../../components/Split.astro";
+import Media from "../../components/Media.astro";
+
+## Overview
+
+<Split ratio="2:3" align="center">
+    <div>
+
+        The Ensemble is an architectural visualization project built in Unreal Engine, developed together with Veldboom Studios for a real estate client.
+        The project spanned nearly two years of intermittent development across three major phases.
+
+        Although primarily an ArchViz product, Ensemble became my first large-scale Unreal project.
+        My contribution focused on system design and UI programming, collaborating with a small team of developers and a 3D designer.
+        It remains my most extensive project to date.
+        My responsibilities grew from early prototyping and feature design to maintaining the technical backbone of the project — including UI, gameplay-like systems, and version control.
+
+    </div>
+    <Media src="/images/caustics.svg" alt="Hero render of The Ensemble" caption="Hero render" />
+</Split>
+
+<Split ratio="1:1">
+    <div>
+
+        ### Challenges
+
+        - Remote workflow
+        - Source control issues
+        - Merging multiple frameworks
+        - Client-driven iterations
+
+    </div>
+    <div>
+
+        ### Contributions & highlights
+
+        - Interactive UI system(s)
+        - Component Filter system
+        - Seamless texture creation
+        - Environment design (nature)
+
+    </div>
+</Split>
+
+## Development
+
+### Phase 1 – Prototyping (2023)
+
+My first exposure to Unreal after transitioning from Unity.
+During this phase I sketched and prototyped the UI, beginning with phone/tablet-style interactions.
+I integrated Ultra Dynamic Sky and added custom weather controls on top of it, and familiarized myself with the team's workflow.
+
+<Split ratio="1:1">
+    <Media src="/images/caustics.svg" alt="Earliest UI sketches" caption="Earliest sketches" />
+    <Media src="/images/caustics.svg" alt="Older user interface" caption="Older User Interface" />
+</Split>
+
+### Phase 2 – Consolidation (2024)
+
+<Split ratio="3:2" reverse align="center">
+    <div>
+
+        The UI system matured into a utility tablet with features such as weather/time controls, light toggles, and the Component Filter.
+        I took ownership of the GitHub repo and resolved major workflow issues.
+        I extended the ArchViz framework(s) with additional Blueprint logic, created seamless brick textures, and designed foliage environments.
+        I reduced the build size from ~8GB to 1.6GB, and delivered the first proper client-facing build.
+
+    </div>
+    <Media src="/images/caustics.svg" alt="Component Filter blueprint logic" caption="Component Filter logic: enables/disables the visibility & collision of tagged actors." />
+</Split>
+
+<Split ratio="1:1">
+    <Media src="/images/caustics.svg" alt="Office spaces before filtering" caption="Office Spaces" />
+    <Media src="/images/caustics.svg" alt="Units after filtering" caption="After Filter" />
+</Split>
+
+The Component Filter allows toggling between office spaces and regular units.
+
+### Phase 3 – Support (Late 2024 – 2025)
+
+While interning at Veldboom Studios, I continued working on Ensemble doing small fixes and updates.
+Such as blueprint reference fixes and POV switching extensions to the ArchViz Interior system, and I managed the final test builds.
+
+## Visuals & Media
+
+A selection of additional visuals and behind-the-scenes material from the development process.
+
+### Seamless texture creation
+
+<Split ratio="1:1">
+    <Media src="/images/caustics.svg" alt="Reference photo of a wall in The Ensemble" caption="Wall reference: irregular and not directly usable as a texture asset." />
+    <Media src="/images/caustics.svg" alt="Seamless 1024x1024 texture" caption="Seamless 1024x1024 texture" />
+</Split>
+
+<Split ratio="2:3" align="center">
+    <div>
+
+        After adjustments in Photoshop & Lightroom, the texture became uniform and tileable.
+        Exported in Power-of-Two resolution for optimal compression and scalability.
+
+    </div>
+    <Media src="/images/caustics.svg" alt="Texture applied in game under different weather" caption="Showcased under different weather conditions from clear skies to snow." />
+</Split>
+
+### Environment design
+
+<Split ratio="2:3" reverse align="center">
+    <div>
+
+        I was responsible for nature props such as trees and bushes.
+        To preserve performance, I used low-poly assets.
+
+    </div>
+    <Media src="/images/caustics.svg" alt="Nature environment" caption="Nature environment" />
+</Split>
+
+### Interactive UI system
+
+<Split ratio="2:3" align="center">
+    <div>
+
+        Functionalities: lights, filtering, time & weather control.
+
+    </div>
+    <Media src="/images/caustics.svg" alt="Final tablet UI" caption="Tablet UI: final version, evolved from the smartphone prototype in Phase 1." />
+</Split>
+
+## Takeaway
+
+Ensemble successfully delivered an interactive architectural visualization that met the client's goals and led to continued collaboration.
+The project served as a valuable crash course in UI/UX, Blueprint systems, and texture creation.
+It also laid the groundwork for my later Unreal projects, especially in system design.
+
+The client has expressed interest in expanding the project into a VR experience.
+
+## Credits & Tools
+
+This project integrated several third-party frameworks under their respective licenses, adapted and customized for the client's specific use cases.
+
+- Ultra Dynamic Sky by Everett Gunther
+- "ArchViz" Explorer by Karl Detroit
+- ArchViz Interactive UI and Tools by SDOT
+
+*Disclaimer: all showcased visuals and systems represent work performed by the developer within the context of the project.*

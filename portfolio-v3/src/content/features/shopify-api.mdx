@@ -14,4 +14,77 @@ teamSize: "2 devs"
 role: "Frontend"
 ---
 
-Write-up coming soon.
+import Split from "../../components/Split.astro";
+import Media from "../../components/Media.astro";
+import Gallery from "../../components/Gallery.astro";
+
+## Overview
+
+<Split ratio="2:3" align="center">
+    <div>
+
+        This project was created for Veldboom Studios to facilitate the integration of Shopify APIs into innovative 3D shopping experiences.
+        The goal was to bridge the gap between traditional e-commerce platforms and immersive 3D environments, enabling users to interact with real Shopify products in a virtual space.
+
+        - Real-time product data from Shopify directly inside Unreal Engine.
+        - A scalable foundation for next-gen e-commerce in 3D, VR, and mobile.
+        - A system that turns API calls into user-friendly, interactive features.
+
+    </div>
+    <Media src="/images/shopify43.png" alt="Systems diagram" caption="System overview" />
+</Split>
+
+## My Role
+
+I joined after the core back-end functionality was built in C++.
+My colleague handled the raw API integration, while I focused on making the system user-friendly.
+I worked on optimizing logic, making the feature Blueprint-compatible, and designing an intuitive UI, so it could be used effectively by non-programmers.
+
+## Development
+
+The early prototype worked, but was limited to console logs and an obscure user interface.
+By collaborating with my colleague, I was able to bridge the system into Blueprints, allowing seamless interaction with Unreal's Editor and UI.
+I also optimized parts of the workflow that were more efficient to handle in Blueprints.
+
+<Split ratio="1:1">
+    <Media src="/images/shopify43.png" alt="Old user interface and output log" caption="Old User Interface & Output Log containing details" />
+    <Media src="/images/shopify43.png" alt="New user interface with real-time cart updates" caption="New User Interface | post real-time cart updates" />
+</Split>
+
+<Split ratio="2:3" reverse align="center">
+    <div>
+
+        This collaboration gave me hands-on experience with integrating C++ back-end systems into accessible gameplay features.
+        It also taught me how to communicate across different specializations to make a feature both technically robust and designer-friendly.
+
+    </div>
+    <Media src="/images/shopify43.png" alt="Web shop checkout compared with the in-game cart" caption="Side by side comparison of actual web shop checkout vs. in-game cart realtime" />
+</Split>
+
+## Under the Hood
+
+While this page mainly shows the user-facing system, here is a quick look at the underlying logic that connects the C++ back-end code to the Blueprint-driven UI.
+
+The `ProductActor` (C++) acts as the parent class.
+Its Blueprint child, `Child_ProductActor`, makes the system more easily extendable.
+For example, each product instance spawns its own Product Widget, which then:
+
+- Checks for available variants
+- Maps them to colors using a Color Map
+- Generates a VariantBox Widget for each
+- Communicates selections back through callbacks
+
+<Gallery cols={3}>
+    <Media src="/images/shopify43.png" alt="Product Widget blueprint" caption="Blueprint snippet – Product Widget" />
+    <Media src="/images/shopify43.png" alt="Variant Box Widget blueprint" caption="Blueprint snippet – Variant Box Widget" />
+    <Media src="/images/shopify43.png" alt="Product Actor blueprint" caption="Blueprint snippet – Product Actor" />
+</Gallery>
+
+> When a variant is selected, the callback chain notifies the parent actor: "Hey mesh, change color! Client has selected pink."
+
+## Takeaway
+
+The feature was delivered as a working tool with a polished interface, ready for use in production.
+This project showed me the importance of balancing technical depth with usability, and highlighted how teamwork between C++ and Blueprint developers can create a strong pipeline.
+
+*Disclaimer: not all visuals may fully represent the final product. The majority of visuals shown here were in-development and behind the scenes.*
