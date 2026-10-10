@@ -1,5 +1,5 @@
 ---
-// Je kunt later props, animations en active states toevoegen.
+import ThemeToggle from "./ThemeToggle.astro";
 ---
 
 <nav class="w-full fixed top-0 left-0 z-50 bg-background/75 backdrop-blur-lg border-b border-border">
@@ -24,6 +24,7 @@
       <li><a class="nav-link" href="/features">Features</a></li>
       <li><a class="nav-link" href="/projects">Projects</a></li>
       <li><a class="nav-link" href="/contact">Contact</a></li>
+      <li><ThemeToggle /></li>
     </ul>
 
     <!-- Hamburger: only under md -->
@@ -81,7 +82,7 @@
     bottom: -1px;
     width: 0;
     height: 1px;
-    background: #438BA8;
+    background: var(--color-accent);
     transition: width 0.25s ease;
   }
 </style>
