@@ -1,10 +1,10 @@
 # Portfolio V3 — MVP
 
 In my own words:
-+ means satisfied for now
-✓ means done-ish
-- means not satisfied yet
-? means uncertain, subject due to change probably
+- '+' means satisfied for now
+- ✓ means done-ish
+- '-' means not satisfied yet
+- ? means uncertain, subject due to change probably
 
 ## NOW
 
