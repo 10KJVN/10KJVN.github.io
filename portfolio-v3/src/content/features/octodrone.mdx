@@ -17,11 +17,12 @@ role: "Gameplay Programmer"
 
 import Split from "../../components/Split.astro";
 
-## Overview
+##
 
 <Split ratio="2:3" align="center">
     <div>
 
+        ### Overview
         Octodrone was the first ground-based enemy developed for Operation Starfall.
         Its behavior combines state-driven AI, patrol and detection logic, and a custom jump attack.
 
@@ -33,11 +34,12 @@ import Split from "../../components/Split.astro";
     <img src="/videos/starfall/octoattackingfinal.gif" alt="Octodrone detecting and attacking the player" class="rounded-xl" />
 </Split>
 
-## State Machine & Animation
+[//]: # (## State Machine & Animation)
 
 <Split ratio="3:2" reverse>
     <div>
 
+        ## State Machine & Animation
         Octo's behavior is driven by the existing enemy state machine.
         We extended it with the states required for its behavior:
 
@@ -96,9 +98,7 @@ The initial attack disables gravity and applies an upward force.
 At the peak of the jump, gravity is restored and a second force moves Octo toward the player's position.
 The attack state inherits from the existing `AttackState` and coordinates the animation events, state transitions, and forces.
 
-### Implementation
-
-<Split ratio="1:1" align="center">
+<Split ratio="1:1" align="center" reverse>
     <div>
 
         ```csharp

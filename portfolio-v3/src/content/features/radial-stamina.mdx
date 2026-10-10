@@ -17,11 +17,12 @@ role: "Technical Artist"
 
 import Split from "../../components/Split.astro";
 
-## Overview
+##
 
 <Split ratio="2:3" align="center">
     <div>
 
+        ### Overview
         Radial Stamina replaced the original stamina display in Operation Starfall.
 
         The feature combines the existing stamina system with a ShaderGraph-based radial UI,
@@ -71,11 +72,12 @@ The ShaderGraph is split into three main sections: fade logic, texture logic, an
 
 <img src="/images/starfall/fullshader.png" alt="Full ShaderGraph for the radial stamina UI" class="rounded-xl" />
 
-### Fade Logic
+
 
 <Split ratio="2:3" align="center">
     <div>
 
+        ### Fade Logic
         The fade section controls the visibility of the radial over time.
 
         The graph calculates the time since the last stamina update,
@@ -95,11 +97,10 @@ The texture's RGBA output is multiplied by the color before being passed into th
 
 [//]: # (A zoomed-in screenshot of these nodes could be useful here, but this section can also stand without an image.)
 
-### Shape Logic
-
 <Split ratio="2:3" reverse>
     <div>
 
+        ### Shape Logic
         The radial shape is controlled using a gradient mask and the current stamina percentage.
 
         The mask's red channel is offset by the stamina value and clamped to create the radial cutoff.
