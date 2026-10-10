@@ -18,33 +18,6 @@ const sortedProjects = (await getCollection("projects"))
 const extraProjects = sortedProjects
     .filter((project) => !project.data.highlight)
     .slice(0, 2);
-
-const skills = {
-  Engine: [
-    { name: "Unity", duration: "4 year" },
-    { name: "Unreal", duration: "2 year" },
-    { name: "Godot", duration: "1 month" },
-  ],
-  Language: [
-    { name: "C#", duration: "4 year" },
-    { name: "C++", duration: "0.5 year" },
-    { name: "HLSL/GLSL", duration: "0.5 year" },
-  ],
-  Tools: [
-    { name: "Git", duration: "5 year" },
-    { name: "Rider", duration: "4 year" },
-    { name: "Visual Studio Code", duration: "4 year" },
-  ],
-  Productivity: [
-    { name: "Trello", duration: "4 year" },
-    { name: "ChatGPT", duration: "3 year" },
-    { name: "Obsidian", duration: "1 month" },
-  ],
-  Creative: [
-    { name: "Blender", duration: "0.5 year" },
-    { name: "Photoshop", duration: "0.5 year" },
-  ],
-};
 ---
 
 <Layout
