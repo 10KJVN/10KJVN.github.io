@@ -1,87 +1,409 @@
 ---
 title: "Parachute Panic"
-description: "Iterating on a Unity game through peer feedback, code restructuring, and a persistent highscore system."
+description: "A Unity remake of the Game & Watch classic, refactored for code craft, with a persistent JSON highscore system."
 thumbnail: "/images/caustics.svg"
-year: 2026
-# duration: "Coursework iteration"
-engine: "Unity"
-language: "C#"
-teamSize: "Solo"
-role: "Gameplay Programming, Software Design"
-tags: ["Unity", "C#", "Code Quality", "Systems Design"]
+tags: ["Unity", "C#", "Gameplay", "Design"]
+highlight: false
+order: 7
+
+year: 2025 # spans into 2026
 links:
-  - label: "GitHub"
-    url: "https://github.com/10KJVN/REPO-NAME"
+  - label: "GitHub Repo"
+    url: "https://github.com/10KJVN/ParachutePanic"
+  - label: "Original Game & Watch"
+    url: "https://youtu.be/FdNPVBBR_RM?si=09S-XEfW1U4cOGqu"
 ---
 
 import Split from "../../components/Split.astro";
 import Media from "../../components/Media.astro";
 
-*Parachute Panic* is a Unity game I revisited to improve an existing project through iterative development, peer feedback, and more deliberate code design.
+## Overview
 
-The gameplay centres on navigating falling objects and obstacles while earning or losing points based on the player's actions. In my version, avoiding obstacles became a stronger focus than catching parachutists.
-
-For this iteration, I chose to build a persistent highscore system. This gave me a concrete feature to develop while improving the structure and maintainability of the existing codebase.
-
-<Media
-    src="/images/caustics.svg"
-    alt="Parachute Panic — replace with a representative gameplay screenshot"
-/>
-
-## Iterating on an existing game
-
-The work began with the core gameplay loop: player movement, object spawning, scoring, and the UI flow between the menu, gameplay, and game-over states.
-
-With that foundation in place, I could focus on the next problem: improving the project beyond simply getting the game to run.
-
-Peer feedback and code review became part of that process. Instead of treating the highscore system as an isolated addition, I used the feature to reconsider responsibilities, improve code structure, and make the implementation easier to extend.
-
-## A persistent leaderboard
-
-The highscore system stores the best scores alongside player names and displays them in the UI. Scores are saved locally so that the leaderboard persists between play sessions.
-
-<Media
-    src="/images/caustics.svg"
-    alt="The persistent highscore leaderboard"
-/>
-
-The feature involved more than displaying a list of numbers. The system needed to handle score data, save and load it, and present the results to the player.
-
-The implementation uses JSON serialization for persistence. Keeping the stored data separate from gameplay and presentation responsibilities also gave the system a clearer structure and made its behaviour easier to reason about.
-
-<Split>
+<Split ratio="3:2" align="center">
     <div>
-        ### Data and persistence
 
-        The leaderboard's data needs to survive beyond the current session. JSON provides a straightforward way to serialize the highscore data for local storage and reconstruct it when the game starts again.
+        Parachute Panic is my Unity take on Nintendo's 1981 Game & Watch *Parachute*, rebuilt from an earlier Processing version.
+        I kept working on it because I still had to retake it, and because it overlapped well with the Git Gud module: the codebase needed improvement in nearly every aspect.
+
+        In my version the emphasis lies less on catching parachutists and more on dodging obstacles.
+        The player earns or loses points depending on their actions, which makes for a more active, risk-driven loop that serves the goal of the game: reaching the highest highscore.
+
+        My own addition is a highscore system: the ten best scores, with player names, are stored locally and shown in the UI.
+
+        This iteration focused on:
+
+        - Improving code quality and structure
+        - Processing peer feedback and playtests
+        - Extending the old highscore system
+
+    </div>
+    <Media src="/images/caustics.svg" alt="Parachute Panic gameplay" caption="Gameplay" />
+</Split>
+
+## Design
+
+<Split ratio="1:1">
+    <div>
+
+        ### Core design choices
+
+        To make the gameplay more manageable I adjusted the spawn intervals and capped the maximum number of lives, balancing challenge and playability.
+
+        The scoring system was reworked to encourage active play: players are rewarded for interacting and less for playing passively.
+        This stops players from "beating" the game without taking any real risk.
+
+        The original only had three positions (left, middle, right).
+        For a modern version I wanted a movement range wide enough for the player sprite to fit across it about five times.
+        {/* TODO: check the wording of this one against your 10 March note */}
+
     </div>
     <div>
-        ### Responsibilities
 
-        The highscore feature also served as an opportunity to separate data handling from the gameplay and UI code that uses it, reducing the amount of unrelated work each part needs to manage.
+        ### Art & sound
+
+        The visual style is inspired by retro arcade games, with pixel art and simple colors for clear readability.
+        I looked up Game & Watch sprite sheets and gave a few sprites a custom outline in Aseprite.
+        The highscore screen draws on old-school arcade leaderboards.
+
+        For audio I chose an arcade-inspired style, with sound effects that give clear feedback on positive and negative interactions.
+        The music is deliberately calmer outside of gameplay, for contrast and to prevent overstimulation.
+
     </div>
 </Split>
 
-## Code quality through feedback
+## Development
 
-A central part of the assignment was improving an existing feature or system through coding conventions, independent research, lesson material, and code-review feedback.
+My process was split into three phases, with a "get it working first, clean it up after" mentality.
 
-That shifted my focus from whether a feature worked to how it was structured. Encapsulation, reusable code, and clearer responsibilities became important considerations while developing the leaderboard.
+<Split ratio="1:1">
+    <div>
 
-I also explored C# generics and delegates as part of the wider implementation and research process. These concepts helped me think more carefully about reusable systems and how different parts of a codebase communicate.
+        ### Phase 1: Functional base
 
-The goal was to make the implementation easier to understand and extend, rather than adding abstraction for its own sake.
+        I focused on getting the core gameplay working.
+        My earlier Processing version served as a reference to see what already worked, and for the rest I searched for comparable YouTube tutorials on arcade games, such as "Space Invaders in Unity".
 
-## Limitations
+        The first peer review (27 Oct 2025) was still useful, even though I barely had a working game to review.
+        It was about the structure of my project in the editor, and how easy or hard it was to find and change things in the inspector.
 
-The core gameplay and highscore functionality were implemented, but not every part of the project reached the same level of completion.
+        The feedback mostly targeted code quality: readability, consistency, and reducing needless complexity.
+        The full review is longer and also covered the player, lives, score and menu scripts.
 
-I kept the remaining limitations in mind when evaluating the result. A working feature is useful evidence of progress, but it doesn't automatically mean the surrounding code or the overall game is finished.
+    </div>
+    <div>
 
-## Takeaways
+        ```text
+        Peer review, 27 Oct 2025 (translated)
 
-Parachute Panic gave me a practical reason to revisit code I had already written and improve it with a more deliberate approach.
+        IN EDITOR:
+        - Unclear which scene to play
+        - Movement speed is changeable, but unclear what it all changes
+        - Cluster speed can't be changed?
+        - Cluster amount isn't clearly indicated, so I assume not
+        - Cluster interval and obstacle interval can be changed
+        - Health can be changed
+        - Attack speed can be changed, but in the bullet, not the player
+        - Miss punishment doesn't work and physics aren't accurate
+        - Unclear which ones to catch and which not
+        - Red doesn't explain enough
 
-The most valuable part was connecting feedback and research to an actual implementation. Rather than studying code quality as a collection of isolated rules, I could see how decisions about structure, data ownership, and responsibilities affected a real game feature.
+        IN SCRIPT:
+        - Easily adjustable: change 1 line in the function
+        and add some code comments for visibility
+        - But the points system must be converted:
+        if you catch the white one, you now lose points
+        ```
 
-It also reinforced a useful distinction: getting something working is one milestone; making it understandable and maintainable is another.
+    </div>
+</Split>
+
+<Split ratio="3:2">
+    <div>
+
+        ### Phase 2: Improve & extend
+
+        With the basics in place, the biggest question was how good or bad my codebase objectively looked.
+        I asked a second-year student to review my code, since I had missed this kind of feedback earlier.
+
+        **Code review, 9 Feb 2026: Cluster.cs**
+
+        - Move the bounds into a separate variable instead of using them inline
+        - Remove unnecessary comments ("basically the function...")
+        - `sealed` is the opposite of `abstract` and could be considered here
+        - Replace magic numbers with constants or readonly variables, like `randomSpeedRange` or `clusterAmount`
+        - Let the for-loop use `clusterAmount`
+        - `InitiateCluster()` can use `Random.Range` with variables instead of fixed values
+
+        **ClusterSpawner.cs**
+
+        - Hungarian notation isn't necessarily wrong, but consistency matters
+        - Naming can be more abstract
+        - The empty for-loop in `Awake()` can go
+        - Replace magic numbers with min/max variables
+
+    </div>
+    <div>
+
+        ### Phase 3: Cleanup
+
+        Over the course of the assignments, the feedback visibly changed.
+        It went from many remarks about the code to "the code is clear, just watch X and Y".
+        To me that confirmed the code was improving each iteration, as the remaining feedback focused on everything around it: gameplay, user experience, and how bad practices could be handled differently or better.
+
+    </div>
+</Split>
+---
+<Split ratio="1:1">
+    <div>
+
+        ### Conventions
+
+        I used a mix of Unity's conventions and the course guidelines.
+        The ones I stuck to most:
+
+        - English as the language of choice
+        - PascalCase and camelCase, following the engine and language conventions
+        - Opening curly bracket on the next line
+        - Local variables at the top of a function, where possible
+        - Group things that belong together without whitespace, and separate things that don't with a single blank line
+        - Declaration order: public / protected / private, member variables before functions, engine hooks (`Start`, `Update`) before custom functions, functions in order of appearance
+        - Always include access modifiers
+
+    </div>
+    <div>
+
+        ### Git workflow
+
+        Looking back, I never did intermediate merges and kept branching further, roughly one branch per assignment:
+
+        - Pre Git Gud: main branch
+        - Code Refactor: develop branch
+        - First Playable: leaderboard branch
+        - Second Iteration: leaderboard branch
+        - Final Assignment: score systems branch
+
+        For the retake, the relevant branch is `retake`.
+        Everything else is either a failed attempt at a mechanic or version control for the intermediate assignments.
+        {/* TODO: exact branch names, if you want to list them as links */}
+
+    </div>
+</Split>
+
+### Technical insights
+
+<Split ratio="1:1" align="center">
+    <div>
+
+        **Syntax sugar** was an important concept for readability.
+        Shortening a declaration like the one on the right works just as well, and `var` helps too, as long as the type stays clear from context.
+
+        **Generics (`<T>`)** were new to me.
+        Applying them in the highscore system gave me better insight into how data can be stored flexibly and reusably.
+
+        **Getters and setters** clicked when I split responsibilities between classes: a private setter keeps the data encapsulated.
+
+    </div>
+    <div>
+
+        ```csharp
+        // before
+        private List<HighscoreElement> highscoreList = new List<HighscoreElement>();
+
+        // after
+        private List<HighscoreElement> highscoreList = new();
+            ```
+
+    </div>
+</Split>
+
+<Split ratio="3:2" reverse align="center">
+    <div>
+
+        **Delegates, Actions and UnityEvents.**
+        I deliberately chose not to write custom UnityEvents, because they are less transparent: you have to go to the editor to see what something does.
+        With Actions and delegates you can read directly which arguments are expected and passed along, and what the intent is, for example from an action named `OnDeath`.
+        That made the code more readable and easier to debug.
+
+        When the highscore list changes, an event fires and the UI reacts, so the UI has no direct dependency on the logic.
+
+    </div>
+    <div>
+
+        ```csharp
+        public delegate void OnHighscoreListChanged(List<HighscoreElement> list);
+        public static event OnHighscoreListChanged onHighscoreListChanged;
+
+        HighscoreHandler.onHighscoreListChanged += UpdateUI;
+        ```
+
+    </div>
+</Split>
+
+## Highscore System
+
+<Split ratio="2:3" align="center">
+    <div>
+
+        The system was designed to store scores persistently, let players enter their initials, and stimulate competition and replay value.
+
+        For storage I chose JSON over PlayerPrefs.
+        JSON suits managing lists like leaderboards, it is more flexible and extensible, and it makes the stored data inspectable.
+        PlayerPrefs is fine for quickly testing functionality, but it is tied to my machine (the registry shared by all my Unity projects) and not much use beyond that.
+
+        I looked at roughly three approaches:
+
+        - Keep scores while the game runs. Local only, so not really a highscore.
+        - Write to a local JSON file. You'd want to encrypt it, otherwise players can cheat their highscore.
+        - An online database. It has to be hosted, linked and set up.
+
+    </div>
+    <Media src="/images/caustics.svg" alt="UML class diagram of the highscore system" caption="UML: logic, data storage and UI are separated." />
+</Split>
+
+The system is built modularly:
+
+- Scores are managed inside the system (`HighscoreHandler` decides whether a score makes the list, `ScoreHandler` tracks the current score)
+- Data is saved and loaded through a separate file-handling layer (`FileHandler`, `JsonHelper`)
+- The UI reacts to changes in the data through an event
+- Entries are stored as a list of name and score, sorted by points
+
+### The duplicate entry bug
+
+<Split ratio="3:2" reverse align="center">
+    <div>
+
+        During implementation I ran into a problem in the flow of the system.
+        The score was saved directly at game over, while the player hadn't been able to enter a name yet.
+        That produced duplicate entries, because the name wasn't available at the moment of saving.
+
+        The cause was the order of events: the game went straight from game over to saving the score, with no step in between for input.
+        I adjusted the event flow with Unity Events so the order of actions is explicitly controlled: an intermediate `EnterName()` step after the `OnDeath` event, with the score only saved after input.
+
+    </div>
+    <div>
+
+        ```csharp
+        private void EnterName()
+        {
+            OnGameEnd?.Invoke();
+
+            if (inputHandler.Name == "")
+        {
+            highscoreMenu.SetActive(true);
+        }
+
+            // A UnityEvent on the enter button of the EnterHighscoreWidget.
+            // That's how it communicates to call -> StopGame() function.
+        }
+        ```
+
+    </div>
+</Split>
+
+### Do leaderboards actually motivate?
+
+Highscores are often used to motivate players, but the effect depends heavily on how they are designed.
+
+- **Leaderboard Design Principles to Enhance Learning and Motivation in a Gamified Educational Environment** found that leaderboards help players set goals and raise motivation, because players can compare their performance and get clear feedback. Not for everyone though: players low in the ranking can end up demotivated.
+- **Dave's Overly Detailed Analysis of a Game System** describes scores as a sense of progression and reward that directly influences behavior: by giving certain actions more points, a developer can steer how players play.
+
+The strength of highscores is that they combine motivation with feedback and encourage replaying.
+The weakness is that they make competition central, which doesn't work for every player, and a badly balanced score system can cause frustration.
+In Parachute Panic the score system rewards active play, with points for desired actions and penalties for mistakes, and highscores are visible in the menu so players can compare.
+I expect that to raise motivation, but I know it won't have the same effect on everyone.
+
+### Reflection
+
+The system builds on several tutorials and some theory, but merging them and bridging them to my own context seriously tested me.
+Debugging with breakpoints because the `highscoreList` wasn't supposed to be empty ("It worked in the tutorial!?").
+Drawing a class diagram because I could no longer follow the communication between more than just this one system.
+
+Extending it came down to pattern recognition: how can I reuse the fundamental base in my own use case.
+It also took trial and error to grasp getters, setters and globals, and to understand that abstracting everything isn't always required.
+
+## Feedback
+
+Based on peer, playtest and teacher feedback I improved the project on both gameplay and code level.
+
+<Split ratio="1:1">
+    <div>
+
+        ### Gameplay & balancing
+
+        - **Too forgiving, not punishing enough** → bomb penalty raised to -10 → mistakes have direct impact, so weighing risk matters more
+        - **Score could be farmed by ignoring objects** → parachutes +7, power-ups +3 → active play is rewarded, passive play discouraged
+        - **Too much visual noise** → spawn intervals increased → better readability, less cognitive overload
+        - **Unclear which objects to catch** → colors, sprites and a title screen explanation improved → faster onboarding
+        - **Physics felt inaccurate** → tuned, but deliberately left slightly unstable → more challenge without full control
+
+    </div>
+    <div>
+
+        ### UI & UX
+
+        - **Unclear UI flow** → restart and menu functionality added
+        - **Duplicate highscore entries** → intermediate `EnterName()` step → score is saved only after input
+        - **Wish to see highscores outside Game Over** → highscore button reused in the main menu
+
+        ### Code quality & refactoring
+
+        - **Magic numbers** → replaced by variables → more readable, easier to tune
+        - **Needlessly complex or unreadable code** → naming improved, unnecessary comments removed
+        - **Unclear inspector variables** → renamed and documented → better usability for designers
+        - **Direct dependencies between systems, like the ScoreManager** → deliberately kept, but I gained insight into event-driven alternatives
+        - **`GameObject.Find()` is strongly discouraged** → usage minimized, direct references instead
+
+    </div>
+</Split>
+
+Feedback played a central role in improving the project step by step.
+Technical feedback in particular, like using events and reducing coupling, gave me a better understanding of scalable software architecture, which is valuable for future projects.
+
+## Takeaway
+
+<Split ratio="1:1">
+    <div>
+
+        I grew a lot in independence as a developer.
+        Where I used to struggle with basics like loops and leaned heavily on external help, I can now write working, thoughtful code on my own.
+
+        The key insight was the difference between code that "works" and code that is also readable, maintainable and future-proof.
+        Refactoring and processing feedback made me think more consciously about structure, naming and responsibility.
+        Trying things myself before reaching for ready-made solutions strengthened my confidence in my own problem solving.
+
+        On the design side I learned that visual presentation and feedback play a big role in motivation, for the player and for me as a developer.
+
+        If I started over, I would begin with a simple, well-structured base, like a minimal scene, and expand iteratively.
+        I would also think about architecture and system structure earlier, to limit unnecessary refactors.
+
+    </div>
+    <div>
+
+        ### Still unfinished
+
+        **Structure**
+
+        - Event-driven architecture isn't fully carried through
+        - Interface-based destruction isn't implemented
+        - The score system glues many classes together, with as many as 5 direct references
+
+        **Highscore system**
+
+        - No validation, no error handling, no encryption
+
+        **Bugs**
+
+        - Something in the physics occasionally goes wrong
+        - You can pause while already game over, which could be used to cheat a higher highscore
+        - The explosion animation stays on screen fairly long
+
+    </div>
+</Split>
+
+## Resources
+
+- [Reference: Game & Watch Parachute (YouTube)](https://youtu.be/FdNPVBBR_RM?si=09S-XEfW1U4cOGqu)
+- [IsNullOrEmpty equivalent for arrays (Stack Overflow)](https://stackoverflow.com/questions/8560106/isnullorempty-equivalent-for-array-csharp)
+- Let's Make An Arcade Game Like Space Invaders! (Night Run Studio) {/* TODO: URL */}
+- Point Counter & High Scores (Velvary) {/* TODO: URL */}
+- The two highscore research sources named above {/* TODO: URLs */}
