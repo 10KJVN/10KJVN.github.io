@@ -1,23 +1,63 @@
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 @theme {
   --font-sans: "Geist", sans-serif;
   --font-display: "Oswald", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 
-  --color-background: #F4F9FC;
-  --color-surface: #FFFFFF;
-  --color-surface-alt: #E8F1F8;
-  --color-text: #1A2B3C;
-  --color-primary: #6ABEDC;
-  --color-ice: #A6E1FA;
-  --color-chrome: #C0C0C0;
+  /* Each color: light-dark(LIGHT, DARK). Edit a theme by editing one line. */
+
+  /* Surfaces */
+  --color-background:  light-dark(#F4F9FC, #080B11);
+  --color-surface:     light-dark(#FFFFFF, #10151D);
+  --color-surface-alt: light-dark(#E8F1F8, #171E29);
+
+  /* Text */
+  --color-text:  light-dark(#1A2B3C, #E9F1F7);
+  --color-muted: light-dark(#4A5B6C, #98A8B8);
+
+  /* Interactive accent: links, CTAs, focus ring */
+  --color-accent:    light-dark(#2438E0, #5EE6F0);
+  --color-on-accent: light-dark(#FFFFFF, #04141A);
+
+  /* Atmospheric colors: gradients, glows, soft fills */
+  --color-primary:    light-dark(#6ABEDC, #5CC8E8);
+  --color-on-primary: light-dark(#0F1D2B, #04141A);
+  --color-ice:        light-dark(#A6E1FA, #21566E);
+  --color-chrome:     light-dark(#C0C0C0, #5A6674);
+
+  /* Lines */
+  --color-border:        light-dark(rgb(26 43 60 / 0.12), rgb(233 241 247 / 0.14));
+  --color-border-strong: light-dark(rgb(26 43 60 / 0.20), rgb(233 241 247 / 0.30));
 }
 
-@theme {
-  --color-border: rgba(26, 43, 60, 0.12);
-  --color-border-strong: rgba(26, 43, 60, 0.2);
+/* Theme-dependent values that shouldn't become Tailwind utilities */
+:root {
+  --glow: light-dark(rgb(166 225 250 / 0.35), rgb(94 230 240 / 0.28));
+  --gradient-hero: linear-gradient(
+          0.25turn,
+          light-dark(#A8D3E1, #0B1626),
+          light-dark(#C0D8E7, #10223A),
+          light-dark(#E5F1F5, #080B11)
+  );
+}
+
+@layer base {
+  :root { color-scheme: light dark; }
+  :root[data-theme="light"] { color-scheme: light; }
+  :root[data-theme="dark"] { color-scheme: dark; }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body { transition: background-color 0.25s ease, color 0.25s ease; }
 }
 
 @layer utilities {
@@ -29,7 +69,7 @@
 
   /* Y2K Futurism related */
   .hero-gradient {
-    background: linear-gradient(0.25turn, #a8d3e1, #c0d8e7, #e5f1f5);
+    background: var(--gradient-hero);
   }
 
   /* Glassmorphism (frosted panel) */
@@ -86,11 +126,11 @@
 
   /* Soft glow */
   .glow-soft {
-    box-shadow: 0 0 24px rgba(166, 225, 250, 0.35);
+    box-shadow: 0 0 24px var(--glow);
   }
 
   .text-glow {
-    text-shadow: 0 0 18px rgba(166, 225, 250, 0.45);
+    text-shadow: 0 0 18px var(--glow);
   }
 }
 
@@ -218,7 +258,7 @@
   .mdx-content ol { list-style: decimal; }
 
   .mdx-content a {
-    color: #438BA8;
+    color: var(--color-accent);
     text-decoration: underline;
     text-underline-offset: 2px;
   }
@@ -240,7 +280,7 @@
   /* Standalone code blocks: wide but not edge-to-edge. Inside a Split they fill their column instead. */
   .mdx-content pre {
     max-width: 100ch;
-    background: var(--color-surface-alt, #E8F1F8);
+    background: var(--color-surface-alt);
     border: 1px solid var(--color-border);
     border-radius: 0.75rem;
     padding: 1rem;
@@ -254,7 +294,7 @@
   }
 
   .mdx-content blockquote {
-    border-left: 2px solid var(--color-primary);
+    border-left: 2px solid var(--color-accent);
     padding-left: 1.25rem;
     margin: 1.5rem 0;
     font-size: 1.125rem;
