@@ -59,7 +59,7 @@ const parentProject = feature.data.projectSlug
         />
 
         <header class="mx-auto max-w-4xl">
-            <p class="font-mono text-[10px] uppercase tracking-[0.25em] opacity-45">
+            <p class="font-mono text-[10px] uppercase tracking-[0.25em] text-muted">
                 Feature · {feature.data.year}
             </p>
 
@@ -69,43 +69,43 @@ const parentProject = feature.data.projectSlug
 
             <!-- This might need refactoring into a component so i can optionally leave out certain metadata per unique feature case.-->
             <div class="mt-8 flex flex-wrap gap-x-6 gap-y-2 border-y border-border py-4">
-            <span class="font-mono text-[10px] uppercase opacity-50">
+            <span class="font-mono text-[10px] uppercase text-muted">
                 {feature.data.year}
             </span>
 
                 {feature.data.duration && (
-                        <span class="font-mono text-[10px] uppercase opacity-50">
+                        <span class="font-mono text-[10px] uppercase text-muted">
                             {feature.data.duration}
                         </span>
                 )}
 
                 <!-- Octo and Radial don't need this for example, its sort of the child feature of a project tagged with Unity -->
                 {feature.data.engine && (
-                        <span class="font-mono text-[10px] uppercase opacity-50">
+                        <span class="font-mono text-[10px] uppercase text-muted">
                             {feature.data.engine}
                         </span>
                 )}
 
                 {feature.data.language && (
-                        <span class="font-mono text-[10px] uppercase opacity-50">
+                        <span class="font-mono text-[10px] uppercase text-muted">
                             {feature.data.language}
                         </span>
                 )}
 
                 {feature.data.teamSize && (
-                        <span class="font-mono text-[10px] uppercase opacity-50">
+                        <span class="font-mono text-[10px] uppercase text-muted">
                             {feature.data.teamSize}
                         </span>
                 )}
 
                 {feature.data.role && (
-                        <span class="font-mono text-[10px] uppercase opacity-50">
+                        <span class="font-mono text-[10px] uppercase text-muted">
                             {feature.data.role}
                         </span>
                 )}
             </div>
 
-            <p class="mt-4 max-w-2xl text-base leading-relaxed opacity-60 md:text-lg">
+            <p class="mt-4 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
                 {feature.data.description}
             </p>
 
@@ -124,12 +124,12 @@ const parentProject = feature.data.projectSlug
 
         {parentProject ? (
                 <a href={`/projects/${parentProject.id}`}
-                   class="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.15em] opacity-50 transition hover:opacity-100">
+                   class="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.15em] text-muted transition hover:text-text">
                     ← Back to {parentProject.data.title}
                 </a>
         ) : (
                 <a href="/features"
-                   class="mt-16 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.15em] opacity-50 transition hover:opacity-100">
+                   class="mt-16 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.15em] text-muted transition hover:text-text">
                     ← Back to Features
                 </a>
         )}

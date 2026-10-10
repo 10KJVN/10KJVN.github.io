@@ -34,7 +34,7 @@ const extraProjects = sortedProjects
       <div class="grid md:grid-cols-1 gap-12 mt-8">
         <!-- Projects column -->
         <div>
-          <h3 class="text-sm uppercase tracking-wide text-text/50 mb-4">Projects</h3>
+          <h3 class="text-sm uppercase tracking-wide text-muted mb-4">Projects</h3>
           <div class="flex flex-col md:flex-row md:flex-wrap gap-4">
             {featuredProjects.map((project) => (
                 <ProjectCard
@@ -64,10 +64,10 @@ const extraProjects = sortedProjects
           <!-- All projects CTA tile -->
 
           <a href="/projects"
-          class="group flex flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-chrome/60 bg-surface-alt/50 p-8 text-center transition hover:bg-surface-alt"
+          class="group flex flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-border-strong bg-surface-alt/50 p-8 text-center transition hover:bg-surface-alt"
           >
           <span class="font-display text-2xl uppercase">All projects</span>
-          <span class="font-mono text-xs text-text/60 transition group-hover:translate-x-1">
+          <span class="font-mono text-xs text-muted transition group-hover:translate-x-1">
             View the full catalogue →
           </span>
           </a>
