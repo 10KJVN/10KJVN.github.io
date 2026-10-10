@@ -22,8 +22,8 @@ const { groups } = Astro.props;
 
     {groups.map((group) => (
             <div class="mb-12 relative">
-                <div class="absolute -left-[26px] top-1 w-3 h-3 rounded-full bg-primary"></div>
-                <p class="text-sm uppercase tracking-wide text-text/40 mb-4">{group.year}</p>
+                <div class="absolute -left-[26px] top-1 w-3 h-3 rounded-full bg-accent"></div>
+                <p class="text-sm uppercase tracking-wide text-muted/80 mb-4">{group.year}</p>
 
                 <div class="flex flex-col gap-8">
                     {group.entries.map((entry) => (
