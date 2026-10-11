@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import SectionHeader from "../components/SectionHeader.astro";
+import FilterBar from "../components/FilterBar.astro";
 import ProjectsGrid from "../components/ProjectsGrid.astro";
 import { getCollection } from "astro:content";
 
@@ -30,56 +31,10 @@ const allTags = Array.from(new Set(projects.flatMap((p) => p.tags))).sort();
         <div class="max-w-5xl mx-auto px-6">
             <SectionHeader title="Projects" />
 
-            <div class="flex flex-wrap gap-2 mb-10">
-                <button
-                        data-tag="all"
-                        class="filter-btn active text-xs uppercase tracking-wide px-3 py-1.5 rounded-full border border-chrome/20 bg-background text-text hover:bg-primary/50"
-                >
-                    All
-                </button>
-                {allTags.map((tag) => (
-                        <button
-                                data-tag={tag}
-                                class="filter-btn active text-xs uppercase tracking-wide px-3 py-1.5 rounded-full border border-chrome/20 bg-background text-text hover:bg-primary/50"
-                        >
-                            {tag}
-                        </button>
-                ))}
-            </div>
+            <FilterBar tags={allTags} />
 
             <ProjectsGrid projects={projects} />
         </div>
     </section>
 </Layout>
 
-<script>
-
-    /*
-     * Client-side filtering for the project grid.
-     *
-     * This intentionally uses vanilla JS instead of React/state
-     * because filtering only changes the visibility of existing cards.
-     */
-
-    const buttons = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
-    const cards = document.querySelectorAll<HTMLAnchorElement>("#projects-grid > a");
-
-    buttons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            const selected: string = btn.dataset.tag ?? "all";
-
-            buttons.forEach((b) => {
-                b.classList.remove("active", "bg-background", "text-text");
-                b.classList.add("text-text/60");
-            });
-            btn.classList.add("active", "bg-background", "text-text");
-            btn.classList.remove("text-text/60");
-
-            cards.forEach((card) => {
-                const tags: string[] = card.dataset.tags?.split(",") ?? [];
-                const show = selected === "all" || tags.includes(selected);
-                card.style.display = show ? "" : "none";
-            });
-        });
-    });
-</script>
