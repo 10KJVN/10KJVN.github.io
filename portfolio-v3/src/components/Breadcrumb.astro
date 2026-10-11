@@ -11,7 +11,7 @@ interface Props {
 const { trail } = Astro.props;
 ---
 
-<nav class="flex flex-wrap items-center gap-2 text-xs uppercase tracking-wide text-text/50 mb-6">
+<nav class="flex flex-wrap items-center gap-2 text-xs uppercase tracking-wide text-muted mb-6">
     {trail.map((crumb, i) => (
             <Fragment>
                 {crumb.href ? (

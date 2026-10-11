@@ -1,0 +1,45 @@
+---
+interface Props {
+    tags: string[];
+}
+
+const { tags } = Astro.props;
+
+const button =
+    "filter-btn rounded-full border border-border px-3 py-1.5 text-xs uppercase tracking-wide text-muted transition hover:border-border-strong hover:text-text aria-pressed:border-accent aria-pressed:bg-accent aria-pressed:text-on-accent";
+---
+
+<div class="mb-10 flex flex-wrap gap-2" role="group" aria-label="Filter by tag">
+    <button type="button" data-tag="all" aria-pressed="true" class={button}>All</button>
+    {tags.map((tag) => (
+            <button type="button" data-tag={tag} aria-pressed="false" class={button}>{tag}</button>
+    ))}
+</div>
+
+<script>
+
+    /*
+     * Client-side filtering for the project grid.
+     *
+     * This intentionally uses vanilla JS instead of React/state
+     * because filtering only changes the visibility of existing cards.
+     */
+
+    const buttons = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
+    const cards = document.querySelectorAll<HTMLElement>("#projects-grid > a");
+
+    buttons.forEach((btn: HTMLButtonElement) => {
+        btn.addEventListener("click", () => {
+            const selected: string = btn.dataset.tag ?? "all";
+
+            buttons.forEach((b: HTMLButtonElement) => {
+                b.setAttribute("aria-pressed", String(b === btn));
+            });
+
+            cards.forEach((card: HTMLElement) => {
+                const tags: string[] = card.dataset.tags?.split(",") ?? [];
+                card.style.display = selected === "all" || tags.includes(selected) ? "" : "none";
+            });
+        });
+    });
+</script>

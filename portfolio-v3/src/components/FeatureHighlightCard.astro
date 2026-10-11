@@ -14,7 +14,7 @@ const { title, description, image, href, tags = [], index, eyebrow } = Astro.pro
 
 <a
         href={href}
-        class="group block overflow-hidden rounded-2xl border border-border bg-surface transition duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_0_32px_rgba(166,225,250,0.15)]"
+        class="group block overflow-hidden rounded-2xl border border-border bg-surface transition duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_0_32px_var(--glow)]"
 >
     <div class="aspect-video overflow-hidden relative">
         <img
@@ -29,7 +29,7 @@ const { title, description, image, href, tags = [], index, eyebrow } = Astro.pro
 
     </div>
     <div class="p-6 md:p-7">
-        {eyebrow && (<p class="font-mono text-[10px] uppercase tracking-[0.25em] opacity-50"> {eyebrow} </p> )}
+        {eyebrow && (<p class="font-mono text-[10px] uppercase tracking-[0.25em] text-muted"> {eyebrow} </p> )}
 
         <!--<h3 class="text-xl font-semibold mt-1 mb-2 text-text">{title}</h3>-->
         <div class="mt-2 flex items-start justify-between gap-6">
@@ -42,7 +42,7 @@ const { title, description, image, href, tags = [], index, eyebrow } = Astro.pro
             <!--</span>-->
         </div>
 
-        <p class="mt-3 max-w-xl text-sm leading-relaxed opacity-60">
+        <p class="mt-3 max-w-xl text-sm leading-relaxed text-muted">
             {description}
         </p>
 
@@ -50,7 +50,7 @@ const { title, description, image, href, tags = [], index, eyebrow } = Astro.pro
 
         <!--<span class="text-primary group-hover:underline text-sm">Read breakdown &rarr;</span>-->
         <div class="mt-6 border-t border-border pt-4">
-            <span class="font-mono text-[10px] uppercase tracking-[0.15em] opacity-50 transition group-hover:opacity-90">
+            <span class="font-mono text-[10px] uppercase tracking-[0.15em] text-muted transition group-hover:text-accent">
                 Read full breakdown →
             </span>
         </div>
