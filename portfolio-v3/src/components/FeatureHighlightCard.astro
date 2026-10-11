@@ -29,7 +29,7 @@ const { title, description, image, href, tags = [], index, eyebrow } = Astro.pro
 
     </div>
     <div class="p-6 md:p-7">
-        {eyebrow && (<p class="font-mono text-[10px] uppercase tracking-[0.25em] text-muted"> {eyebrow} </p> )}
+        {eyebrow && (<p class="label"> {eyebrow} </p> )}
 
         <!--<h3 class="text-xl font-semibold mt-1 mb-2 text-text">{title}</h3>-->
         <div class="mt-2 flex items-start justify-between gap-6">
@@ -50,7 +50,7 @@ const { title, description, image, href, tags = [], index, eyebrow } = Astro.pro
 
         <!--<span class="text-primary group-hover:underline text-sm">Read breakdown &rarr;</span>-->
         <div class="mt-6 border-t border-border pt-4">
-            <span class="font-mono text-[10px] uppercase tracking-[0.15em] text-muted transition group-hover:text-accent">
+            <span class="label transition group-hover:text-accent">
                 Read full breakdown →
             </span>
         </div>

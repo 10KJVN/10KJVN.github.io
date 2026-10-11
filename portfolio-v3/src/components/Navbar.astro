@@ -4,7 +4,7 @@ import ThemeToggle from "./ThemeToggle.astro";
 
 <nav class="fixed left-0 top-0 z-50 w-full border-b border-border bg-background/75 backdrop-blur-lg">
   <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-    <!-- Brand -->
+    <!-- Brand, TODO: Realign to be left of navbar -->
     <a
         href="/"
         class="shrink-0 text-xl font-semibold tracking-wide transition hover:opacity-80"
@@ -23,6 +23,8 @@ import ThemeToggle from "./ThemeToggle.astro";
       <li><a class="nav-link" href="/projects">Projects</a></li>
       <li><a class="nav-link" href="/contact">Contact</a></li>
     </ul>
+
+    <!-- TODO: find out whether i want to swap positions of middle and right aligned between theme switch and nav items. -->
 
     <!-- Theme and mobile controls -->
     <div class="flex shrink-0 items-center gap-2 md:ml-6">
