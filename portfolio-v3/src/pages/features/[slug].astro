@@ -67,7 +67,7 @@ const parentProject = feature.data.projectSlug
                 {feature.data.title}
             </h1>
 
-            <!-- This might need refactoring into a component so i can optionally leave out certain metadata per unique feature case.-->
+            <!-- TODO: This might need refactoring into a component so i can optionally leave out certain metadata per unique feature case.-->
             <div class="mt-8 flex flex-wrap gap-x-6 gap-y-2 border-y border-border py-4">
             <span class="label">
                 {feature.data.year}
@@ -112,7 +112,7 @@ const parentProject = feature.data.projectSlug
         </header>
 
         <!-- Keep the title and summary readable while allowing the hero and MDX compositions to use the wider canvas. -->
-        <figure class="mx-auto mt-14 max-w-[1440px] overflow-hidden rounded-2xl border border-border">
+        <figure class="mx-auto mt-14 max-w-[1440px] overflow-hidden rounded-frame border border-border crop-marks">
             <img src={feature.data.thumbnail} alt={feature.data.title} class="w-full" />
         </figure>
 
