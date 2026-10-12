@@ -31,6 +31,10 @@ const { project } = Astro.props;
 
 const { Content } = await render(project)
 
+const credit = [project.data.role, project.data.teamSize, project.data.duration]
+    .filter(Boolean)
+    .join(" / ");
+
 // Show every feature explicitly associated with this project, in its chosen order.
 // The route should not silently hide content when a project has more than two features.
 const allFeatures = await getCollection("features");
@@ -63,6 +67,8 @@ const projectFeatures = allFeatures
             <p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
                 {project.data.description}
             </p>
+            <!--I don't mess with this below-->
+            {credit && <p class="label mt-6">{credit}</p>}
 
         </header>
 

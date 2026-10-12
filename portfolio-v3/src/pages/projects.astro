@@ -20,7 +20,9 @@ const projects = sorted.map((entry) => ({
     highlight: entry.data.highlight,
 }));
 
-const allTags = Array.from(new Set(projects.flatMap((p) => p.tags))).sort();
+// Order here = order of the filter pills. Every tag still shows on cards.
+const FILTER_TAGS: string[] = ["Unity", "Unreal", "Godot", "Gameplay", "Shaders", "UI", "Design", "Concept"];
+const allTags: string[] = FILTER_TAGS.filter((tag) => projects.some((p) => p.tags.includes(tag)));
 ---
 
 <Layout

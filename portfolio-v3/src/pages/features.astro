@@ -20,7 +20,9 @@ const features = sorted.map((entry) => ({
     tags: entry.data.tags,
 }));
 
-const allTags = Array.from(new Set(features.flatMap((p) => p.tags))).sort();
+// Order here = order of the filter pills. Every tag still shows on cards.
+const FILTER_TAGS: string[] = ["Unity", "C#", "Unreal", "C++", "Godot", "Gameplay", "Shaders", "UI"];
+const allTags: string[] = FILTER_TAGS.filter((tag) => features.some((f) => f.tags.includes(tag)));
 ---
 
 <Layout title="Features | Jahva's Portfolio">

@@ -6,16 +6,12 @@ import {getCollection} from "astro:content";
 import ProjectCard from "../components/ProjectCard.astro";
 import { resolveFeatureHref } from "../lib/resolveFeatureHref";
 
-const featuredProjects = (await getCollection("projects"))
-    .filter((project) => project.data.highlight)
-
-const featuredFeatures = (await getCollection("features"))
-    .filter((feature) => feature.data.highlight)
-
-const sortedProjects = (await getCollection("projects"))
+const allProjects = (await getCollection("projects"))
     .sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999));
 
-const extraProjects = sortedProjects
+const featuredProjects = allProjects.filter((project) => project.data.highlight);
+
+const extraProjects = allProjects
     .filter((project) => !project.data.highlight)
     .slice(0, 2);
 ---
