@@ -364,4 +364,75 @@
   }
   .crop-marks::before { top: 10px; left: 10px; border-top-width: 1px; border-left-width: 1px; }
   .crop-marks::after { right: 10px; bottom: 10px; border-right-width: 1px; border-bottom-width: 1px; }
+
+  /* Lightbox: one shared <dialog>, created on first use by Media.astro */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    overscroll-behavior: contain;
+    color: var(--color-text);
+    /* Page background at 94%. Swap for a fixed dark value if you want a dark overlay in both themes. */
+    background: color-mix(in oklab, var(--color-background) 94%, transparent);
+  }
+
+  .lightbox__stage {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    place-items: center;
+    padding: clamp(1rem, 4vw, 3rem);
+    cursor: zoom-out;
+  }
+
+  .lightbox__figure {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    justify-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+
+  /* Fills the available space, never distorts. For small images that look soft when
+     enlarged, use: width:auto; height:auto; max-width:100%; max-height:100%; */
+  .lightbox__img {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    object-fit: contain;
+    cursor: default;
+  }
+
+  .lightbox__close {
+    position: absolute;
+    top: max(1rem, env(safe-area-inset-top));
+    right: max(1rem, env(safe-area-inset-right));
+    display: grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    place-items: center;
+    border: 1px solid var(--color-border-strong);
+    border-radius: 9999px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    cursor: pointer;
+  }
+
+  .lightbox__close:hover { border-color: var(--color-accent); }
+}
+
+html.lightbox-open { overflow: hidden; }
+
+@keyframes lightbox-in { from { opacity: 0; } to { opacity: 1; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  .lightbox[open] { animation: lightbox-in 0.18s ease-out; }
 }

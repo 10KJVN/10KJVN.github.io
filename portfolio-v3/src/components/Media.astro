@@ -3,16 +3,119 @@ interface Props {
     src: string;
     alt: string;
     caption?: string;
+    /** Opens the image in the shared lightbox. Off by default. */
+    lightbox?: boolean;
+    /** Larger file for the lightbox. Falls back to `src`. */
+    fullSrc?: string;
 }
 
-const { src, alt, caption } = Astro.props;
+const { src, alt, caption, lightbox = false, fullSrc } = Astro.props;
+const imageClass: string = "m-0 w-full rounded-frame border border-border";
 ---
 
 <figure class="my-8">
-    <img src={src} alt={alt} class="m-0 w-full rounded-frame border border-border" />
+    {lightbox ? (
+            <button
+                    type="button"
+                    data-lightbox
+                    data-full={fullSrc ?? src}
+                    data-caption={caption ?? ""}
+                    aria-label={`Enlarge image: ${alt}`}
+                    class="relative block w-full cursor-zoom-in rounded-frame"
+            >
+                <img src={src} alt={alt} class={imageClass} />
+                <span
+                        aria-hidden="true"
+                        class="absolute bottom-3 right-3 grid h-8 w-8 place-items-center rounded-full border border-border bg-surface/80 text-text"
+                >
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                </svg>
+            </span>
+            </button>
+    ) : (
+            <img src={src} alt={alt} class={imageClass} />
+    )}
     {caption && (
             <figcaption class="label mt-2">
                 {caption}
             </figcaption>
     )}
 </figure>
+
+<script>
+    const OPEN_CLASS = "lightbox-open";
+
+    let dialog: HTMLDialogElement | null = null;
+    let opener: HTMLElement | null = null;
+
+    const build = (): HTMLDialogElement => {
+        const el: HTMLDialogElement = document.createElement("dialog");
+        el.className = "lightbox";
+        el.setAttribute("aria-label", "Image viewer");
+        el.innerHTML = `
+            <button type="button" class="lightbox__close" aria-label="Close image viewer">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+            </button>
+            <div class="lightbox__stage">
+                <figure class="lightbox__figure">
+                    <img class="lightbox__img" alt="" />
+                    <figcaption class="lightbox__caption label" hidden></figcaption>
+                </figure>
+            </div>`;
+
+        // Anything except the image and caption closes it, including the close button.
+        el.addEventListener("click", (event: MouseEvent) => {
+            const target = event.target as Element;
+            if (!target.closest(".lightbox__img, .lightbox__caption")) el.close();
+        });
+
+        // Fires for the close button, Escape and backdrop clicks alike.
+        el.addEventListener("close", () => {
+            document.documentElement.classList.remove(OPEN_CLASS);
+            opener?.focus();
+            opener = null;
+        });
+
+        document.body.append(el);
+        return el;
+    };
+
+    const open = (trigger: HTMLElement): void => {
+        // Rebuild if the node was removed (e.g. by a future page-swap).
+        if (!dialog || !dialog.isConnected) dialog = build();
+
+        const img = dialog.querySelector<HTMLImageElement>(".lightbox__img");
+        const caption = dialog.querySelector<HTMLElement>(".lightbox__caption");
+        const thumb = trigger.querySelector<HTMLImageElement>("img");
+        if (!img || !caption || !thumb) return;
+
+        const thumbUrl: string = thumb.currentSrc || thumb.src;
+        const fullUrl: string = trigger.dataset.full
+            ? new URL(trigger.dataset.full, window.location.href).href
+            : thumbUrl;
+
+        opener = trigger;
+        img.alt = thumb.alt;
+        img.src = thumbUrl; // already cached, so it appears instantly
+        caption.textContent = trigger.dataset.caption ?? "";
+        caption.hidden = !caption.textContent;
+
+        // If a larger file was provided, swap it in once it has loaded.
+        if (fullUrl !== thumbUrl) {
+            const preload = new Image();
+            preload.onload = () => {
+                if (opener === trigger && dialog?.open) img.src = fullUrl;
+            };
+            preload.src = fullUrl;
+        }
+
+        document.documentElement.classList.add(OPEN_CLASS);
+        dialog.showModal();
+    };
+
+    document.addEventListener("click", (event: MouseEvent) => {
+        const trigger = (event.target as Element).closest<HTMLElement>("[data-lightbox]");
+        if (trigger) open(trigger);
+    });
+</script>

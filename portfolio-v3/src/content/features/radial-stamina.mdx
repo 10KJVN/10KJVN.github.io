@@ -16,6 +16,7 @@ role: "Technical Artist"
 ---
 
 import Split from "../../components/Split.astro";
+import Media from "../../components/Media.astro";
 
 ##
 
@@ -63,14 +64,22 @@ became an opportunity to explore how the same gameplay information could drive a
         After the update, the display fades out and reappears when the stamina changes again.
 
     </div>
-    <img src="/images/starfall/unityradialevents.png" alt="Unity Events used to control the stamina radial" class="rounded-xl" />
+    <img src="/images/starfall/unityradialevents.png" alt="Unity Events used to control the stamina radial" />
 </Split>
 
 ## ShaderGraph
 
 The ShaderGraph is split into three main sections: fade logic, texture logic, and shape logic.
 
-<img src="/images/starfall/fullshader.png" alt="Full ShaderGraph for the radial stamina UI" class="rounded-xl" />
+{/* Regular content */}
+<Media
+    lightbox
+    src="/images/starfall/fullshader.png"
+    fullSrc="/images/starfall/fullshader-large.png"
+    alt="Full ShaderGraph for the radial stamina UI"
+    caption="Full ShaderGraph"
+/>
+
 
 
 
@@ -86,7 +95,7 @@ The ShaderGraph is split into three main sections: fade logic, texture logic, an
         These values are combined to produce the final visibility of the stamina ring.
 
     </div>
-    <img src="/videos/starfall/RadialFade.gif" alt="Radial stamina fading in and out" class="rounded-xl" />
+    <Media lightbox src="/videos/starfall/RadialFade.gif" alt="Radial stamina fading in and out" caption="Fade section" />
 </Split>
 
 ### Texture Logic
@@ -109,7 +118,7 @@ The texture's RGBA output is multiplied by the color before being passed into th
         This produces a ring that fills and fades dynamically with the player's stamina.
 
     </div>
-    <img src="/images/starfall/mask8p.jpg" alt="The gradient and radial mask textures used by the shader" class="rounded-xl" />
+    <img src="/images/starfall/mask8p.jpg" alt="The gradient and radial mask textures used by the shader" />
 </Split>
 
 ## Collaboration
