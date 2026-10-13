@@ -24,6 +24,7 @@ links:
 
 import Split from "../../components/Split.astro";
 import Gallery from "../../components/Gallery.astro";
+import ComparisonSlider from "../../components/ComparisonSlider.astro";
 
 ## Overview
 
@@ -89,8 +90,26 @@ From there I added features in roughly this order: Distance Fog, a Shader Includ
         [Beer's Law](https://cglearn.eu/pub/advanced-computer-graphics/volumetric-rendering) ended up being the key bit of theory tying the fog math together.
 
     </div>
-    <img src="/images/DirtJamThumb.png" alt="Way2Terrain gallery placeholder" />
+    <ComparisonSlider
+        start={50}
+        beforeSrc="/images/dirtjam/01NoFog.png"
+        beforeAlt="Before the change"
+        afterSrc="/images/dirtjam/02LightFog.png"
+        afterAlt="After the change"
+        beforeLabel="Fog off"
+        afterLabel="Fog on"
+    />
 </Split>
+
+{/* Standalone, with explicit labels */}
+<ComparisonSlider
+    beforeSrc="/images/dirtjam/01NoFog.png"
+    beforeAlt="Scene with no distance fog"
+    afterSrc="/images/dirtjam/02LightFog.png"
+    afterAlt="Scene with the exponential distance fog"
+    beforeLabel="Fog off"
+    afterLabel="Fog on"
+/>
 
 ## Gallery
 

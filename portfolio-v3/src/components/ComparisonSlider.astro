@@ -1,0 +1,143 @@
+---
+interface Props {
+    beforeSrc: string;
+    beforeAlt: string;
+    afterSrc: string;
+    afterAlt: string;
+    beforeLabel?: string;
+    afterLabel?: string;
+    /** Initial divider position, 0-100: how much of the "before" image is revealed from the left. */
+    start?: number;
+}
+
+const {
+    beforeSrc,
+    beforeAlt,
+    afterSrc,
+    afterAlt,
+    beforeLabel = "Before",
+    afterLabel = "After",
+    start = 50,
+} = Astro.props;
+
+const initial: number = Math.min(100, Math.max(0, Math.round(start)));
+---
+
+<figure
+        class="comparison relative my-8 cursor-ew-resize touch-pan-y select-none overflow-hidden rounded-frame border border-border"
+        data-comparison
+        data-before-label={beforeLabel}
+        data-after-label={afterLabel}
+        style={`--pos: ${initial}%`}
+>
+    <img src={afterSrc} alt={afterAlt} class="comparison__after m-0 block h-auto w-full" draggable="false" loading="lazy" decoding="async" />
+    <img src={beforeSrc} alt={beforeAlt} class="comparison__before m-0 absolute inset-0 h-full w-full object-cover" draggable="false" loading="lazy" decoding="async" />
+
+    <!-- Accessible control. Must come before the handle so peer-focus-visible can style it. -->
+    <input
+            type="range"
+            min="0"
+            max="100"
+            step="1"
+            value={initial}
+            aria-label={`Comparison position: ${beforeLabel} versus ${afterLabel}`}
+            class="peer pointer-events-none absolute inset-0 h-full w-full opacity-0"
+    />
+
+    <span
+            aria-hidden="true"
+            class="pointer-events-none absolute inset-y-0 w-0.5 -translate-x-1/2 bg-surface shadow-[0_0_0_1px_var(--color-border-strong)]"
+            style="left: var(--pos)"
+    ></span>
+
+    <span
+            aria-hidden="true"
+            class="pointer-events-none absolute top-1/2 grid h-10 w-10 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-border-strong bg-surface text-text peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent"
+            style="left: var(--pos)"
+    >
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 6l-6 6 6 6M15 6l6 6-6 6" />
+        </svg>
+    </span>
+
+    <span aria-hidden="true" class="label pointer-events-none absolute left-3 top-3 rounded-full border border-border bg-surface/85 px-2 py-1 text-text">{beforeLabel}</span>
+    <span aria-hidden="true" class="label pointer-events-none absolute right-3 top-3 rounded-full border border-border bg-surface/85 px-2 py-1 text-text">{afterLabel}</span>
+</figure>
+
+<script>
+    const init = (root: HTMLElement): void => {
+        if (root.dataset.ready) return;
+        root.dataset.ready = "true";
+
+        const input = root.querySelector<HTMLInputElement>("input[type='range']");
+        const beforeImg = root.querySelector<HTMLImageElement>(".comparison__before");
+        const afterImg = root.querySelector<HTMLImageElement>(".comparison__after");
+        if (!input) return;
+
+        const beforeLabel: string = root.dataset.beforeLabel ?? "Before";
+        const afterLabel: string = root.dataset.afterLabel ?? "After";
+
+        const sync = (value: number): void => {
+            const clamped: number = Math.min(100, Math.max(0, value));
+            const whole: number = Math.round(clamped);
+            root.style.setProperty("--pos", `${clamped}%`);
+            input.value = String(whole);
+            input.setAttribute("aria-valuetext", `${whole}% ${beforeLabel}, ${100 - whole}% ${afterLabel}`);
+        };
+
+        const fromPointer = (event: PointerEvent): void => {
+            const rect: DOMRect = root.getBoundingClientRect();
+            sync(((event.clientX - rect.left) / rect.width) * 100);
+        };
+
+        root.addEventListener("pointerdown", (event: PointerEvent) => {
+            if (event.pointerType === "mouse" && event.button !== 0) return;
+            root.setPointerCapture(event.pointerId);
+            input.focus({ preventScroll: true });
+            fromPointer(event);
+        });
+
+        root.addEventListener("pointermove", (event: PointerEvent) => {
+            if (root.hasPointerCapture(event.pointerId)) fromPointer(event);
+        });
+
+        // Keyboard (and assistive tech) changes arrive as input events.
+        input.addEventListener("input", () => sync(Number(input.value)));
+
+        sync(Number(input.value));
+
+        // Dev only: mismatched aspect ratios can't line up, so the "before" image gets cropped.
+        if (import.meta.env.DEV && beforeImg && afterImg) {
+            const check = (): void => {
+                if (!beforeImg.naturalWidth || !afterImg.naturalWidth) return;
+                const a: number = beforeImg.naturalWidth / beforeImg.naturalHeight;
+                const b: number = afterImg.naturalWidth / afterImg.naturalHeight;
+                if (Math.abs(a - b) / b > 0.01) {
+                    console.warn(
+                        "ComparisonSlider: the images have different aspect ratios, so the 'before' image is cropped to fit.",
+                        beforeImg.src,
+                        afterImg.src,
+                    );
+                }
+            };
+            [beforeImg, afterImg].forEach((img: HTMLImageElement) => {
+                if (img.complete) check();
+                else img.addEventListener("load", check, { once: true });
+            });
+        }
+    };
+
+    const initAll = (): void => {
+        document.querySelectorAll<HTMLElement>("[data-comparison]").forEach((el) => init(el));
+    };
+
+    initAll();
+    // Only fires if you ever add Astro's ClientRouter; initAll is safe to call repeatedly.
+    document.addEventListener("astro:page-load", initAll);
+</script>
+
+<style>
+    .comparison__before {
+        clip-path: inset(0 calc(100% - var(--pos, 50%)) 0 0);
+    }
+</style>
