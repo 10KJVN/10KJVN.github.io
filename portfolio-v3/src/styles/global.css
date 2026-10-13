@@ -365,48 +365,53 @@
   .crop-marks::before { top: 10px; left: 10px; border-top-width: 1px; border-left-width: 1px; }
   .crop-marks::after { right: 10px; bottom: 10px; border-right-width: 1px; border-bottom-width: 1px; }
 
-  /* Lightbox: one shared <dialog>, created on first use by Media.astro */
   .lightbox {
+    --lightbox-pad: clamp(1rem, 5vw, 4rem); /* breathing room around the image: raise it for a smaller image */
     position: fixed;
     inset: 0;
     width: 100%;
+    height: 100vh;
     height: 100dvh;
     max-width: none;
     max-height: none;
     margin: 0;
     padding: 0;
     border: 0;
+    overflow: hidden; /* sizing below is explicit, so nothing should ever scroll */
     overscroll-behavior: contain;
     color: var(--color-text);
-    /* Page background at 94%. Swap for a fixed dark value if you want a dark overlay in both themes. */
     background: color-mix(in oklab, var(--color-background) 94%, transparent);
   }
 
   .lightbox__stage {
-    display: grid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 100%;
-    place-items: center;
-    padding: clamp(1rem, 4vw, 3rem);
+    padding: var(--lightbox-pad);
     cursor: zoom-out;
   }
 
   .lightbox__figure {
-    display: grid;
-    grid-template-rows: minmax(0, 1fr) auto;
-    justify-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 0.75rem;
-    width: 100%;
-    height: 100%;
+    min-width: 0;
+    max-width: 100%;
     margin: 0;
   }
 
-  /* Fills the available space, never distorts. For small images that look soft when
-     enlarged, use: width:auto; height:auto; max-width:100%; max-height:100%; */
+  /* Never taller or wider than the screen, whatever the file's pixel size.
+     3rem reserves room for the caption. */
   .lightbox__img {
-    width: 100%;
-    height: 100%;
-    min-height: 0;
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: calc(100vh - 2 * var(--lightbox-pad) - 3rem);
+    max-height: calc(100dvh - 2 * var(--lightbox-pad) - 3rem);
     object-fit: contain;
     cursor: default;
   }
@@ -425,8 +430,6 @@
     color: var(--color-text);
     cursor: pointer;
   }
-
-  .lightbox__close:hover { border-color: var(--color-accent); }
 }
 
 html.lightbox-open { overflow: hidden; }
