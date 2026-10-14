@@ -1,0 +1,182 @@
+---
+title: "Highscore System"
+description: "A persistent JSON highscore system for Parachute Panic, with logic, file storage and UI kept separate, and a name-entry flow that fixed duplicate entries."
+thumbnail: "/images/caustics.svg"
+tags: ["Gameplay", "C#", "JSON"]
+highlight: false
+projectSlug: "parachute"
+order: 5
+
+year: 2026
+engine: "Unity"
+language: "C#"
+teamSize: "Solo"
+---
+
+import Media from "../../components/Media.astro"
+import Split from "../../components/Split.astro"
+
+## Overview
+
+<Split ratio="3:2" align="center">
+    <div>
+
+        The highscore system is my own addition to Parachute Panic, my Unity take on Nintendo's 1981 Game & Watch *Parachute*.
+        In my version the emphasis lies less on catching parachutists and more on dodging obstacles: the player earns or loses points depending on their actions, and the goal of the game is the highest highscore.
+
+        The system stores the ten best scores, with player names, locally and shows them in the UI.
+        It was designed to:
+
+        - Store scores persistently
+        - Let players enter their initials
+        - Stimulate competition and replay value
+
+    </div>
+    <Media
+            src="/images/caustics.svg"
+            alt="The highscore flow in Parachute Panic: game over, name entry and the highscore list"
+            caption="Highscore flow"
+    />
+</Split>
+
+{/* TODO: replace the placeholder above with the highscore-system GIF. Swap src, and edit alt and caption to match what it shows. */}
+
+## Research: do leaderboards motivate?
+
+Highscores are often used to motivate players, but the effect depends heavily on how they are designed.
+
+- **Leaderboard Design Principles to Enhance Learning and Motivation in a Gamified Educational Environment** found that leaderboards help players set goals and raise motivation, because players can compare their performance and get clear feedback. Not for everyone though: players low in the ranking can end up demotivated.
+- **Dave's Overly Detailed Analysis of a Game System** describes scores as a sense of progression and reward that directly influences behavior: by giving certain actions more points, a developer can steer how players play.
+
+The strength of highscores is that they combine motivation with feedback and encourage replaying.
+The weakness is that they make competition central, which doesn't work for every player, and a badly balanced score system can cause frustration.
+In Parachute Panic the score system rewards active play, with points for desired actions and penalties for mistakes, and highscores are visible in the menu so players can compare.
+I expect that to raise motivation, but I know it won't have the same effect on everyone.
+
+## Storage decisions
+
+<Split ratio="1:1">
+    <div>
+
+        An early version followed a similar arcade-game tutorial and saved and loaded a single highscore with Unity's PlayerPrefs.
+        For the real system I chose JSON instead.
+        JSON suits managing lists like leaderboards, it is more flexible and extensible, and it makes the stored data inspectable.
+        PlayerPrefs is fine for quickly testing functionality, but it is tied to my machine (the registry shared by all my Unity projects) and not much use beyond that.
+
+    </div>
+    <div>
+
+        I looked at roughly three approaches:
+
+        - Keep scores while the game runs. Local only, so not really a highscore.
+        - Write to a local JSON file. You'd want to encrypt it, otherwise players can cheat their highscore.
+        - An online database. It has to be hosted, linked and set up.
+
+    </div>
+</Split>
+
+## Implementation
+
+<Split ratio="2:3" align="center">
+    <div>
+
+        The system is built modularly, with logic, data storage and UI separated:
+
+        - Scores are managed inside the system: `HighscoreHandler` decides whether a score makes the list, and `ScoreHandler` tracks the current score
+        - Data is saved and loaded through a separate file-handling layer (`FileHandler` and `JsonHelper`, built on Unity's `JsonUtility` and `System.IO`)
+        - The UI reacts to changes in the data through an event
+        - Entries are stored as a list of name and score, sorted by points
+
+        The file layer uses generics (T), so it can store any serializable data, even though the highscore list is its only use for now.
+
+    </div>
+    <Media
+            lightbox
+            src="/images/caustics.svg"
+            alt="UML class diagram of the highscore system"
+            caption="UML: logic, data storage and UI are separated."
+    />
+</Split>
+
+{/* TODO: replace the placeholder above with the UML diagram &#40;lightbox is on, so a large file is fine&#41; */}
+
+### Event-driven UI
+
+<Split ratio="3:2" reverse align="center">
+    <div>
+
+        When the highscore list changes, an event fires and the UI reacts, so the UI has no direct dependency on the underlying logic.
+        I used a C# delegate and a static event for this, rather than writing custom UnityEvents, because they are more transparent in code: you can read directly which arguments are expected and what the intent is.
+
+    </div>
+    <div>
+
+        ```csharp
+        public delegate void OnHighscoreListChanged(List HighscoreElement> list);
+        public static event OnHighscoreListChanged onHighscoreListChanged;
+
+        HighscoreHandler.onHighscoreListChanged += UpdateUI;
+        ```
+
+    </div>
+</Split>
+
+## The duplicate entry bug
+
+<Split ratio="3:2" reverse align="center">
+    <div>
+
+        During implementation I ran into a problem in the flow of the system.
+        The score was saved directly at game over, while the player hadn't been able to enter a name yet.
+        That produced duplicate entries, because the name wasn't available at the moment of saving.
+
+        The cause was the order of events: the game went straight from game over to saving the score, with no step in between for input.
+        I adjusted the event flow so the order of actions is explicitly controlled: an intermediate `EnterName()` step after the `OnDeath` event, with the score only saved after input.
+
+    </div>
+    <div>
+
+        ```csharp
+        private void EnterName()
+        {
+            OnGameEnd?.Invoke();
+
+            if (inputHandler.Name == "")
+            {
+                highscoreMenu.SetActive(true);
+            }
+
+            // A UnityEvent on the enter button of the EnterHighscoreWidget.
+            // That's how it communicates to call -> StopGame() function.
+        }
+        ```
+
+    </div>
+</Split>
+
+## Limitations
+
+- No validation
+- No error handling
+- No encryption: the JSON file is readable, so scores could be edited, which is the cheating risk I noted when choosing JSON
+- In the game itself, you can pause while already game over, which could be used to cheat a higher highscore
+
+## Reflection
+
+The system builds on several tutorials and some theory, but merging them and bridging them to my own context seriously tested me.
+Debugging with breakpoints because the `highscoreList` wasn't supposed to be empty ("It worked in the tutorial!?").
+Drawing a class diagram because I could no longer follow the communication between more than just this one system.
+
+Extending it came down to pattern recognition: how can I reuse the fundamental base in my own use case.
+It also took trial and error to grasp getters, setters and globals, and to understand that abstracting everything isn't always required.
+
+## Resources
+
+- [JsonUtility (Unity)](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/JsonUtility.html)
+- [System.IO (Microsoft)](https://learn.microsoft.com/en-us/dotnet/api/system.io?view=net-10.0)
+- [Generic classes and methods, C# (Microsoft)](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/generics)
+- [IsNullOrEmpty equivalent for arrays (Stack Overflow)](https://stackoverflow.com/questions/8560106/isnullorempty-equivalent-for-array-csharp)
+- [Highscore management UML (Mermaid)](https://mermaid.ai/d/682e1993-beaf-4c4c-8edd-2e07c80fc28a)
+- Point Counter & High Scores (Velvary) {/* TODO: URL */}
+- Leaderboard Design Principles to Enhance Learning and Motivation in a Gamified Educational Environment {/* TODO: URL */}
+- Dave's Overly Detailed Analysis of a Game System {/* TODO: URL */}
