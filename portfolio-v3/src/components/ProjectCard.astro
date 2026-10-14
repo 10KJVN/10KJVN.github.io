@@ -6,7 +6,8 @@ interface Props {
     href: string;
     tags?: string[];
     highlight?: boolean;
-    class? : string;
+    size?: "regular" | "wide"; /** "regular" is the default. "wide" is a larger treatment; the parent decides where it is used and how wide it gets. */
+    class?: string;
 }
 
 const {
@@ -16,10 +17,20 @@ const {
     href,
     tags = [],
     highlight = false,
-    class: className = ""
+    size = "regular",
+    class: className = "",
 } = Astro.props;
 
-const isExternal = href.startsWith("http");
+const isExternal: boolean = href.startsWith("http");
+
+// Full literal class strings so Tailwind can detect them.
+// Below lg the parent stacks everything in one column, so wide is a normal 16:9 card.
+// From lg up the parent gives it a track ~2x as wide, so the image goes 32:9 (2 x 16:9) to keep the same height.
+// I've made it 16/6 which makes it equal on 1.5fr, change to 16/5.2 when making 1.75fr.
+const sizes = {
+    regular: { image: "aspect-video", title: "text-xl" },
+    wide: { image: "aspect-video lg:aspect-[16/6]", title: "text-xl lg:text-2xl" },
+}[size];
 ---
 
 <a href={href}
@@ -32,16 +43,15 @@ const isExternal = href.startsWith("http");
       : "border-border bg-surface hover:bg-surface-alt"
     } ${className}`}
 >
-  <div class="aspect-video overflow-hidden">
-    <img
-      src={image}
-      alt={title}
-      class="w-full h-full object-cover transition duration-300 group-hover:scale-105"
-    />
-  </div>
+    <div class={`${sizes.image} overflow-hidden`}>
+        <img src={image}
+             alt={title}
+             class="w-full h-full object-cover transition duration-300 group-hover:scale-105"
+        />
+    </div>
 
   <div class="p-5">
-    <h3 class="text-xl font-semibold mb-2">{title}</h3>
+    <h3 class={`${sizes.title} font-semibold mb-2`}>{title}</h3>
       <p class="opacity-70 text-sm leading-relaxed mb-3">{description}</p>
 
       {tags.length > 0 && (
