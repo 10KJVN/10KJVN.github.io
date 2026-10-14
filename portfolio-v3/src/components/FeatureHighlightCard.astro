@@ -7,16 +7,22 @@ interface Props {
     tags?: string[];
     index?: number;
     eyebrow?: string;
+    size?: "regular" | "wide";
 }
 
-const { title, description, image, href, tags = [], index, eyebrow } = Astro.props;
+const { title, description, image, href, tags = [], index, eyebrow, size = "regular" } = Astro.props;
+
+const sizes = {
+    regular: { image: "aspect-video" },
+    wide: { image: "aspect-video lg:aspect-[32/9]" },
+}[size];
 ---
 
 <a
         href={href}
         class="group block overflow-hidden rounded-frame border border-border bg-surface transition duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_0_32px_var(--glow)]"
 >
-    <div class="aspect-video overflow-hidden relative">
+    <div class={`relative overflow-hidden ${sizes.image}`}>
         <img
                 src={image}
                 alt={title}

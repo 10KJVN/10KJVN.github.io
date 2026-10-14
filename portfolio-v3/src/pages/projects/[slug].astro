@@ -42,6 +42,9 @@ const allFeatures = await getCollection("features");
 const projectFeatures = allFeatures
     .filter((feature) => feature.data.projectSlug === project.id)
     .sort((a, b) => (a.data.order ?? Infinity) - (b.data.order ?? Infinity));
+
+// One feature = it gets the whole row and the wide card. Two or more share the row as regular cards.
+const singleFeature: boolean = projectFeatures.length === 1;
 ---
 
 <Layout
@@ -103,7 +106,7 @@ const projectFeatures = allFeatures
                         </div>
                     </div>
 
-                    <div class="grid gap-6 lg:grid-cols-2">
+                    <div class={`grid gap-6 ${singleFeature ? "" : "lg:grid-cols-2"}`}>
                         {projectFeatures.map((feature) => (
                                 <FeatureHighlightCard
                                         title={feature.data.title}
@@ -111,9 +114,8 @@ const projectFeatures = allFeatures
                                         image={feature.data.thumbnail}
                                         href={resolveFeatureHref(feature)}
                                         tags={feature.data.tags}
-                                        eyebrow={
-                                            feature.data.tags[0]
-                                        }
+                                        eyebrow={feature.data.tags[0]}
+                                        size={singleFeature ? "wide" : "regular"}
                                 />
                         ))}
                     </div>
