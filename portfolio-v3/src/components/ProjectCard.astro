@@ -28,8 +28,8 @@ const isExternal: boolean = href.startsWith("http");
 // From lg up the parent gives it a track ~2x as wide, so the image goes 32:9 (2 x 16:9) to keep the same height.
 // I've made it 16/6 which makes it equal on 1.5fr, change to 16/5.2 when making 1.75fr.
 const sizes = {
-    regular: { image: "aspect-video", title: "text-xl" },
-    wide: { image: "aspect-video lg:aspect-[16/6]", title: "text-xl lg:text-2xl" },
+    regular: { title: "text-xl" },
+    wide: { title: "text-xl lg:text-2xl" },
 }[size];
 ---
 
@@ -37,13 +37,13 @@ const sizes = {
    target={isExternal ? "_blank" : undefined}
    rel={isExternal ? "noopener noreferrer" : undefined}
    data-tags={tags.join(",")}
-   class={`rounded-frame transition border hover:shadow-[0_0_24px_var(--glow)] group block overflow-hidden
+   class={`rounded-frame transition border hover:shadow-[0_0_48px_var(--glow)] group block overflow-hidden
     ${highlight 
       ? "border-primary/40 bg-surface hover:bg-surface-alt" 
       : "border-border bg-surface hover:bg-surface-alt"
     } ${className}`}
 >
-    <div class={`${sizes.image} overflow-hidden`}>
+    <div class="aspect-video overflow-hidden">
         <img src={image}
              alt={title}
              class="w-full h-full object-cover transition duration-300 group-hover:scale-105"

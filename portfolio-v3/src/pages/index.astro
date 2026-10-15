@@ -15,6 +15,12 @@ const featuredProjects = featuredSlugs.flatMap((slug) =>
     allProjects.filter((project) => project.id === slug)
 );
 
+// Optional short card text for the homepage only. Key = project slug.
+// No entry (or an empty string) = the card shows the project's normal description.
+const homeDescriptions: Partial<Record<string, string>> = {
+  // "dirt-jam": "Your short card description goes here.",
+};
+
 const extraProjects = allProjects
     .filter((project) => !project.data.highlight)
     .slice(0, 2);
@@ -34,12 +40,12 @@ const extraProjects = allProjects
       <div class="grid lg:grid-cols-1 gap-12 mt-8">
         <!-- Projects column -->
         <div>
-          <h3 class="label mb-4">Projects</h3>
-          <div class="grid gap-4 lg:grid-cols-[1fr_1.5fr_1fr]">
+          <!--<h3 class="label mb-4">Projects</h3>-->
+          <div class="grid gap-4 lg:grid-cols-[1fr_1.75fr_1fr] 3xl:grid-cols-[1fr_1.5fr_1fr] items-center">
             {featuredProjects.map((project, i) => (
                 <ProjectCard
                     title={project.data.title}  
-                    description={project.data.description}
+                    description={homeDescriptions[project.id] || project.data.description}
                     href={`/projects/${project.id}`}
                     image={project.data.thumbnail}
                     tags={project.data.tags}

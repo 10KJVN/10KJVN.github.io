@@ -34,6 +34,8 @@
   --color-border-strong: light-dark(rgb(26 43 60 / 0.20), rgb(233 241 247 / 0.30));
 
   --radius-frame: 0.25rem; /* 0 = razor edges, 0.5rem = softer */
+
+  --breakpoint-3xl: 140rem; /* 2240px. Viewports at least this wide get the 1.5fr centre column. */
 }
 
 /* Theme-dependent values that shouldn't become Tailwind utilities */
