@@ -4,6 +4,8 @@ import ProjectLinks from "../../components/ProjectLinks.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import BackToTop from "../../components/BackToTop.astro";
+import PageEndNav from "../../components/PageEndNav.astro";
+import { getPageNav } from "../../lib/pageNav";
 
 export async function getStaticPaths() {
     const features = await getCollection("features");
@@ -31,6 +33,8 @@ const projects = await getCollection("projects");
 const parentProject = feature.data.projectSlug
     ? projects.find((project) => project.id === feature.data.projectSlug)
     : undefined;
+
+const nav = await getPageNav("feature", feature.id);
 ---
 
 <Layout
@@ -122,17 +126,19 @@ const parentProject = feature.data.projectSlug
 
         <ProjectLinks links={feature.data.links} />
 
-        {parentProject ? (
-                <a href={`/projects/${parentProject.id}`}
-                   class="inline-flex items-center gap-2 label transition hover:text-text">
-                    ← Back to {parentProject.data.title}
-                </a>
-        ) : (
-                <a href="/features"
-                   class="mt-16 inline-flex items-center gap-2 label transition hover:text-text">
-                    ← Back to Features
-                </a>
-        )}
+        <PageEndNav left={nav.left} right={nav.right}>
+            {parentProject ? (
+                    <a href={`/projects/${parentProject.id}`}
+                       class="inline-flex items-center gap-2 label transition hover:text-text">
+                        ← Back to {parentProject.data.title}
+                    </a>
+            ) : (
+                    <a href="/features"
+                       class="inline-flex items-center gap-2 label transition hover:text-text">
+                        ← Back to Features
+                    </a>
+            )}
+        </PageEndNav>
 
     </article>
 

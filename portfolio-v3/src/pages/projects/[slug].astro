@@ -14,6 +14,8 @@ import FeatureHighlightCard from "../../components/FeatureHighlightCard.astro";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import { resolveFeatureHref } from "../../lib/resolveFeatureHref";
 import BackToTop from "../../components/BackToTop.astro";
+import PageEndNav from "../../components/PageEndNav.astro";
+import { getPageNav } from "../../lib/pageNav";
 
 export async function getStaticPaths() {
     const projects = await getCollection("projects");
@@ -45,6 +47,8 @@ const projectFeatures = allFeatures
 
 // One feature = it gets the whole row and the wide card. Two or more share the row as regular cards.
 const singleFeature: boolean = projectFeatures.length === 1;
+
+const nav = await getPageNav("project", project.id);
 ---
 
 <Layout
@@ -130,6 +134,8 @@ const singleFeature: boolean = projectFeatures.length === 1;
         </div>
 
         <ProjectLinks links={project.data.links} />
+
+        <PageEndNav left={nav.left} right={nav.right} />
 
     </article>
 

@@ -1,0 +1,41 @@
+---
+import type { NavLink } from "../lib/pageNav";
+
+interface Props {
+    left?: NavLink;
+    right?: NavLink;
+}
+
+const { left, right } = Astro.props;
+const hasCenter: boolean = Astro.slots.has("default");
+const show: boolean = Boolean(left || right || hasCenter);
+---
+
+{show && (
+<nav
+        aria-label="Page navigation"
+        class="mt-20 grid grid-cols-2 items-center gap-x-6 gap-y-8 border-t border-border pt-8 md:grid-cols-3"
+>
+    <div class="justify-self-start">
+        {left && (
+                <a href={left.href} class="group block">
+                    <span class="label transition group-hover:text-accent">← {left.label}</span>
+                    <span class="mt-1 block font-display text-xl uppercase tracking-wide">{left.title}</span>
+                </a>
+        )}
+    </div>
+
+    <div class={hasCenter ? "order-last col-span-2 justify-self-center md:order-none md:col-span-1" : "hidden md:block"}>
+        <slot />
+    </div>
+
+    <div class="justify-self-end text-right">
+        {right && (
+                <a href={right.href} class="group block">
+                    <span class="label transition group-hover:text-accent">{right.label} →</span>
+                    <span class="mt-1 block font-display text-xl uppercase tracking-wide">{right.title}</span>
+                </a>
+        )}
+    </div>
+</nav>
+    )}
