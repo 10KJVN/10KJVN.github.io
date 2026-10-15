@@ -37,7 +37,7 @@ const sizes = {
    target={isExternal ? "_blank" : undefined}
    rel={isExternal ? "noopener noreferrer" : undefined}
    data-tags={tags.join(",")}
-   class={`rounded-frame transition border hover:shadow-[0_0_24px_var(--glow)]
+   class={`rounded-frame transition border hover:shadow-[0_0_24px_var(--glow)] group block overflow-hidden
     ${highlight 
       ? "border-primary/40 bg-surface hover:bg-surface-alt" 
       : "border-border bg-surface hover:bg-surface-alt"
