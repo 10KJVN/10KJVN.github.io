@@ -1,17 +1,28 @@
 ---
 interface Props {
     title: string;
-    /** Optional decorative index, e.g. "01". */
-    index?: string;
+    subtitle?: string;
+    centered?: boolean;
+    as?: 'h1' | 'h2' | 'h3';
+    class?: string;
 }
 
-const { title, index } = Astro.props;
+const {
+    title,
+    subtitle,
+    centered = false,
+    as: Tag = 'h2',
+    class: className = '',
+} = Astro.props;
 ---
 
-<header class="mb-10">
-    {index && <p class="label mb-2 text-accent">{index}</p>}
-    <h2 class="font-display text-4xl font-medium uppercase tracking-wide text-text">
+<div class={`mb-8 ${centered ? 'text-center' : ''} ${className}`}>
+    <Tag class="text-2xl font-bold tracking-tight text-text sm:text-3xl">
         {title}
-    </h2>
-    <div class="ruler mt-4" aria-hidden="true"></div>
-</header>
+    </Tag>
+    {subtitle && (
+            <p class="mt-2 text-text/70 text-base sm:text-lg">
+                {subtitle}
+            </p>
+    )}
+</div>
