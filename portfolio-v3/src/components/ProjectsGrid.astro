@@ -17,7 +17,8 @@ interface Props {
 const { projects } = Astro.props;
 ---
 
-<div class="grid md:grid-cols-3 gap-6" id="projects-grid">
+<!-- removed md:grid-cols-3 here for tablet compatibility -->
+<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
     {projects.map((project) => (
             <ProjectCard
                     title={project.title}

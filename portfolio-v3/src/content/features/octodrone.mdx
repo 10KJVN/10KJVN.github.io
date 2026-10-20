@@ -16,13 +16,14 @@ role: "Gameplay Programmer"
 ---
 
 import Split from "../../components/Split.astro";
+import Media from "../../components/Media.astro";
 
-##
+<div className="section-break" aria-hidden="true"></div>
 
 <Split ratio="2:3" align="center">
     <div>
 
-        ### Overview
+        <h2 className="title-only">Overview</h2>
         Octodrone was the first ground-based enemy developed for Operation Starfall.
         Its behavior combines state-driven AI, patrol and detection logic, and a custom jump attack.
 
@@ -31,7 +32,11 @@ import Split from "../../components/Split.astro";
         [//]: # (with both of us working across the AI and animation systems.)
 
     </div>
-    <img src="/videos/starfall/octoattackingfinal.gif" alt="Octodrone detecting and attacking the player"/>
+    <Media lightbox
+           src="/videos/starfall/octoattackingfinal.gif"
+           fullSrc="/videos/starfall/octoattackingfinal.gif"
+           alt="" caption="Octodrone detecting and attacking the player"
+    />
 </Split>
 
 [//]: # (## State Machine & Animation)
@@ -53,7 +58,11 @@ import Split from "../../components/Split.astro";
         **Visuals & animations:** [Alex Kentie](https://nl.linkedin.com/in/alexkentie), Creative Director at Neon Origins.
 
     </div>
-    <img src="/videos/starfall/OctoAnim.gif" alt="Octodrone animation states" />
+    <Media lightbox
+           src="/videos/starfall/OctoAnim.gif"
+           fullSrc="/videos/starfall/OctoAnim.gif"
+           alt="" caption="Octodrone animation states"
+    />
 </Split>
 
 ## Patrol & Detection
@@ -87,7 +96,11 @@ A small but important part of the implementation was keeping Octo facing the dir
         allowing Octo to turn around correctly while patrolling.
 
     </div>
-    <img src="/videos/starfall/Patrolling.gif" alt="Octodrone patrolling" />
+    <Media lightbox
+           src="/videos/starfall/Patrolling.gif"
+           fullSrc="/videos/starfall/Patrolling.gif"
+           alt="" caption="Octodrone patrolling"
+    />
 </Split>
 
 ## Jump Attack
@@ -113,23 +126,25 @@ The attack state inherits from the existing `AttackState` and coordinates the an
             movmentForce.Direction = moveDirection;
 
             EnemyAI.forceBody.Add(attackForce, new CallbackConfig()
-        {
-            OnFinish = OnJumpPeak,
-            OnCancel = AttackFinished
-        }
-            );
+            {
+                OnFinish = OnJumpPeak,
+                OnCancel = AttackFinished
+            });
 
             EnemyAI.forceBody.Add(movementForce, new CallbackConfig()
-        {
-            OnFinish = OnJumpFinish,
-            OnCancel = AttackFinished
-        }
-            );
+            {
+                OnFinish = OnJumpFinish,
+                OnCancel = AttackFinished
+            });
         }
         ```
 
     </div>
-    <img src="/videos/starfall/OctoAttack.gif" alt="Octodrone performing its jump attack" />
+    <Media lightbox
+           src="/videos/starfall/OctoAttack.gif"
+           fullSrc="/videos/starfall/OctoAttack.gif"
+           alt="" caption="Octodrone performing its jump attack"
+    />
 </Split>
 
 The attack state ties the animation timing and Force System together,
