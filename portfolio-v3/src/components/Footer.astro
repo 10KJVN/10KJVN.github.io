@@ -1,15 +1,16 @@
-<!-- Footer.astro, after -->
-<footer class="mt-24 text-sm text-muted">
-  <hr class="full-bleed border-border-strong" />
+---
+const currentYear = new Date().getFullYear();
+---
 
-  <div class="py-10 flex flex-col items-center gap-6 md:grid md:grid-cols-3 md:items-center">
-    <!-- copyright: last on mobile, left on desktop -->
-    <p class="order-3 md:order-1 md:justify-self-start">
-      © {new Date().getFullYear()} Jahvairo Monkau
+<!-- Footer.astro, after -->
+<footer class="mt-auto border-t border-border/50 bg-background/50 backdrop-blur-sm">
+  <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-8 sm:flex-row">
+    <p class="text-sm text-text/60">
+      &copy; {currentYear} Jahvairo Monkau
     </p>
 
     <!-- nav: first on mobile, center on desktop -->
-    <nav class="order-1 md:order-2 md:justify-self-center flex gap-6 text-xs uppercase tracking-widest">
+    <nav class="order-1 md:order-2 md:justify-self-center flex gap-6 text-xs uppercase tracking-widest" aria-label="Footer">
       <a href="/" class="hover:text-text transition">Home</a>
       <a href="/about" class="hover:text-text transition">About</a>
       <a href="/features" class="hover:text-text transition">Features</a>
