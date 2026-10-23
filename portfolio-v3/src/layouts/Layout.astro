@@ -50,15 +50,23 @@ const mainWidth = {
 	</head>
 
 	<body class="bg-background text-text font-sans antialiased" style="scroll-behavior: smooth">
+	<a
+		href="#main"
+		class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:border focus:border-border-strong focus:bg-surface focus:px-4 focus:py-2 focus:text-sm focus:text-text"
+	>
+		Skip to main content
+	</a>
 		<div class="mx-auto max-w-5xl px-6">
 			<Navbar />
 		</div>
 
-		<main class={`mx-auto ${mainWidth} py-10`}>
+		<main id="main" tabindex="-1" class={`mx-auto ${mainWidth} py-10 focus:outline-none`}>
 			<slot />
 		</main>
 
-		<Footer />
+		<div class="mx-auto max-w-5xl px-6">
+			<Footer />
+		</div>
 	</body>
 </html>
 
