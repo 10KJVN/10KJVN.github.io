@@ -3,7 +3,7 @@ interface Props {
     title: string;
     subtitle?: string;
     centered?: boolean;
-    as?: 'h1' | 'h2' | 'h3';
+    as?: 'h1' | 'h2';
     class?: string;
 }
 
@@ -11,15 +11,15 @@ const {
     title,
     subtitle,
     centered = false,
-    as: Tag = 'h2',
+    as: Heading = 'h2',
     class: className = '',
 } = Astro.props;
 ---
 
 <div class={`mb-8 ${centered ? 'text-center' : ''} ${className}`}>
-    <Tag class="text-2xl font-bold tracking-tight text-text sm:text-3xl">
+    <Heading class="font-display text-4xl font-medium uppercase tracking-wide text-text">
         {title}
-    </Tag>
+    </Heading>
     {subtitle && (
             <p class="mt-2 text-text/70 text-base sm:text-lg">
                 {subtitle}
