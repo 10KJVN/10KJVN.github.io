@@ -11,15 +11,17 @@ interface Props {
 const { trail } = Astro.props;
 ---
 
-<nav class="flex flex-wrap items-center gap-2 label mb-6" aria-label="Breadcrumb" aria-current="page">
-    {trail.map((crumb, i) => (
-            <Fragment>
-                {crumb.href ? (
-                        <a href={crumb.href} class="hover:text-text transition">{crumb.label}</a>
-                ) : (
-                        <span class="text-text">{crumb.label}</span>
-                )}
-                {i < trail.length - 1 && <span>/</span>}
-            </Fragment>
-    ))}
+<nav aria-label="Breadcrumb" class="mb-6">
+    <ol class="flex flex-wrap items-center gap-2 label">
+        {trail.map((crumb, i) => (
+                <li class="flex items-center gap-2">
+                    {crumb.href ? (
+                            <a href={crumb.href} class="hover:text-text transition">{crumb.label}</a>
+                    ) : (
+                            <span class="text-text" aria-current="page">{crumb.label}</span>
+                    )}
+                    {i < trail.length - 1 && <span aria-hidden="true">/</span>}
+                </li>
+        ))}
+    </ol>
 </nav>

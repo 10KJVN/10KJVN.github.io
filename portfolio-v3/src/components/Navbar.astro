@@ -1,8 +1,17 @@
 ---
 import ThemeToggle from "./ThemeToggle.astro";
+
+const path: string = Astro.url.pathname;
+
+// "page" for the current section: /projects/dirt-jam keeps Projects current, "/" only matches Home.
+const current = (href: string): "page" | undefined => {
+  const here: string = path.replace(/\/$/, "") || "/";
+  const match: boolean = href === "/" ? here === "/" : here === href || here.startsWith(`${href}/`);
+  return match ? "page" : undefined;
+};
 ---
 
-<nav class="fixed left-0 top-0 z-50 w-full border-b border-border bg-background/75 backdrop-blur-lg" aria-current="page">
+<nav aria-label="Primary" class="fixed left-0 top-0 z-50 w-full border-b border-border bg-background/75 backdrop-blur-lg">
   <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
     <!-- Brand, TODO: Realign to be left of navbar -->
     <a
@@ -17,11 +26,11 @@ import ThemeToggle from "./ThemeToggle.astro";
         id="nav-links"
         class="absolute left-0 top-full hidden w-full flex-col gap-4 border-b border-border bg-background px-6 py-6 text-sm uppercase tracking-wide md:static md:flex md:w-auto md:flex-row md:items-center md:gap-6 md:border-0 md:bg-transparent md:p-0"
     >
-      <li><a class="nav-link" href="/">Home</a></li>
-      <li><a class="nav-link" href="/about">About</a></li>
-      <li><a class="nav-link" href="/features">Features</a></li>
-      <li><a class="nav-link" href="/projects">Projects</a></li>
-      <li><a class="nav-link" href="/contact">Contact</a></li>
+      <li><a class="nav-link" href="/" aria-current={current("/")}>Home</a></li>
+      <li><a class="nav-link" href="/about" aria-current={current("/about")}>About</a></li>
+      <li><a class="nav-link" href="/features" aria-current={current("/features")}>Features</a></li>
+      <li><a class="nav-link" href="/projects" aria-current={current("/projects")}>Projects</a></li>
+      <li><a class="nav-link" href="/contact" aria-current={current("/contact")}>Contact</a></li>
     </ul>
 
     <!-- TODO: find out whether i want to swap positions of middle and right aligned between theme switch and nav items. -->
@@ -102,7 +111,8 @@ import ThemeToggle from "./ThemeToggle.astro";
     transition: width 0.25s ease;
   }
 
-  .nav-link:hover::after {
+  .nav-link:hover::after,
+  .nav-link[aria-current="page"]::after {
     width: 100%;
   }
 </style>
