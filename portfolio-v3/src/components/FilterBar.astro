@@ -16,6 +16,8 @@ const button =
     ))}
 </div>
 
+<p id="filter-status" class="sr-only" role="status"></p>
+
 <script>
 
     /*
@@ -36,10 +38,22 @@ const button =
                 b.setAttribute("aria-pressed", String(b === btn));
             });
 
+            let visible: number = 0;
+
             cards.forEach((card: HTMLElement) => {
                 const tags: string[] = card.dataset.tags?.split(",") ?? [];
-                card.style.display = selected === "all" || tags.includes(selected) ? "" : "none";
+                const show: boolean = selected === "all" || tags.includes(selected);
+                card.style.display = show ? "" : "none";
+                if (show) visible += 1;
             });
+
+            const status = document.getElementById("filter-status");
+            if (status) {
+                status.textContent =
+                    selected === "all"
+                        ? `Showing all ${cards.length} items`
+                        : `Showing ${visible} of ${cards.length} items tagged ${selected}`;
+            }
         });
     });
 </script>

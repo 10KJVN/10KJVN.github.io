@@ -70,18 +70,35 @@ const current = (href: string): "page" | undefined => {
   const links = document.getElementById("nav-links");
 
   if (toggle && links) {
+    const nav = toggle.closest("nav");
+
     const setOpen = (open: boolean): void => {
       links.classList.toggle("hidden", !open);
       links.classList.toggle("flex", open);
       toggle.setAttribute("aria-expanded", String(open));
     };
 
+    const isOpen = (): boolean => toggle.getAttribute("aria-expanded") === "true";
+
     toggle.addEventListener("click", () => {
-      setOpen(toggle.getAttribute("aria-expanded") !== "true");
+      setOpen(!isOpen());
     });
 
     links.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => setOpen(false));
+    });
+
+    // Escape closes the menu and returns focus to the button that opened it.
+    document.addEventListener("keydown", (event: KeyboardEvent) => {
+      if (event.key === "Escape" && isOpen()) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    // A click outside the navbar closes it. The theme toggle and brand sit inside the navbar, so they don't.
+    document.addEventListener("click", (event: MouseEvent) => {
+      if (isOpen() && nav && !nav.contains(event.target as Node)) setOpen(false);
     });
 
     // Reset mobile menu state when returning to desktop layout.
@@ -114,5 +131,17 @@ const current = (href: string): "page" | undefined => {
   .nav-link:hover::after,
   .nav-link[aria-current="page"]::after {
     width: 100%;
+  }
+
+  /* Mobile dropdown only: taller tap targets. Desktop nav is unchanged. */
+  @media (max-width: 767px) {
+    .nav-link {
+      display: inline-block;
+      padding-block: 0.625rem; /* 20px line + 20px padding = 40px tall. Lower it to tighten the menu. */
+    }
+
+    .nav-link::after {
+      bottom: 0.5rem; /* keeps the underline close to the text */
+    }
   }
 </style>
