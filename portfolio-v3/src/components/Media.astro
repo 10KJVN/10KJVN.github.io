@@ -7,9 +7,12 @@ interface Props {
     lightbox?: boolean;
     /** Larger file for the lightbox. Falls back to `src`. */
     fullSrc?: string;
+    /** Pixel size of the file. Optional: lets the browser reserve the right space before the image loads. */
+    width?: number;
+    height?: number;
 }
 
-const { src, alt, caption, lightbox = false, fullSrc } = Astro.props;
+const { src, alt, caption, lightbox = false, fullSrc, width, height } = Astro.props;
 const imageClass: string = "m-0 w-full rounded-frame border border-border";
 ---
 
@@ -23,7 +26,7 @@ const imageClass: string = "m-0 w-full rounded-frame border border-border";
                     aria-label={`Enlarge image: ${alt}`}
                     class="relative block w-full cursor-zoom-in rounded-frame"
             >
-                <img src={src} alt={alt} class={imageClass} loading="lazy" decoding="async" />
+                <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" class={imageClass} />
                 <span
                         aria-hidden="true"
                         class="absolute bottom-3 right-3 grid h-8 w-8 place-items-center rounded-full border border-border bg-surface/80 text-text"
@@ -34,7 +37,7 @@ const imageClass: string = "m-0 w-full rounded-frame border border-border";
             </span>
             </button>
     ) : (
-            <img src={src} alt={alt} class={imageClass} loading="lazy" decoding="async" />
+            <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" class={imageClass} />
     )}
     {caption && (
             <figcaption class="label mt-2">

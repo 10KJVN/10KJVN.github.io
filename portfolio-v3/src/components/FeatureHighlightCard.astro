@@ -27,6 +27,8 @@ const sizes = {
                 src={image}
                 alt=""
                 class="w-full h-full object-cover transition duration-300 group-hover:scale-105"
+                loading="lazy"
+                decoding="async"
         />
 
         {index != null && (<span class="absolute top-3 right-3 font-mono text-[10px] uppercase tracking-wide text-text bg-surface/80 px-2 py-0.5 rounded-full border border-border">
