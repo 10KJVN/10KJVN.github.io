@@ -5,65 +5,32 @@
         id="back-to-top"
         type="button"
         aria-label="Back to top"
-        tabindex="-1"
-        aria-hidden="true"
-        class="fixed bottom-6 right-6 z-40 flex h-11 w-11 invisible opacity-0 items-center justify-center rounded-full bg-surface border border-border text-text shadow-md transition-all duration-300 hover:bg-surface/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        inert
+        class="fixed bottom-6 right-6 px-4 py-2 rounded-full border border-chrome/50 bg-background/60 backdrop-blur text-sm text-text/70 hover:bg-primary/10 transition opacity-0 pointer-events-none"
 >
-    <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-            aria-hidden="true"
-    >
-        <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-    </svg>
+    ↑ Top
 </button>
 
 <script>
-    function setupBackToTop() {
-        const button = document.getElementById('back-to-top') as HTMLButtonElement | null;
-        const mainContent = document.getElementById('main-content');
+    const btn = document.getElementById("back-to-top");
+    const reduceMotion: MediaQueryList = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-        if (!button) return;
-
-        const toggleVisibility = () => {
-            const isScrolled = window.scrollY > 300;
-
-            if (isScrolled) {
-                button.classList.remove('invisible', 'opacity-0', 'pointer-events-none');
-                button.classList.add('opacity-100');
-                button.removeAttribute('tabindex');
-                button.removeAttribute('aria-hidden');
-            } else {
-                button.classList.add('invisible', 'opacity-0', 'pointer-events-none');
-                button.classList.remove('opacity-100');
-                button.setAttribute('tabindex', '-1');
-                button.setAttribute('aria-hidden', 'true');
-            }
+    if (btn) {
+        const update = (): void => {
+            const show: boolean = window.scrollY > 600;
+            btn.classList.toggle("opacity-0", !show);
+            btn.classList.toggle("pointer-events-none", !show);
+            // `inert` removes the button from the tab order and the accessibility tree while it is hidden.
+            btn.toggleAttribute("inert", !show);
         };
 
-        button.addEventListener('click', () => {
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.addEventListener("scroll", update, { passive: true });
+        update();
 
-            window.scrollTo({
-                top: 0,
-                behavior: prefersReducedMotion ? 'auto' : 'smooth',
-            });
-
-            if (mainContent) {
-                mainContent.focus({ preventScroll: true });
-            } else {
-                document.body.focus({ preventScroll: true });
-            }
+        btn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: reduceMotion.matches ? "auto" : "smooth" });
+            // The button is about to disappear, so park keyboard focus on the page content.
+            document.getElementById("main")?.focus({ preventScroll: true });
         });
-
-        window.addEventListener('scroll', toggleVisibility, { passive: true });
-        toggleVisibility();
     }
-
-    setupBackToTop();
-    document.addEventListener('astro:after-swap', setupBackToTop);
 </script>
