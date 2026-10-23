@@ -20,7 +20,7 @@ const { links = [] } = Astro.props;
         rel="noopener noreferrer"
         class="text-sm px-4 py-2 rounded-full border border-border-strong text-text/70 hover:text-text hover:bg-primary/50 transition"
             >
-            {link.label} &nearr;
+            {link.label} <span aria-hidden="true">&nearr;</span><span class="sr-only"> (opens in a new tab)</span>
         </a>
         ))}
 </div>
