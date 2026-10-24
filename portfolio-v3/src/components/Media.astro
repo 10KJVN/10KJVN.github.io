@@ -24,12 +24,12 @@ const imageClass: string = "m-0 w-full rounded-frame border border-border";
                     data-full={fullSrc ?? src}
                     data-caption={caption ?? ""}
                     aria-label={`Enlarge image: ${alt}`}
-                    class="relative block w-full cursor-zoom-in rounded-frame"
+                    class="lightbox-trigger"
             >
                 <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" class={imageClass} />
                 <span
                         aria-hidden="true"
-                        class="absolute bottom-3 right-3 grid h-8 w-8 place-items-center rounded-full border border-border bg-surface/80 text-text"
+                        class="lightbox-trigger__badge"
                 >
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
@@ -62,7 +62,7 @@ const imageClass: string = "m-0 w-full rounded-frame border border-border";
             </button>
             <div class="lightbox__stage">
                 <figure class="lightbox__figure">
-                    <img class="lightbox__img" alt="" loading="lazy" decoding="async" />
+                    <img class="lightbox__img" alt="" decoding="async" />
                     <figcaption class="lightbox__caption label" hidden></figcaption>
                 </figure>
             </div>`;

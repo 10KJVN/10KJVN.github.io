@@ -297,6 +297,63 @@
     cursor: pointer;
   }
 
+  /* Lightbox trigger: a restrained "this image opens" cue. Applies only to <Media lightbox>.
+   Tune with the three variables; the rest follows. */
+  .lightbox-trigger {
+    --zoom-badge-rest: 0.75;                        /* corner icon opacity at rest: 1 = solid, 0 = only on hover/focus */
+    --zoom-frame-hover: var(--color-border-strong); /* frame line on hover/focus. Try: color-mix(in srgb, var(--color-accent) 55%, transparent) */
+    --zoom-accent: var(--color-accent);             /* corner icon + ring colour on hover/focus */
+    position: relative;
+    display: block;
+    width: 100%;
+    cursor: zoom-in;
+    border-radius: var(--radius-frame);
+  }
+
+  /* Frame overlay: sits exactly over the image's own 1px border. */
+  .lightbox-trigger::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid transparent;
+    border-radius: var(--radius-frame);
+    pointer-events: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .lightbox-trigger__badge {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    border: 1px solid var(--color-border);
+    border-radius: 9999px;
+    background: color-mix(in srgb, var(--color-surface) 80%, transparent);
+    color: var(--color-text);
+    opacity: var(--zoom-badge-rest);
+    transition: opacity 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+
+  /* Hover only where hover exists, so phones don't get a stuck highlight after a tap. */
+  @media (hover: hover) {
+    .lightbox-trigger:hover::after { border-color: var(--zoom-frame-hover); }
+
+    .lightbox-trigger:hover .lightbox-trigger__badge {
+      opacity: 1;
+      color: var(--zoom-accent);
+      border-color: var(--zoom-accent);
+    }
+  }
+
+  .lightbox-trigger:focus-visible .lightbox-trigger__badge {
+    opacity: 1;
+    color: var(--zoom-accent);
+    border-color: var(--zoom-accent);
+  }
+
   .section-break {
     counter-increment: section;
     margin-top: 4rem;
