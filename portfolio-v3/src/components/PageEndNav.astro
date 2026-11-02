@@ -18,8 +18,8 @@ const show: boolean = Boolean(left || right || hasCenter);
 >
     <div class="justify-self-start">
         {left && (
-                <a href={left.href} class="group block">
-                    <span class="label transition group-hover:text-accent">← {left.label}</span>
+                <a href={left.href} class="group block rounded-frame border border-border-strong px-5 py-4 transition hover:border-accent hover:bg-surface">
+                    <span class="label transition group-hover:text-accent"><span class="inline-block text-accent transition group-hover:-translate-x-1">←</span> {left.label}</span>
                     <span class="mt-1 block font-display text-xl uppercase tracking-wide">{left.title}</span>
                 </a>
         )}
@@ -31,8 +31,8 @@ const show: boolean = Boolean(left || right || hasCenter);
 
     <div class="justify-self-end text-right">
         {right && (
-                <a href={right.href} class="group block">
-                    <span class="label transition group-hover:text-accent">{right.label} →</span>
+                <a href={right.href} class="group block rounded-frame border border-border-strong px-5 py-4 transition hover:border-accent hover:bg-surface">
+                    <span class="label transition group-hover:text-accent">{right.label} <span class="inline-block text-accent transition group-hover:translate-x-1">→</span></span>
                     <span class="mt-1 block font-display text-xl uppercase tracking-wide">{right.title}</span>
                 </a>
         )}

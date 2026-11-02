@@ -11,27 +11,34 @@
   /* Each color: light-dark(LIGHT, DARK). Edit a theme by editing one line. */
 
   /* Surfaces */
-  --color-background:  light-dark(#F4F9FC, #080B11);
-  --color-surface:     light-dark(#FFFFFF, #10151D);
-  --color-surface-alt: light-dark(#E8F1F8, #171E29);
+  /* Light: ice / white / blue-black ink, cobalt structure, electric cyan atmosphere.
+     Dark: midnight / night panel / blue shadow. */
+  --color-background:  light-dark(#F0F6FC, #090B12);
+  --color-surface:     light-dark(#FFFFFF, #121522);
+  --color-surface-alt: light-dark(#E3EDF8, #1A2338);
 
   /* Text */
-  --color-text:  light-dark(#1A2B3C, #E9F1F7);
-  --color-muted: light-dark(#4A5B6C, #98A8B8);
+  --color-text:  light-dark(#14243B, #E6EAF4);
+  --color-muted: light-dark(#475B76, #9AA3B8);
 
-  /* Interactive accent: links, CTAs, focus ring */
-  --color-accent:    light-dark(#2438E0, #5EE6F0);
-  --color-on-accent: light-dark(#FFFFFF, #04141A);
+  /* Interactive accent: links, CTAs, focus ring.
+     Light: cobalt. Dark: a lifted dusty cobalt, since #526DAA itself is only ~3.6:1 on midnight. */
+  --color-accent:    light-dark(#1648D8, #8FA8E0);
+  --color-on-accent: light-dark(#FFFFFF, #090B12);
 
   /* Atmospheric colors: gradients, glows, soft fills */
-  --color-primary:    light-dark(#6ABEDC, #5CC8E8);
-  --color-on-primary: light-dark(#0F1D2B, #04141A);
-  --color-ice:        light-dark(#A6E1FA, #21566E);
-  --color-chrome:     light-dark(#C0C0C0, #5A6674);
+  --color-primary:    light-dark(#39C7F4, #526DAA);
+  --color-on-primary: light-dark(#0A1F33, #F1F4FB);
+  --color-ice:        light-dark(#BFE6FA, #1C2944);
+  --color-chrome:     light-dark(#B8CDE1, #5A6680);
+
+  /* Selective accents. Use sparingly: violet for secondary marks, warm for a single streetlight touch per view. */
+  --color-violet: light-dark(#6B5B9A, #8B7AA8);
+  --color-warm:   light-dark(#8F6A2E, #C6A77A);
 
   /* Lines */
-  --color-border:        light-dark(rgb(26 43 60 / 0.12), rgb(233 241 247 / 0.14));
-  --color-border-strong: light-dark(rgb(26 43 60 / 0.20), rgb(233 241 247 / 0.30));
+  --color-border:        light-dark(rgb(20 36 59 / 0.12), rgb(190 205 240 / 0.12));
+  --color-border-strong: light-dark(rgb(20 36 59 / 0.22), rgb(190 205 240 / 0.26));
 
   --radius-frame: 0.25rem; /* 0 = razor edges, 0.5rem = softer */
 
@@ -40,12 +47,16 @@
 
 /* Theme-dependent values that shouldn't become Tailwind utilities */
 :root {
-  --glow: light-dark(rgb(166 225 250 / 0.35), rgb(94 230 240 / 0.28));
-  --gradient-hero: linear-gradient(
+  --glow: light-dark(rgb(57 199 244 / 0.32), rgb(82 109 170 / 0.38));
+  /* First layer: dark = a distant blue light from the upper right; light = an overexposed cyan bloom.
+     Second: the base wash. */
+  --gradient-hero:
+          radial-gradient(70% 60% at 100% 15%, light-dark(rgb(57 199 244 / 0.30), rgb(82 109 170 / 0.30)), transparent 70%),
+          linear-gradient(
           0.25turn,
-          light-dark(#A8D3E1, #0B1626),
-          light-dark(#C0D8E7, #10223A),
-          light-dark(#E5F1F5, #080B11)
+          light-dark(#D3E8F7, #0C1120),
+          light-dark(#E2F0FA, #121B33),
+          light-dark(#F0F6FC, #090B12)
   );
 }
 
@@ -58,6 +69,29 @@
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
   }
+}
+
+/* Dark only: faint grain on the page background. z-index -1 keeps it behind all content,
+   so it never touches screenshots, videos or diagrams. */
+:root[data-theme="dark"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("/images/white-noise.png");
+  background-size: 256px;
+  opacity: 0.045;
+}
+
+/* Light only: a faint cyan bloom from the top right, behind all content. */
+:root[data-theme="light"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(60% 45% at 100% 0%, rgb(57 199 244 / 0.14), transparent 70%);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -79,12 +113,40 @@
   /* Glassmorphism (frosted panel) */
   /* Could un-hardcode by replacing with ´background: color-mix(in srgb, var(--color-ice) 18%, transparent);´ */
   .glass-panel {
-    background: rgba(166, 225, 250, 0.18);
+    background: color-mix(in srgb, var(--color-ice) 18%, transparent);
     backdrop-filter: blur(8px);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow:
+      0 4px 8px 0 light-dark(rgb(20 36 59 / 0.08), rgb(0 0 0 / 0.2)),
+      0 6px 20px 0 light-dark(rgb(20 36 59 / 0.08), rgb(0 0 0 / 0.19)),
+      inset 0 1px 0 light-dark(rgb(255 255 255 / 0.9), transparent);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    border: 1px solid light-dark(rgb(255 255 255 / 0.7), rgb(190 205 240 / 0.2));
     border-radius: 12px;
+  }
+
+  /* Chrome seam: a 2px reflective edge on the left of a panel. Needs `relative` on the element.
+     Light = bright silver with a white glint; dark = a faint cool edge. */
+  .chrome-edge::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 2px;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+            180deg,
+            light-dark(#FFFFFF, rgb(190 205 240 / 0.08)),
+            light-dark(#B8CDE1, rgb(190 205 240 / 0.30)) 30%,
+            light-dark(#FFFFFF, rgb(190 205 240 / 0.10)) 55%,
+            light-dark(#B8CDE1, rgb(190 205 240 / 0.26)) 80%,
+            light-dark(#FFFFFF, rgb(190 205 240 / 0.08))
+    );
+  }
+
+  /* Primary CTA sheen: a glossy top highlight in light, flat in dark. Layers over bg-accent. */
+  .cta-sheen {
+    background-image: linear-gradient(180deg, light-dark(rgb(255 255 255 / 0.28), transparent), transparent 60%);
+    box-shadow: inset 0 1px 0 light-dark(rgb(255 255 255 / 0.5), transparent), 0 0 24px var(--glow);
   }
 
   /* Soft glow */

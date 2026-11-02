@@ -56,17 +56,13 @@ const mainWidth = {
 	>
 		Skip to main content
 	</a>
-		<div class="mx-auto max-w-5xl px-6">
-			<Navbar />
-		</div>
+		<Navbar />
 
 		<main id="main" tabindex="-1" class={`mx-auto ${mainWidth} py-10 focus:outline-none`}>
 			<slot />
 		</main>
 
-		<div class="mx-auto max-w-5xl px-6">
-			<Footer />
-		</div>
+		<Footer />
 	</body>
 </html>
 
