@@ -33,38 +33,21 @@ For this project, I started with the provided reference code and a list of sugge
 
 ## Creative Direction
 
+The visual direction started with Kankan's Way2Geeked album visualizer,
+particularly in combination with the song `Livefastdieslay ##4Kaine`.
+I was drawn to its noisy, high-contrast imagery, shifting between washed-out grays and saturated pinks.
+I initially considered recreating some of these visuals through shader effects,
+but eventually decided to take the elements I liked and reinterpret them in a different context.
+
+Other visualizers and artwork I was drawn to at the time,
+including SoFaygo's `Pink Heartz` and LUCKI's `s*x m*ney dr*gs`,
+helped shape the direction further. I collected these references into a moodboard, using their colors,
+textures and abstract imagery as a starting point for the environment.
+
 <Gallery cols={2}>
-    <img loading="lazy" decoding="async" src="/images/DirtJamThumb.png" alt="Way2Terrain gallery placeholder" />
-    <img loading="lazy" decoding="async" src="/images/DirtJamThumb.png" alt="Way2Terrain gallery placeholder" />
+    <video src="/videos/dirtjam/W2GVisualizerLMV2.mp4" alt="Album visualizer of Way2Geeked on Youtube." autoPlay={true} muted={true} loop={true}></video>
+    <img loading="lazy" decoding="async" src="/images/dirtjam/16by9_moodboard.jpg" alt="Way2Terrain gallery placeholder" />
 </Gallery>
-
-Engines like Unity and Unreal ship with mature terrain systems and polished shader workflows.
-Godot doesn't — which is exactly what made this a good challenge.
-Most of the work was recreating conveniences bigger engines give you for free.
-
-I started by studying the base terrain generator's source and structure.
-From there I added features in roughly this order: Distance Fog, a Shader Include system, Level of Detail, an upgraded lighting model, and Triplanar Texture Mapping.
-
-<Split ratio="1:1">
-    <div>
-
-        {/* Your commented-out GLSL alignment snippet from the old card can live here until you have a real one. */}
-
-        ### GPU Data Alignment
-
-        Forgetting to pad a struct for 16-byte alignment turns your shader uniforms into nonsense.
-        GPUs read in `vec4` chunks, so a lone `vec3` needs a dummy float to keep the layout intact.
-
-    </div>
-    <div>
-
-        ### Shader Modularity
-
-        Built a GDScript-driven GLSL include loader, cutting ~500 lines of duplicated shader code across effects.
-        Full breakdown in the [closed PRs](https://github.com/10KJVN/Godot-Terrain/pulls?q=is%3Apr+is%3Aclosed).
-
-    </div>
-</Split>
 
 ##
 
