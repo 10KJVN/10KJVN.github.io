@@ -10,14 +10,41 @@ interface Props {
     /** Pixel size of the file. Optional: lets the browser reserve the right space before the image loads. */
     width?: number;
     height?: number;
+    /** Video only. Starts playback on load. Browsers require `muted` for this to work. */
+    autoPlay?: boolean;
+    /** Video only. */
+    muted?: boolean;
+    /** Video only. */
+    loop?: boolean;
+    /** Video only. Shows the play/pause bar. Defaults to on, unless `autoPlay` is set. */
+    controls?: boolean;
 }
 
-const { src, alt, caption, lightbox = false, fullSrc, width, height } = Astro.props;
+const {
+    src, alt, caption, lightbox = false, fullSrc, width, height,
+    autoPlay = false, muted = false, loop = false, controls,
+} = Astro.props;
+const isVideo: boolean = /\.(mp4|webm|ogg)$/i.test(src);
+const showControls: boolean = controls ?? !autoPlay;
 const imageClass: string = "m-0 w-full rounded-frame border border-border";
 ---
 
 <figure class="my-8">
-    {lightbox ? (
+    {isVideo ? (
+            <video
+                    src={src}
+                    width={width}
+                    height={height}
+                    autoplay={autoPlay}
+                    muted={muted}
+                    loop={loop}
+                    controls={showControls}
+                    playsinline
+                    preload="metadata"
+                    aria-label={alt}
+                    class={imageClass}
+            ></video>
+    ) : lightbox ? (
             <button
                     type="button"
                     data-lightbox
