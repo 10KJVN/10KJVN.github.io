@@ -127,15 +127,10 @@ afterLabel="Fog on"
 I also extended the terrain's existing Lambertian diffuse lighting with Blinn–Phong specular highlights,
 giving the surfaces a more pronounced response to light.
 
-<ComparisonSlider
-start={50}
-beforeSrc="/images/dirtjam/LambertScreen.png"
-beforeAlt="Before the change"
-afterSrc="/images/dirtjam/BlinnScreen.png"
-afterAlt="After the change"
-beforeLabel="Lambertian Diffuse"
-afterLabel="Blinn-Phong"
-/>
+<Gallery cols={2}>
+    <Media src="/images/dirtjam/LambertScreen.png" alt="Lambertian Diffusion" caption="Lambertian Diffusion: The old lightning model" />
+    <Media src="/images/dirtjam/BlinnScreen.png" alt="Blinn-Phong" caption="Blinn-Phong: The new lightning model" />
+</Gallery>
 
 Outside the implemented features, I researched other fog approaches,
 including animated and layered fog, through OGLDEV's Mastering Fog Rendering in OpenGL.
