@@ -67,65 +67,43 @@ For this project, I started with the provided reference code and a list of sugge
 
 ## Getting Familiar
 
-Before jumping into new features, I first wanted to understand what I was working with.
-The jam provided an annotated terrain generator in Godot,
-so I went through the code and experimented with the available inspector parameters.
 
-I played around with the mesh settings, noise generation,
-octave count and material properties to get a better understanding of how they influenced the generated terrain.
-This gave me a starting point for deciding what I wanted to build on top of the existing implementation.
-
-The jam also provided a list of suggested features for participants looking for ideas.
-After considering which ones were most relevant to my plans and discussing their execution order,
-I settled on four to start with:
-
-- **Distance Fog** - introducing atmospheric depth.
-- **Shader Include Files** - reducing duplicated code between shader stages.
-- **Level of Detail** - adjusting terrain detail based on camera distance.
-- **Improved Lighting** - extending the existing Lambertian model with specular highlights.
-
-<Split ratio="2:3">
+<Split ratio="1:1">
     <div>
-
-        ### Texturing
-
-        Five days of trial and error to get clean triplanar mapping working.
-        Ended up supporting multi-resolution textures without stretching.
-
+        Before jumping into new features, I first wanted to understand what I was working with.
+        The jam provided an annotated terrain generator in Godot,
+        so I went through the code and experimented with the available inspector parameters.
     </div>
-    <img loading="lazy" decoding="async" src="/images/DirtJamThumb.png" alt="Way2Terrain gallery placeholder" />
-</Split>
-
-<Split ratio="2:3" reverse>
     <div>
-
-        ### Fog & Lighting
-
-        Switching to exponential fog exposed a blending issue that flattened lit terrain.
-        Fixed by upgrading the lighting model to Blinn–Phong for sharper highlights.
-        [Beer's Law](https://cglearn.eu/pub/advanced-computer-graphics/volumetric-rendering) ended up being the key bit of theory tying the fog math together.
-
+        I played around with the mesh settings, noise generation,
+        octave count and material properties to get a better understanding of how they influenced the generated terrain.
+        This gave me a starting point for deciding what I wanted to build on top of the existing implementation.s.
     </div>
-    <ComparisonSlider
-        start={50}
-        beforeSrc="/images/dirtjam/01NoFog.png"
-        beforeAlt="Before the change"
-        afterSrc="/images/dirtjam/02LightFog.png"
-        afterAlt="After the change"
-        beforeLabel="Fog off"
-        afterLabel="Fog on"
-    />
 </Split>
 
 {/* Standalone, with explicit labels */}
 <ComparisonSlider
-    beforeSrc="/images/dirtjam/01NoFog.png"
-    beforeAlt="Scene with no distance fog"
-    afterSrc="/images/dirtjam/02LightFog.png"
-    afterAlt="Scene with the exponential distance fog"
-    beforeLabel="Fog off"
-    afterLabel="Fog on"
+beforeSrc="/images/dirtjam/NoiseScreen.png"
+beforeAlt="Playing with the noise parameters"
+afterSrc="/images/dirtjam/OctaveScreen.png"
+afterAlt="Playing with the octave parameters"
+beforeLabel="Noise"
+afterLabel="Octaves"
 />
+
+<Split ratio="1:1">
+    <div>
+        The jam also provided a list of suggested features for participants looking for ideas.
+        After considering which ones were most relevant to my plans and discussing their execution order,
+        I settled on four to start with:
+    </div>
+    <div>
+        - **Distance Fog** - introducing atmospheric depth.
+        - **Shader Include Files** - reducing duplicated code between shader stages.
+        - **Level of Detail** - adjusting terrain detail based on camera distance.
+        - **Improved Lighting** - extending the existing Lambertian model with specular highlights.
+    </div>
+</Split>
 
 ## Gallery
 
