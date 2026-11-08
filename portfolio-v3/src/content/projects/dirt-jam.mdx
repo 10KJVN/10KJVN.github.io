@@ -81,28 +81,25 @@ For this project, I started with the provided reference code and a list of sugge
     </div>
 </Split>
 
-{/* Standalone, with explicit labels */}
-<ComparisonSlider
-beforeSrc="/images/dirtjam/NoiseScreen.png"
-beforeAlt="Playing with the noise parameters"
-afterSrc="/images/dirtjam/OctaveScreen.png"
-afterAlt="Playing with the octave parameters"
-beforeLabel="Noise"
-afterLabel="Octaves"
-/>
-
-<Split ratio="1:1">
+<Split ratio="1:1" align="center">
     <div>
         The jam also provided a list of suggested features for participants looking for ideas.
-        After considering which ones were most relevant to my plans and discussing their execution order,
+        After considering which ones were most relevant to my plans,
         I settled on four to start with:
-    </div>
-    <div>
+
         - **Distance Fog** - introducing atmospheric depth.
         - **Shader Include Files** - reducing duplicated code between shader stages.
         - **Level of Detail** - adjusting terrain detail based on camera distance.
         - **Improved Lighting** - extending the existing Lambertian model with specular highlights.
     </div>
+    <ComparisonSlider
+        beforeSrc="/images/dirtjam/NoiseScreen.png"
+        beforeAlt="Playing with the noise parameters"
+        afterSrc="/images/dirtjam/OctaveScreen.png"
+        afterAlt="Playing with the octave parameters"
+        beforeLabel="Noise"
+        afterLabel="Octaves"
+    />
 </Split>
 
 ## Gallery
