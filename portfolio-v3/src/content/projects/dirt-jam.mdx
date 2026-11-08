@@ -36,7 +36,7 @@ For this project, I started with the provided reference code and a list of sugge
 
 <Split ratio="1:1">
     <div>
-        The visual direction started with Kankan's Way2Geeked album visualizer,
+        The visual direction started with Kankan's `Way2Geeked` album visualizer,
         particularly in combination with the song `Livefastdieslay ##4Kaine`.
         I was drawn to its noisy, high-contrast imagery, shifting between washed-out grays and saturated pinks.
         I initially considered recreating some of these visuals through shader effects,
@@ -67,7 +67,6 @@ For this project, I started with the provided reference code and a list of sugge
 
 ## Getting Familiar
 
-
 <Split ratio="1:1">
     <div>
         Before jumping into new features, I first wanted to understand what I was working with.
@@ -81,7 +80,7 @@ For this project, I started with the provided reference code and a list of sugge
     </div>
 </Split>
 
-<Split ratio="1:1" align="center">
+<Split ratio="1:1" reverse align="center">
     <div>
         The jam also provided a list of suggested features for participants looking for ideas.
         After considering which ones were most relevant to my plans,
@@ -101,6 +100,45 @@ For this project, I started with the provided reference code and a list of sugge
         afterLabel="Octaves"
     />
 </Split>
+
+## Building Atmosphere
+
+With the initial features implemented,
+I started bringing them together in an early scene mock-up.
+I experimented with different post-processing combinations,
+comparing screen-space and additive bloom before settling on the latter.
+
+`Distance fog` became a more involved exploration.
+Linear fog was relatively straightforward to implement,
+which gave me the confidence to push it further with exponential fog.
+That proved considerably more challenging and led me to investigate the underlying attenuation theory,
+eventually discovering `Beer's Law` through discussions in the jam community.
+
+<ComparisonSlider
+start={50}
+beforeSrc="/images/dirtjam/01NoFog.png"
+beforeAlt="Before the change"
+afterSrc="/images/dirtjam/02LightFog.png"
+afterAlt="After the change"
+beforeLabel="Fog off"
+afterLabel="Fog on"
+/>
+
+I also extended the terrain's existing Lambertian diffuse lighting with Blinn–Phong specular highlights,
+giving the surfaces a more pronounced response to light.
+
+<ComparisonSlider
+start={50}
+beforeSrc="/images/dirtjam/LambertScreen.png"
+beforeAlt="Before the change"
+afterSrc="/images/dirtjam/BlinnScreen.png"
+afterAlt="After the change"
+beforeLabel="Lambertian Diffuse"
+afterLabel="Blinn-Phong"
+/>
+
+Outside the implemented features, I researched other fog approaches,
+including animated and layered fog, through OGLDEV's Mastering Fog Rendering in OpenGL.
 
 ## Gallery
 
