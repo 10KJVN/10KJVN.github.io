@@ -27,6 +27,13 @@ const infoFields = {
     language: z.string().optional(),
     teamSize: z.string().optional(),
     role: z.string().optional(),
+
+    // Project Info panel (ProjectInfo.astro) tuning, all optional:
+    //   infoTitle: heading above the panel (default "Project info"; "" hides it)
+    //   infoHide:  fields to leave out for this project, e.g. ["engine", "language"]
+    infoTitle: z.string().optional(),
+    infoHide: z.array(z.enum(["year", "duration", "engine", "language", "teamSize", "role"])).default([]),
+
     links: z
         .array(z.object({ label: z.string(), url: z.string().url() }))
         .default([]),

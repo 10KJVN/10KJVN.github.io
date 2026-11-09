@@ -1,6 +1,10 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import ProjectLinks from "../../components/ProjectLinks.astro";
+import Img from "../../components/Img.astro";
+import HeroMeta from "../../components/HeroMeta.astro";
+import ProjectInfo from "../../components/ProjectInfo.astro";
+import TableOfContents from "../../components/TableOfContents.astro";
+import HeadingLinks from "../../components/HeadingLinks.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import BackToTop from "../../components/BackToTop.astro";
@@ -26,7 +30,7 @@ interface Props {
 }
 
 const { feature } = Astro.props;
-const { Content } = await render(feature);
+const { Content, headings } = await render(feature);
 
 const projects = await getCollection("projects");
 
@@ -71,43 +75,18 @@ const nav = await getPageNav("feature", feature.id);
                 {feature.data.title}
             </h1>
 
-            <!-- TODO: This might need refactoring into a component so i can optionally leave out certain metadata per unique feature case.-->
-            <div class="mt-8 flex flex-wrap gap-x-6 gap-y-2 border-y border-border py-4">
-            <span class="label">
-                {feature.data.year}
-            </span>
-
-                {feature.data.duration && (
-                        <span class="label">
-                            {feature.data.duration}
-                        </span>
-                )}
-
-                <!-- Octo and Radial don't need this for example, its sort of the child feature of a project tagged with Unity -->
-                {feature.data.engine && (
-                        <span class="label">
-                            {feature.data.engine}
-                        </span>
-                )}
-
-                {feature.data.language && (
-                        <span class="label">
-                            {feature.data.language}
-                        </span>
-                )}
-
-                {feature.data.teamSize && (
-                        <span class="label">
-                            {feature.data.teamSize}
-                        </span>
-                )}
-
-                {feature.data.role && (
-                        <span class="label">
-                            {feature.data.role}
-                        </span>
-                )}
-            </div>
+            <!-- Per feature: infoTitle / infoHide in the front matter (e.g. infoHide: ["engine"] for a child feature
+                 whose engine is obvious from its project). Year is left out: the eyebrow above already shows it. -->
+            <ProjectInfo
+                    class="mt-8"
+                    role={feature.data.role}
+                    teamSize={feature.data.teamSize}
+                    duration={feature.data.duration}
+                    engine={feature.data.engine}
+                    language={feature.data.language}
+                    title={feature.data.infoTitle}
+                    hide={[...feature.data.infoHide, "year"]}
+            />
 
             <p class="mt-4 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
                 {feature.data.description}
@@ -117,14 +96,20 @@ const nav = await getPageNav("feature", feature.id);
 
         <!-- Keep the title and summary readable while allowing the hero and MDX compositions to use the wider canvas. -->
         <figure class="mx-auto mt-14 max-w-[1440px] overflow-hidden rounded-frame border border-border crop-marks">
-            <img loading="lazy" decoding="async" src={feature.data.thumbnail} alt={feature.data.title} class="w-full" fetchpriority="high" />
+            <Img src={feature.data.thumbnail} alt={feature.data.title} class="w-full" loading="eager" fetchpriority="high" sizes="(min-width: 1440px) 1440px, 100vw" />
         </figure>
 
-        <div class="mdx-content mt-16">
-            <Content />
-        </div>
+        <!-- Tags left, links right. Both optional. -->
+        <HeroMeta class="mx-auto mt-3 max-w-[1440px]" tags={feature.data.tags} links={feature.data.links} />
 
-        <ProjectLinks links={feature.data.links} />
+        <div class="mt-16">
+            <TableOfContents headings={headings}>
+                <div class="mdx-content">
+                    <Content />
+                </div>
+            </TableOfContents>
+        </div>
+        <HeadingLinks />
 
         <PageEndNav left={nav.left} right={nav.right}>
             {parentProject ? (

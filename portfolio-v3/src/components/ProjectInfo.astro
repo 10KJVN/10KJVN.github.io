@@ -1,4 +1,17 @@
 ---
+/**
+ * Compact "who / how long / with what" panel for project and feature pages.
+ *
+ * Reads the project's front matter, so there is nothing extra to write. Per project you can:
+ *   infoTitle: "Jam entry"        change the heading ("" hides it)
+ *   infoHide: ["engine"]          leave fields out
+ * Empty fields are never rendered, and if nothing is left the whole panel disappears.
+ *
+ * Order and emphasis: Role leads (it answers "what did you do?"), then Team and Duration (context),
+ * then Engine and Language (tech), then Year.
+ */
+type FieldKey = "role" | "teamSize" | "duration" | "engine" | "language" | "year";
+
 interface Props {
     year?: number;
     duration?: string;
@@ -6,34 +19,50 @@ interface Props {
     language?: string;
     teamSize?: string;
     role?: string;
+    /** Heading above the panel. Default "Project info". Pass "" to hide it. */
+    title?: string;
+    /** Fields to leave out of this panel. */
+    hide?: FieldKey[];
+    class?: string;
 }
 
-interface Stat {
-    label: string;
-    value: string | number;
-}
+const { year, duration, engine, language, teamSize, role, title = "Project info", hide = [], class: className = "" } = Astro.props;
 
-const { year, duration, engine, language, teamSize, role} = Astro.props;
+interface Field { key: FieldKey; label: string; value: string }
 
-const stats: Stat[] = (
+// Ordered by importance. A comma in the value means several items, so the label goes plural.
+const plural = (label: string, value: string): string => (value.includes(",") ? `${label}s` : label);
+
+const fields: Field[] = (
     [
-        { label: "Year", value: year },
-        { label: "Duration", value: duration },
-        { label: "Engine", value: engine },
-        { label: "Language", value: language },
-        { label: "Team Size", value: teamSize },
-        { label: "Role", value: role },
-    ] as { label: string; value: string | number | undefined }[]
-).filter((s): s is Stat => Boolean(s.value));
+        { key: "role", label: "Role", value: role },
+        { key: "teamSize", label: "Team", value: teamSize },
+        { key: "duration", label: "Duration", value: duration },
+        { key: "engine", label: "Engine", value: engine },
+        { key: "language", label: "Language", value: language },
+        { key: "year", label: "Year", value: year !== undefined ? String(year) : undefined },
+    ] as { key: FieldKey; label: string; value: string | undefined }[]
+)
+    .filter((f): f is Field => Boolean(f.value) && !hide.includes(f.key))
+    .map((f) => ({ ...f, label: plural(f.label, f.value) }));
+
+const headingId = "project-info-title";
 ---
 
-<section class="border border-chrome rounded-2xl p-6 mb-8">
-    <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 mb-6">
-        {stats.map((s) => (
-                <div>
-                    <p class="text-xs uppercase tracking-wide text-text/80 font-mono mb-1">{s.label}</p>
-                    <p class="text-sm text-text/80 font-mono">{s.value}</p>
-                </div>
-        ))}
-    </div>
-</section>
+{fields.length > 0 && (
+        <section class={`rounded-frame border border-border bg-surface ${className}`} aria-labelledby={title ? headingId : undefined} aria-label={title ? undefined : "Project info"}>
+            {title && (
+                    <p id={headingId} class="label border-b border-border px-4 py-2.5">{title}</p>
+            )}
+            <!-- Cells overlap their neighbours' borders by 1px and the list clips the outer edge, so dividers
+                 stay clean however many fields there are and however they wrap. -->
+            <dl class="flex flex-wrap overflow-hidden">
+                {fields.map((field) => (
+                        <div class={`-ml-px -mt-px min-w-0 flex-1 border-l border-t border-border px-4 py-3 ${field.key === "role" ? "basis-56 sm:flex-[1.4]" : "basis-36"}`}>
+                            <dt class="label">{field.label}</dt>
+                            <dd class={`mt-1 ${field.key === "role" ? "text-base font-medium text-text" : "text-sm text-text/80"}`}>{field.value}</dd>
+                        </div>
+                ))}
+            </dl>
+        </section>
+)}

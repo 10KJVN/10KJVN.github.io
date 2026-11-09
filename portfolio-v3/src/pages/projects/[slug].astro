@@ -8,7 +8,11 @@
     */
 
 import Layout from "../../layouts/Layout.astro";
-import ProjectLinks from "../../components/ProjectLinks.astro";
+import Img from "../../components/Img.astro";
+import HeroMeta from "../../components/HeroMeta.astro";
+import ProjectInfo from "../../components/ProjectInfo.astro";
+import TableOfContents from "../../components/TableOfContents.astro";
+import HeadingLinks from "../../components/HeadingLinks.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import FeatureHighlightCard from "../../components/FeatureHighlightCard.astro";
 import { getCollection, render, type CollectionEntry } from "astro:content";
@@ -31,11 +35,7 @@ interface Props {
 
 const { project } = Astro.props;
 
-const { Content } = await render(project)
-
-const credit = [project.data.role, project.data.teamSize, project.data.duration]
-    .filter(Boolean)
-    .join(" / ");
+const { Content, headings } = await render(project)
 
 // Show every feature explicitly associated with this project, in its chosen order.
 // The route should not silently hide content when a project has more than two features.
@@ -74,25 +74,29 @@ const nav = await getPageNav("project", project.id);
             <p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
                 {project.data.description}
             </p>
-            <!--I don't mess with this below-->
-            {credit && <p class="label mt-6">{credit}</p>}
-
         </header>
 
-        <!-- Hero sits outside the header so it can use the wide canvas instead of the header's max-w-5xl. -->
+        <!-- Hero sits outside the header so it can use the wide canvas instead of the header's max-w-5xl.
+             It is the page's largest image, so it loads immediately. -->
         <figure class="mx-auto mt-14 max-w-[1440px] overflow-hidden rounded-frame border border-border crop-marks">
-            <img loading="lazy" decoding="async" src={project.data.thumbnail} alt={project.data.title} class="w-full" fetchpriority="high" />
+            <Img src={project.data.thumbnail} alt={project.data.title} class="w-full" loading="eager" fetchpriority="high" sizes="(min-width: 1440px) 1440px, 100vw" />
         </figure>
 
-        <div class="mt-6 flex flex-wrap justify-center gap-2">
-            {project.data.tags.map((tag) => (
-                    <span
-                            class="rounded-full border border-border px-3 py-1.5 font-mono text-[10px] uppercase tracking-wide text-muted"
-                    >
-                    {tag}
-                </span>
-            ))}
-        </div>
+        <!-- Tags left, links right. Both optional. -->
+        <HeroMeta class="mx-auto mt-3 max-w-[1440px]" tags={project.data.tags} links={project.data.links} />
+
+        <!-- Role / team / duration / engine / language. Per project: infoTitle, infoHide in the front matter.
+             Year is left out here because the eyebrow above the title already shows it. -->
+        <ProjectInfo
+                class="mx-auto mt-3 max-w-[1440px]"
+                role={project.data.role}
+                teamSize={project.data.teamSize}
+                duration={project.data.duration}
+                engine={project.data.engine}
+                language={project.data.language}
+                title={project.data.infoTitle}
+                hide={[...project.data.infoHide, "year"]}
+        />
 
         <!-- Feature Showcase -->
         {projectFeatures.length > 0 && (
@@ -129,11 +133,15 @@ const nav = await getPageNav("project", project.id);
 
 
         <!-- Project narrative is authored in MDX so each project can choose its own structure. -->
-        <div class="mdx-content mt-20">
-            <Content />
+        <!-- On long pages the article gets a persistent table of contents (see src/config.ts for the threshold). -->
+        <div class="mt-20">
+            <TableOfContents headings={headings}>
+                <div class="mdx-content">
+                    <Content />
+                </div>
+            </TableOfContents>
         </div>
-
-        <ProjectLinks links={project.data.links} />
+        <HeadingLinks />
 
         <PageEndNav left={nav.left} right={nav.right} />
 

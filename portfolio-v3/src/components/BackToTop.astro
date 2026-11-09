@@ -12,25 +12,32 @@
 </button>
 
 <script>
-    const btn = document.getElementById("back-to-top");
     const reduceMotion: MediaQueryList = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-    if (btn) {
-        const update = (): void => {
-            const show: boolean = window.scrollY > 600;
-            btn.classList.toggle("opacity-0", !show);
-            btn.classList.toggle("pointer-events-none", !show);
-            // `inert` removes the button from the tab order and the accessibility tree while it is hidden.
-            btn.toggleAttribute("inert", !show);
-        };
+    // The button is looked up each time: with page transitions it is a new element on every page (or absent).
+    const update = (): void => {
+        const btn = document.getElementById("back-to-top");
+        if (!btn) return;
+        const show: boolean = window.scrollY > 600;
+        btn.classList.toggle("opacity-0", !show);
+        btn.classList.toggle("pointer-events-none", !show);
+        // `inert` removes the button from the tab order and the accessibility tree while it is hidden.
+        btn.toggleAttribute("inert", !show);
+    };
 
-        window.addEventListener("scroll", update, { passive: true });
-        update();
-
+    const bind = (): void => {
+        const btn = document.getElementById("back-to-top");
+        if (!btn || btn.dataset.bound) return;
+        btn.dataset.bound = "true";
         btn.addEventListener("click", () => {
             window.scrollTo({ top: 0, behavior: reduceMotion.matches ? "auto" : "smooth" });
             // The button is about to disappear, so park keyboard focus on the page content.
             document.getElementById("main")?.focus({ preventScroll: true });
         });
-    }
+        update();
+    };
+
+    window.addEventListener("scroll", update, { passive: true });
+    bind();
+    document.addEventListener("astro:page-load", bind);
 </script>

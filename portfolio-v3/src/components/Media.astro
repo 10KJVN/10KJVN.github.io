@@ -1,16 +1,19 @@
 ---
+import Img from "./Img.astro";
+import { resolveImage, resolveVideo } from "../lib/media";
+
 interface Props {
     src: string;
     alt: string;
     caption?: string;
-    /** Opens the image in the shared lightbox. Off by default. */
+    /** Opens the image in the shared lightbox (with zoom and pan). Off by default. */
     lightbox?: boolean;
     /** Larger file for the lightbox. Falls back to `src`. */
     fullSrc?: string;
-    /** Pixel size of the file. Optional: lets the browser reserve the right space before the image loads. */
+    /** Pixel size of the file. Optional: read from the file at build time, so the space is reserved before it loads. */
     width?: number;
     height?: number;
-    /** Video only. Starts playback on load. Browsers require `muted` for this to work. */
+    /** Video only. Starts playback when scrolled into view. Browsers require `muted` for this to work. */
     autoPlay?: boolean;
     /** Video only. */
     muted?: boolean;
@@ -22,16 +25,26 @@ interface Props {
     aspect?: "16:9" | "4:3" | "1:1";
     /** CSS object-position for the crop, e.g. "center 20%". Empty means centered. */
     position?: string;
+    /** Rendered width hint so the browser can pick a smaller file. Default assumes a full-width image. */
+    sizes?: string;
+    /** Above-the-fold media: load immediately instead of lazily. */
+    priority?: boolean;
 }
 
 const {
     src, alt, caption, lightbox = false, fullSrc, width, height,
     autoPlay = false, muted = false, loop = false, controls,
-    aspect = null, position = "",
+    aspect = null, position = "", sizes, priority = false,
 } = Astro.props;
 
-const isVideo: boolean = /\.(mp4|webm|ogg)$/i.test(src);
-const showControls: boolean = controls ?? !autoPlay;
+/*
+ * A GIF with an optimised MP4 next to it (scripts/optimize-media.mjs) is shown as a silent looping clip.
+ * Videos only download once they are near the viewport; until then the poster stands in.
+ */
+const video = /\.(mp4|gif)$/i.test(src) ? await resolveVideo(src) : null;
+const lazyClip: boolean = Boolean(video && (video.fromGif || autoPlay));
+const clipLightbox: boolean = lightbox && Boolean(video?.fromGif);
+
 const aspectClasses: Record<"16:9" | "4:3" | "1:1", string> = {
     "16:9": "aspect-video",
     "4:3": "aspect-[4/3]",
@@ -41,33 +54,67 @@ const aspectClasses: Record<"16:9" | "4:3" | "1:1", string> = {
 const cropClass: string = aspect ? `${aspectClasses[aspect]} object-cover` : "";
 const cropStyle: string | undefined = position ? `object-position: ${position}` : undefined;
 const imageClass: string = `m-0 w-full rounded-frame border border-border ${cropClass}`;
+
+// Pixel size of whatever the lightbox will show, so it can size and zoom the image without waiting for it.
+const fullInfo = video ? { width: video.width, height: video.height } : await resolveImage(fullSrc ?? src);
+
+const videoAttrs = video
+    ? {
+        // The browser fetches `poster` immediately, whatever the scroll position. So it is applied by the
+        // script when the video nears the viewport (the size attributes below keep the space reserved).
+        "data-poster": video.poster,
+        width: width ?? video.width,
+        height: height ?? video.height,
+        muted: muted || lazyClip,
+        loop: loop || video.fromGif,
+        playsinline: true,
+        preload: "none",
+        "aria-label": alt,
+        class: imageClass,
+        style: cropStyle,
+        ...(lazyClip
+            ? { "data-lazy-video": "", "data-src": video.src }
+            : { src: video.src, controls: controls ?? true }),
+    }
+    : {};
 ---
 
 <figure class="my-8">
-    {isVideo ? (
-            <video
-                    src={src}
-                    width={width}
-                    height={height}
-                    autoplay={autoPlay}
-                    muted={muted}
-                    loop={loop}
-                    controls={showControls}
-                    playsinline
-                    preload="metadata"
-                    aria-label={alt}
-                    class={imageClass}
-            ></video>
+    {video ? (
+            clipLightbox ? (
+                    <button
+                            type="button"
+                            data-lightbox
+                            data-kind="video"
+                            data-full={video.src}
+                            data-w={fullInfo.width}
+                            data-h={fullInfo.height}
+                            data-caption={caption ?? ""}
+                            aria-label={`Enlarge animation: ${alt}`}
+                            class="lightbox-trigger"
+                    >
+                        <video {...videoAttrs}></video>
+                        <span aria-hidden="true" class="lightbox-trigger__badge">
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                            </svg>
+                        </span>
+                    </button>
+            ) : (
+                    <video {...videoAttrs}></video>
+            )
     ) : lightbox ? (
             <button
                     type="button"
                     data-lightbox
                     data-full={fullSrc ?? src}
+                    data-w={fullInfo.width}
+                    data-h={fullInfo.height}
                     data-caption={caption ?? ""}
                     aria-label={`Enlarge image: ${alt}`}
                     class="lightbox-trigger"
             >
-                <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" style={cropStyle} class={imageClass} />
+                <Img src={src} alt={alt} width={width} height={height} sizes={sizes} loading={priority ? "eager" : "lazy"} style={cropStyle} class={imageClass} />
                 <span
                         aria-hidden="true"
                         class="lightbox-trigger__badge"
@@ -78,7 +125,7 @@ const imageClass: string = `m-0 w-full rounded-frame border border-border ${crop
             </span>
             </button>
     ) : (
-            <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" style={cropStyle} class={imageClass} />
+            <Img src={src} alt={alt} width={width} height={height} sizes={sizes} loading={priority ? "eager" : "lazy"} style={cropStyle} class={imageClass} />
     )}
     {caption && (
             <figcaption class="label mt-2">
@@ -89,34 +136,112 @@ const imageClass: string = `m-0 w-full rounded-frame border border-border ${crop
 
 <script>
     const OPEN_CLASS = "lightbox-open";
+    const REDUCED: MediaQueryList = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    /* ------------------------------------------------------------------ *
+     * Lazy clips: GIF replacements and autoplay videos.
+     * Nothing is downloaded until the clip is near the viewport, and it pauses again once it leaves.
+     * Reduced motion: no autoplay. The poster is shown with a play control instead.
+     * ------------------------------------------------------------------ */
+    const clipObserver = new IntersectionObserver(
+        (entries) => {
+            for (const entry of entries) {
+                const clip = entry.target as HTMLVideoElement;
+                const lazyClip = clip.hasAttribute("data-lazy-video");
+                if (entry.isIntersecting) {
+                    // Posters load late too: browsers would otherwise fetch every poster on page load.
+                    if (clip.dataset.poster && !clip.getAttribute("poster")) clip.poster = clip.dataset.poster;
+                    if (!lazyClip) continue;
+                    if (!clip.getAttribute("src") && clip.dataset.src) clip.src = clip.dataset.src;
+                    if (!REDUCED.matches) clip.play().catch(() => { /* autoplay blocked: the poster stays */ });
+                } else if (lazyClip && !clip.paused) {
+                    clip.pause();
+                }
+            }
+        },
+        { rootMargin: "250px 0px" },
+    );
+
+    const watchClips = (): void => {
+        document.querySelectorAll<HTMLVideoElement>("video[data-poster], video[data-lazy-video]").forEach((clip) => {
+            if (REDUCED.matches && clip.hasAttribute("data-lazy-video")) clip.controls = true;
+            clipObserver.observe(clip);
+        });
+    };
+    watchClips();
+    document.addEventListener("astro:page-load", watchClips);
+
+    /* ------------------------------------------------------------------ *
+     * Lightbox with zoom and pan.
+     *   Mouse     wheel = zoom at cursor, drag = pan, double-click = zoom in / reset
+     *   Touch     pinch = zoom, drag = pan, double-tap = zoom in / reset
+     *   Keyboard  + / - zoom, 0 reset, arrow keys pan (when zoomed), Esc closes
+     *   Buttons   zoom out, zoom in, fit
+     * All listeners live on the dialog, which only exists while open, so none of this
+     * can touch normal page scrolling.
+     * ------------------------------------------------------------------ */
+    type Media = HTMLImageElement | HTMLVideoElement;
+
+    const BUTTON_STEP = 1.5; // zoom factor for the +/- buttons and keys
+    const PAN_STEP = 80; // px per arrow key press
+    const TAP_MS = 300; // double-tap window
 
     let dialog: HTMLDialogElement | null = null;
     let opener: HTMLElement | null = null;
+    let media: Media | null = null;
+
+    const view = { scale: 1, x: 0, y: 0 };
+    let natural = { w: 0, h: 0 }; // pixel size of the file shown
+    let fit = { w: 0, h: 0 }; // size it takes at "fit" (scale 1)
+    let base = { cx: 0, cy: 0 }; // centre of the media at scale 1, in viewport coordinates
+    let maxScale = 8;
+    let suppressCloseUntil = 0;
+
+    const clamp = (v: number, lo: number, hi: number): number => Math.min(hi, Math.max(lo, v));
+    const $ = <T extends Element>(selector: string): T => dialog!.querySelector<T>(selector)!;
 
     const build = (): HTMLDialogElement => {
         const el: HTMLDialogElement = document.createElement("dialog");
         el.className = "lightbox";
         el.setAttribute("aria-label", "Image viewer");
         el.innerHTML = `
+            <div class="lightbox__tools" role="toolbar" aria-label="Zoom controls">
+                <button type="button" class="lightbox__btn" data-zoom="out" aria-label="Zoom out">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14" /></svg>
+                </button>
+                <span class="lightbox__zoom label" data-zoom-label aria-live="polite">1.0×</span>
+                <button type="button" class="lightbox__btn" data-zoom="in" aria-label="Zoom in">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+                </button>
+                <button type="button" class="lightbox__btn" data-zoom="fit" aria-label="Reset zoom to fit">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3" /></svg>
+                </button>
+            </div>
             <button type="button" class="lightbox__close" aria-label="Close image viewer">
                 <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
             </button>
             <div class="lightbox__stage">
                 <figure class="lightbox__figure">
-                    <img class="lightbox__img" alt="" decoding="async" />
+                    <img class="lightbox__img lightbox__media" alt="" decoding="async" draggable="false" />
+                    <video class="lightbox__video lightbox__media" muted loop playsinline hidden></video>
                     <figcaption class="lightbox__caption label" hidden></figcaption>
                 </figure>
             </div>`;
 
-        // Anything except the image and caption closes it, including the close button.
+        // Anything except the media, caption and zoom controls closes it, including the close button.
         el.addEventListener("click", (event: MouseEvent) => {
+            if (performance.now() < suppressCloseUntil) return; // the click that ended a drag
             const target = event.target as Element;
-            if (!target.closest(".lightbox__img, .lightbox__caption")) el.close();
+            if (!target.closest(".lightbox__media, .lightbox__caption, .lightbox__tools")) el.close();
         });
 
         // Fires for the close button, Escape and backdrop clicks alike.
         el.addEventListener("close", () => {
             document.documentElement.classList.remove(OPEN_CLASS);
+            const clip = el.querySelector<HTMLVideoElement>(".lightbox__video");
+            clip?.pause();
+            clip?.removeAttribute("src");
+            media = null;
             opener?.focus();
             opener = null;
         });
@@ -125,41 +250,246 @@ const imageClass: string = `m-0 w-full rounded-frame border border-border ${crop
         return el;
     };
 
+    /** Size the media to fit the stage, then re-measure where its centre sits. */
+    const layout = (): void => {
+        if (!dialog || !media) return;
+        const stage = $<HTMLElement>(".lightbox__stage");
+        const style = getComputedStyle(stage);
+        const availW = stage.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+        const caption = $<HTMLElement>(".lightbox__caption");
+        const availH = stage.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom) - (caption.hidden ? 0 : 48);
+
+        media.style.transform = "none";
+        if (natural.w && natural.h) {
+            const f = Math.min(1, availW / natural.w, availH / natural.h);
+            fit = { w: natural.w * f, h: natural.h * f };
+            media.style.width = `${fit.w}px`;
+            media.style.height = `${fit.h}px`;
+            // Enough range to reach 1:1 pixels and then some, without runaway zoom.
+            maxScale = clamp((natural.w / fit.w) * 3, 4, 20);
+        } else {
+            media.style.width = "";
+            media.style.height = "";
+            fit = { w: media.offsetWidth, h: media.offsetHeight };
+            maxScale = 6;
+        }
+
+        const rect = media.getBoundingClientRect();
+        base = { cx: rect.left + rect.width / 2, cy: rect.top + rect.height / 2 };
+        render();
+    };
+
+    /** Keep the zoomed media covering the viewport (never drag it into empty space), then paint. */
+    const render = (): void => {
+        if (!dialog || !media) return;
+        const vw = dialog.clientWidth;
+        const vh = dialog.clientHeight;
+        const ws = fit.w * view.scale;
+        const hs = fit.h * view.scale;
+        view.x = ws <= vw ? 0 : clamp(view.x, vw - base.cx - ws / 2, ws / 2 - base.cx);
+        view.y = hs <= vh ? 0 : clamp(view.y, vh - base.cy - hs / 2, hs / 2 - base.cy);
+
+        media.style.transform = view.scale === 1 && view.x === 0 && view.y === 0
+            ? "none"
+            : `translate(${view.x}px, ${view.y}px) scale(${view.scale})`;
+        dialog.toggleAttribute("data-zoomed", view.scale > 1.001);
+        $<HTMLElement>("[data-zoom-label]").textContent = `${view.scale.toFixed(1)}×`;
+        $<HTMLButtonElement>("[data-zoom='out']").disabled = view.scale <= 1.001;
+        $<HTMLButtonElement>("[data-zoom='in']").disabled = view.scale >= maxScale - 0.001;
+        $<HTMLButtonElement>("[data-zoom='fit']").disabled = view.scale <= 1.001 && view.x === 0 && view.y === 0;
+    };
+
+    /** Zoom to `next`, keeping the point at (px, py) fixed on screen. */
+    const zoomAt = (next: number, px: number, py: number): void => {
+        const s0 = view.scale;
+        const s1 = clamp(next, 1, maxScale);
+        if (s1 === s0) return;
+        const ratio = s1 / s0;
+        view.x = (px - base.cx) - ((px - base.cx) - view.x) * ratio;
+        view.y = (py - base.cy) - ((py - base.cy) - view.y) * ratio;
+        view.scale = s1;
+        render();
+    };
+
+    const centre = (): { x: number; y: number } => ({ x: dialog!.clientWidth / 2, y: dialog!.clientHeight / 2 });
+
+    const reset = (): void => {
+        view.scale = 1;
+        view.x = 0;
+        view.y = 0;
+        render();
+    };
+
+    /** Fit <-> zoom toggle for double-click / double-tap: zoom in to at least 1:1 pixels. */
+    const toggleZoom = (px: number, py: number): void => {
+        if (view.scale > 1.05) reset();
+        else zoomAt(Math.min(maxScale, Math.max(2.5, natural.w ? natural.w / fit.w : 2.5)), px, py);
+    };
+
+    const bindInteractions = (el: HTMLDialogElement): void => {
+        const pointers = new Map<number, { x: number; y: number }>();
+        let pinch: { dist: number; scale: number } | null = null;
+        let downAt = { x: 0, y: 0 };
+        let dragged = false;
+        let lastTap = { t: 0, x: 0, y: 0 };
+
+        const spread = (): number => {
+            const [a, b] = [...pointers.values()];
+            return Math.hypot(a.x - b.x, a.y - b.y);
+        };
+
+        el.addEventListener("pointerdown", (event: PointerEvent) => {
+            const target = event.target as Element;
+            if (!target.closest(".lightbox__media") || (event.pointerType === "mouse" && event.button !== 0)) return;
+            (target as Element).setPointerCapture(event.pointerId);
+            pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+            downAt = { x: event.clientX, y: event.clientY };
+            dragged = false;
+            if (pointers.size === 2) pinch = { dist: spread(), scale: view.scale };
+        });
+
+        el.addEventListener("pointermove", (event: PointerEvent) => {
+            const prev = pointers.get(event.pointerId);
+            if (!prev) return;
+            const next = { x: event.clientX, y: event.clientY };
+            pointers.set(event.pointerId, next);
+
+            if (pointers.size === 2 && pinch) {
+                const [a, b] = [...pointers.values()];
+                zoomAt(pinch.scale * (spread() / pinch.dist), (a.x + b.x) / 2, (a.y + b.y) / 2);
+                dragged = true;
+            } else if (pointers.size === 1 && view.scale > 1.001) {
+                view.x += next.x - prev.x;
+                view.y += next.y - prev.y;
+                if (Math.hypot(next.x - downAt.x, next.y - downAt.y) > 4) {
+                    dragged = true;
+                    el.classList.add("lightbox--dragging");
+                }
+                render();
+            }
+        });
+
+        const end = (event: PointerEvent): void => {
+            if (!pointers.delete(event.pointerId)) return;
+            if (pointers.size < 2) pinch = null;
+            el.classList.remove("lightbox--dragging");
+            if (dragged) {
+                suppressCloseUntil = performance.now() + 80;
+                return;
+            }
+            // A tap or click, not a drag. Double-click / double-tap is detected here from pointer events
+            // (touch has no reliable dblclick, and this keeps mouse and touch behaving the same).
+            const now = performance.now();
+            if (now - lastTap.t < TAP_MS && Math.hypot(event.clientX - lastTap.x, event.clientY - lastTap.y) < 30) {
+                toggleZoom(event.clientX, event.clientY);
+                lastTap = { t: 0, x: 0, y: 0 };
+            } else {
+                lastTap = { t: now, x: event.clientX, y: event.clientY };
+            }
+        };
+        el.addEventListener("pointerup", end);
+        el.addEventListener("pointercancel", end);
+
+        // Wheel / trackpad pinch (which arrives as ctrl+wheel) zoom at the cursor.
+        el.addEventListener("wheel", (event: WheelEvent) => {
+            event.preventDefault();
+            const speed = event.ctrlKey ? 0.01 : 0.0018;
+            zoomAt(view.scale * Math.exp(-event.deltaY * speed), event.clientX, event.clientY);
+        }, { passive: false });
+
+        el.addEventListener("keydown", (event: KeyboardEvent) => {
+            if (event.ctrlKey || event.metaKey || event.altKey) return;
+            const c = centre();
+            switch (event.key) {
+                case "+": case "=": event.preventDefault(); zoomAt(view.scale * BUTTON_STEP, c.x, c.y); break;
+                case "-": case "_": event.preventDefault(); zoomAt(view.scale / BUTTON_STEP, c.x, c.y); break;
+                case "0": event.preventDefault(); reset(); break;
+                case "ArrowLeft": if (view.scale > 1.001) { event.preventDefault(); view.x += PAN_STEP; render(); } break;
+                case "ArrowRight": if (view.scale > 1.001) { event.preventDefault(); view.x -= PAN_STEP; render(); } break;
+                case "ArrowUp": if (view.scale > 1.001) { event.preventDefault(); view.y += PAN_STEP; render(); } break;
+                case "ArrowDown": if (view.scale > 1.001) { event.preventDefault(); view.y -= PAN_STEP; render(); } break;
+            }
+        });
+
+        el.querySelector("[data-zoom='in']")?.addEventListener("click", () => { const c = centre(); zoomAt(view.scale * BUTTON_STEP, c.x, c.y); });
+        el.querySelector("[data-zoom='out']")?.addEventListener("click", () => { const c = centre(); zoomAt(view.scale / BUTTON_STEP, c.x, c.y); });
+        el.querySelector("[data-zoom='fit']")?.addEventListener("click", reset);
+
+        window.addEventListener("resize", () => { if (el.open) layout(); });
+    };
+
     const open = (trigger: HTMLElement): void => {
-        // Rebuild if the node was removed (e.g. by a future page-swap).
-        if (!dialog || !dialog.isConnected) dialog = build();
+        // Rebuild if the node was removed (e.g. by a page swap).
+        if (!dialog || !dialog.isConnected) {
+            dialog = build();
+            bindInteractions(dialog);
+        }
 
-        const img = dialog.querySelector<HTMLImageElement>(".lightbox__img");
-        const caption = dialog.querySelector<HTMLElement>(".lightbox__caption");
-        const thumb = trigger.querySelector<HTMLImageElement>("img");
-        if (!img || !caption || !thumb) return;
-
-        const thumbUrl: string = thumb.currentSrc || thumb.src;
-        const fullUrl: string = trigger.dataset.full
-            ? new URL(trigger.dataset.full, window.location.href).href
-            : thumbUrl;
+        const isClip = trigger.dataset.kind === "video";
+        const img = $<HTMLImageElement>(".lightbox__img");
+        const clip = $<HTMLVideoElement>(".lightbox__video");
+        const caption = $<HTMLElement>(".lightbox__caption");
+        const thumb = trigger.querySelector<HTMLImageElement | HTMLVideoElement>(isClip ? "video" : "img");
+        if (!thumb) return;
 
         opener = trigger;
-        img.alt = thumb.alt;
-        img.src = thumbUrl; // already cached, so it appears instantly
         caption.textContent = trigger.dataset.caption ?? "";
         caption.hidden = !caption.textContent;
+        view.scale = 1;
+        view.x = 0;
+        view.y = 0;
 
-        // If a larger file was provided, swap it in once it has loaded.
-        if (fullUrl !== thumbUrl) {
-            const preload = new Image();
-            preload.onload = () => {
-                if (opener === trigger && dialog?.open) img.src = fullUrl;
+        // The size comes from the build when known; otherwise from the loaded thumbnail.
+        const known = { w: Number(trigger.dataset.w) || 0, h: Number(trigger.dataset.h) || 0 };
+
+        if (isClip) {
+            img.hidden = true;
+            img.removeAttribute("src");
+            clip.hidden = false;
+            media = clip;
+            const v = thumb as HTMLVideoElement;
+            natural = known.w ? known : { w: v.videoWidth, h: v.videoHeight };
+            clip.addEventListener("loadedmetadata", () => {
+                if (!natural.w) { natural = { w: clip.videoWidth, h: clip.videoHeight }; layout(); }
+            }, { once: true });
+            clip.src = trigger.dataset.full ?? "";
+            clip.play().catch(() => { /* the clip stays on its first frame */ });
+        } else {
+            clip.hidden = true;
+            img.hidden = false;
+            media = img;
+            const t = thumb as HTMLImageElement;
+            const thumbUrl: string = t.currentSrc || t.src; // already cached, so it appears instantly
+            const fullUrl: string = trigger.dataset.full
+                ? new URL(trigger.dataset.full, window.location.href).href
+                : thumbUrl;
+            natural = known.w ? known : { w: t.naturalWidth, h: t.naturalHeight };
+            img.alt = t.alt;
+            img.src = thumbUrl;
+            img.onload = () => {
+                if (!natural.w && img.naturalWidth) { natural = { w: img.naturalWidth, h: img.naturalHeight }; layout(); }
             };
-            preload.src = fullUrl;
+
+            // Swap in the full-resolution file once it has loaded (the box is already sized, so nothing jumps).
+            if (fullUrl !== thumbUrl) {
+                const preload = new Image();
+                preload.onload = () => {
+                    if (opener === trigger && dialog?.open) img.src = fullUrl;
+                };
+                preload.src = fullUrl;
+            }
         }
 
         document.documentElement.classList.add(OPEN_CLASS);
         dialog.showModal();
+        layout();
     };
 
     document.addEventListener("click", (event: MouseEvent) => {
         const trigger = (event.target as Element).closest<HTMLElement>("[data-lightbox]");
         if (trigger) open(trigger);
     });
+
+    // With view transitions, never carry an open viewer across a navigation.
+    document.addEventListener("astro:before-swap", () => dialog?.close());
 </script>

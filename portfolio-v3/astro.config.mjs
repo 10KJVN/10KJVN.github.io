@@ -11,5 +11,11 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
+  // Code blocks stay dark in both site themes; the default theme's comment colour (#6A737D) fails WCAG contrast
+  // on its own background, this one passes.
+  markdown: {
+    shikiConfig: { theme: "github-dark-high-contrast" },
+  },
+
   integrations: [mdx()]
 });

@@ -1,4 +1,6 @@
 ---
+import Img from "./Img.astro";
+
 interface Props {
     title: string;
     description: string;
@@ -23,12 +25,11 @@ const sizes = {
         class="group block overflow-hidden rounded-frame border border-border bg-surface transition duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_0_32px_var(--glow)]"
 >
     <div class={`relative overflow-hidden ${sizes.image}`}>
-        <img
+        <Img
                 src={image}
                 alt=""
                 class="w-full h-full object-cover transition duration-300 group-hover:scale-105"
-                loading="lazy"
-                decoding="async"
+                sizes="(min-width: 1024px) 50vw, 100vw"
         />
 
         {index != null && (<span class="absolute top-3 right-3 font-mono text-[10px] uppercase tracking-wide text-text bg-surface/80 px-2 py-0.5 rounded-full border border-border">

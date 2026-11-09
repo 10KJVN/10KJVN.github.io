@@ -1,5 +1,9 @@
 ---
+import Img from "./Img.astro";
+
 interface Props {
+    /** Above-the-fold cards load their image immediately; the rest are lazy. */
+    priority?: boolean;
     title: string;
     description: string;
     image: string;
@@ -11,6 +15,7 @@ interface Props {
 }
 
 const {
+    priority = false,
     title,
     description,
     image,
@@ -44,16 +49,18 @@ const sizes = {
     } ${className}`}
 >
     <div class="aspect-video overflow-hidden">
-        <img src={image}
+        <Img src={image}
              alt=""
              class="w-full h-full object-cover transition duration-300 group-hover:scale-105"
-             loading="lazy"
-             decoding="async"
+             loading={priority ? "eager" : "lazy"}
+             fetchpriority={priority ? "high" : undefined}
+             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
         />
     </div>
 
   <div class="p-5">
-    <h3 class={`${sizes.title} font-semibold mb-2`}>{title}</h3>
+    <!-- h2: cards sit directly under the page's h1, so h3 would skip a level. -->
+    <h2 class={`${sizes.title} font-semibold mb-2`}>{title}</h2>
       <p class="opacity-70 text-sm leading-relaxed mb-3">{description}</p>
 
       {tags.length > 0 && (

@@ -202,6 +202,8 @@ const pad = (n: number): string => String(n).padStart(2, "0");
         private interacting = false; // focus inside, or a finger down
         private visible = true;
         private lockUntil = 0; // scroll events before this time come from go(), not the visitor
+        private abort = new AbortController(); // removes the document-level listeners in destroy()
+        private observers: (IntersectionObserver | ResizeObserver)[] = [];
 
         constructor(private root: HTMLElement) {
             this.track = root.querySelector<HTMLElement>("[data-track]")!;
@@ -240,9 +242,11 @@ const pad = (n: number): string => String(n).padStart(2, "0");
             });
 
             // Keep the slide the visitor sees in place if the width changes (rotate, resize).
-            new ResizeObserver(() => {
+            const resize = new ResizeObserver(() => {
                 this.track.scrollTo({ left: this.index * this.track.clientWidth, behavior: "auto" });
-            }).observe(this.track);
+            });
+            resize.observe(this.track);
+            this.observers.push(resize);
 
             if (!this.autoplay) return;
 
@@ -263,12 +267,23 @@ const pad = (n: number): string => String(n).padStart(2, "0");
                 window.setTimeout(() => { this.interacting = false; this.updatePlayback(); }, this.interval);
             }, { passive: true });
 
-            new IntersectionObserver(([entry]) => {
+            const visibility = new IntersectionObserver(([entry]) => {
                 this.visible = entry.isIntersecting;
                 this.updatePlayback();
-            }, { threshold: 0.4 }).observe(this.root);
-            document.addEventListener("visibilitychange", () => this.updatePlayback());
-            REDUCED.addEventListener("change", () => this.updatePlayback());
+            }, { threshold: 0.4 });
+            visibility.observe(this.root);
+            this.observers.push(visibility);
+            const { signal } = this.abort;
+            document.addEventListener("visibilitychange", () => this.updatePlayback(), { signal });
+            REDUCED.addEventListener("change", () => this.updatePlayback(), { signal });
+        }
+
+        /** Stop everything: used when a page transition removes this carousel. */
+        destroy(): void {
+            window.clearInterval(this.timer);
+            this.timer = undefined;
+            this.observers.forEach((o) => o.disconnect());
+            this.abort.abort();
         }
 
         /** Move to a slide. Wraps around at both ends. */
@@ -319,5 +334,17 @@ const pad = (n: number): string => String(n).padStart(2, "0");
         }
     }
 
-    document.querySelectorAll<HTMLElement>("[data-carousel]").forEach((el) => new CarouselController(el));
+    const instances: CarouselController[] = [];
+    const initAll = (): void => {
+        document.querySelectorAll<HTMLElement>("[data-carousel]").forEach((el) => {
+            if (el.dataset.ready) return;
+            el.dataset.ready = "true";
+            instances.push(new CarouselController(el));
+        });
+    };
+
+    initAll();
+    // Page transitions: start carousels on the new page, and stop the old page's timers before it goes.
+    document.addEventListener("astro:page-load", initAll);
+    document.addEventListener("astro:before-swap", () => instances.splice(0).forEach((c) => c.destroy()));
 </script>

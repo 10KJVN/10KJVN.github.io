@@ -27,10 +27,13 @@ const button =
      * because filtering only changes the visibility of existing cards.
      */
 
+    const init = (): void => {
     const buttons = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
     const cards = document.querySelectorAll<HTMLElement>("#projects-grid > a");
 
     buttons.forEach((btn: HTMLButtonElement) => {
+        if (btn.dataset.bound) return;
+        btn.dataset.bound = "true";
         btn.addEventListener("click", () => {
             const selected: string = btn.dataset.tag ?? "all";
 
@@ -56,4 +59,9 @@ const button =
             }
         });
     });
+    };
+
+    init();
+    // Re-bind after a page transition (a new grid and new buttons).
+    document.addEventListener("astro:page-load", init);
 </script>

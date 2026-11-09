@@ -1,5 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
+
+/* Self-hosted fonts (Latin subset, variable weights). Files are in public/fonts and preloaded in Layout.astro,
+   so there is no third-party request and no render-blocking @import chain. */
+@font-face {
+  font-family: "Geist";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/fonts/geist-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url("/fonts/jetbrains-mono-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Oswald";
+  font-style: normal;
+  font-weight: 500 700;
+  font-display: swap;
+  src: url("/fonts/oswald-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
@@ -79,7 +107,7 @@
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-image: url("/images/white-noise.png");
+  background-image: url("/images/white-noise.webp");
   background-size: 256px;
   opacity: 0.045;
 }
@@ -333,7 +361,9 @@
 
   /* Never taller or wider than the screen, whatever the file's pixel size.
      3rem reserves room for the caption. */
-  .lightbox__img {
+  /* The viewer script normally sets an exact pixel size (fit to the screen); these limits are the
+     fallback for files whose size isn't known yet. */
+  .lightbox__media {
     display: block;
     width: auto;
     height: auto;
@@ -341,10 +371,58 @@
     max-height: calc(100vh - 2 * var(--lightbox-pad) - 3rem);
     max-height: calc(100dvh - 2 * var(--lightbox-pad) - 3rem);
     object-fit: contain;
-    cursor: default;
+    cursor: zoom-in;
+    touch-action: none; /* the viewer owns pinch/drag here. The dialog only exists while open, so page scrolling is untouched. */
+    user-select: none;
+    -webkit-user-select: none;
+    transform-origin: center;
+    will-change: transform;
+  }
+  .lightbox[data-zoomed] .lightbox__media { cursor: grab; }
+  .lightbox--dragging .lightbox__media { cursor: grabbing; }
+  .lightbox[data-zoomed] .lightbox__caption { opacity: 0; }
+  .lightbox__caption { transition: opacity 0.2s ease; }
+
+  /* Zoom controls: a compact cluster to the left of the close button. */
+  .lightbox__tools {
+    position: absolute;
+    top: max(1rem, env(safe-area-inset-top));
+    right: calc(max(1rem, env(safe-area-inset-right)) + 3.5rem);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    height: 2.75rem;
+    padding: 0 0.375rem;
+    border: 1px solid var(--color-border-strong);
+    border-radius: 9999px;
+    background: var(--color-surface);
+  }
+
+  .lightbox__zoom {
+    min-width: 2.75rem;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.08em;
+  }
+
+  .lightbox__btn {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    border-radius: 9999px;
+    color: var(--color-text);
+    cursor: pointer;
+    transition: color 0.2s ease, background-color 0.2s ease;
+  }
+  .lightbox__btn:disabled { opacity: 0.35; cursor: default; }
+  @media (hover: hover) {
+    .lightbox__btn:not(:disabled):hover { color: var(--color-accent); background: var(--color-surface-alt); }
   }
 
   .lightbox__close {
+    z-index: 1;
     position: absolute;
     top: max(1rem, env(safe-area-inset-top));
     right: max(1rem, env(safe-area-inset-right));
@@ -437,9 +515,26 @@
 
 html.lightbox-open { overflow: hidden; }
 
+/* Page transitions (only present when enabled in src/config.ts). A plain cross-fade: the length comes from
+   --vt-duration on <html>. Reduced-motion visitors get no animation (Astro and the rule at the bottom skip it). */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--vt-duration, 180ms);
+  animation-timing-function: ease-out;
+}
+
+/* Anchor jumps (TOC, copied section links) land below the fixed navbar instead of under it. */
+.mdx-content :is(h2, h3)[id] { scroll-margin-top: 6rem; }
+
 @keyframes lightbox-in { from { opacity: 0; } to { opacity: 1; } }
 
 @media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+
   *,
   *::before,
   *::after {

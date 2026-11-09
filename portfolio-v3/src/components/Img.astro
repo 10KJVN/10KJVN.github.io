@@ -1,0 +1,40 @@
+---
+/**
+ * The one place that turns an image path into markup: a <picture> with WebP sources when the optimised
+ * variants exist (see scripts/optimize-media.mjs), a plain <img> otherwise. Also sets width/height from
+ * the real file so the browser reserves the space (no layout shift).
+ */
+import { resolveImage } from "../lib/media";
+
+interface Props {
+    src: string;
+    alt: string;
+    class?: string;
+    style?: string;
+    /** Above-the-fold images (the hero) should pass "eager". */
+    loading?: "lazy" | "eager";
+    fetchpriority?: "high" | "low" | "auto";
+    /** How wide the image is rendered, for the browser to pick a file. Default assumes a full-width image. */
+    sizes?: string;
+    width?: number;
+    height?: number;
+}
+
+const {
+    src, alt, class: className, style, loading = "lazy", fetchpriority,
+    sizes = "100vw", width, height,
+} = Astro.props;
+
+const image = await resolveImage(src);
+const w = width ?? image.width;
+const h = height ?? image.height;
+---
+
+{image.webpSrcset ? (
+        <picture>
+            <source type="image/webp" srcset={image.webpSrcset} sizes={sizes} />
+            <img src={image.src} alt={alt} width={w} height={h} loading={loading} decoding="async" fetchpriority={fetchpriority} style={style} class={className} />
+        </picture>
+) : (
+        <img src={image.src} alt={alt} width={w} height={h} loading={loading} decoding="async" fetchpriority={fetchpriority} style={style} class={className} />
+)}

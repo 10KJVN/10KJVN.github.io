@@ -1,0 +1,47 @@
+---
+/**
+ * The strip directly under a project/feature hero image: tags on the left, links on the right.
+ *   - Up to `maxTags` tags (default 5).
+ *   - Either side can be empty: it simply isn't rendered, and links stay on the right.
+ *   - Below md the two sides stack, tags first.
+ */
+import ProjectLinks from "./ProjectLinks.astro";
+
+interface LinkItem {
+    label: string;
+    url: string;
+}
+
+interface Props {
+    tags?: string[];
+    links?: LinkItem[];
+    maxTags?: number;
+    class?: string;
+}
+
+const { tags = [], links = [], maxTags = 5, class: className = "" } = Astro.props;
+const shownTags: string[] = tags.slice(0, maxTags);
+const show: boolean = shownTags.length > 0 || links.length > 0;
+---
+
+{show && (
+        <div class={`flex flex-col gap-4 rounded-frame border border-border bg-surface px-4 py-3.5 md:flex-row md:items-start md:justify-between md:gap-8 ${className}`}>
+            {shownTags.length > 0 && (
+                    <div class="min-w-0">
+                        <p class="label mb-2">Tags</p>
+                        <ul class="flex flex-wrap gap-2">
+                            {shownTags.map((tag) => (
+                                    <li class="rounded-full border border-border px-3 py-1.5 font-mono text-[10px] uppercase tracking-wide text-muted">{tag}</li>
+                            ))}
+                        </ul>
+                    </div>
+            )}
+
+            {links.length > 0 && (
+                    <div class="md:ml-auto md:max-w-[55%] md:text-right">
+                        <p class="label mb-2">Links</p>
+                        <ProjectLinks links={links} variant="compact" />
+                    </div>
+            )}
+        </div>
+)}
