@@ -1,0 +1,323 @@
+---
+/**
+ * Compact image carousel for a handful of related images.
+ *
+ *   <Carousel
+ *       aspect="16:9"
+ *       slides={[
+ *           { src: "/images/x/a.png", alt: "…", caption: "…" },
+ *           { src: "/images/x/b.png", alt: "…", fullSrc: "/images/x/b-large.png" },
+ *       ]}
+ *   />
+ *
+ * Each slide is a regular <Media>, so lightbox, borders, captions and cropping behave exactly
+ * like everywhere else. Built on native scroll-snap: touch swipe, keyboard and reduced-motion
+ * come from the browser, the script only adds buttons, indicators and autoplay.
+ */
+import Media from "./Media.astro";
+
+interface Slide {
+    src: string;
+    alt: string;
+    caption?: string;
+    /** Larger file for the lightbox. Falls back to `src`. */
+    fullSrc?: string;
+}
+
+interface Props {
+    slides: Slide[];
+    /** Every slide is cropped to this ratio, so the carousel never changes height. */
+    aspect?: "16:9" | "4:3" | "1:1";
+    /** CSS object-position for the crop, applied to every slide. */
+    position?: string;
+    /** Opens slides in the shared lightbox. On by default. */
+    lightbox?: boolean;
+    /** Set false to turn autoplay off completely (no pause button is shown either). */
+    autoplay?: boolean;
+    /** Milliseconds each slide stays up during autoplay. */
+    interval?: number;
+    /** Accessible name for the whole carousel. */
+    label?: string;
+}
+
+const {
+    slides,
+    aspect = "16:9",
+    position = "",
+    lightbox = true,
+    autoplay = true,
+    interval = 5000,
+    label = "Image carousel",
+} = Astro.props;
+
+const count: number = slides.length;
+const multiple: boolean = count > 1;
+const canAutoplay: boolean = autoplay && multiple;
+const pad = (n: number): string => String(n).padStart(2, "0");
+---
+
+<div
+        class="carousel my-8"
+        data-carousel
+        data-autoplay={canAutoplay ? "true" : "false"}
+        data-interval={interval}
+        role="group"
+        aria-roledescription="carousel"
+        aria-label={label}
+>
+    <div
+            class="carousel__track flex overflow-x-auto"
+            data-track
+            tabindex={multiple ? 0 : undefined}
+            aria-label={`${label}, use the arrow keys to change slide`}
+    >
+        {slides.map((slide, i) => (
+                <div
+                        class="carousel__slide min-w-0 flex-[0_0_100%] [&>figure]:my-0"
+                        data-slide
+                        role="group"
+                        aria-roledescription="slide"
+                        aria-label={`${i + 1} of ${count}`}
+                >
+                    <Media
+                            src={slide.src}
+                            alt={slide.alt}
+                            caption={slide.caption}
+                            fullSrc={slide.fullSrc}
+                            lightbox={lightbox}
+                            aspect={aspect}
+                            position={position}
+                    />
+                </div>
+        ))}
+    </div>
+
+    {multiple && (
+            <div class="mt-3 flex items-center justify-between gap-3">
+                <button type="button" class="carousel__btn" data-prev aria-label="Previous slide">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
+                </button>
+
+                <div class="flex min-w-0 items-center gap-4">
+                    <p class="label tabular-nums" data-counter aria-live="off">
+                        <span data-current>{pad(1)}</span> / {pad(count)}
+                    </p>
+                    <div class="flex items-center">
+                        {slides.map((_, i) => (
+                                <button
+                                        type="button"
+                                        class="carousel__dot"
+                                        data-dot={i}
+                                        aria-label={`Go to slide ${i + 1}`}
+                                        aria-current={i === 0 ? "true" : undefined}
+                                >
+                                    <span></span>
+                                </button>
+                        ))}
+                    </div>
+                    {canAutoplay && (
+                            <button type="button" class="carousel__btn carousel__btn--small" data-toggle aria-label="Pause autoplay" data-playing="true">
+                                <svg data-icon-pause viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" /></svg>
+                                <svg data-icon-play viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true" hidden><path d="M8 5l11 7-11 7z" /></svg>
+                            </button>
+                    )}
+                </div>
+
+                <button type="button" class="carousel__btn" data-next aria-label="Next slide">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+                </button>
+            </div>
+    )}
+</div>
+
+<style>
+    .carousel__track {
+        scroll-snap-type: x mandatory;
+        overscroll-behavior-x: contain; /* a swipe at the end doesn't trigger browser back/forward */
+        scrollbar-width: none;
+        border-radius: var(--radius-frame);
+    }
+    .carousel__track::-webkit-scrollbar { display: none; }
+    .carousel__slide { scroll-snap-align: start; scroll-snap-stop: always; }
+
+    .carousel__btn {
+        display: grid;
+        flex: none;
+        width: 2.25rem;
+        height: 2.25rem;
+        place-items: center;
+        border: 1px solid var(--color-border-strong);
+        border-radius: 9999px;
+        background: var(--color-surface);
+        color: var(--color-text);
+        cursor: pointer;
+        transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .carousel__btn--small { width: 1.75rem; height: 1.75rem; }
+    @media (hover: hover) {
+        .carousel__btn:hover { color: var(--color-accent); border-color: var(--color-accent); }
+    }
+
+    /* The button is the (24px) hit area, the span is the visible dot. */
+    .carousel__dot {
+        display: grid;
+        width: 1.5rem;
+        height: 1.5rem;
+        place-items: center;
+        cursor: pointer;
+    }
+    .carousel__dot span {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 9999px;
+        background: var(--color-border-strong);
+        transition: background-color 0.2s ease, width 0.2s ease;
+    }
+    .carousel__dot[aria-current="true"] span { width: 1.25rem; background: var(--color-accent); }
+    @media (hover: hover) {
+        .carousel__dot:not([aria-current="true"]):hover span { background: var(--color-muted); }
+    }
+
+    /* Very narrow phones: drop the counter, the dots already show position. */
+    @media (max-width: 22rem) {
+        [data-counter] { display: none; }
+    }
+</style>
+
+<script>
+    const REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    class CarouselController {
+        private track: HTMLElement;
+        private slides: HTMLElement[];
+        private dots: HTMLElement[];
+        private current: HTMLElement | null;
+        private toggle: HTMLElement | null;
+        private index = 0;
+        private timer: number | undefined;
+        private autoplay: boolean;
+        private interval: number;
+        private userPaused = false; // the pause button
+        private hovering = false;
+        private interacting = false; // focus inside, or a finger down
+        private visible = true;
+        private lockUntil = 0; // scroll events before this time come from go(), not the visitor
+
+        constructor(private root: HTMLElement) {
+            this.track = root.querySelector<HTMLElement>("[data-track]")!;
+            this.slides = [...root.querySelectorAll<HTMLElement>("[data-slide]")];
+            this.dots = [...root.querySelectorAll<HTMLElement>("[data-dot]")];
+            this.current = root.querySelector<HTMLElement>("[data-current]");
+            this.toggle = root.querySelector<HTMLElement>("[data-toggle]");
+            this.autoplay = root.dataset.autoplay === "true";
+            this.interval = Math.max(1500, Number(root.dataset.interval) || 5000);
+
+            if (this.slides.length < 2) return;
+            this.bind();
+            this.sync();
+            this.updatePlayback();
+        }
+
+        private bind(): void {
+            // Native scroll-snap drives swipes, wheel and keyboard; we just follow the position.
+            let frame = 0;
+            this.track.addEventListener("scroll", () => {
+                cancelAnimationFrame(frame);
+                frame = requestAnimationFrame(() => {
+                    if (performance.now() < this.lockUntil) return; // our own smooth scroll is in flight
+                    const i = Math.round(this.track.scrollLeft / this.track.clientWidth);
+                    if (i !== this.index) { this.index = i; this.sync(); }
+                });
+            }, { passive: true });
+
+            this.root.querySelector("[data-prev]")?.addEventListener("click", () => this.go(this.index - 1));
+            this.root.querySelector("[data-next]")?.addEventListener("click", () => this.go(this.index + 1));
+            this.dots.forEach((dot, i) => dot.addEventListener("click", () => this.go(i)));
+
+            this.track.addEventListener("keydown", (e: KeyboardEvent) => {
+                if (e.key === "ArrowLeft") { e.preventDefault(); this.go(this.index - 1); }
+                if (e.key === "ArrowRight") { e.preventDefault(); this.go(this.index + 1); }
+            });
+
+            // Keep the slide the visitor sees in place if the width changes (rotate, resize).
+            new ResizeObserver(() => {
+                this.track.scrollTo({ left: this.index * this.track.clientWidth, behavior: "auto" });
+            }).observe(this.track);
+
+            if (!this.autoplay) return;
+
+            this.toggle?.addEventListener("click", () => {
+                this.userPaused = !this.userPaused;
+                this.updatePlayback();
+            });
+            this.root.addEventListener("mouseenter", () => { this.hovering = true; this.updatePlayback(); });
+            this.root.addEventListener("mouseleave", () => { this.hovering = false; this.updatePlayback(); });
+            this.root.addEventListener("focusin", () => { this.interacting = true; this.updatePlayback(); });
+            this.root.addEventListener("focusout", (e: FocusEvent) => {
+                if (!this.root.contains(e.relatedTarget as Node | null)) { this.interacting = false; this.updatePlayback(); }
+            });
+            // A finger on the carousel pauses it; a tap or swipe is "interaction", so it stays
+            // paused until the visitor leaves (pointerleave doesn't fire for touch, so use a delay).
+            this.root.addEventListener("touchstart", () => { this.interacting = true; this.updatePlayback(); }, { passive: true });
+            this.root.addEventListener("touchend", () => {
+                window.setTimeout(() => { this.interacting = false; this.updatePlayback(); }, this.interval);
+            }, { passive: true });
+
+            new IntersectionObserver(([entry]) => {
+                this.visible = entry.isIntersecting;
+                this.updatePlayback();
+            }, { threshold: 0.4 }).observe(this.root);
+            document.addEventListener("visibilitychange", () => this.updatePlayback());
+            REDUCED.addEventListener("change", () => this.updatePlayback());
+        }
+
+        /** Move to a slide. Wraps around at both ends. */
+        private go(target: number, smooth = true): void {
+            const count = this.slides.length;
+            const next = (target + count) % count;
+            const wrapped = Math.abs(next - this.index) > 1 && count > 2;
+            const animate = smooth && !REDUCED.matches && !wrapped;
+            this.lockUntil = animate ? performance.now() + 700 : 0;
+            this.track.scrollTo({ left: next * this.track.clientWidth, behavior: animate ? "smooth" : "auto" });
+            this.index = next;
+            this.sync();
+            if (this.autoplay) this.updatePlayback(); // restart the timer so a manual change gets a full interval
+        }
+
+        /** Indicators + accessibility state. */
+        private sync(): void {
+            this.slides.forEach((slide, i) => {
+                const active = i === this.index;
+                // Off-screen slides can't be tabbed into (a focused off-screen button would scroll the track).
+                slide.toggleAttribute("inert", !active);
+            });
+            this.dots.forEach((dot, i) => {
+                if (i === this.index) dot.setAttribute("aria-current", "true");
+                else dot.removeAttribute("aria-current");
+            });
+            if (this.current) this.current.textContent = String(this.index + 1).padStart(2, "0");
+        }
+
+        private updatePlayback(): void {
+            window.clearInterval(this.timer);
+            this.timer = undefined;
+
+            const playing = this.autoplay && !REDUCED.matches && !this.userPaused;
+            if (this.toggle) {
+                this.toggle.dataset.playing = String(playing);
+                this.toggle.setAttribute("aria-label", playing ? "Pause autoplay" : "Start autoplay");
+                this.toggle.querySelector("[data-icon-pause]")?.toggleAttribute("hidden", !playing);
+                this.toggle.querySelector("[data-icon-play]")?.toggleAttribute("hidden", playing);
+                // Reduced motion removes autoplay entirely, so the control would do nothing.
+                this.toggle.toggleAttribute("hidden", REDUCED.matches);
+            }
+            // Announce slide changes only while nothing is moving them on their own.
+            this.root.querySelector("[data-counter]")?.setAttribute("aria-live", playing ? "off" : "polite");
+
+            const running = playing && !this.hovering && !this.interacting && this.visible && !document.hidden;
+            if (running) this.timer = window.setInterval(() => this.go(this.index + 1), this.interval);
+        }
+    }
+
+    document.querySelectorAll<HTMLElement>("[data-carousel]").forEach((el) => new CarouselController(el));
+</script>

@@ -2,6 +2,14 @@
 import Layout from "../layouts/Layout.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import Timeline from "../components/Timeline.astro";
+import Skills from "../components/Skills.astro";
+import { skills } from "../data/skills";
+
+/*
+ * Three timeline entries have a `photo` slot. Until the real photo exists the slot shows a
+ * "Photo to come" frame. To fill one: add `src: "/images/about/<file>.jpg"` (put the file in
+ * public/images/about/) and write a real `alt`. A 4:3 landscape crop works best.
+ */
 
 const timeline = [
     {
@@ -21,6 +29,7 @@ const timeline = [
                 title: "HKU",
                 description:
                     "Applied last-minute after realizing I was dealing with serious imposter syndrome and didn't feel ready to job-hunt yet. Decided to start over with more passion and motivation, and shape my path on my own terms this time.",
+                photo: { alt: "Photo from my time starting at HKU", caption: "HKU, 2025" },
             },
             {
                 title: "First Game Jam — The Dirt Jam",
@@ -53,6 +62,7 @@ const timeline = [
                 title: "Aspekt Internship — Loznica, Serbia",
                 description:
                     "My first internship abroad, working with Media Designers on an iteration of the Bee Project — a game raising awareness of bees' role in the ecosystem. Also freelancing and job-hunting on the side, while building cultural and social self-sufficiency.",
+                photo: { alt: "Photo from my internship in Loznica, Serbia", caption: "Loznica, Serbia, 2024" },
             },
         ],
     },
@@ -90,6 +100,7 @@ const timeline = [
                 title: "Media College Amsterdam",
                 description:
                     "Started as a Software Development course covering Python and basic web development. From the 2nd semester, students could specialize into Game Development or Fullstack Development.",
+                photo: { alt: "Photo from my first years at Media College Amsterdam", caption: "Media College Amsterdam, 2021" },
             },
             {
                 title: "First Game — Pac-Man Clone",
@@ -105,11 +116,12 @@ const timeline = [
         title="About | Jahva's Portfolio"
         description="Who I am and how I got here."
 >
-    <section class="py-24">
-        <div class="max-w-3xl mx-auto px-6">
-            <SectionHeader as="h1" title="About Me" />
+    <!-- Three parts: who I am, how I got here, what I work with. Left-aligned to the article edge. -->
+    <div class="py-16 md:py-20">
 
-            <div class="text-text/70 leading-relaxed space-y-4 mb-16 max-w-2xl">
+        <section>
+            <SectionHeader as="h1" title="About Me" />
+            <div class="max-w-2xl space-y-4 text-lg leading-relaxed text-text/70">
                 <p>
                     I'm a 21-year-old game developer from Amsterdam, The Netherlands.
                 </p>
@@ -118,9 +130,17 @@ const timeline = [
                     That said, I'm working toward a specialization somewhere between Technical Artist and Graphics Programmer, drawn in by shaders and the visual side of rendering.
                 </p>
             </div>
+        </section>
 
+        <section class="mt-20">
             <SectionHeader title="My Story" />
             <Timeline groups={timeline} />
-        </div>
-    </section>
+        </section>
+
+        <section class="mt-20">
+            <SectionHeader title="Skills" subtitle="What I work with, and for how long." />
+            <Skills skills={skills} />
+        </section>
+
+    </div>
 </Layout>
