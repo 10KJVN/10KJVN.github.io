@@ -80,7 +80,7 @@ For this project, I started with the provided reference code and a list of sugge
     </div>
 </Split>
 
-<Split ratio="1:1" reverse align="center">
+<Split ratio="1:1" reverse>
     <div>
         The jam also provided a list of suggested features for participants looking for ideas.
         After considering which ones were most relevant to my plans,
@@ -137,8 +137,19 @@ giving the surfaces a more pronounced response to light.
     <Media lightbox src="/images/dirtjam/BlinnScreen.png" alt="Blinn-Phong" caption="Blinn-Phong: The new lightning model" />
 </Gallery>
 
-Outside the implemented features, I researched other fog approaches,
-including animated and layered fog, through OGLDEV's Mastering Fog Rendering in OpenGL.
+<Split ratio="3:2" reverse align="center">
+    <div>
+        Outside the implemented features, I researched other fog approaches,
+        including animated and layered fog, through OGLDEV's Mastering Fog Rendering in OpenGL.
+    </div>
+    <div>
+        <Media lightbox
+               src="/images/dirtjam/cloudsTweaking.gif"
+               alt="cloud experiments"
+               caption="Atmospheric variations explored during development."
+        />
+    </div>
+</Split>
 
 ## Texture Mapping
 
@@ -172,18 +183,23 @@ including animated and layered fog, through OGLDEV's Mastering Fog Rendering in 
 
 ## Final Composition
 
-After the texturing work,
-I wanted to spend less time on low-level implementation and more on shaping the environment.
-For the water,
-I opted for a simpler GDShader implementation using vertex displacement and Fresnel reflection,
-which I integrated with Sky3D to follow the changing sky.
-
-<iframe width="560" height="315"
-        src="https://www.youtube.com/embed/78o5SYJE_Ns?si=Sz9MmV4vuMmR2NV-"
-        title="YouTube video player"
-        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;
+<Split ratio="1:1" align="center">
+    <div>
+        After the texturing work,
+        I wanted to spend less time on low-level implementation and more on shaping the environment.
+        For the water,
+        I opted for a simpler GDShader implementation using vertex displacement and Fresnel reflection,
+        which I integrated with Sky3D to follow the changing sky.
+    </div>
+    <div>
+        <iframe width="640" height="360"
+                src="https://www.youtube.com/embed/78o5SYJE_Ns?si=Sz9MmV4vuMmR2NV-"
+                title="YouTube video player"
+                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;
         web-share" referrerpolicy="strict-origin-when-cross-origin"allowfullscreen>
-</iframe>
+        </iframe>
+    </div>
+</Split>
 
 ## Post Mortem
 
