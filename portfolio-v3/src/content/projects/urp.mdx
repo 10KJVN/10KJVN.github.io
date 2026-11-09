@@ -7,6 +7,12 @@ highlight: false
 order: 4
 
 year: 2023
+duration: "8 weeks"
+engine: "Unity 2022.3"
+language: "C#, CG, HLSL"
+teamSize: "Solo"
+role: "Graphics Programmer"
+
 links:
   - label: "GitHub Repo"
     url: "https://github.com/10KJVN/URPShaders"
@@ -14,6 +20,7 @@ links:
 
 import Split from "../../components/Split.astro";
 import Media from "../../components/Media.astro";
+import Gallery from "../../components/Gallery.astro";
 
 ## Overview
 
@@ -23,11 +30,17 @@ import Media from "../../components/Media.astro";
         During the elective *Verdieping Software*, I focused on deepening my understanding of the Universal Render Pipeline and shader programming.
         Developed during my time at NeoN Origins, it became a personal R&D project centered around post-processing and custom render features.
 
-        It began with a user story from Operation Starfall: "I want the game to feel like watching an 80s NTSC TV."
+        It began with a user story from [Operation Starfall](/projects/operation-starfall): "I want the game to feel like watching an 80s NTSC TV."
         That became my starting point for learning post-processing, experimenting with ShaderGraph, and studying shader fundamentals.
 
+        Two features came out of it and were delivered: a **Tint** renderer feature and a **Chromatic Aberration** effect.
+        Everything after that is exploration.
+
     </div>
-    <Media src="/images/urp43.png" alt="Slide 4 of the specialization pitch presentation" caption="Slide 4 of presentation" />
+    <Media lightbox
+           src="/images/urp/pitch-user-story.png"
+           alt="Slide 4 of the specialization pitch presentation"
+           caption="Slide 4 of presentation" />
 </Split>
 
 ## Custom Post-Processing
@@ -45,7 +58,10 @@ Two scripts work together to apply it: `TintRendererFeature` and `CustomPostScre
         This is the injection of the pass into the graphics pipeline.
 
     </div>
-    <Media src="/images/urp43.png" alt="TintRendererFeature and TintPass code" caption="Code snippet: Tint Renderer + TintPass" />
+    <Media lightbox
+           src="/images/urp/tint-renderer-feature-code.png"
+           alt="TintRendererFeature and TintPass code"
+           caption="Code snippet: Tint Renderer + TintPass" />
 </Split>
 
 <Split ratio="3:2" reverse align="center">
@@ -56,28 +72,47 @@ Two scripts work together to apply it: `TintRendererFeature` and `CustomPostScre
         `CustomPostScreenTint` adds a float and a color to the inspector, with booleans to turn each on or off.
 
     </div>
-    <Media src="/images/urp43.png" alt="Custom volume override in the Unity inspector" caption="Accessible tint intensity & color in the Unity inspector." />
+    <Media lightbox
+           src="/images/urp/tint-volume-override.png"
+           alt="Custom volume override in the Unity inspector"
+           caption="Accessible tint intensity & color in the Unity inspector." />
 </Split>
 
 ### What went wrong
 
 I was stuck for two weeks getting the screen tint to render at all.
-The shaders were fine — I had simply forgotten to add my renderer feature to the renderer.
+The shaders were fine, I had simply forgotten to add my renderer feature to the renderer.
 
 ## Chromatic Aberration
 
 The effect started as an experiment in UV space, eventually evolving into a full post-processing pass with tweakable intensity.
 
-<Split ratio="1:1">
-    <Media src="/images/urp43.png" alt="ShaderGraph prototype" caption="ShaderGraph prototype: RGB channel offset per object." />
-    <Media src="/images/urp43.png" alt="Fullscreen chromatic aberration" caption="Fullscreen effect: RGB channels split across the entire screen with customizable offset." />
-</Split>
+<Gallery cols={2}>
+    <Media lightbox
+           src="/videos/urp/chromatic-aberration-object.gif"
+           alt="ShaderGraph prototype splitting RGB channels on a single object"
+           caption="ShaderGraph prototype: RGB channel offset per object." />
+    <Media lightbox
+           src="/videos/urp/chromatic-aberration-fullscreen.gif"
+           alt="Fullscreen chromatic aberration effect"
+           caption="Fullscreen effect: RGB channels split across the entire screen with customizable offset." />
+</Gallery>
 
 The UV-space version applies the effect within the bounds of a 3D object rather than screen-wide.
 Each channel is manipulated based on altered UV input, simulating color fringing in a localized, object-contained way.
 
+<Media lightbox
+       src="/images/urp/shadergraph-uv-prototype.png"
+       alt="ShaderGraph with hand-drawn annotations comparing the old and new UV offset setup"
+       caption="Localized UV-space chromatic aberration prototype." />
+
 Both implementations separately manipulate and recombine the color channels to form new RGB vectors,
 then blend them with a sampled source using a strength-controlled `EffectMultiply` parameter.
+
+<Media lightbox
+       src="/images/urp/shadergraph-fullscreen-final.png"
+       alt="Annotated ChromaticFullScreen ShaderGraph with separate R, G and B offsets recombined"
+       caption="Final fullscreen chromatic aberration graph. The annotations show how the RGB channels are offset and recombined." />
 
 ## Exploration
 
@@ -88,18 +123,24 @@ After delivering the core features, I kept exploring shader techniques:
 - Multipass rendering
 - Color spaces, manually converting between RGB and YUV
 
-Most of these resulted in glitchy, trippy visuals — but each experiment revealed something new about the rendering pipeline.
+Most of these resulted in glitchy, trippy visuals, but each experiment revealed something new about the rendering pipeline.
 
-{/* TODO: GIFs of these experiments */}
+<Media lightbox
+       src="/videos/urp/shader-exploration.gif"
+       alt="Glitchy experimental shader results"
+       caption="Results of the exploration experiments." />
 
 <Split ratio="2:3" reverse align="center">
     <div>
 
         In Photoshop I illustrated additive RGB blending.
-        Red and green combine as expected — but blue remains a mystery?
+        Red and green combine as expected, but blue remains a mystery?
 
     </div>
-    <Media src="/images/urp43.png" alt="Illustration of additive RGB blending with directional arrows" caption="Illustration of additive RGB blending in Photoshop." />
+    <Media lightbox
+           src="/images/urp/rgb-blending-illustration.png"
+           alt="Illustration of additive RGB blending with directional arrows"
+           caption="Illustration of additive RGB blending in Photoshop." />
 </Split>
 
 <Split ratio="3:2" align="center">
@@ -111,10 +152,13 @@ Most of these resulted in glitchy, trippy visuals — but each experiment reveal
         I experimented with CG, HLSL and GLSL, and learned how ShaderLab structures SubShaders, Passes and HLSL includes.
         I also collected notes on shader stages (vertex, fragment, geometry, etc.), realizing I was only scratching the surface.
 
-        This gave me the foundation to move from node-based workflows to structured shader code — a skill I now apply across graphics projects.
+        This gave me the foundation to move from node-based workflows to structured shader code, a skill I now apply across graphics projects.
 
     </div>
-    <Media src="/images/urp43.png" alt="Beginner shader template" caption="A screenshot sample of my beginner template on writing shaders." />
+    <Media lightbox
+           src="/images/urp/shader-template-notes.png"
+           alt="Beginner shader template"
+           caption="A screenshot sample of my beginner template on writing shaders." />
 </Split>
 
 ## Takeaway
@@ -123,13 +167,11 @@ This project was a turning point where I delivered two production-ready URP feat
 It gave me hands-on experience with post-processing, custom renderer features, and shader architecture.
 It built a foundation that continues to shape my path.
 
-It showed me how shader math, rendering theory and artistic direction come together — and confirmed I wanted to keep exploring the technical art side of game development.
+It showed me how shader math, rendering theory and artistic direction come together, and confirmed I wanted to keep exploring the technical art side of game development.
 
 ## Resources
 
-{/* TODO: add the URLs for these */}
-
-- Unity URP 14.0.X documentation (official URP manual)
-- Making a Chromatic Aberration Shader (YouTube Short)
-- A Review of Shader Languages (blog article by Alain Galvan)
-- My specialization pitch presentation
+- [Unity URP 14.0.X documentation](https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@14.0/manual/) (official URP manual)
+- [Making a Chromatic Aberration Shader](https://youtube.com/shorts/mWUjGaduj4o) (YouTube Short)
+- [A Review of Shader Languages](https://alain.xyz/blog/a-review-of-shader-languages) (blog article by Alain Galvan)
+- [My specialization pitch presentation](/documents/urp/specialization-pitch.pdf) (original kickoff presentation)

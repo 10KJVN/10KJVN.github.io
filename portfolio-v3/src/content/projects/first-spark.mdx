@@ -1,12 +1,17 @@
 ---
 title: "First Spark"
 description: "Concept and design project — application piece for HKU."
-thumbnail: "/images/caustics.svg"
+thumbnail: "/images/firstspark/the-first-spark.png"
 tags: ["Unity", "HLSL", "Concept", "Design"]
 highlight: false
 order: 5
 
 year: 2025
+duration: "7 days"
+engine: "Unity 6"
+language: "C#, HLSL"
+teamSize: "Solo"
+
 links:
   - label: "GitHub Repo"
     url: "https://github.com/10KJVN/OntwerpHKU/tree/develop"
@@ -30,8 +35,15 @@ import Media from "../../components/Media.astro";
         *Trigger warning: volume might be loud.*
 
     </div>
-    <Media src="/images/caustics.svg" alt="The first spark" caption="The First Spark" />
+    <Media src="/videos/firstspark/first-light-720p.mp4"
+           alt="First Spark gameplay"
+           caption="Gameplay capture (720p)" />
 </Split>
+
+<Media lightbox
+       src="/images/firstspark/the-first-spark.png"
+       alt="The player stands in a dark cave beside a glowing fire"
+       caption="The First Spark" />
 
 ## Design Pillars
 
@@ -46,7 +58,10 @@ This primal urge is paired with modern design sensibilities to create a layered,
         Instead of tutorials or UI markers, the game uses light, shadow, and subtle visual hints to guide the player.
 
     </div>
-    <Media src="/images/caustics.svg" alt="Environmental level design" caption="Environmental level design" />
+    <Media lightbox
+           src="/images/firstspark/level-layout.png"
+           alt="Layout of the cave level"
+           caption="Environmental level design" />
 </Split>
 
 <Split ratio="2:3" reverse align="center">
@@ -57,7 +72,10 @@ This primal urge is paired with modern design sensibilities to create a layered,
         The player's vision expands throughout the game, creating a physical and emotional journey from obscurity to clarity.
 
     </div>
-    <Media src="/images/caustics.svg" alt="Visibility expanding through the game" caption="Visibility as narrative" />
+    <Media lightbox
+           src="/videos/firstspark/vision-state.gif"
+           alt="The player's visibility expanding through the game"
+           caption="Visibility as narrative" />
 </Split>
 
 <Split ratio="2:3" align="center">
@@ -68,7 +86,10 @@ This primal urge is paired with modern design sensibilities to create a layered,
         Entities encountered in the mist carry no fixed meaning — players are free to interpret their role in the story.
 
     </div>
-    <Media src="/images/caustics.svg" alt="Entities in the mist" caption="Open interpretation" />
+    <Media lightbox
+           src="/images/firstspark/mist-entity.png"
+           alt="An entity encountered in the mist"
+           caption="Open interpretation" />
 </Split>
 
 ## Technical Work
@@ -93,6 +114,17 @@ This primal urge is paired with modern design sensibilities to create a layered,
     </div>
 </Split>
 
+<Split ratio="1:1" align="center">
+    <Media lightbox
+           src="/videos/firstspark/animated-mist.gif"
+           alt="Animated mist in the cave"
+           caption="Animated mist" />
+    <Media lightbox
+           src="/images/firstspark/linear-eye-depth.png"
+           alt="Linear eye depth view of the scene with the counter and timer HUD"
+           caption="Linear eye depth view" />
+</Split>
+
 ## Reflection
 
 First Spark is aimed at players who enjoy atmospheric, symbolic experiences and are willing to explore without being told exactly what to do.
@@ -113,3 +145,8 @@ First Spark is aimed at players who enjoy atmospheric, symbolic experiences and 
 
     </div>
 </Split>
+
+<Media lightbox
+       src="/images/firstspark/finale.png"
+       alt="The player silhouetted against a bright opening, with an interact prompt"
+       caption="The finale" />
