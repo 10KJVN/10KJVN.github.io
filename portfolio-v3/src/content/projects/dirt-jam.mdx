@@ -203,37 +203,52 @@ giving the surfaces a more pronounced response to light.
 
 ## Post Mortem
 
-<Split ratio="1:1" align="center">
+<Split ratio="1:1">
     <div>
-        This project was my crash course into graphics programming, where I learned about concepts such as:
+        This project was my crash course into graphics programming.
+        Along the way, I got familiar with concepts such as:
 
         - GPU Data Alignment
-        - Generating Terrain Data
-        - Rendering Terrain Data
+        - Procedural Terrain Generation
+        - Terrain Rendering
         - Compositor Effects (Godot)
-        - Graphics APIs (Vulkan, SPIR-V)
+        - Vulkan and SPIR-V
     </div>
     <div>
-        My favorite takeaway was figuring out GPU memory alignment — and coming up with my own analogy to really understand it:
+        My favorite takeaway was figuring out GPU memory alignment -
+        and coming up with my own analogy to really understand it:
 
-        > Think of UBO memory like an inventory grid. Each data type has its own slot size, and a row can only hold 4 slots.
-        Bigger items (like `vec3` and `vec4`) get VIP spots at the start of the row, and smaller items fill in the gaps.
-        If the order changes on the CPU side, you have to re-pack the layout to match on the GPU side.
+        > Think of UBO memory like an inventory grid.
+        > Each row can hold 4 slots, but different data types have their own placement rules.
+        > Bigger items like `vec3` and `vec4` need VIP spots at the start of a row.
+        > A `vec3` leaves one slot available for a `float`,
+        > while a `vec2` needs to start at an even slot.
+        >
+        > You can't just put things wherever there's an empty space.
+        > If you change the order on the CPU side,
+        > you have to rearrange the layout to match what the GPU expects.
     </div>
     <Media lightbox src="/images/dirtjam/blackbeard.jpg"
-           alt="Kurohige" caption="Who i was feelin' like"
-    />
+        alt="Kurohige" caption="Who I was feelin' like" />
 </Split>
 
-<Split ratio="1:1" align="start">
+<Split ratio="1:1">
     <div>
-        Despite undergoing this project FULLY ai-assisted from start to finish, the familiarity gained, lessons learned are here to stay.
-        Since this is a vibe-coded project, I didn't bother to add any code snippets.
-        I'm just glad I've been able to have fun on something so technical and out of my comfort zone.
+        The entire project was AI-assisted,
+        with ChatGPT generating much of the implementation while I steered the creative direction,
+        selected features, integrated the results and worked through issues as they appeared.
+
+        I wasn't writing every line of code myself,
+        but I still came away with a much better understanding of the concepts and systems underneath it.
+        Most importantly, I had a lot of fun exploring something so technical and outside my comfort zone.
     </div>
     <div>
-        So take that 'crash course into GFX programming' with a grain of salt. Emphasis on the programming part.
-        Realistically, I probably couldn't have done this without it (at the time).
-        I might be more up to the task nowadays, but who knows! I know I don't 💯
+        So take that "crash course in graphics programming" with a grain of salt.
+        Emphasis on the programming part.
+
+        Realistically, I probably couldn't have taken on this project without AI at the time.
+        I'd like to think I'm better equipped to tackle something like this myself nowadays, but who knows.
+
+        I know I don't. 💯
     </div>
 </Split>
