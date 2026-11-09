@@ -7,15 +7,25 @@ highlight: false
 order: 4
 
 year: 2025
+duration: "10 weeks"
+engine: "Unity 6"
+language: "C#"
+teamSize: "3 devs, 5 artists"
+role: "Gameplay & UI Programmer"
+
 links:
   - label: "GitHub Repo"
     url: "https://github.com/j5x/PvB2025"
+  - label: "Documentation (Wiki)"
+    url: "https://github.com/j5x/PvB2025/wiki/Documentation-Jahvairo"
   - label: "Gameplay Showcase"
     url: "https://youtu.be/Qi8E0QrySEo?si=08UsQBxyvXhHL0ew&t=127"
 ---
 
 import Split from "../../components/Split.astro";
 import Media from "../../components/Media.astro";
+import Gallery from "../../components/Gallery.astro";
+import YouTubeEmbed from "../../components/YoutubeEmbed.astro";
 
 ## Overview
 
@@ -28,16 +38,21 @@ import Media from "../../components/Media.astro";
 
         My features:
 
-        - Designed and implemented Character Classes
-        - Built the Combat System
-        - Handled Canvas & UI scaling for mobile
-        - Integrated VFX and optimized textures
+        - Designed and implemented [Character Classes](https://github.com/j5x/PvB2025/tree/develop/Assets/Script/CharacterSystem)
+        - Built the [Combat System](https://github.com/j5x/PvB2025/tree/develop/Assets/Script/AttackSystem)
+        - Handled Canvas & UI scaling for mobile ([Safe Area Handler](https://github.com/j5x/PvB2025/blob/develop/Assets/Script/UI/SafeArea.cs))
+        - Integrated [VFX](https://github.com/j5x/PvB2025/tree/develop/Assets/Script/Vfx) and optimized textures
 
         Builds are available for Android and Windows.
         Since the game was designed for portrait mobile, expect stretched visuals on PC.
 
     </div>
-    <Media src="/images/candy43.png" alt="Candy Dandy gameplay showcase" caption="Gameplay showcase (starts at ~2:08)" />
+    <YouTubeEmbed
+        id="Qi8E0QrySEo"
+        title="Candy Dandy gameplay showcase"
+        start={127}
+        caption="Gameplay showcase (starts at ~2:08)"
+    />
 </Split>
 
 ## Project Kickoff
@@ -47,10 +62,10 @@ After securing our first choice, we brainstormed concepts.
 Options ranged from a dating sim to a cake-baking sim, but we pushed for a fighting game with match-3 integration.
 Early mockups helped us and the client decide on a portrait layout to balance scope and usability.
 
-<Split ratio="1:1">
-    <Media src="/images/candy43.png" alt="Concept 1: portrait mockup" caption="Concept 1: Portrait — matching and fighting combined." />
-    <Media src="/images/candy43.png" alt="Concept 2: landscape mockup" caption="Concept 2: Landscape — matching with cutscene transitions." />
-</Split>
+<Media lightbox
+       src="/images/candydandy/concept-mockups.png"
+       alt="Hand-drawn mockups of a portrait concept and a landscape concept on phone frames"
+       caption="Concept 1 (left): Portrait, matching and fighting combined. Concept 2 (right): Landscape, matching with cutscene transitions." />
 
 ## Development
 
@@ -62,7 +77,10 @@ Early mockups helped us and the client decide on a portrait layout to balance sc
         All characters (player and enemies) derive from a shared base class handling variables, components, and core functions.
 
     </div>
-    <Media src="/images/candy43.png" alt="Character class diagram" caption="Character class diagram" />
+    <Media lightbox
+           src="/images/candydandy/character-diagram.png"
+           alt="Character class diagram"
+           caption="Character class diagram" />
 </Split>
 
 <Split ratio="2:3" reverse align="center">
@@ -74,7 +92,10 @@ Early mockups helped us and the client decide on a portrait layout to balance sc
         This gave designers flexibility while keeping the system modular.
 
     </div>
-    <Media src="/images/candy43.png" alt="Attack properties in the Unity inspector" caption="Attack setup via ScriptableObjects, tweakable directly in the Inspector." />
+    <Media lightbox
+           src="/images/candydandy/attack-config-inspector.png"
+           alt="Attack properties in the Unity inspector"
+           caption="Attack setup via ScriptableObjects, tweakable directly in the Inspector." />
 </Split>
 
 ## Mobile UI & Safe Area
@@ -83,10 +104,16 @@ A major challenge was scaling across devices.
 Using Unity's Canvas Scaler and a custom Safe Area Handler, I ensured UI panels adapt to notches, rounded corners, tablets, and Android soft keys.
 This made the game consistently playable across a wide range of devices.
 
-<Split ratio="1:1">
-    <Media src="/images/candy43.png" alt="Safe area debug colors" caption="Debug overlay used to visualize and adjust safe areas during setup." />
-    <Media src="/images/candy43.png" alt="Cropping issue fix" caption="Cropping issue fix" />
-</Split>
+<Gallery cols={2}>
+    <Media lightbox
+           src="/images/candydandy/safe-area-debug.png"
+           alt="Safe area debug colors"
+           caption="Debug overlay used to visualize and adjust safe areas during setup." />
+    <Media lightbox
+           src="/images/candydandy/safe-area-cropping-fix.png"
+           alt="Safe area cropping issue and the fix"
+           caption="The cropping issue and its fix." />
+</Gallery>
 
 <Split ratio="3:2" align="center">
     <div>
@@ -95,7 +122,9 @@ This made the game consistently playable across a wide range of devices.
         I fixed this by extending and mirroring background art to fill the space naturally.
 
     </div>
-    <Media src="/images/candy43.png" alt="Sprint 2 gameplay after scaling fixes" caption="Sprint 2: gameplay after scaling fixes, verified across multiple device sizes." />
+    <Media src="/videos/candydandy/gameplay-sprint2.mp4"
+           alt="Sprint 2 gameplay after scaling fixes"
+           caption="Sprint 2: gameplay after scaling fixes, verified across multiple device sizes." />
 </Split>
 
 ## Takeaway
@@ -103,10 +132,12 @@ This made the game consistently playable across a wide range of devices.
 <Split ratio="3:2" align="center">
     <div>
 
-        Candy Dandy taught me how to adapt UI for mobile screens and implement Safe Area handling — skills praised by our client as invaluable for future projects.
+        Candy Dandy taught me how to adapt UI for mobile screens and implement Safe Area handling, skills praised by our client as invaluable for future projects.
         I also deepened my experience in character systems, combat mechanics, and technical art integration.
         Most importantly, I learned to balance technical and artistic collaboration while working with a real client and a cross-discipline team.
 
     </div>
-    <Media src="/images/candy43.png" alt="Final presentation VFX integration" caption="Final presentation: VFX integration and technical animation support." />
+    <Media src="/videos/candydandy/final-presentation-vfx.mp4"
+           alt="Final presentation showing the VFX integration"
+           caption="Final presentation: VFX integration and technical animation support." />
 </Split>

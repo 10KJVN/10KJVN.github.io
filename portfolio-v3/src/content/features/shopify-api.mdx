@@ -31,14 +31,27 @@ import Gallery from "../../components/Gallery.astro";
         - A system that turns API calls into user-friendly, interactive features.
 
     </div>
-    <Media src="/images/shopify43.png" alt="Systems diagram" caption="System overview" />
+    <Media lightbox
+           src="/images/shopify/systems-chart.png"
+           alt="Systems diagram"
+           caption="System overview" />
 </Split>
 
 ## My Role
 
-I joined after the core back-end functionality was built in C++.
-My colleague handled the raw API integration, while I focused on making the system user-friendly.
-I worked on optimizing logic, making the feature Blueprint-compatible, and designing an intuitive UI, so it could be used effectively by non-programmers.
+<Split ratio="3:2" align="center">
+    <div>
+
+        I joined after the core back-end functionality was built in C++.
+        My colleague handled the raw API integration, while I focused on making the system user-friendly.
+        I worked on optimizing logic, making the feature Blueprint-compatible, and designing an intuitive UI, so it could be used effectively by non-programmers.
+
+    </div>
+    <Media lightbox
+           src="/images/shopify/showcase-collage.jpg"
+           alt="Collage of the Checkout, ProductBox, Product and VariantBox widget blueprints in the Unreal widget designer"
+           caption="Widget blueprints behind the cart, product and variant UI." />
+</Split>
 
 ## Development
 
@@ -46,10 +59,15 @@ The early prototype worked, but was limited to console logs and an obscure user 
 By collaborating with my colleague, I was able to bridge the system into Blueprints, allowing seamless interaction with Unreal's Editor and UI.
 I also optimized parts of the workflow that were more efficient to handle in Blueprints.
 
-<Split ratio="1:1">
-    <Media src="/images/shopify43.png" alt="Old user interface and output log" caption="Old User Interface & Output Log containing details" />
-    <Media src="/images/shopify43.png" alt="New user interface with real-time cart updates" caption="New User Interface | post real-time cart updates" />
-</Split>
+<Gallery cols={2}>
+    <Media lightbox
+           src="/images/shopify/old-ui.png"
+           alt="Old user interface and output log"
+           caption="Old User Interface & Output Log containing details" />
+    <Media src="/videos/shopify/new-ui-cart-sync.mp4"
+           alt="New user interface with real-time cart updates"
+           caption="New User Interface | post real-time cart updates" />
+</Gallery>
 
 <Split ratio="2:3" reverse align="center">
     <div>
@@ -58,7 +76,10 @@ I also optimized parts of the workflow that were more efficient to handle in Blu
         It also taught me how to communicate across different specializations to make a feature both technically robust and designer-friendly.
 
     </div>
-    <Media src="/images/shopify43.png" alt="Web shop checkout compared with the in-game cart" caption="Side by side comparison of actual web shop checkout vs. in-game cart realtime" />
+    <Media lightbox
+           src="/images/shopify/webshop-vs-ingame-cart.png"
+           alt="Web shop checkout compared with the in-game cart"
+           caption="Side by side comparison of actual web shop checkout vs. in-game cart realtime" />
 </Split>
 
 ## Under the Hood
@@ -75,9 +96,9 @@ For example, each product instance spawns its own Product Widget, which then:
 - Communicates selections back through callbacks
 
 <Gallery cols={3}>
-    <Media src="/images/shopify43.png" alt="Product Widget blueprint" caption="Blueprint snippet – Product Widget" />
-    <Media src="/images/shopify43.png" alt="Variant Box Widget blueprint" caption="Blueprint snippet – Variant Box Widget" />
-    <Media src="/images/shopify43.png" alt="Product Actor blueprint" caption="Blueprint snippet – Product Actor" />
+    <Media lightbox src="/images/shopify/product-widget-blueprint.png" alt="Product Widget blueprint" caption="Blueprint snippet – Product Widget" />
+    <Media lightbox src="/images/shopify/variant-box-blueprint.png" alt="Variant Box Widget blueprint" caption="Blueprint snippet – Variant Box Widget" />
+    <Media lightbox src="/images/shopify/product-actor-blueprint.png" alt="Product Actor blueprint" caption="Blueprint snippet – Product Actor" />
 </Gallery>
 
 > When a variant is selected, the callback chain notifies the parent actor: "Hey mesh, change color! Client has selected pink."

@@ -1,19 +1,28 @@
 ---
 title: "The Ensemble"
 description: "Interactive architectural visualization built in Unreal Engine."
-thumbnail: "/images/caustics.svg"
+thumbnail: "/images/ensemble/hero.jpg"
 tags: ["Unreal", "Blueprints", "ArchViz", "UI"]
 highlight: false
 order: 7
 
 year: 2023 # start year; the project ran to 2025
+duration: "~2 years"
+engine: "Unreal Engine 5"
+language: "Blueprints"
+teamSize: "3 devs, 1 3D designer"
+role: "UI Programmer"
+
 links:
-  - label: "Ensemble | Veldboom Studios"
-    url: "https://www.veldboomstudios.com" # TODO: real URL
+  - label: "The Ensemble"
+    url: "https://www.the-ensemble.amsterdam/"
+  - label: "Veldboom Studios"
+    url: "https://www.veldboomstudios.com/"
 ---
 
 import Split from "../../components/Split.astro";
 import Media from "../../components/Media.astro";
+import Gallery from "../../components/Gallery.astro";
 
 ## Overview
 
@@ -26,10 +35,13 @@ import Media from "../../components/Media.astro";
         Although primarily an ArchViz product, Ensemble became my first large-scale Unreal project.
         My contribution focused on system design and UI programming, collaborating with a small team of developers and a 3D designer.
         It remains my most extensive project to date.
-        My responsibilities grew from early prototyping and feature design to maintaining the technical backbone of the project — including UI, gameplay-like systems, and version control.
+        My responsibilities grew from early prototyping and feature design to maintaining the technical backbone of the project, including UI, gameplay-like systems, and version control.
 
     </div>
-    <Media src="/images/caustics.svg" alt="Hero render of The Ensemble" caption="Hero render" />
+    <Media lightbox
+           src="/images/ensemble/hero.jpg"
+           alt="Hero render of The Ensemble"
+           caption="Hero render" />
 </Split>
 
 <Split ratio="1:1">
@@ -45,7 +57,7 @@ import Media from "../../components/Media.astro";
     </div>
     <div>
 
-        ### Contributions & highlights
+        ### My contributions
 
         - Interactive UI system(s)
         - Component Filter system
@@ -63,10 +75,16 @@ My first exposure to Unreal after transitioning from Unity.
 During this phase I sketched and prototyped the UI, beginning with phone/tablet-style interactions.
 I integrated Ultra Dynamic Sky and added custom weather controls on top of it, and familiarized myself with the team's workflow.
 
-<Split ratio="1:1">
-    <Media src="/images/caustics.svg" alt="Earliest UI sketches" caption="Earliest sketches" />
-    <Media src="/images/caustics.svg" alt="Older user interface" caption="Older User Interface" />
-</Split>
+<Gallery cols={2}>
+    <Media lightbox
+           src="/videos/ensemble/ui-sketches.gif"
+           alt="Earliest UI sketches"
+           caption="Earliest sketches" />
+    <Media lightbox
+           src="/videos/ensemble/ui-prototype.gif"
+           alt="Early smartphone-style user interface prototype"
+           caption="Early UI prototype" />
+</Gallery>
 
 ### Phase 2 – Consolidation (2024)
 
@@ -79,15 +97,16 @@ I integrated Ultra Dynamic Sky and added custom weather controls on top of it, a
         I reduced the build size from ~8GB to 1.6GB, and delivered the first proper client-facing build.
 
     </div>
-    <Media src="/images/caustics.svg" alt="Component Filter blueprint logic" caption="Component Filter logic: enables/disables the visibility & collision of tagged actors." />
+    <Media lightbox
+           src="/images/ensemble/component-filter-blueprint.png"
+           alt="Component Filter blueprint logic"
+           caption="Component Filter logic: enables/disables the visibility & collision of tagged actors." />
 </Split>
 
-<Split ratio="1:1">
-    <Media src="/images/caustics.svg" alt="Office spaces before filtering" caption="Office Spaces" />
-    <Media src="/images/caustics.svg" alt="Units after filtering" caption="After Filter" />
-</Split>
-
-The Component Filter allows toggling between office spaces and regular units.
+<Media lightbox
+       src="/images/ensemble/component-filter-result.jpg"
+       alt="Office spaces shown after using the Component Filter"
+       caption="Office spaces: the Component Filter allows toggling between office spaces and regular units." />
 
 ### Phase 3 – Support (Late 2024 – 2025)
 
@@ -98,12 +117,36 @@ Such as blueprint reference fixes and POV switching extensions to the ArchViz In
 
 A selection of additional visuals and behind-the-scenes material from the development process.
 
+### Interactive UI system
+
+<Split ratio="2:3" align="center">
+    <div>
+
+        Functionalities: lights, filtering, time & weather control.
+
+    </div>
+    <Media src="/videos/ensemble/hmi-showcase.mp4"
+           alt="Tablet HMI interaction showcase"
+           caption="Tablet HMI showcase." />
+</Split>
+
+<Media lightbox
+       src="/images/ensemble/tablet-ui-final.jpg"
+       alt="Final tablet UI"
+       caption="Tablet UI: final version, evolved from the smartphone prototype in Phase 1." />
+
 ### Seamless texture creation
 
-<Split ratio="1:1">
-    <Media src="/images/caustics.svg" alt="Reference photo of a wall in The Ensemble" caption="Wall reference: irregular and not directly usable as a texture asset." />
-    <Media src="/images/caustics.svg" alt="Seamless 1024x1024 texture" caption="Seamless 1024x1024 texture" />
-</Split>
+<Gallery cols={2}>
+    <Media lightbox
+           src="/images/ensemble/wall-reference.jpg"
+           alt="Reference photo of a wall in The Ensemble"
+           caption="Wall reference: irregular and not directly usable as a texture asset." />
+    <Media lightbox
+           src="/images/ensemble/seamless-texture-1k.jpg"
+           alt="Seamless 1024x1024 texture"
+           caption="Seamless 1024x1024 texture" />
+</Gallery>
 
 <Split ratio="2:3" align="center">
     <div>
@@ -112,7 +155,10 @@ A selection of additional visuals and behind-the-scenes material from the develo
         Exported in Power-of-Two resolution for optimal compression and scalability.
 
     </div>
-    <Media src="/images/caustics.svg" alt="Texture applied in game under different weather" caption="Showcased under different weather conditions from clear skies to snow." />
+    <Media lightbox
+           src="/videos/ensemble/texture-weather.gif"
+           alt="The texture applied to the building in-game under different weather"
+           caption="The texture applied to the building, shown under different weather conditions from clear skies to snow." />
 </Split>
 
 ### Environment design
@@ -124,27 +170,29 @@ A selection of additional visuals and behind-the-scenes material from the develo
         To preserve performance, I used low-poly assets.
 
     </div>
-    <Media src="/images/caustics.svg" alt="Nature environment" caption="Nature environment" />
-</Split>
-
-### Interactive UI system
-
-<Split ratio="2:3" align="center">
-    <div>
-
-        Functionalities: lights, filtering, time & weather control.
-
-    </div>
-    <Media src="/images/caustics.svg" alt="Final tablet UI" caption="Tablet UI: final version, evolved from the smartphone prototype in Phase 1." />
+    <Media lightbox
+           src="/videos/ensemble/nature-environment.gif"
+           alt="Nature environment around the building"
+           caption="Nature environment" />
 </Split>
 
 ## Takeaway
 
-Ensemble successfully delivered an interactive architectural visualization that met the client's goals and led to continued collaboration.
-The project served as a valuable crash course in UI/UX, Blueprint systems, and texture creation.
-It also laid the groundwork for my later Unreal projects, especially in system design.
+<Split ratio="3:2" align="center">
+    <div>
 
-The client has expressed interest in expanding the project into a VR experience.
+        Ensemble successfully delivered an interactive architectural visualization that met the client's goals and led to continued collaboration.
+        The project served as a valuable crash course in UI/UX, Blueprint systems, and texture creation.
+        It also laid the groundwork for my later Unreal projects, especially in system design.
+
+        The client has expressed interest in expanding the project into a VR experience.
+
+    </div>
+    <Media lightbox
+           src="/images/ensemble/showcase.jpg"
+           alt="Render of The Ensemble"
+           caption="The Ensemble" />
+</Split>
 
 ## Credits & Tools
 
