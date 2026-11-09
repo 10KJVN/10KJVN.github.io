@@ -49,7 +49,9 @@ const mainWidth = {
 		<!-- <meta name="generator" content={Astro.generator} /> -->
 	</head>
 
-	<body class="bg-background text-text font-sans antialiased" style="scroll-behavior: smooth">
+	<!-- Site shell: a full-height column. <main> grows (flex-1), so the footer is pushed to the
+	     bottom edge on short pages and simply follows the content on long ones. -->
+	<body class="flex min-h-dvh flex-col bg-background text-text font-sans antialiased" style="scroll-behavior: smooth">
 	<a
 		href="#main"
 		class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:border focus:border-border-strong focus:bg-surface focus:px-4 focus:py-2 focus:text-sm focus:text-text"
@@ -58,7 +60,8 @@ const mainWidth = {
 	</a>
 		<Navbar />
 
-		<main id="main" tabindex="-1" class={`mx-auto ${mainWidth} py-10 focus:outline-none`}>
+		<!-- w-full: in a flex column, mx-auto would otherwise shrink <main> to its content width. -->
+		<main id="main" tabindex="-1" class={`mx-auto w-full flex-1 ${mainWidth} py-10 focus:outline-none`}>
 			<slot />
 		</main>
 
@@ -67,11 +70,12 @@ const mainWidth = {
 </html>
 
 <style>
+	/* No fixed height on html/body: the body's min-height (min-h-dvh) drives the shell, so tall
+	   pages grow the document instead of overflowing a 100%-high box. */
 	html,
 	body {
 		margin: 0;
 		width: 100%;
-		height: 100%;
 		scroll-behavior: smooth;
 	}
 

@@ -1,0 +1,71 @@
+---
+/**
+ * Skills grouped by category, each with how long I've used it.
+ * The bar is a duration, not a proficiency score, and all bars share one scale so they compare
+ * across categories. Data lives in src/data/skills.ts.
+ */
+interface Skill {
+    name: string;
+    /** "<number> year(s)" or "<number> month(s)", e.g. "4 year", "0.5 year", "1 month". */
+    duration: string;
+}
+
+interface Props {
+    skills: Record<string, Skill[]>;
+    /** Entries shown per category. */
+    max?: number;
+}
+
+const { skills, max = 3 } = Astro.props;
+
+/** "0.5 year" -> 6, "1 month" -> 1. Throws on anything unexpected so a typo fails the build. */
+const toMonths = (duration: string): number => {
+    const match = duration.trim().match(/^(\d+(?:\.\d+)?)\s*(year|month)s?$/i);
+    if (!match) throw new Error(`Skills: can't read duration "${duration}". Use e.g. "4 year" or "1 month".`);
+    const value = parseFloat(match[1]);
+    return Math.round(match[2].toLowerCase() === "year" ? value * 12 : value);
+};
+
+/** 6 -> "6 months", 12 -> "1 year", 48 -> "4 years", 1 -> "1 month". */
+const format = (months: number): string => {
+    if (months < 12) return `${months} ${months === 1 ? "month" : "months"}`;
+    const years = months / 12;
+    const text = Number.isInteger(years) ? String(years) : years.toFixed(1);
+    return `${text} ${years === 1 ? "year" : "years"}`;
+};
+
+const categories = Object.entries(skills).map(([name, list]) => ({
+    name,
+    entries: list.slice(0, max).map((s) => ({ name: s.name, months: toMonths(s.duration) })),
+}));
+
+// One shared scale, so a 6-month bar looks the same length in every category.
+const scale: number = Math.max(...categories.flatMap((c) => c.entries.map((e) => e.months)));
+const widthOf = (months: number): number => Math.max(3, Math.round((months / scale) * 100));
+---
+
+<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {categories.map((category) => (
+            <section class="rounded-frame border border-border bg-surface p-5">
+                <h3 class="label mb-4 text-accent">{category.name}</h3>
+                <ul class="flex flex-col gap-4">
+                    {category.entries.map((entry) => (
+                            <li>
+                                <div class="flex items-baseline justify-between gap-3">
+                                    <span class="text-sm font-medium text-text">{entry.name}</span>
+                                    <span class="label shrink-0 tracking-wider">{format(entry.months)}</span>
+                                </div>
+                                <!-- Decorative: the duration is already written out as text. -->
+                                <div class="mt-2 h-1 rounded-full bg-border" aria-hidden="true">
+                                    <div class="h-full rounded-full bg-accent" style={`width: ${widthOf(entry.months)}%`}></div>
+                                </div>
+                            </li>
+                    ))}
+                </ul>
+            </section>
+    ))}
+</div>
+
+<p class="label mt-4 max-w-prose normal-case tracking-wider">
+    Bars show how long I've been using each one, on a shared scale. They aren't a measure of how good I am at it.
+</p>
