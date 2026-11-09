@@ -142,18 +142,23 @@ including animated and layered fog, through OGLDEV's Mastering Fog Rendering in 
 
 ## Texture Mapping
 
-Moving beyond the terrain's initial flat coloring,
-I wanted to introduce actual surface textures.
-This turned out to be the most challenging part of the project.
-Getting triplanar texturing to work without unwanted stretching took several days of debugging.
-
-I was struggling to get the textures and their associated resources to work correctly,
-so I reached out to other jam participants.
-`Refoulay` shared their implementation, which gave me a useful reference for troubleshooting my own.
-After working through the initialization and texture-binding issues,
-I eventually got the terrain rendering correctly.
-I then extended the implementation to support different texture resolutions,
-testing everything from 128px to 4K in the running scene.
+<Split ratio="1:1">
+    <div>
+        Moving beyond the terrain's initial flat coloring,
+        I wanted to introduce actual surface textures.
+        This turned out to be the most challenging part of the project.
+        Getting triplanar texturing to work without unwanted stretching took several days of debugging.
+    </div>
+    <div>
+        I was struggling to get the textures and their associated resources to work correctly,
+        so I reached out to other jam participants.
+        `Refoulay` shared their implementation, which gave me a useful reference for troubleshooting my own.
+        After working through the initialization and texture-binding issues,
+        I eventually got the terrain rendering correctly.
+        I then extended the implementation to support different texture resolutions,
+        testing everything from 128px to 4K in the running scene.
+    </div>
+</Split>
 
 <Gallery cols={2}>
     <Media lightbox src="/images/dirtjam/Rocky.png" alt="Rocky texture" caption="Rocky texture" />
