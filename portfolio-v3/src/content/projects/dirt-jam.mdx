@@ -76,7 +76,7 @@ For this project, I started with the provided reference code and a list of sugge
     <div>
         I played around with the mesh settings, noise generation,
         octave count and material properties to get a better understanding of how they influenced the generated terrain.
-        This gave me a starting point for deciding what I wanted to build on top of the existing implementation.s.
+        This gave me a starting point for deciding what I wanted to build on top of the existing implementation.
     </div>
 </Split>
 
@@ -103,37 +103,68 @@ For this project, I started with the provided reference code and a list of sugge
 
 ## Building Atmosphere
 
-With the initial features implemented,
-I started bringing them together in an early scene mock-up.
-I experimented with different post-processing combinations,
-comparing screen-space and additive bloom before settling on the latter.
-
-`Distance fog` became a more involved exploration.
-Linear fog was relatively straightforward to implement,
-which gave me the confidence to push it further with exponential fog.
-That proved considerably more challenging and led me to investigate the underlying attenuation theory,
-eventually discovering `Beer's Law` through discussions in the jam community.
+<Split ratio="1:1">
+    <div>
+        With the initial features implemented,
+        I started bringing them together in an early scene mock-up.
+        I experimented with different post-processing combinations,
+        comparing screen-space and additive bloom before settling on the latter.
+    </div>
+    <div>
+        `Distance fog` became a more involved exploration.
+        Linear fog was relatively straightforward to implement,
+        which gave me the confidence to push it further with exponential fog.
+        That proved considerably more challenging and led me to investigate the underlying attenuation theory,
+        eventually discovering `Beer's Law` through discussions in the jam community.
+    </div>
+</Split>
 
 <ComparisonSlider
-start={50}
-beforeSrc="/images/dirtjam/01NoFog.png"
-beforeAlt="Before the change"
-afterSrc="/images/dirtjam/02LightFog.png"
-afterAlt="After the change"
-beforeLabel="Fog off"
-afterLabel="Fog on"
+    start={50}
+    beforeSrc="/images/dirtjam/01NoFog.png"
+    beforeAlt="Before the change"
+    afterSrc="/images/dirtjam/02LightFog.png"
+    afterAlt="After the change"
+    beforeLabel="Fog off"
+    afterLabel="Fog on"
 />
 
 I also extended the terrain's existing Lambertian diffuse lighting with Blinn–Phong specular highlights,
 giving the surfaces a more pronounced response to light.
 
 <Gallery cols={2}>
-    <Media src="/images/dirtjam/LambertScreen.png" alt="Lambertian Diffusion" caption="Lambertian Diffusion: The old lightning model" />
-    <Media src="/images/dirtjam/BlinnScreen.png" alt="Blinn-Phong" caption="Blinn-Phong: The new lightning model" />
+    <Media lightbox src="/images/dirtjam/LambertScreen.png" alt="Lambertian Diffusion" caption="Lambertian Diffusion: The old lightning model" />
+    <Media lightbox src="/images/dirtjam/BlinnScreen.png" alt="Blinn-Phong" caption="Blinn-Phong: The new lightning model" />
 </Gallery>
 
 Outside the implemented features, I researched other fog approaches,
 including animated and layered fog, through OGLDEV's Mastering Fog Rendering in OpenGL.
+
+## Texture Mapping
+
+Moving beyond the terrain's initial flat coloring,
+I wanted to introduce actual surface textures.
+This turned out to be the most challenging part of the project.
+Getting triplanar texturing to work without unwanted stretching took several days of debugging.
+
+I was struggling to get the textures and their associated resources to work correctly,
+so I reached out to other jam participants.
+`Refoulay` shared their implementation, which gave me a useful reference for troubleshooting my own.
+After working through the initialization and texture-binding issues,
+I eventually got the terrain rendering correctly.
+I then extended the implementation to support different texture resolutions,
+testing everything from 128px to 4K in the running scene.
+
+<Gallery cols={2}>
+    <Media lightbox src="/images/dirtjam/LambertScreen.png" alt="Lambertian Diffusion" caption="Lambertian Diffusion: The old lightning model" />
+    <Media lightbox src="/images/dirtjam/BlinnScreen.png" alt="Blinn-Phong" caption="Blinn-Phong: The new lightning model" />
+</Gallery>
+
+<Gallery cols={2}>
+    <Media lightbox src="/images/dirtjam/LambertScreen.png" alt="Lambertian Diffusion" caption="Lambertian Diffusion: The old lightning model" />
+    <Media lightbox src="/images/dirtjam/BlinnScreen.png" alt="Blinn-Phong" caption="Blinn-Phong: The new lightning model" />
+</Gallery>
+
 
 ## Gallery
 
@@ -149,7 +180,7 @@ A few experiments and unused visuals from along the way — cloud studies, light
 
 ##
 
-<Split ratio="2:3">
+<Split ratio="1:1">
     <div>
 
         ### Resources
