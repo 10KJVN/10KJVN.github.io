@@ -1,0 +1,31 @@
+---
+interface Props {
+    /** Video ID, e.g. "78o5SYJE_Ns" from youtube.com/watch?v=78o5SYJE_Ns */
+    id: string;
+    /** Accessible name. Describe the video, not the player. */
+    title: string;
+    /** Start time in seconds. 0 or omitted starts from the beginning. */
+    start?: number;
+    caption?: string;
+}
+
+const { id, title, start = 0, caption = "" } = Astro.props;
+
+const query: string = start > 0 ? `?start=${Math.floor(start)}` : "";
+const src: string = `https://www.youtube.com/embed/${id}${query}`;
+---
+
+<figure class="my-8">
+    <div class="aspect-video w-full overflow-hidden rounded-frame border border-border">
+        <iframe
+                src={src}
+                title={title}
+                loading="lazy"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                referrerpolicy="strict-origin-when-cross-origin"
+                class="h-full w-full"
+        ></iframe>
+    </div>
+    {caption && <figcaption class="label mt-2">{caption}</figcaption>}
+</figure>

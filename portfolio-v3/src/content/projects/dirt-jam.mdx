@@ -26,6 +26,7 @@ import Split from "../../components/Split.astro";
 import Gallery from "../../components/Gallery.astro";
 import ComparisonSlider from "../../components/ComparisonSlider.astro";
 import Media from "../../components/Media.astro";
+import YouTubeEmbed from "../../components/YouTubeEmbed.astro";
 
 ## Overview
 
@@ -192,12 +193,11 @@ giving the surfaces a more pronounced response to light.
         which I integrated with Sky3D to follow the changing sky.
     </div>
     <div>
-        <iframe width="640" height="360"
-                src="https://www.youtube.com/embed/78o5SYJE_Ns?si=Sz9MmV4vuMmR2NV-"
-                title="YouTube video player"
-                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;
-        web-share" referrerpolicy="strict-origin-when-cross-origin"allowfullscreen>
-        </iframe>
+        <YouTubeEmbed
+        id="78o5SYJE_Ns"
+        title="Way2Terrain final scene showcase: terrain, water and sky"
+        start={0}
+        />
     </div>
 </Split>
 
