@@ -205,7 +205,6 @@ giving the surfaces a more pronounced response to light.
 
 <Split ratio="1:1" align="center">
     <div>
-
         This project was my crash course into graphics programming, where I learned about concepts such as:
 
         - GPU Data Alignment
@@ -213,15 +212,28 @@ giving the surfaces a more pronounced response to light.
         - Rendering Terrain Data
         - Compositor Effects (Godot)
         - Graphics APIs (Vulkan, SPIR-V)
-
     </div>
     <div>
-
         My favorite takeaway was figuring out GPU memory alignment — and coming up with my own analogy to really understand it:
 
         > Think of UBO memory like an inventory grid. Each data type has its own slot size, and a row can only hold 4 slots.
         Bigger items (like `vec3` and `vec4`) get VIP spots at the start of the row, and smaller items fill in the gaps.
         If the order changes on the CPU side, you have to re-pack the layout to match on the GPU side.
+    </div>
+    <Media lightbox src="/images/dirtjam/blackbeard.jpg"
+           alt="Kurohige" caption="Who i was feelin' like"
+    />
+</Split>
 
+<Split ratio="1:1" align="start">
+    <div>
+        Despite undergoing this project FULLY ai-assisted from start to finish, the familiarity gained, lessons learned are here to stay.
+        Since this is a vibe-coded project, I didn't bother to add any code snippets.
+        I'm just glad I've been able to have fun on something so technical and out of my comfort zone.
+    </div>
+    <div>
+        So take that 'crash course into GFX programming' with a grain of salt. Emphasis on the programming part.
+        Realistically, I probably couldn't have done this without it (at the time).
+        I might be more up to the task nowadays, but who knows! I know I don't 💯
     </div>
 </Split>
