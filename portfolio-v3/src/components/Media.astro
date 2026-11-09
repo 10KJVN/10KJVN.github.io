@@ -18,15 +18,29 @@ interface Props {
     loop?: boolean;
     /** Video only. Shows the play/pause bar. Defaults to on, unless `autoPlay` is set. */
     controls?: boolean;
+    /** Thumbnail crop (CSS only). The lightbox still opens the full, uncropped image. */
+    aspect?: "16:9" | "4:3" | "1:1";
+    /** CSS object-position for the crop, e.g. "center 20%". Empty means centered. */
+    position?: string;
 }
 
 const {
     src, alt, caption, lightbox = false, fullSrc, width, height,
     autoPlay = false, muted = false, loop = false, controls,
+    aspect = null, position = "",
 } = Astro.props;
+
 const isVideo: boolean = /\.(mp4|webm|ogg)$/i.test(src);
 const showControls: boolean = controls ?? !autoPlay;
-const imageClass: string = "m-0 w-full rounded-frame border border-border";
+const aspectClasses: Record<"16:9" | "4:3" | "1:1", string> = {
+    "16:9": "aspect-video",
+    "4:3": "aspect-[4/3]",
+    "1:1": "aspect-square",
+};
+
+const cropClass: string = aspect ? `${aspectClasses[aspect]} object-cover` : "";
+const cropStyle: string | undefined = position ? `object-position: ${position}` : undefined;
+const imageClass: string = `m-0 w-full rounded-frame border border-border ${cropClass}`;
 ---
 
 <figure class="my-8">
@@ -53,7 +67,7 @@ const imageClass: string = "m-0 w-full rounded-frame border border-border";
                     aria-label={`Enlarge image: ${alt}`}
                     class="lightbox-trigger"
             >
-                <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" class={imageClass} />
+                <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" style={cropStyle} class={imageClass} />
                 <span
                         aria-hidden="true"
                         class="lightbox-trigger__badge"
@@ -64,7 +78,7 @@ const imageClass: string = "m-0 w-full rounded-frame border border-border";
             </span>
             </button>
     ) : (
-            <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" class={imageClass} />
+            <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" style={cropStyle} class={imageClass} />
     )}
     {caption && (
             <figcaption class="label mt-2">
