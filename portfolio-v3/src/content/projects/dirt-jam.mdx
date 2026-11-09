@@ -166,49 +166,24 @@ including animated and layered fog, through OGLDEV's Mastering Fog Rendering in 
 </Gallery>
 
 <Gallery cols={2}>
-    <Media lightbox src="/images/dirtjam/Dirt.png" alt="Dirt Rocks" caption="Dirt rock texture" />
+    <Media lightbox src="/images/dirtjam/LeanLake.png" alt="Dirt Rocks" caption="Lean lake 😷🥼" />
     <Media lightbox src="/images/dirtjam/Ice.png" alt="Icy texture" caption="Icy texture" />
 </Gallery>
 
-## Gallery
+## Final Composition
 
-A few experiments and unused visuals from along the way — cloud studies, lighting moods, and logo variations explored before landing on the final look.
+After the texturing work,
+I wanted to spend less time on low-level implementation and more on shaping the environment.
+For the water,
+I opted for a simpler GDShader implementation using vertex displacement and Fresnel reflection,
+which I integrated with Sky3D to follow the changing sky.
 
-<Gallery cols={3}>
-    <img loading="lazy" decoding="async" src="/images/DirtJamThumb.png" alt="Way2Terrain gallery placeholder" />
-    <img loading="lazy" decoding="async" src="/images/DirtJamThumb.png" alt="Way2Terrain gallery placeholder" />
-    <img loading="lazy" decoding="async" src="/images/DirtJamThumb.png" alt="Way2Terrain gallery placeholder" />
-</Gallery>
-
-*(Placeholder — swap in your actual gallery images: cloud experimentation, glacial peaks at sunset, moodboards, logo variations, final showcase.)*
-
-##
-
-<Split ratio="1:1">
-    <div>
-
-        ### Resources
-
-        - [Beer's Law — volumetric rendering theory](https://cglearn.eu/pub/advanced-computer-graphics/volumetric-rendering)
-        - [Fog theory walkthrough (video)](https://youtu.be/oQksg57qsRA?si=uunivFLk1rYETOH1&t=138)
-
-    </div>
-    <div>
-
-        **Glossary** — a few terms if you're newer to graphics programming:
-
-        - **CPU** — the computer's general-purpose "brain." Handles logic and game state, but is slower at graphics work.
-        - **GPU** — specialized hardware for rendering and parallel calculations, essential for games and 3D visuals.
-        - **Shader** — a small program that runs on the GPU to control how something looks: color, lighting, surface effects.
-        - **Uniform** — a shared setting that stays constant across many pixels or objects, like a global color every shader can read.
-        - **Buffer** — a block of GPU memory used to store data so shaders can access it quickly.
-        - **Uniform Buffer Object (UBO)** — a shared "box of settings" (colors, lights, camera info) multiple shaders can read at once.
-        - **Data Alignment** — how data is arranged in memory so it fits the slots hardware expects. Misaligned data wastes memory or slows things down.
-        - **Texture Mapping** — applying a 2D image onto a 3D surface to add detail like grass, rock, or water.
-        - **Low-level** — working with raw materials instead of prebuilt furniture. More control, more effort.
-
-    </div>
-</Split>
+<iframe width="560" height="315"
+        src="https://www.youtube.com/embed/78o5SYJE_Ns?si=Sz9MmV4vuMmR2NV-"
+        title="YouTube video player"
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;
+        web-share" referrerpolicy="strict-origin-when-cross-origin"allowfullscreen>
+</iframe>
 
 ## Post Mortem
 
