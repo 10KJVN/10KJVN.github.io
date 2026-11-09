@@ -1,0 +1,15 @@
+---
+interface Props {
+    /** Max width of the block: sm = 576px, md = 672px, lg = 896px. */
+    width?: "sm" | "md" | "lg";
+}
+
+const { width = "md" }: Props = Astro.props;
+
+// Literal class strings so Tailwind can detect them.
+const maxWidth: string = { sm: "max-w-xl", md: "max-w-2xl", lg: "max-w-4xl" }[width];
+---
+
+<div class={`mx-auto my-10 ${maxWidth} [&>*:first-child]:mt-0 [&>*:last-child]:mb-0`}>
+    <slot />
+</div>
