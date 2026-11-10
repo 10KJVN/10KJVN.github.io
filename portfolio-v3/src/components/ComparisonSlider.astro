@@ -145,8 +145,15 @@ const initial: number = Math.min(100, Math.max(0, Math.round(start)));
 </script>
 
 <style>
-    .comparison__before {
+    .comparison :global(.comparison__before) {
         clip-path: inset(0 calc(100% - var(--pos, 50%)) 0 0);
+    }
+
+    /* Images must not be draggable or clickable themselves: the figure handles all pointer input. */
+    .comparison :global(img) {
+        pointer-events: none;
+        -webkit-user-drag: none;
+        user-select: none;
     }
 
     .comparison__label {
