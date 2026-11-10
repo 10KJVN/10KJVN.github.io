@@ -18,12 +18,11 @@ role: "Technical Artist"
 import Split from "../../components/Split.astro";
 import Media from "../../components/Media.astro";
 
-<div className="section-break" aria-hidden="true"></div>
+## Overview
 
-<Split ratio="2:3" align="center">
+<Split ratio="3:2" align="start">
     <div>
 
-        ### Overview
         Radial Stamina replaced the original stamina display in Operation Starfall.
 
         The feature combines the existing stamina system with a ShaderGraph-based radial UI,
@@ -37,7 +36,7 @@ import Media from "../../components/Media.astro";
         src="/videos/starfall/radialplayergif.gif"
         fullSrc="/videos/starfall/radialplayergif.gif"
         alt="Radial stamina system in-game"
-        caption="Full ShaderGraph"
+        caption="Radial stamina system in-game"
     />
 </Split>
 
@@ -69,7 +68,16 @@ became an opportunity to explore how the same gameplay information could drive a
         After the update, the display fades out and reappears when the stamina changes again.
 
     </div>
-    <img loading="lazy" decoding="async" src="/images/starfall/unityradialevents.png" alt="Unity Events used to control the stamina radial" />
+    <div>
+        ```csharp
+        [Header("Events")]
+        [SerializeField] private UnityEvent onStaminaEmpty = new UnityEvent();
+        [SerializeField] private UnityEvent onStaminaDeplete = new UnityEvent();
+        [SerializeField] private UnityEvent onStaminaIncrease = new UnityEvent();
+        [SerializeField] private UnityEvent onStaminaUpdate = new UnityEvent();
+        [SerializeField] private UnityEvent onStaminaFull = new UnityEvent();
+        ```
+    </div>
 </Split>
 
 ## ShaderGraph
@@ -85,7 +93,7 @@ The ShaderGraph is split into three main sections: fade logic, texture logic, an
     caption="Full ShaderGraph"
 />
 
-<Split ratio="2:3" align="center">
+<Split ratio="1:1" align="center">
     <div>
 
         ### Fade Logic
@@ -97,16 +105,13 @@ The ShaderGraph is split into three main sections: fade logic, texture logic, an
         These values are combined to produce the final visibility of the stamina ring.
 
     </div>
-    <Media lightbox src="/videos/starfall/RadialFade.gif" alt="Radial stamina fading in and out" caption="Fade section" />
+    <Media lightbox src="/videos/starfall/RadialFade.gif" alt="Radial stamina fading in and out" caption="Fade section logic visualized" />
 </Split>
 
 ### Texture Logic
-
 The texture section combines the ring texture with its configured color.
-
 The texture's RGBA output is multiplied by the color before being passed into the final shader output.
-
-[//]: # (A zoomed-in screenshot of these nodes could be useful here, but this section can also stand without an image.)
+{/*Find a way to wrap this text early to please my eyes more*/}
 
 <Split ratio="2:3" reverse>
     <div>
@@ -120,7 +125,7 @@ The texture's RGBA output is multiplied by the color before being passed into th
         This produces a ring that fills and fades dynamically with the player's stamina.
 
     </div>
-    <img loading="lazy" decoding="async" src="/images/starfall/mask8p.jpg" alt="The gradient and radial mask textures used by the shader" />
+    <Media lightbox src="/images/starfall/mask8p.jpg" alt="Mask texturew" caption="Gradient and mask texture used by the shader" />
 </Split>
 
 ## Collaboration
