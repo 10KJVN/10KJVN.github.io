@@ -62,9 +62,11 @@ I also optimized parts of the workflow that were more efficient to handle in Blu
 <Gallery cols={2}>
     <Media lightbox
            src="/images/shopify/old-ui.png"
+           aspect="16:9"
            alt="Old user interface and output log"
            caption="Old User Interface & Output Log containing details" />
     <Media src="/videos/shopify/new-ui-cart-sync.mp4"
+           aspect="16:9"
            alt="New user interface with real-time cart updates"
            caption="New User Interface | post real-time cart updates" />
 </Gallery>
@@ -96,9 +98,9 @@ For example, each product instance spawns its own Product Widget, which then:
 - Communicates selections back through callbacks
 
 <Gallery cols={3}>
-    <Media lightbox src="/images/shopify/product-widget-blueprint.png" alt="Product Widget blueprint" caption="Blueprint snippet – Product Widget" />
-    <Media lightbox src="/images/shopify/variant-box-blueprint.png" alt="Variant Box Widget blueprint" caption="Blueprint snippet – Variant Box Widget" />
-    <Media lightbox src="/images/shopify/product-actor-blueprint.png" alt="Product Actor blueprint" caption="Blueprint snippet – Product Actor" />
+    <Media lightbox src="/images/shopify/product-widget-blueprint.png" alt="Product Widget blueprint" caption="Blueprint snippet – Product Widget" aspect="16:10" />
+    <Media lightbox src="/images/shopify/variant-box-blueprint.png" alt="Variant Box Widget blueprint" caption="Blueprint snippet – Variant Box Widget" aspect="16:10" />
+    <Media lightbox src="/images/shopify/product-actor-blueprint.png" alt="Product Actor blueprint" caption="Blueprint snippet – Product Actor" aspect="16:10" />
 </Gallery>
 
 > When a variant is selected, the callback chain notifies the parent actor: "Hey mesh, change color! Client has selected pink."
