@@ -18,28 +18,22 @@ role: "Gameplay Programmer"
 import Split from "../../components/Split.astro";
 import Media from "../../components/Media.astro";
 
-<div className="section-break" aria-hidden="true"></div>
+## Overview
 
 <Split ratio="2:3" align="center">
     <div>
-
-        <h2 className="title-only">Overview</h2>
         Octodrone was the first ground-based enemy developed for Operation Starfall.
         Its behavior combines state-driven AI, patrol and detection logic, and a custom jump attack.
 
         I worked on this feature together with my co-worker [Jason Siegersma](https://j5x.github.io/projectgame3.html).
-
-        [//]: # (with both of us working across the AI and animation systems.)
-
     </div>
     <Media lightbox
            src="/videos/starfall/octoattackingfinal.gif"
            fullSrc="/videos/starfall/octoattackingfinal.gif"
+           aspect="16:9"
            alt="" caption="Octodrone detecting and attacking the player"
     />
 </Split>
-
-[//]: # (## State Machine & Animation)
 
 <Split ratio="3:2" reverse>
     <div>
@@ -99,6 +93,7 @@ A small but important part of the implementation was keeping Octo facing the dir
     <Media lightbox
            src="/videos/starfall/Patrolling.gif"
            fullSrc="/videos/starfall/Patrolling.gif"
+           aspect="4:3"
            alt="" caption="Octodrone patrolling"
     />
 </Split>
@@ -143,20 +138,25 @@ The attack state inherits from the existing `AttackState` and coordinates the an
     <Media lightbox
            src="/videos/starfall/OctoAttack.gif"
            fullSrc="/videos/starfall/OctoAttack.gif"
+           aspect="4:3"
            alt="" caption="Octodrone performing its jump attack"
     />
 </Split>
 
-The attack state ties the animation timing and Force System together,
-allowing the jump to transition into the forward strike.
-
-The most interesting part was learning how Octo's states interacted with the existing Force System.
+<Split>
+    <div>
+        The attack state ties the animation timing and Force System together,
+        allowing the jump to transition into the forward strike.
+    </div>
+    <div>
+        The most interesting part was learning how Octo's states interacted with the existing Force System.
+    </div>
+</Split>
 
 ## Collaboration
 
 The other dev took the stronger role in the underlying gameplay code, while I focused more heavily on the Animator.
 We regularly switched between implementation and debugging as the feature came together.
-
 This overlap was especially useful when debugging the interaction between the AI, animation-, and Force Systems.
 
 ## Takeaway
