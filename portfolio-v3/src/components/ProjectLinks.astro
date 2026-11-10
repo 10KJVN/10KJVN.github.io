@@ -6,19 +6,27 @@ interface LinkItem {
 
 interface Props {
     links?: LinkItem[];
+    /** "default": roomy pills with a bottom margin. "compact": small pills for the project hero panel. */
+    variant?: "default" | "compact";
 }
 
-const { links = [] } = Astro.props;
+const { links = [], variant = "default" } = Astro.props;
+
+const wrapper: string = variant === "compact" ? "flex flex-wrap gap-2 md:justify-end" : "flex flex-wrap gap-3 mb-10";
+const pill: string =
+    variant === "compact"
+        ? "inline-flex items-center gap-1.5 rounded-full border border-border-strong px-3 py-1.5 text-xs text-text transition hover:border-accent hover:text-accent"
+        : "text-sm px-4 py-2 rounded-full border border-border-strong text-text/70 hover:text-text hover:bg-primary/50 transition";
 ---
 
 {links.length > 0 && (
-<div class="flex flex-wrap gap-3 mb-10">
+<div class={wrapper}>
     {links.map((link) => (
 
         <a href={link.url}
         target="_blank"
         rel="noopener noreferrer"
-        class="text-sm px-4 py-2 rounded-full border border-border-strong text-text/70 hover:text-text hover:bg-primary/50 transition"
+        class={pill}
             >
             {link.label} <span aria-hidden="true">&nearr;</span><span class="sr-only"> (opens in a new tab)</span>
         </a>

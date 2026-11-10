@@ -22,25 +22,32 @@
     type Theme = "light" | "dark";
 
     const root: HTMLElement = document.documentElement;
-    const button = document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
     const media: MediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
 
     const saved = (): string | null => {
         try { return localStorage.getItem("theme"); } catch { return null; }
     };
 
+    // The button is looked up each time: with page transitions it is a new element on every page.
     const apply = (theme: Theme): void => {
         root.dataset.theme = theme;
-        button?.setAttribute("aria-pressed", String(theme === "dark"));
+        document.querySelector("[data-theme-toggle]")?.setAttribute("aria-pressed", String(theme === "dark"));
     };
 
-    apply(root.dataset.theme === "dark" ? "dark" : "light");
+    const init = (): void => {
+        const button = document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
+        if (!button || button.dataset.bound) return;
+        button.dataset.bound = "true";
+        apply(root.dataset.theme === "dark" ? "dark" : "light");
+        button.addEventListener("click", () => {
+            const next: Theme = root.dataset.theme === "dark" ? "light" : "dark";
+            apply(next);
+            try { localStorage.setItem("theme", next); } catch { /* storage blocked: choice lasts this page only */ }
+        });
+    };
 
-    button?.addEventListener("click", () => {
-        const next: Theme = root.dataset.theme === "dark" ? "light" : "dark";
-        apply(next);
-        try { localStorage.setItem("theme", next); } catch { /* storage blocked: choice lasts this page only */ }
-    });
+    init();
+    document.addEventListener("astro:page-load", init);
 
     // Follow the OS while the visitor hasn't made an explicit choice.
     media.addEventListener("change", (event: MediaQueryListEvent) => {

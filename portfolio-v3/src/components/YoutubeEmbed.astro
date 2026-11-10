@@ -11,21 +11,77 @@ interface Props {
 
 const { id, title, start = 0, caption = "" } = Astro.props;
 
-const query: string = start > 0 ? `?start=${Math.floor(start)}` : "";
-const src: string = `https://www.youtube.com/embed/${id}${query}`;
+const startAt: number = Math.max(0, Math.floor(start));
+const watchUrl: string = `https://www.youtube.com/watch?v=${id}${startAt > 0 ? `&t=${startAt}s` : ""}`;
+// Click-to-load: only this thumbnail is fetched on page load. The player (and YouTube's scripts and
+// cookies) loads when the visitor presses play.
+const thumb: string = `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
 ---
 
 <figure class="my-8">
-    <div class="aspect-video w-full overflow-hidden rounded-frame border border-border">
-        <iframe
-                src={src}
-                title={title}
-                loading="lazy"
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
-                referrerpolicy="strict-origin-when-cross-origin"
-                class="h-full w-full"
-        ></iframe>
+    <div
+            class="relative aspect-video w-full overflow-hidden rounded-frame border border-border bg-surface-alt"
+            data-yt
+            data-id={id}
+            data-start={startAt}
+            data-title={title}
+    >
+        <button type="button" data-yt-play aria-label={`Play video: ${title}`} class="group absolute inset-0 block h-full w-full cursor-pointer">
+            <img
+                    src={thumb}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    width="1280"
+                    height="720"
+                    class="m-0 h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+            />
+            <span
+                    aria-hidden="true"
+                    class="absolute left-1/2 top-1/2 grid h-14 w-14 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-border-strong bg-surface/90 text-text shadow-[0_0_24px_var(--glow)] transition group-hover:border-accent group-hover:text-accent"
+            >
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5l11 7-11 7z" /></svg>
+            </span>
+        </button>
+        <noscript>
+            <a href={watchUrl} class="absolute inset-0 grid place-items-center text-sm text-accent underline">Watch "{title}" on YouTube</a>
+        </noscript>
     </div>
     {caption && <figcaption class="label mt-2">{caption}</figcaption>}
 </figure>
+
+<script>
+    // One delegated listener: it keeps working for embeds that arrive with a page transition.
+    document.addEventListener("click", (event: MouseEvent) => {
+        const button = (event.target as Element).closest<HTMLButtonElement>("[data-yt-play]");
+        const box = button?.closest<HTMLElement>("[data-yt]");
+        if (!button || !box) return;
+
+        const params = new URLSearchParams({ autoplay: "1", rel: "0" });
+        if (Number(box.dataset.start) > 0) params.set("start", String(box.dataset.start));
+
+        const frame = document.createElement("iframe");
+        frame.src = `https://www.youtube-nocookie.com/embed/${box.dataset.id}?${params}`;
+        frame.title = box.dataset.title ?? "YouTube video";
+        frame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        frame.allowFullscreen = true;
+        frame.referrerPolicy = "strict-origin-when-cross-origin";
+        frame.className = "absolute inset-0 h-full w-full";
+        button.replaceWith(frame);
+        frame.focus();
+    });
+
+    // Not every video has a 1280px thumbnail. Fall back to the one that always exists.
+    const fixThumbs = (): void => {
+        document.querySelectorAll<HTMLImageElement>("[data-yt] img").forEach((img) => {
+            if (img.dataset.checked) return;
+            img.dataset.checked = "true";
+            const fallback = (): void => { img.src = img.src.replace("maxresdefault", "hqdefault"); };
+            // maxresdefault answers with a 120px placeholder when it doesn't exist.
+            img.addEventListener("load", () => { if (img.naturalWidth <= 120) fallback(); }, { once: true });
+            img.addEventListener("error", fallback, { once: true });
+        });
+    };
+    fixThumbs();
+    document.addEventListener("astro:page-load", fixThumbs);
+</script>

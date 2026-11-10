@@ -1,6 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import SectionHeader from "../components/SectionHeader.astro";
+import { existsSync } from "node:fs";
+import path from "node:path";
+import { siteConfig } from "../config";
+
+// CV link: configured in src/config.ts. Only shown when the PDF is actually in public/, so it can't 404.
+const cv = siteConfig.cv;
+const cvAvailable: boolean = existsSync(path.join("public", ...cv.href.split("/").filter(Boolean)));
 ---
 <Layout
         title="Contact | Jahva's Portfolio"
@@ -60,6 +67,23 @@ import SectionHeader from "../components/SectionHeader.astro";
                 </svg>
                 <span class="text-text/80">itch.io: link<span class="sr-only"> (opens in a new tab)</span></span>
                 </a>
+
+                {cvAvailable ? (
+                        <a href={cv.href}
+                           download
+                           class="flex items-center justify-center gap-3 px-6 py-4 rounded-frame border border-accent/50 bg-surface hover:bg-surface-alt transition"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
+                            </svg>
+                            <span class="text-text/80">{cv.label} <span class="text-muted text-sm">(PDF)</span></span>
+                        </a>
+                ) : import.meta.env.DEV && (
+                        <!-- Dev only reminder: nothing is shown to visitors while the file is missing. -->
+                        <p class="rounded-frame border border-dashed border-border-strong px-6 py-4 text-sm text-muted">
+                            CV link hidden: add the PDF at <code>public{cv.href}</code> (see src/config.ts).
+                        </p>
+                )}
 
                 <!-- Will add Dutch and English CV. -->
                 <!--Might wanna make those contact buttons a component with style tokens for easier modifying.-->

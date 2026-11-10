@@ -1,0 +1,65 @@
+---
+/**
+ * Three images in one deliberate arrangement (not three identical cards).
+ *
+ *   lg and up:            below lg:
+ *   [ tall ] [ wide  ]    [      first       ]
+ *   [ tall ] [ small ]    [ second ] [ third ]
+ *
+ * Each slot takes { src?, alt, caption?, position? }. Until `src` is set the slot shows an obvious
+ * placeholder. Photos are cropped to fill their slot (object-cover); `position` sets the focal point,
+ * e.g. "center 20%".
+ */
+import Img from "./Img.astro";
+
+interface Slot {
+    /** Leave out until the image exists: a labelled placeholder is shown instead. */
+    src?: string;
+    alt: string;
+    caption?: string;
+    /** CSS object-position for the crop. */
+    position?: string;
+}
+
+interface Props {
+    /** Exactly three, in this order: [tall, wide, small]. */
+    images: [Slot, Slot, Slot];
+    class?: string;
+}
+
+const { images, class: className = "" } = Astro.props;
+
+// Literal class strings so Tailwind can detect them.
+const slots = [
+    { name: "Tall", figure: "col-span-2 lg:col-span-1 lg:row-span-2", frame: "aspect-[4/3] lg:aspect-auto lg:flex-1" },
+    { name: "Wide", figure: "col-span-1 lg:col-start-2 lg:row-start-1", frame: "aspect-square lg:aspect-[4/3]" },
+    { name: "Small", figure: "col-span-1 lg:col-start-2 lg:row-start-2", frame: "aspect-square lg:aspect-[4/3]" },
+];
+---
+
+<div class={`grid grid-cols-2 gap-3 lg:gap-4 ${className}`}>
+    {images.map((slot, i) => (
+            <figure class={`m-0 flex min-w-0 flex-col ${slots[i].figure}`}>
+                <div class={`relative min-h-0 overflow-hidden rounded-frame border ${slots[i].frame} ${slot.src ? "border-border" : "border-dashed border-border-strong bg-surface-alt"}`}>
+                    {slot.src ? (
+                            <Img
+                                    src={slot.src}
+                                    alt={slot.alt}
+                                    loading="eager"
+                                    sizes="(min-width: 1024px) 30vw, 100vw"
+                                    class="absolute inset-0 m-0 h-full w-full object-cover"
+                                    style={slot.position ? `object-position: ${slot.position}` : undefined}
+                            />
+                    ) : (
+                            <div aria-hidden="true" class="absolute inset-0 grid place-items-center p-3 text-center">
+                                <div>
+                                    <p class="label">Image placeholder</p>
+                                    <p class="label mt-1 text-accent">{String(i + 1).padStart(2, "0")} · {slots[i].name}</p>
+                                </div>
+                            </div>
+                    )}
+                </div>
+                {slot.caption && <figcaption class="label mt-2">{slot.caption}</figcaption>}
+            </figure>
+    ))}
+</div>

@@ -1,0 +1,140 @@
+---
+/**
+ * Adds a small "copy link to this section" button to every h2/h3 of the article (.mdx-content).
+ * Drop <HeadingLinks /> anywhere on a page that renders MDX. It reuses the ids MDX already puts on
+ * headings (the same ones the table of contents links to), so there's no second anchor system.
+ *
+ * Look: hidden until the heading is hovered or the button is focused; on touch screens it is always
+ * faintly visible, since there is no hover. Feedback is a small "Link copied" bubble plus a screen-reader
+ * announcement.
+ */
+---
+
+<script>
+    const SELECTOR = ".mdx-content :is(h2, h3)[id]";
+    const LINK_ICON =
+        '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 0 0-7.07-7.07l-1.7 1.7" /><path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 0 0 7.07 7.07l1.7-1.7" /></svg>';
+    const FEEDBACK_MS = 1800;
+
+    const decorate = (): void => {
+        document.querySelectorAll<HTMLElement>(SELECTOR).forEach((heading) => {
+            if (heading.querySelector(".heading-link")) return;
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "heading-link";
+            button.setAttribute("aria-label", "Copy link to this section");
+            button.innerHTML = `${LINK_ICON}<span class="heading-link__tip" aria-hidden="true">Link copied</span>`;
+            heading.append(button);
+        });
+    };
+
+    const announce = (message: string): void => {
+        let region = document.getElementById("heading-link-status");
+        if (!region) {
+            region = document.createElement("div");
+            region.id = "heading-link-status";
+            region.className = "sr-only";
+            region.setAttribute("role", "status");
+            document.body.append(region);
+        }
+        region.textContent = "";
+        // A change after a tick makes screen readers announce it again on repeat copies.
+        window.setTimeout(() => { region!.textContent = message; }, 50);
+    };
+
+    const copy = async (text: string): Promise<boolean> => {
+        try {
+            await navigator.clipboard.writeText(text);
+            return true;
+        } catch {
+            // Insecure context or permission denied: fall back to the old selection trick.
+            const field = document.createElement("textarea");
+            field.value = text;
+            field.setAttribute("readonly", "");
+            field.style.cssText = "position:fixed;opacity:0;pointer-events:none";
+            document.body.append(field);
+            field.select();
+            let ok = false;
+            try { ok = document.execCommand("copy"); } catch { /* nothing else to try */ }
+            field.remove();
+            return ok;
+        }
+    };
+
+    document.addEventListener("click", async (event: MouseEvent) => {
+        const button = (event.target as Element).closest<HTMLButtonElement>(".heading-link");
+        const heading = button?.closest<HTMLElement>("[id]");
+        if (!button || !heading) return;
+
+        const url = new URL(window.location.href);
+        url.hash = heading.id;
+        const ok = await copy(url.href);
+
+        const tip = button.querySelector<HTMLElement>(".heading-link__tip");
+        if (tip) tip.textContent = ok ? "Link copied" : "Couldn't copy";
+        button.dataset.copied = "true";
+        announce(ok ? "Link to this section copied to the clipboard" : "Couldn't copy the link");
+        window.setTimeout(() => { delete button.dataset.copied; }, FEEDBACK_MS);
+    });
+
+    decorate();
+    document.addEventListener("astro:page-load", decorate);
+</script>
+
+<style is:global>
+    .heading-link {
+        position: relative;
+        display: inline-grid;
+        width: 1.75rem;
+        height: 1.75rem;
+        margin-left: 0.5rem;
+        vertical-align: middle;
+        place-items: center;
+        border-radius: 9999px;
+        color: var(--color-muted);
+        font-size: 1rem;
+        letter-spacing: normal;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.15s ease, color 0.15s ease;
+    }
+
+    /* Revealed by hover over the heading, keyboard focus, or the copied state. */
+    .mdx-content :is(h2, h3):hover .heading-link,
+    .heading-link:focus-visible,
+    .heading-link[data-copied] {
+        opacity: 1;
+    }
+    .heading-link:hover,
+    .heading-link[data-copied] { color: var(--color-accent); }
+
+    /* No hover on touch screens: keep it visible, but quiet. */
+    @media (hover: none) {
+        .heading-link { opacity: 0.45; }
+    }
+
+    .heading-link__tip {
+        position: absolute;
+        left: 50%;
+        bottom: calc(100% + 0.25rem);
+        padding: 0.2rem 0.5rem;
+        border: 1px solid var(--color-border-strong);
+        border-radius: var(--radius-frame);
+        background: var(--color-surface);
+        color: var(--color-text);
+        font-family: var(--font-mono);
+        font-size: 0.6875rem;
+        font-weight: 400;
+        letter-spacing: 0.08em;
+        text-transform: none;
+        white-space: nowrap;
+        pointer-events: none;
+        transform: translateX(-50%) translateY(0.25rem);
+        opacity: 0;
+        transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+    .heading-link[data-copied] .heading-link__tip {
+        opacity: 1;
+        transform: translateX(-50%);
+    }
+</style>

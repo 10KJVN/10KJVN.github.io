@@ -66,48 +66,52 @@ const current = (href: string): "page" | undefined => {
 </nav>
 
 <script>
-  const toggle = document.getElementById("nav-toggle");
-  const links = document.getElementById("nav-links");
+  // Elements are looked up on demand: with page transitions the navbar is a new element on every page.
+  const toggleEl = (): HTMLElement | null => document.getElementById("nav-toggle");
+  const linksEl = (): HTMLElement | null => document.getElementById("nav-links");
 
-  if (toggle && links) {
-    const nav = toggle.closest("nav");
+  const setOpen = (open: boolean): void => {
+    const links = linksEl();
+    links?.classList.toggle("hidden", !open);
+    links?.classList.toggle("flex", open);
+    toggleEl()?.setAttribute("aria-expanded", String(open));
+  };
 
-    const setOpen = (open: boolean): void => {
-      links.classList.toggle("hidden", !open);
-      links.classList.toggle("flex", open);
-      toggle.setAttribute("aria-expanded", String(open));
-    };
+  const isOpen = (): boolean => toggleEl()?.getAttribute("aria-expanded") === "true";
 
-    const isOpen = (): boolean => toggle.getAttribute("aria-expanded") === "true";
-
-    toggle.addEventListener("click", () => {
-      setOpen(!isOpen());
-    });
-
+  // Per-page wiring (guarded, safe to call repeatedly).
+  const bind = (): void => {
+    const toggle = toggleEl();
+    const links = linksEl();
+    if (!toggle || !links || toggle.dataset.bound) return;
+    toggle.dataset.bound = "true";
+    toggle.addEventListener("click", () => setOpen(!isOpen()));
     links.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => setOpen(false));
     });
+  };
 
-    // Escape closes the menu and returns focus to the button that opened it.
-    document.addEventListener("keydown", (event: KeyboardEvent) => {
-      if (event.key === "Escape" && isOpen()) {
-        setOpen(false);
-        toggle.focus();
-      }
-    });
+  bind();
+  document.addEventListener("astro:page-load", bind);
 
-    // A click outside the navbar closes it. The theme toggle and brand sit inside the navbar, so they don't.
-    document.addEventListener("click", (event: MouseEvent) => {
-      if (isOpen() && nav && !nav.contains(event.target as Node)) setOpen(false);
-    });
+  // Escape closes the menu and returns focus to the button that opened it.
+  document.addEventListener("keydown", (event: KeyboardEvent) => {
+    if (event.key === "Escape" && isOpen()) {
+      setOpen(false);
+      toggleEl()?.focus();
+    }
+  });
 
-    // Reset mobile menu state when returning to desktop layout.
-    const desktop = window.matchMedia("(min-width: 768px)");
+  // A click outside the navbar closes it. The theme toggle and brand sit inside the navbar, so they don't.
+  document.addEventListener("click", (event: MouseEvent) => {
+    const nav = toggleEl()?.closest("nav");
+    if (isOpen() && nav && !nav.contains(event.target as Node)) setOpen(false);
+  });
 
-    desktop.addEventListener("change", (event) => {
-      if (event.matches) setOpen(false);
-    });
-  }
+  // Reset mobile menu state when returning to desktop layout.
+  window.matchMedia("(min-width: 768px)").addEventListener("change", (event) => {
+    if (event.matches) setOpen(false);
+  });
 </script>
 
 <style>

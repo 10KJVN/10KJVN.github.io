@@ -1,4 +1,6 @@
 ---
+import Img from "./Img.astro";
+
 interface Props {
     beforeSrc: string;
     beforeAlt: string;
@@ -30,8 +32,9 @@ const initial: number = Math.min(100, Math.max(0, Math.round(start)));
         data-after-label={afterLabel}
         style={`--pos: ${initial}%`}
 >
-    <img src={afterSrc} alt={afterAlt} class="comparison__after m-0 block h-auto w-full" draggable="false" loading="lazy" decoding="async" />
-    <img src={beforeSrc} alt={beforeAlt} class="comparison__before m-0 absolute inset-0 h-full w-full object-cover" draggable="false" loading="lazy" decoding="async" />
+    <!-- Img serves WebP at a size that suits the screen (the originals are multi-hundred-KB PNGs). -->
+    <Img src={afterSrc} alt={afterAlt} class="comparison__after m-0 block h-auto w-full" sizes="(min-width: 1024px) 50vw, 100vw" />
+    <Img src={beforeSrc} alt={beforeAlt} class="comparison__before m-0 absolute inset-0 h-full w-full object-cover" sizes="(min-width: 1024px) 50vw, 100vw" />
 
     <!-- Accessible control. Must come before the handle so peer-focus-visible can style it. -->
     <input

@@ -1,4 +1,19 @@
 ---
+/**
+ * Persistent table of contents for long pages. Wrap the article in it:
+ *
+ *   <TableOfContents headings={headings}>
+ *       <div class="mdx-content"><Content /></div>
+ *   </TableOfContents>
+ *
+ * `headings` comes straight from render(entry), so the list is always the real headings of the page.
+ *   - xl and up: a sticky rail to the right of the article (the article is narrowed, so nothing is covered).
+ *   - below xl: a sticky "On this page" bar under the navbar that opens a list.
+ * The section currently on screen is highlighted (and named in the mobile bar). Pages with fewer than
+ * `minHeadings` sections (src/config.ts) get no TOC and the slot renders unchanged.
+ */
+import { siteConfig } from "../config";
+
 interface Heading {
     depth: number;
     slug: string;
@@ -7,23 +22,204 @@ interface Heading {
 
 interface Props {
     headings?: Heading[];
+    title?: string;
+    /** Minimum number of top-level (h2) sections for the TOC to appear. */
+    minHeadings?: number;
 }
 
-const { headings = [] } = Astro.props;
-const sections = headings.filter((h) => h.depth === 2);
+const { headings = [], title = siteConfig.toc.title, minHeadings = siteConfig.toc.minHeadings } = Astro.props;
+
+// h2 are sections, h3 their sub-points. Deeper levels would just add noise.
+const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
+const sectionCount: number = items.filter((h) => h.depth === 2).length;
+const show: boolean = sectionCount >= minHeadings;
+
+// Number the sections like the article does (01, 02, ...).
+let section = 0;
+const numbered = items.map((h) => ({ ...h, number: h.depth === 2 ? String(++section).padStart(2, "0") : null }));
 ---
 
-{sections.length > 0 && (
-<nav class="border border-chrome rounded-2xl p-4 mb-8">
-    <p class="text-xs uppercase tracking-wide text-text/70 mb-3">Jump to Section</p>
-    <ul class="flex flex-wrap gap-x-4 gap-y-2 text-sm">
-        {sections.map((h) => (
-                <li>
-                    <a href={`#${h.slug}`} class="text-accent hover:underline transition">
-                        {h.text}
-                    </a>
-                </li>
-        ))}
-    </ul>
-</nav>
-    )}
+{!show ? (
+        <slot />
+) : (
+        <div data-toc class="xl:grid xl:grid-cols-[minmax(0,1fr)_13rem] xl:items-start xl:gap-12 2xl:grid-cols-[minmax(0,1fr)_15rem]">
+
+            <!-- Below xl: sticky bar under the navbar -->
+            <div class="toc-bar sticky top-[4.25rem] z-30 -mx-8 mb-8 border-y border-border bg-background/90 px-8 backdrop-blur-lg lg:-mx-12 lg:px-12 xl:hidden">
+                <button
+                        type="button"
+                        data-toc-toggle
+                        aria-expanded="false"
+                        aria-controls="toc-panel"
+                        class="flex w-full items-center justify-between gap-4 py-3 text-left"
+                >
+                    <span class="min-w-0">
+                        <span class="label block">{title}</span>
+                        <span data-toc-current data-default="Jump to a section" class="mt-0.5 block truncate text-sm text-text">Jump to a section</span>
+                    </span>
+                    <svg class="toc-chevron shrink-0 text-muted" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
+                </button>
+                <nav id="toc-panel" data-toc-panel hidden aria-label={title} class="max-h-[60vh] overflow-y-auto border-t border-border py-2">
+                    <ul>
+                        {numbered.map((h) => (
+                                <li>
+                                    <a
+                                            href={`#${h.slug}`}
+                                            data-toc-link
+                                            data-slug={h.slug}
+                                            data-title={h.text}
+                                            class={`block py-2 text-sm text-muted transition hover:text-text ${h.depth === 3 ? "pl-8 text-[13px]" : ""}`}
+                                    >
+                                        {h.number && <span class="mr-2 font-mono text-[10px] text-accent" aria-hidden="true">{h.number}</span>}{h.text}
+                                    </a>
+                                </li>
+                        ))}
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="min-w-0">
+                <slot />
+            </div>
+
+            <!-- xl and up: persistent rail -->
+            <aside class="hidden xl:block">
+                <nav aria-label={title} class="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto pr-1" data-toc-rail>
+                    <p class="label mb-3">{title}</p>
+                    <ul class="border-l border-border">
+                        {numbered.map((h) => (
+                                <li>
+                                    <a
+                                            href={`#${h.slug}`}
+                                            data-toc-link
+                                            data-slug={h.slug}
+                                            data-title={h.text}
+                                            class={`toc-link -ml-px block border-l-2 border-transparent py-1.5 leading-snug text-muted transition hover:text-text ${h.depth === 3 ? "pl-7 text-xs" : "pl-3 text-sm"}`}
+                                    >
+                                        {h.number && <span class="mr-2 font-mono text-[10px] text-accent" aria-hidden="true">{h.number}</span>}{h.text}
+                                    </a>
+                                </li>
+                        ))}
+                    </ul>
+                </nav>
+            </aside>
+        </div>
+)}
+
+<style>
+    /* Active section: accent edge on the rail, brighter text everywhere. */
+    :global([data-toc] [data-toc-link][aria-current="location"]) {
+        color: var(--color-text);
+    }
+    :global([data-toc] .toc-link[aria-current="location"]) {
+        border-left-color: var(--color-accent);
+    }
+    :global([data-toc] [data-toc-toggle][aria-expanded="true"] .toc-chevron) {
+        transform: rotate(180deg);
+    }
+    :global([data-toc] .toc-chevron) {
+        transition: transform 0.2s ease;
+    }
+</style>
+
+<script>
+    // Scroll-spy + the mobile dropdown. Re-runs after page transitions (init is idempotent per page).
+    let cleanup: (() => void) | null = null;
+
+    const OFFSET = 150; // px from the top of the viewport at which a heading counts as "current" (navbar + mobile bar + a little air)
+
+    const init = (): void => {
+        cleanup?.();
+        cleanup = null;
+
+        const root = document.querySelector<HTMLElement>("[data-toc]");
+        if (!root) return;
+
+        const links = [...root.querySelectorAll<HTMLAnchorElement>("[data-toc-link]")];
+        const slugs = [...new Set(links.map((l) => l.dataset.slug ?? ""))].filter(Boolean);
+        const headings = slugs
+            .map((slug) => document.getElementById(slug))
+            .filter((el): el is HTMLElement => el !== null);
+        if (headings.length === 0) return;
+
+        const current = root.querySelector<HTMLElement>("[data-toc-current]");
+        const rail = root.querySelector<HTMLElement>("[data-toc-rail]");
+        const toggle = root.querySelector<HTMLButtonElement>("[data-toc-toggle]");
+        const panel = root.querySelector<HTMLElement>("[data-toc-panel]");
+        let active = "";
+
+        const setActive = (slug: string): void => {
+            if (slug === active) return;
+            active = slug;
+            links.forEach((link) => {
+                if (link.dataset.slug === slug) link.setAttribute("aria-current", "location");
+                else link.removeAttribute("aria-current");
+            });
+            if (current) {
+                // From the TOC's own data, not the heading element (which may contain the copy-link button).
+                const label = links.find((l) => l.dataset.slug === slug)?.dataset.title;
+                current.textContent = label || current.dataset.default || "";
+            }
+            // Keep the active entry visible inside a scrollable rail, without moving the page.
+            const link = rail?.querySelector<HTMLElement>(`[data-slug="${CSS.escape(slug)}"]`);
+            if (rail && link && (link.offsetTop < rail.scrollTop || link.offsetTop + link.offsetHeight > rail.scrollTop + rail.clientHeight)) {
+                rail.scrollTop = link.offsetTop - rail.clientHeight / 2;
+            }
+        };
+
+        const compute = (): void => {
+            const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4;
+            if (atBottom) return setActive(headings[headings.length - 1].id);
+            let found = "";
+            for (const h of headings) {
+                if (h.getBoundingClientRect().top <= OFFSET) found = h.id;
+                else break;
+            }
+            setActive(found);
+        };
+
+        let ticking = false;
+        const onScroll = (): void => {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(() => { ticking = false; compute(); });
+        };
+
+        const setOpen = (open: boolean): void => {
+            toggle?.setAttribute("aria-expanded", String(open));
+            if (panel) panel.hidden = !open;
+        };
+
+        const onToggle = (): void => setOpen(toggle?.getAttribute("aria-expanded") !== "true");
+        const onPanelClick = (event: Event): void => {
+            if ((event.target as Element).closest("a")) setOpen(false);
+        };
+        const onKey = (event: KeyboardEvent): void => {
+            if (event.key === "Escape" && toggle?.getAttribute("aria-expanded") === "true") { setOpen(false); toggle.focus(); }
+        };
+        const onOutside = (event: MouseEvent): void => {
+            if (toggle?.getAttribute("aria-expanded") === "true" && !(event.target as Element).closest(".toc-bar")) setOpen(false);
+        };
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onScroll);
+        toggle?.addEventListener("click", onToggle);
+        panel?.addEventListener("click", onPanelClick);
+        document.addEventListener("keydown", onKey);
+        document.addEventListener("click", onOutside);
+        compute();
+
+        cleanup = (): void => {
+            window.removeEventListener("scroll", onScroll);
+            window.removeEventListener("resize", onScroll);
+            toggle?.removeEventListener("click", onToggle);
+            panel?.removeEventListener("click", onPanelClick);
+            document.removeEventListener("keydown", onKey);
+            document.removeEventListener("click", onOutside);
+        };
+    };
+
+    init();
+    document.addEventListener("astro:page-load", init);
+    document.addEventListener("astro:before-swap", () => { cleanup?.(); cleanup = null; });
+</script>

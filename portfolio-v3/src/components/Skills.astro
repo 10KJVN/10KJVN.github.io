@@ -44,7 +44,7 @@ const scale: number = Math.max(...categories.flatMap((c) => c.entries.map((e) =>
 const widthOf = (months: number): number => Math.max(3, Math.round((months / scale) * 100));
 ---
 
-<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
     {categories.map((category) => (
             <section class="rounded-frame border border-border bg-surface p-5">
                 <h3 class="label mb-4 text-accent">{category.name}</h3>

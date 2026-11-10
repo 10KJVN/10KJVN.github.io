@@ -1,7 +1,12 @@
 ---
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
+import { ClientRouter } from "astro:transitions";
+import { siteConfig } from "../config";
 import "../styles/global.css";
+
+// Central switch: src/config.ts -> pageTransitions.enabled
+const { pageTransitions } = siteConfig;
 
 interface Props {
 	title?: string;
@@ -24,12 +29,18 @@ const mainWidth = {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" style={pageTransitions.enabled ? `--vt-duration: ${pageTransitions.durationMs}ms` : undefined}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<!-- The fonts used above the fold, fetched in parallel with the CSS instead of after it. -->
+		<link rel="preload" href="/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin />
+		<link rel="preload" href="/fonts/oswald-latin.woff2" as="font" type="font/woff2" crossorigin />
+		<link rel="preload" href="/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
 
 		<meta name="color-scheme" content="light dark" />
+		{pageTransitions.enabled && <ClientRouter />}
 		<script is:inline>
 			(function () {
 				var theme;
@@ -38,6 +49,10 @@ const mainWidth = {
 					theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 				}
 				document.documentElement.dataset.theme = theme;
+				// With page transitions the incoming document starts without a theme: carry the current one over.
+				document.addEventListener("astro:before-swap", function (event) {
+					event.newDocument.documentElement.dataset.theme = document.documentElement.dataset.theme;
+				});
 			})();
 		</script>
 

@@ -19,8 +19,9 @@ const { projects } = Astro.props;
 
 <!-- removed md:grid-cols-3 here for tablet compatibility -->
 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
-    {projects.map((project) => (
+    {projects.map((project, i) => (
             <ProjectCard
+                    priority={i < 3}
                     title={project.title}
                     description={project.description}
                     image={project.image}

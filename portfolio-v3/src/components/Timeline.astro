@@ -1,17 +1,8 @@
 ---
-interface TimelinePhoto {
-    /** Leave out until the photo exists: a labelled placeholder frame is shown instead. */
-    src?: string;
-    alt: string;
-    caption?: string;
-}
-
 interface TimelineEntry {
     title: string;
     description: string;
     link?: { label: string; url: string };
-    /** Optional photo tied to this milestone. Right of the text on desktop, below it on mobile. */
-    photo?: TimelinePhoto;
 }
 
 interface TimelineGroup {
@@ -26,57 +17,37 @@ interface Props {
 const { groups } = Astro.props;
 ---
 
-<ol class="relative">
+<!--
+  Layout: a year column on the left, a continuous rule with one dot per year, and the entries to the right.
+  Entries sit in two columns from lg up so wide screens are used, one column below that.
+-->
+<ol>
     {groups.map((group) => (
-            <li class="grid gap-x-10 border-t border-border-strong py-8 first:border-t-0 first:pt-0 md:grid-cols-[5.5rem_minmax(0,1fr)]">
-                <h3 class="font-display text-3xl font-medium leading-none tracking-wide text-accent md:pt-1">
+            <li class="group grid md:grid-cols-[6.5rem_minmax(0,1fr)]">
+                <h3 class="pb-4 font-display text-3xl font-medium leading-none tracking-wide text-accent md:pb-0 md:pt-0.5">
                     {group.year}
                 </h3>
 
-                <ul class="relative mt-5 flex flex-col gap-10 border-l border-border-strong pl-6 md:mt-0 md:pl-8">
-                    {group.entries.map((entry) => (
-                            <li class="relative grid items-start gap-5 lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-8">
-                                <span
-                                        aria-hidden="true"
-                                        class="absolute -left-[29px] top-[7px] h-2.5 w-2.5 rounded-full border-2 border-accent bg-background md:-left-[37px]"
-                                ></span>
+                <div class="relative ml-1 border-l border-border-strong pb-12 pl-6 group-last:border-transparent group-last:pb-0 md:ml-0 md:pl-10">
+                    <span
+                            aria-hidden="true"
+                            class="absolute -left-[6px] top-[5px] h-[11px] w-[11px] rounded-full border-2 border-accent bg-background"
+                    ></span>
 
-                                <div>
-                                    <h4 class="mb-1 text-lg font-semibold text-text/90">{entry.title}</h4>
+                    <ul class="grid gap-x-14 gap-y-9 lg:grid-cols-2">
+                        {group.entries.map((entry) => (
+                                <li class="max-w-[34rem]">
+                                    <h4 class="mb-1.5 text-lg font-semibold leading-snug text-text/90">{entry.title}</h4>
                                     <p class="text-sm leading-relaxed text-text/70">{entry.description}</p>
                                     {entry.link && (
                                             <a href={entry.link.url} class="mt-2 inline-block text-sm text-accent hover:underline">
                                                 {entry.link.label} &rarr;
                                             </a>
                                     )}
-                                </div>
-
-                                {entry.photo && (
-                                        <figure class="m-0 max-w-sm lg:max-w-none">
-                                            {entry.photo.src ? (
-                                                    <img
-                                                            src={entry.photo.src}
-                                                            alt={entry.photo.alt}
-                                                            loading="lazy"
-                                                            decoding="async"
-                                                            class="m-0 aspect-[4/3] w-full rounded-frame border border-border object-cover"
-                                                    />
-                                            ) : (
-                                                    <div
-                                                            aria-hidden="true"
-                                                            class="grid aspect-[4/3] w-full place-items-center rounded-frame border border-dashed border-border-strong bg-surface-alt"
-                                                    >
-                                                        <span class="label">Photo to come</span>
-                                                    </div>
-                                            )}
-                                            {entry.photo.caption && (
-                                                    <figcaption class="label mt-2">{entry.photo.caption}</figcaption>
-                                            )}
-                                        </figure>
-                                )}
-                            </li>
-                    ))}
-                </ul>
+                                </li>
+                        ))}
+                    </ul>
+                </div>
             </li>
     ))}
 </ol>
