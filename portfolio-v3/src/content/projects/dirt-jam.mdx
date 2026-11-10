@@ -30,7 +30,7 @@ import YouTubeEmbed from "../../components/YouTubeEmbed.astro";
 
 ## Overview
 
-Acerola's Dirt Jam is a community event encouraging participants to explore graphics and shader programming.
+Acerola's `Dirt Jam` is a community event encouraging participants to explore graphics and shader programming.
 For this project, I started with the provided reference code and a list of suggested ideas to experiment with.
 
 ## Creative Direction
@@ -130,12 +130,12 @@ For this project, I started with the provided reference code and a list of sugge
     afterLabel="Fog on"
 />
 
-I also extended the terrain's existing Lambertian diffuse lighting with Blinn–Phong specular highlights,
+I also extended the terrain's existing `Lambertian` diffuse lighting with `Blinn–Phong` specular highlights,
 giving the surfaces a more pronounced response to light.
 
 <Gallery cols={2}>
-    <Media lightbox src="/images/dirtjam/LambertScreen.png" alt="Lambertian Diffusion" caption="Lambertian Diffusion: The old lightning model" />
-    <Media lightbox src="/images/dirtjam/BlinnScreen.png" alt="Blinn-Phong" caption="Blinn-Phong: The new lightning model" />
+    <Media lightbox src="/images/dirtjam/LambertScreen.png" alt="Lambertian Diffusion" caption="Lambertian Diffusion: The old lighting model" />
+    <Media lightbox src="/images/dirtjam/BlinnScreen.png" alt="Blinn-Phong" caption="Blinn-Phong: The new lighting model" />
 </Gallery>
 
 <Split ratio="3:2" reverse align="center">
@@ -159,7 +159,7 @@ giving the surfaces a more pronounced response to light.
         Moving beyond the terrain's initial flat coloring,
         I wanted to introduce actual surface textures.
         This turned out to be the most challenging part of the project.
-        Getting triplanar texturing to work without unwanted stretching took several days of debugging.
+        Getting `triplanar` texturing to work without unwanted stretching took several days of debugging.
     </div>
     <div>
         I was struggling to get the textures and their associated resources to work correctly,
@@ -168,7 +168,7 @@ giving the surfaces a more pronounced response to light.
         After working through the initialization and texture-binding issues,
         I eventually got the terrain rendering correctly.
         I then extended the implementation to support different texture resolutions,
-        testing everything from 128px to 4K in the running scene.
+        testing everything from `128px` to `4K` in the running scene.
     </div>
 </Split>
 
@@ -189,8 +189,8 @@ giving the surfaces a more pronounced response to light.
         After the texturing work,
         I wanted to spend less time on low-level implementation and more on shaping the environment.
         For the water,
-        I opted for a simpler GDShader implementation using vertex displacement and Fresnel reflection,
-        which I integrated with Sky3D to follow the changing sky.
+        I opted for a simpler GDShader implementation using vertex displacement and `Fresnel` reflection,
+        which I integrated with `Sky3D` to follow the changing sky.
     </div>
     <div>
         <YouTubeEmbed
@@ -240,7 +240,7 @@ giving the surfaces a more pronounced response to light.
     />
     <div>
         The entire project was AI-assisted,
-        with ChatGPT generating much of the implementation while I steered the creative direction,
+        with `ChatGPT` generating much of the implementation while I steered the creative direction,
         selected features, integrated the results and worked through issues as they appeared.
 
         I wasn't writing every line of code myself,
