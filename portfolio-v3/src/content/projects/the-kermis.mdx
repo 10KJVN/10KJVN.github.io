@@ -16,6 +16,7 @@ import Split from "../../components/Split.astro";
 import Media from "../../components/Media.astro";
 import Carousel from "../../components/Carousel.astro";
 import Center from "../../components/Center.astro";
+import Gallery from "../../components/Gallery.astro";
 
 ## Overview
 
@@ -71,42 +72,56 @@ import Center from "../../components/Center.astro";
 
 ## Vertical Slice
 
-<Split ratio="1:1" align="center">
-    <div>
-        I started looking more closely at what made these fleeting experiences memorable.
-        One distinction that helped me put it into words was the difference between
-        `Vergankelijke Schoonheid` and `Efemere Pracht.`
+I started looking more closely at what made these fleeting experiences memorable.
+One distinction that helped me put it into words was the difference between
+`Vergankelijke Schoonheid` and `Efemere Pracht.`
 
-        The former is more about the melancholy of things `gradually passing:`
-        autumn leaves, aging, or something slowly falling apart.
-        The latter puts the emphasis on the brief but intense `moment itself:`
-        fireworks, a flower that only blooms for a day, or rain catching the sunlight.
 
-        Where `Weather Report` explored the former, I wanted `The Kermis` to lean towards the latter.
-    </div>
-    <Media src="/images/caustics.svg" alt="Gameplay GIF from the shooting gallery" caption="Shooting gallery gameplay" />
-</Split>
+The former is more about the melancholy of things `gradually passing:`
+autumn leaves, aging, or something slowly falling apart.
+The latter puts the emphasis on the brief but intense `moment itself:`
+fireworks, a flower that only blooms for a day, or rain catching the sunlight.
 
-{/*I intend for these 2 paragraphs to be in reverse, so aligned to the right side of article*/}
+Where `Weather Report` explored the former, I wanted `The Kermis` to lean towards the latter.
+
+{/* The original intended experience */}
+<Gallery cols={2}>
+    <Media
+        lightbox
+        src="/images/kermis/kref01.jpg"
+        aspect="4:3"
+        alt="Ref 1"
+    />
+    <Media
+        lightbox
+        src="/images/kermis/kref02.jpg"
+        aspect="4:3"
+        alt="Ref 1"
+    />
+</Gallery>
+
 My initial idea was to let players spend a day at an amusement park with different companions,
 visiting attractions and taking pictures along the way.
 Eventually, the surroundings and people would disappear,
 leaving the player with the memories of that day.
 
-I liked the idea visually,
-but struggled to find a meaningful way for the player to participate beyond simply observing the experience.
-Discussions with my buddy group helped me explore more interactive directions.
+I liked the idea,
+but I was still figuring out how to make it interactive without having to simulate every attraction in full.
+For example, boarding a rollercoaster could simply trigger an interaction followed by a scripted ride sequence.
+The Ferris wheel eventually took a similar direction, although that became a pre-rendered cinematic.
+
+Discussions with my buddy group also helped me explore more interactive directions.
 Rather than just witnessing these moments, I wanted players to actively take part in them.
 
-{/*Considering to make this also centered, if not then aligned to the left.*/}
-This gradually evolved into a collection of small attractions and minigames,
+This gradually evolved into a collection of smaller attractions and minigames,
 with players deciding how to spend their time.
 At one point, I even considered limiting them to three coins,
 forcing them to choose which attractions to visit.
 
-The scope eventually became a single playable attraction: the shooting gallery.
-Rather than attempting to build an entire fairground experience,
-I focused on creating a vertical slice that could capture a small part of what I originally envisioned.
+{/*Considering to make this also centered, if not then aligned to the left.*/}
+{/* Finding the scope */}
+The idea was still broader than what I would eventually build,
+but now I had a more tangible direction to work towards.
 
 ## From concept to vertical slice
 
