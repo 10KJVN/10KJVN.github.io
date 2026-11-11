@@ -14,6 +14,7 @@ links:
 
 import Split from "../../components/Split.astro";
 import Media from "../../components/Media.astro";
+import Carousel from "../../components/Carousel.astro";
 
 ## Concept
 
@@ -34,14 +35,19 @@ import Media from "../../components/Media.astro";
         if temporality was such a big part of my fascination,
         wouldn't a kermis be a more fitting subject than a permanent amusement park?
     </div>
-    <Media lightbox
-       src="/images/kermis/dandelion.jpg"
-       aspect="4:3"
-       position="center 5%"
-       fullSrc="/images/kermis/dandelion.jpg"
-       alt="Dandelion artwork off some artist"
-       caption="Ephemeral Beauty: Abstract Dandelion Dreaming by Floral Abstractions"
-    />
+    <div>
+        <Carousel
+            aspect="16:9"
+            lightbox={true}
+            slides={[
+                { src: "/images/kermis/WR01.png", alt: "sunny", caption: "Sunny State"},
+                { src: "/images/kermis/WR02.png", alt: "sunny", caption: "Cloudy State"},
+                { src: "/images/kermis/WR03.png", alt: "sunny", caption: "Rainy State"},
+                { src: "/images/kermis/WR04.png", alt: "sunny", caption: "Stormy State"},
+                { src: "/images/kermis/WR05.png", alt: "sunny", caption: "Sunset State"},
+            ]}
+        />
+    </div>
 </Split>
 
 ## Overview
