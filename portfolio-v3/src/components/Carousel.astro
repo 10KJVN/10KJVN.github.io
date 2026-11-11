@@ -45,7 +45,7 @@ const {
     aspect = "16:9",
     position = "",
     lightbox = true,
-    autoplay = true,
+    autoplay = false,
     interval = 5000,
     label = "Image carousel",
 } = Astro.props;
@@ -53,8 +53,9 @@ const {
 const count: number = slides.length;
 const multiple: boolean = count > 1;
 const canAutoplay: boolean = autoplay && multiple;
-const pad = (n: number): string => String(n).padStart(2, "0");
----
+const aspectClass: string = { "16:9": "aspect-video", "4:3": "aspect-[4/3]", "1:1": "aspect-square" }[aspect];
+// Seamless loop: a copy of the last slide sits before the first, and a copy of the first sits after the last.
+const slideList: Slide[] = multiple ? [slides[count - 1], ...slides, slides[0]] : slides;---
 
 <div
         class="carousel my-8"
@@ -65,81 +66,114 @@ const pad = (n: number): string => String(n).padStart(2, "0");
         aria-roledescription="carousel"
         aria-label={label}
 >
-    <div
-            class="carousel__track flex overflow-x-auto"
-            data-track
-            tabindex={multiple ? 0 : undefined}
-            aria-label={`${label}, use the arrow keys to change slide`}
-    >
-        {slides.map((slide, i) => (
-                <div
-                        class="carousel__slide min-w-0 flex-[0_0_100%] [&>figure]:my-0"
-                        data-slide
-                        role="group"
-                        aria-roledescription="slide"
-                        aria-label={`${i + 1} of ${count}`}
-                >
-                    <Media
-                            src={slide.src}
-                            alt={slide.alt}
-                            caption={slide.caption}
-                            fullSrc={slide.fullSrc}
-                            lightbox={lightbox}
-                            aspect={aspect}
-                            position={position}
-                    />
+    <div class="carousel__stage relative">
+        <div
+                class="carousel__track flex overflow-x-auto"
+                data-track
+                tabindex={multiple ? 0 : undefined}
+                aria-label={`${label}, use the arrow keys to change slide`}
+        >
+            {slideList.map((slide: Slide, p: number) => {
+                const clone: boolean = multiple && (p === 0 || p === count + 1);
+                const real: number = multiple ? (p - 1 + count) % count : p;
+                return (
+                        <div
+                                class="carousel__slide min-w-0 flex-[0_0_100%] [&>figure]:my-0"
+                                data-slide
+                                data-clone={clone ? "true" : undefined}
+                                role="group"
+                                aria-roledescription="slide"
+                                aria-label={`${real + 1} of ${count}`}
+                                {...(clone ? { inert: true, "aria-hidden": "true" } : {})}
+                        >
+                            <Media
+                                    src={slide.src}
+                                    alt={slide.alt}
+                                    caption={slide.caption}
+                                    fullSrc={slide.fullSrc}
+                                    lightbox={lightbox}
+                                    aspect={aspect}
+                                    position={position}
+                            />
+                        </div>
+                );
+            })}
+        </div>
+
+        {multiple && (
+                <div class={`pointer-events-none absolute inset-x-0 top-0 flex items-center justify-between px-3 ${aspectClass}`}>
+                    <button type="button" class="carousel__arrow" data-prev aria-label="Previous slide">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
+                    </button>
+                    <button type="button" class="carousel__arrow" data-next aria-label="Next slide">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+                    </button>
                 </div>
-        ))}
+        )}
     </div>
 
     {multiple && (
-            <div class="mt-3 flex items-center justify-between gap-3">
-                <button type="button" class="carousel__btn" data-prev aria-label="Previous slide">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
-                </button>
-
-                <div class="flex min-w-0 items-center gap-4">
-                    <p class="label tabular-nums" data-counter aria-live="off">
-                        <span data-current>{pad(1)}</span> / {pad(count)}
-                    </p>
-                    <div class="flex items-center">
-                        {slides.map((_, i) => (
-                                <button
-                                        type="button"
-                                        class="carousel__dot"
-                                        data-dot={i}
-                                        aria-label={`Go to slide ${i + 1}`}
-                                        aria-current={i === 0 ? "true" : undefined}
-                                >
-                                    <span></span>
-                                </button>
-                        ))}
-                    </div>
-                    {canAutoplay && (
-                            <button type="button" class="carousel__btn carousel__btn--small" data-toggle aria-label="Pause autoplay" data-playing="true">
-                                <svg data-icon-pause viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" /></svg>
-                                <svg data-icon-play viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true" hidden><path d="M8 5l11 7-11 7z" /></svg>
-                            </button>
-                    )}
-                </div>
-
-                <button type="button" class="carousel__btn" data-next aria-label="Next slide">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
-                </button>
+            <div class="mt-3 flex items-center justify-center">
+                <span class="sr-only" data-status aria-live="polite"></span>
+                {slides.map((_: Slide, i: number) => (
+                        <button
+                                type="button"
+                                class="carousel__dot"
+                                data-dot={i}
+                                aria-label={`Go to slide ${i + 1}`}
+                                aria-current={i === 0 ? "true" : undefined}
+                        >
+                            <span></span>
+                        </button>
+                ))}
+                {canAutoplay && (
+                        <button type="button" class="carousel__btn carousel__btn--small ml-2" data-toggle aria-label="Pause autoplay" data-playing="true">
+                            <svg data-icon-pause viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" /></svg>
+                            <svg data-icon-play viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5l11 7-11 7z" /></svg>
+                        </button>
+                )}
             </div>
     )}
 </div>
 
 <style>
+    /* Hidden until the script has positioned the track, so the cloned slide never flashes. */
+    .carousel:not([data-ready]) .carousel__track { visibility: hidden; }
+
     .carousel__track {
         scroll-snap-type: x mandatory;
-        overscroll-behavior-x: contain; /* a swipe at the end doesn't trigger browser back/forward */
+        overscroll-behavior-x: contain;
         scrollbar-width: none;
         border-radius: var(--radius-frame);
+        user-select: none;
     }
     .carousel__track::-webkit-scrollbar { display: none; }
+    .carousel__track.is-dragging { scroll-snap-type: none; }
+    .carousel__track.is-dragging,
+    .carousel__track.is-dragging :global(*) { cursor: grabbing; }
     .carousel__slide { scroll-snap-align: start; scroll-snap-stop: always; }
 
+    /* Arrows: a chevron on a faint scrim, visible only while the mouse is over the image. */
+    .carousel__arrow {
+        display: grid;
+        width: 2.5rem;
+        height: 2.5rem;
+        place-items: center;
+        border-radius: 9999px;
+        background: rgb(0 0 0 / 0.3);
+        color: #fff;
+        opacity: 0;
+        pointer-events: auto;
+        cursor: pointer;
+        transition: opacity 0.2s ease, background-color 0.2s ease;
+    }
+    .carousel__stage:hover .carousel__arrow,
+    .carousel__stage:focus-within .carousel__arrow { opacity: 1; }
+    .carousel__arrow:hover { background: rgb(0 0 0 / 0.55); }
+    /* Touch screens swipe instead, so the arrows are not shown. */
+    @media (hover: none) { .carousel__arrow { display: none; } }
+
+    /* Only used by the optional autoplay pause button. */
     .carousel__btn {
         display: grid;
         flex: none;
@@ -177,174 +211,244 @@ const pad = (n: number): string => String(n).padStart(2, "0");
     @media (hover: hover) {
         .carousel__dot:not([aria-current="true"]):hover span { background: var(--color-muted); }
     }
-
-    /* Very narrow phones: drop the counter, the dots already show position. */
-    @media (max-width: 22rem) {
-        [data-counter] { display: none; }
-    }
 </style>
 
 <script>
-    const REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const REDUCED: MediaQueryList = window.matchMedia("(prefers-reduced-motion: reduce)");
+        const DRAG_THRESHOLD: number = 6; // px the mouse must move before a press counts as a drag (below this it is a click)
+        const SWIPE_FRACTION: number = 0.15; // how far (fraction of the width) a drag must go to change slide
 
-    class CarouselController {
-        private track: HTMLElement;
-        private slides: HTMLElement[];
-        private dots: HTMLElement[];
-        private current: HTMLElement | null;
-        private toggle: HTMLElement | null;
-        private index = 0;
-        private timer: number | undefined;
-        private autoplay: boolean;
-        private interval: number;
-        private userPaused = false; // the pause button
-        private hovering = false;
-        private interacting = false; // focus inside, or a finger down
-        private visible = true;
-        private lockUntil = 0; // scroll events before this time come from go(), not the visitor
-        private abort = new AbortController(); // removes the document-level listeners in destroy()
-        private observers: (IntersectionObserver | ResizeObserver)[] = [];
+        class CarouselController {
+            private track: HTMLElement;
+            private slides: HTMLElement[]; // real slides only, clones excluded
+            private dots: HTMLElement[];
+            private status: HTMLElement | null;
+            private toggle: HTMLElement | null;
+            private count: number;
+            // DOM position: 0 = copy of the last slide, 1..count = real slides, count + 1 = copy of the first.
+            private pos: number = 1;
+            private timer: number | undefined = undefined;
+            private settleTimer: number | undefined = undefined;
+            private autoplay: boolean;
+            private interval: number;
+            private userPaused: boolean = false;
+            private hovering: boolean = false;
+            private interacting: boolean = false;
+            private visible: boolean = true;
+            private dragging: boolean = false;
+            private suppressClick: boolean = false;
+            private abort: AbortController = new AbortController();
+            private observers: (IntersectionObserver | ResizeObserver)[] = [];
 
-        constructor(private root: HTMLElement) {
-            this.track = root.querySelector<HTMLElement>("[data-track]")!;
-            this.slides = [...root.querySelectorAll<HTMLElement>("[data-slide]")];
-            this.dots = [...root.querySelectorAll<HTMLElement>("[data-dot]")];
-            this.current = root.querySelector<HTMLElement>("[data-current]");
-            this.toggle = root.querySelector<HTMLElement>("[data-toggle]");
-            this.autoplay = root.dataset.autoplay === "true";
-            this.interval = Math.max(1500, Number(root.dataset.interval) || 5000);
+            constructor(private root: HTMLElement) {
+                this.track = root.querySelector<HTMLElement>("[data-track]")!;
+                this.slides = [...root.querySelectorAll<HTMLElement>("[data-slide]:not([data-clone])")];
+                this.dots = [...root.querySelectorAll<HTMLElement>("[data-dot]")];
+                this.status = root.querySelector<HTMLElement>("[data-status]");
+                this.toggle = root.querySelector<HTMLElement>("[data-toggle]");
+                this.count = this.slides.length;
+                this.autoplay = root.dataset.autoplay === "true";
+                this.interval = Math.max(1500, Number(root.dataset.interval) || 5000);
 
-            if (this.slides.length < 2) return;
-            this.bind();
-            this.sync();
-            this.updatePlayback();
-        }
-
-        private bind(): void {
-            // Native scroll-snap drives swipes, wheel and keyboard; we just follow the position.
-            let frame = 0;
-            this.track.addEventListener("scroll", () => {
-                cancelAnimationFrame(frame);
-                frame = requestAnimationFrame(() => {
-                    if (performance.now() < this.lockUntil) return; // our own smooth scroll is in flight
-                    const i = Math.round(this.track.scrollLeft / this.track.clientWidth);
-                    if (i !== this.index) { this.index = i; this.sync(); }
-                });
-            }, { passive: true });
-
-            this.root.querySelector("[data-prev]")?.addEventListener("click", () => this.go(this.index - 1));
-            this.root.querySelector("[data-next]")?.addEventListener("click", () => this.go(this.index + 1));
-            this.dots.forEach((dot, i) => dot.addEventListener("click", () => this.go(i)));
-
-            this.track.addEventListener("keydown", (e: KeyboardEvent) => {
-                if (e.key === "ArrowLeft") { e.preventDefault(); this.go(this.index - 1); }
-                if (e.key === "ArrowRight") { e.preventDefault(); this.go(this.index + 1); }
-            });
-
-            // Keep the slide the visitor sees in place if the width changes (rotate, resize).
-            const resize = new ResizeObserver(() => {
-                this.track.scrollTo({ left: this.index * this.track.clientWidth, behavior: "auto" });
-            });
-            resize.observe(this.track);
-            this.observers.push(resize);
-
-            if (!this.autoplay) return;
-
-            this.toggle?.addEventListener("click", () => {
-                this.userPaused = !this.userPaused;
+                if (this.count < 2) return;
+                this.jump(1); // start on the first real slide, not on the copy before it
+                this.bind();
+                this.bindDrag();
+                this.sync();
                 this.updatePlayback();
-            });
-            this.root.addEventListener("mouseenter", () => { this.hovering = true; this.updatePlayback(); });
-            this.root.addEventListener("mouseleave", () => { this.hovering = false; this.updatePlayback(); });
-            this.root.addEventListener("focusin", () => { this.interacting = true; this.updatePlayback(); });
-            this.root.addEventListener("focusout", (e: FocusEvent) => {
-                if (!this.root.contains(e.relatedTarget as Node | null)) { this.interacting = false; this.updatePlayback(); }
-            });
-            // A finger on the carousel pauses it; a tap or swipe is "interaction", so it stays
-            // paused until the visitor leaves (pointerleave doesn't fire for touch, so use a delay).
-            this.root.addEventListener("touchstart", () => { this.interacting = true; this.updatePlayback(); }, { passive: true });
-            this.root.addEventListener("touchend", () => {
-                window.setTimeout(() => { this.interacting = false; this.updatePlayback(); }, this.interval);
-            }, { passive: true });
+                }
 
-            const visibility = new IntersectionObserver(([entry]) => {
-                this.visible = entry.isIntersecting;
-                this.updatePlayback();
-            }, { threshold: 0.4 });
-            visibility.observe(this.root);
-            this.observers.push(visibility);
-            const { signal } = this.abort;
-            document.addEventListener("visibilitychange", () => this.updatePlayback(), { signal });
-            REDUCED.addEventListener("change", () => this.updatePlayback(), { signal });
-        }
+            /** The visible slide as 0..count-1, whichever copy is on screen. */
+                private get index(): number {
+                return (((this.pos - 1) % this.count) + this.count) % this.count;
+                }
 
-        /** Stop everything: used when a page transition removes this carousel. */
-        destroy(): void {
-            window.clearInterval(this.timer);
-            this.timer = undefined;
-            this.observers.forEach((o) => o.disconnect());
-            this.abort.abort();
-        }
+            private bind(): void {
+                const { signal } = this.abort;
 
-        /** Move to a slide. Wraps around at both ends. */
-        private go(target: number, smooth = true): void {
-            const count = this.slides.length;
-            const next = (target + count) % count;
-            const wrapped = Math.abs(next - this.index) > 1 && count > 2;
-            const animate = smooth && !REDUCED.matches && !wrapped;
-            this.lockUntil = animate ? performance.now() + 700 : 0;
-            this.track.scrollTo({ left: next * this.track.clientWidth, behavior: animate ? "smooth" : "auto" });
-            this.index = next;
-            this.sync();
-            if (this.autoplay) this.updatePlayback(); // restart the timer so a manual change gets a full interval
-        }
+                // Touch swipes and keyboard are native scroll-snap. When any scroll stops, read where it landed.
+                this.track.addEventListener("scroll", () => {
+                    window.clearTimeout(this.settleTimer);
+                    this.settleTimer = window.setTimeout(() => this.settle(), 120);
+                    }, { passive: true });
 
-        /** Indicators + accessibility state. */
-        private sync(): void {
-            this.slides.forEach((slide, i) => {
-                const active = i === this.index;
-                // Off-screen slides can't be tabbed into (a focused off-screen button would scroll the track).
-                slide.toggleAttribute("inert", !active);
-            });
-            this.dots.forEach((dot, i) => {
-                if (i === this.index) dot.setAttribute("aria-current", "true");
-                else dot.removeAttribute("aria-current");
-            });
-            if (this.current) this.current.textContent = String(this.index + 1).padStart(2, "0");
-        }
+                this.root.querySelector("[data-prev]")?.addEventListener("click", () => this.goTo(this.pos - 1));
+                this.root.querySelector("[data-next]")?.addEventListener("click", () => this.goTo(this.pos + 1));
+                this.dots.forEach((dot: HTMLElement, i: number) => dot.addEventListener("click", () => this.goTo(i + 1)));
 
-        private updatePlayback(): void {
-            window.clearInterval(this.timer);
-            this.timer = undefined;
+                this.track.addEventListener("keydown", (e: KeyboardEvent) => {
+                    if (e.key === "ArrowLeft") { e.preventDefault(); this.goTo(this.pos - 1); }
+                    if (e.key === "ArrowRight") { e.preventDefault(); this.goTo(this.pos + 1); }
+                    });
 
-            const playing = this.autoplay && !REDUCED.matches && !this.userPaused;
-            if (this.toggle) {
-                this.toggle.dataset.playing = String(playing);
-                this.toggle.setAttribute("aria-label", playing ? "Pause autoplay" : "Start autoplay");
-                this.toggle.querySelector("[data-icon-pause]")?.toggleAttribute("hidden", !playing);
-                this.toggle.querySelector("[data-icon-play]")?.toggleAttribute("hidden", playing);
-                // Reduced motion removes autoplay entirely, so the control would do nothing.
-                this.toggle.toggleAttribute("hidden", REDUCED.matches);
+                // Keep the visible slide in place if the width changes (rotate, resize).
+                const resize: ResizeObserver = new ResizeObserver(() => {
+                    this.track.scrollTo({ left: this.pos * this.track.clientWidth, behavior: "auto" });
+                    });
+                resize.observe(this.track);
+                this.observers.push(resize);
+
+                if (!this.autoplay) return;
+
+                this.toggle?.addEventListener("click", () => {
+                    this.userPaused = !this.userPaused;
+                    this.updatePlayback();
+                    });
+                this.root.addEventListener("mouseenter", () => { this.hovering = true; this.updatePlayback(); });
+                this.root.addEventListener("mouseleave", () => { this.hovering = false; this.updatePlayback(); });
+                this.root.addEventListener("focusin", () => { this.interacting = true; this.updatePlayback(); });
+                this.root.addEventListener("focusout", (e: FocusEvent) => {
+                    if (!this.root.contains(e.relatedTarget as Node | null)) { this.interacting = false; this.updatePlayback(); }
+                    });
+                this.root.addEventListener("touchstart", () => { this.interacting = true; this.updatePlayback(); }, { passive: true });
+                this.root.addEventListener("touchend", () => {
+                    window.setTimeout(() => { this.interacting = false; this.updatePlayback(); }, this.interval);
+                    }, { passive: true });
+
+                const visibility: IntersectionObserver = new IntersectionObserver(([entry]: IntersectionObserverEntry[]) => {
+                    this.visible = entry.isIntersecting;
+                    this.updatePlayback();
+                    }, { threshold: 0.4 });
+                visibility.observe(this.root);
+                this.observers.push(visibility);
+                document.addEventListener("visibilitychange", () => this.updatePlayback(), { signal });
+                REDUCED.addEventListener("change", () => this.updatePlayback(), { signal });
+                }
+
+            /** Click-and-drag for the mouse. Touch and pen already swipe natively. */
+                private bindDrag(): void {
+                let pressed: boolean = false;
+                let startX: number = 0;
+                let startLeft: number = 0;
+                let startPos: number = 1;
+
+                this.track.addEventListener("pointerdown", (e: PointerEvent) => {
+                    if (e.pointerType !== "mouse" || e.button !== 0) return;
+                    pressed = true;
+                    startX = e.clientX;
+                    startLeft = this.track.scrollLeft;
+                    startPos = this.pos;
+                    });
+
+                this.track.addEventListener("pointermove", (e: PointerEvent) => {
+                    if (!pressed) return;
+                    const dx: number = e.clientX - startX;
+                    if (!this.dragging) {
+                        if (Math.abs(dx) < DRAG_THRESHOLD) return;
+                        this.dragging = true;
+                        // Capture only once it is a real drag, otherwise plain clicks (lightbox) would be redirected.
+                        this.track.setPointerCapture(e.pointerId);
+                        this.track.classList.add("is-dragging");
+                        }
+                    this.track.scrollLeft = startLeft - dx;
+                    });
+
+                const end = (e: PointerEvent): void => {
+                    if (!pressed) return;
+                    pressed = false;
+                    if (!this.dragging) return; // it was a click: let it through
+                    const dx: number = e.clientX - startX;
+                    this.dragging = false;
+                    this.suppressClick = true;
+                    window.setTimeout(() => { this.suppressClick = false; }, 0);
+                    this.track.classList.remove("is-dragging");
+                    if (this.track.hasPointerCapture(e.pointerId)) this.track.releasePointerCapture(e.pointerId);
+                    const moved: boolean = Math.abs(dx) > this.track.clientWidth * SWIPE_FRACTION;
+                    this.goTo(startPos + (moved ? (dx < 0 ? 1 : -1) : 0));
+                    };
+                this.track.addEventListener("pointerup", end);
+                this.track.addEventListener("pointercancel", end);
+
+                // The click that ends a drag must not open the lightbox.
+                this.track.addEventListener("click", (e: MouseEvent) => {
+                    if (!this.suppressClick) return;
+                    e.preventDefault();
+                    e.stopPropagation();
+                    }, { capture: true });
+
+                // No browser ghost-image drag of the pictures.
+                this.track.addEventListener("dragstart", (e: Event) => e.preventDefault());
+                }
+
+            /** Stop everything: used when a page transition removes this carousel. */
+                destroy(): void {
+                window.clearInterval(this.timer);
+                window.clearTimeout(this.settleTimer);
+                this.timer = undefined;
+                this.observers.forEach((o: IntersectionObserver | ResizeObserver) => o.disconnect());
+                this.abort.abort();
+                }
+
+            /** Instant, invisible move (copy slide to its identical real slide). */
+                private jump(pos: number): void {
+                this.pos = pos;
+                this.track.scrollTo({ left: pos * this.track.clientWidth, behavior: "auto" });
+                }
+
+            /** Scroll to a DOM position. Reaching a copy (0 or count + 1) is what makes the loop animate. */
+                private goTo(pos: number): void {
+                this.pos = Math.min(this.count + 1, Math.max(0, pos));
+                const animate: boolean = !REDUCED.matches;
+                this.track.scrollTo({ left: this.pos * this.track.clientWidth, behavior: animate ? "smooth" : "auto" });
+                this.sync();
+                if (this.autoplay) this.updatePlayback(); // restart the timer so a manual change gets a full interval
+                }
+
+            /** After scrolling stops: if we landed on a copy, jump to the real slide that looks the same. */
+                private settle(): void {
+                if (this.dragging) return;
+                const width: number = this.track.clientWidth;
+                if (!width) return;
+                this.pos = Math.min(this.count + 1, Math.max(0, Math.round(this.track.scrollLeft / width)));
+                if (this.pos === 0) this.jump(this.count);
+                    else if (this.pos === this.count + 1) this.jump(1);
+                this.sync();
+                }
+
+            /** Dots + accessibility state. */
+                private sync(): void {
+                this.slides.forEach((slide: HTMLElement, i: number) => {
+                    // Off-screen slides can't be tabbed into (a focused off-screen button would scroll the track).
+                    slide.toggleAttribute("inert", i !== this.index);
+                    });
+                this.dots.forEach((dot: HTMLElement, i: number) => {
+                    if (i === this.index) dot.setAttribute("aria-current", "true");
+                        else dot.removeAttribute("aria-current");
+                    });
+                if (this.status) this.status.textContent = `Slide ${this.index + 1} of ${this.count}`;
+                }
+
+            private updatePlayback(): void {
+                window.clearInterval(this.timer);
+                this.timer = undefined;
+
+                const playing: boolean = this.autoplay && !REDUCED.matches && !this.userPaused;
+                if (this.toggle) {
+                    this.toggle.dataset.playing = String(playing);
+                    this.toggle.setAttribute("aria-label", playing ? "Pause autoplay" : "Start autoplay");
+                    this.toggle.querySelector("[data-icon-pause]")?.toggleAttribute("hidden", !playing);
+                    this.toggle.querySelector("[data-icon-play]")?.toggleAttribute("hidden", playing);
+                    this.toggle.toggleAttribute("hidden", REDUCED.matches);
+                    }
+                // Announce slide changes only while nothing is moving them on its own.
+                this.status?.setAttribute("aria-live", playing ? "off" : "polite");
+
+                const running: boolean = playing && !this.hovering && !this.interacting && this.visible && !document.hidden;
+                if (running) this.timer = window.setInterval(() => this.goTo(this.pos + 1), this.interval);
+                }
             }
-            // Announce slide changes only while nothing is moving them on their own.
-            this.root.querySelector("[data-counter]")?.setAttribute("aria-live", playing ? "off" : "polite");
 
-            const running = playing && !this.hovering && !this.interacting && this.visible && !document.hidden;
-            if (running) this.timer = window.setInterval(() => this.go(this.index + 1), this.interval);
-        }
-    }
+        const instances: CarouselController[] = [];
+        const initAll = (): void => {
+            document.querySelectorAll<HTMLElement>("[data-carousel]").forEach((el: HTMLElement) => {
+                if (el.dataset.ready) return;
+                el.dataset.ready = "true";
+                instances.push(new CarouselController(el));
+                });
+            };
 
-    const instances: CarouselController[] = [];
-    const initAll = (): void => {
-        document.querySelectorAll<HTMLElement>("[data-carousel]").forEach((el) => {
-            if (el.dataset.ready) return;
-            el.dataset.ready = "true";
-            instances.push(new CarouselController(el));
-        });
-    };
-
-    initAll();
-    // Page transitions: start carousels on the new page, and stop the old page's timers before it goes.
-    document.addEventListener("astro:page-load", initAll);
-    document.addEventListener("astro:before-swap", () => instances.splice(0).forEach((c) => c.destroy()));
+        initAll();
+        // Page transitions: start carousels on the new page, and stop the old page's timers before it goes.
+        document.addEventListener("astro:page-load", initAll);
+        document.addEventListener("astro:before-swap", () => instances.splice(0).forEach((c: CarouselController) => c.destroy()));
 </script>
