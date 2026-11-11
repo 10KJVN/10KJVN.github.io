@@ -15,40 +15,43 @@ links:
 import Split from "../../components/Split.astro";
 import Media from "../../components/Media.astro";
 import Carousel from "../../components/Carousel.astro";
+import Center from "../../components/Center.astro";
 
 ## Concept
 
-<Split ratio="1:1" align="center">
+<Split ratio="1:1" align="start">
     <div>
         The starting point for `The Kermis` was a fascination with atmosphere.
         I found that term too broad to build a game around,
         so I started exploring what actually interested me about it.
         Eventually, I realized it wasn't simply the atmosphere itself,
         but the memorable moments it can create, and the feeling of wanting to experience them again.
-
-        I had explored a related fascination in an earlier project,
-        `Weather Report`, albeit through a different approach.
-        This time, I wanted to explore that interest in a more interactive way.
-
+    </div>
+    <div>
         During concepting, I discussed a few different directions with my buddy group.
         One conversation in particular made me reconsider the setting:
         if temporality was such a big part of my fascination,
         wouldn't a kermis be a more fitting subject than a permanent amusement park?
     </div>
-    <div>
-        <Carousel
-            aspect="16:9"
-            autoplay={true}
-            slides={[
-                { src: "/images/kermis/WR01.png", alt: "sunny", caption: "Sunny State"},
-                { src: "/images/kermis/WR02.png", alt: "sunny", caption: "Cloudy State"},
-                { src: "/images/kermis/WR03.png", alt: "sunny", caption: "Rainy State"},
-                { src: "/images/kermis/WR04.png", alt: "sunny", caption: "Stormy State"},
-                { src: "/images/kermis/WR05.png", alt: "sunny", caption: "Sunset State"},
-            ]}
-        />
-    </div>
 </Split>
+
+<Center>
+I had explored a related fascination in an earlier project,
+`Weather Report`, albeit through a different approach.
+This time, I wanted to explore that interest in a more interactive way.
+</Center>
+
+<Carousel
+    aspect="16:9"
+    autoplay={true}
+    slides={[
+        { src: "/images/kermis/WR01.png", alt: "sunny", caption: "Sunny State"},
+        { src: "/images/kermis/WR02.png", alt: "sunny", caption: "Cloudy State"},
+        { src: "/images/kermis/WR03.png", alt: "sunny", caption: "Rainy State"},
+        { src: "/images/kermis/WR04.png", alt: "sunny", caption: "Stormy State"},
+        { src: "/images/kermis/WR05.png", alt: "sunny", caption: "Sunset State"},
+    ]}
+/>
 
 ## Overview
 
