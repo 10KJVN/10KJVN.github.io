@@ -83,7 +83,7 @@ const numbered = items.map((h) => ({ ...h, number: h.depth === 2 ? String(++sect
             </div>
 
             <!-- xl and up: persistent rail -->
-            <aside class="hidden xl:block">
+            <aside class="hidden xl:block xl:self-stretch">
                 <nav aria-label={title} class="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto pr-1" data-toc-rail>
                     <p class="label mb-3">{title}</p>
                     <ul class="border-l border-border">
