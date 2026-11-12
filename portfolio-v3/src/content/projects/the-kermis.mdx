@@ -234,52 +234,71 @@ import ComparisonSlider from "../../components/ComparisonSlider.astro";
     caption="Chain reaction of stars breaking"
 />
 
-## Playtesting
+## *Playtesting*
 
-Once the shooting gallery was playable,
-I started getting other people to try it.
-The first round of playtesting exposed a few issues with the experience.
-Some players struggled to identify which targets were shootable,
-aiming didn't always feel accurate,
-and the trajectory line could get in the way of seeing the actual shot.
+<Center width="md">
+    The first playtest exposed a few issues with the shooting gallery.
+    Players struggled to identify shootable targets,
+    aiming didn't always feel accurate,
+    and the trajectory line could obstruct the actual shot.
+</Center>
 
-I went back to the hit detection and experimented with different collider configurations and camera angles.
-Eventually, I settled on sphere colliders to make hits more consistent.
-I also set the camera's `FOV` to `80°` and made the targets more visually distinct.
+<Split ratio="1:1" align="start">
+    <div>
+        ### *Target readability*
 
-The larger stars received brighter,
-emissive materials and were worth more points.
-This gave players clearer visual priorities,
-while also introducing targets that were more rewarding to hit.
+        The targets needed a clearer visual hierarchy.
+        Larger stars received brighter emissive materials,
+        and were worth more points to reward players for prioritising them.
+    </div>
+    <div>
+        ### *Aiming and hit detection*
+
+        I experimented with different collider configurations and camera angles.
+        Eventually, I settled on sphere colliders to make hits more consistent.
+        I also set the camera's `FOV` to `80°`.
+    </div>
+</Split>
 
 <ComparisonSlider
     start={70}
     beforeSrc="/images/kermis/oldTargets.png"
-    beforeAlt="Before the change"
+    beforeAlt="Original target appearance"
     afterSrc="/images/kermis/newTargets.png"
-    afterAlt="After the change"
+    afterAlt="Improved target appearance"
     beforeLabel="Old"
     afterLabel="New"
 />
 
-The second playtest took place on June 10, with 13 testers.
-This time, the feedback highlighted a few additional improvements:
-a proper end screen, clearer feedback when the timer ran out,
-a faster charge speed and a projectile trail to make shots easier to follow.
+<Center width="md">
+    A second playtest with 13 testers brought up a few more improvements:
+    a proper end screen, clearer feedback when the timer ran out,
+    faster charging and a projectile trail.
+</Center>
 
-I implemented the projectile trail,
-but not every suggestion made it into the final build.
-An impact marker was also suggested,
-as was making more objects in the environment destructible.
+<Split ratio="1:1" align="start" reverse>
+    <div>
+        ### *Reusable responses*
 
-I didn't make the entire environment shootable,
-but I did develop a reusable hit-response component.
-This allowed different objects to react to being shot with optional score,
-sound and visual feedback, without having to implement a separate response for every object.
-A stuffed animal, for example, could simply play a squeak when hit.
+        I didn't make the entire environment shootable.
+        Instead, I developed a reusable hit-response component.
 
-{/*I didn't annotate the image yet with the rectangles, but im going to be using the oldTargets and newTargets photos so u can drop them in pre-emptively laid out nice. */}
-{/* Actually on second note, reconsider that because a button "show hitboxes" would be cool but thats new web dev functionality. And in the trailer i actually show 3 shooting interactions outside the stars and cans. So it's fine as is. */}
+        Different objects could react to shots with optional score,
+        sound and visual feedback,
+        without needing a separate implementation for each one.
+    </div>
+    <div>
+        ### *Gameplay feedback*
+
+        I implemented the projectile trail and added the result screen.
+        An impact marker was also suggested,
+        but didn't make it into the final build.
+
+        The feedback also encouraged me to explore more reactive objects.
+        A stuffed animal, for example,
+        could simply play a squeak when hit.
+    </div>
+</Split>
 
 ## Systems
 
