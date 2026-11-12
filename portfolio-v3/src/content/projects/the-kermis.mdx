@@ -5,10 +5,19 @@ thumbnail: "/images/thumbnails/image4.png"
 tags: ["Unity", "Concept", "Design", "Gameplay"]
 highlight: true
 order: 3
+
 year: 2026
+duration: "10 weeks"
+engine: "Unity"
+language: "C#"
+teamSize: "Solo* + 3 contributors"
+role: "Gameplay Programmer"
+
 links:
   - label: "GitHub Repo"
     url: "https://github.com/10KJVN/KermisGame"
+  - label: "Download Game"
+    url: "https://10kjvn.itch.io/the-kermis"
 ---
 
 import Split from "../../components/Split.astro";
@@ -17,6 +26,7 @@ import Carousel from "../../components/Carousel.astro";
 import Center from "../../components/Center.astro";
 import Gallery from "../../components/Gallery.astro";
 import ComparisonSlider from "../../components/ComparisonSlider.astro";
+import YouTubeEmbed from "../../components/YouTubeEmbed.astro";
 
 ## Overview
 
@@ -138,7 +148,7 @@ import ComparisonSlider from "../../components/ComparisonSlider.astro";
     </div>
 </Split>
 
-## The Shooting Gallery
+## Shooting Gallery
 
 <Split ratio="1:1" align="center">
     <div>
@@ -155,7 +165,7 @@ import ComparisonSlider from "../../components/ComparisonSlider.astro";
     </div>
     <Media
     lightbox aspect="16:9"
-    src="/images/kermis/research02.png"
+    src="/images/kermis/InspoCollage.jpg"
     alt="Collage of kermis shooting attraction references"
     caption="References for presentation, targets and destructive feedback"
     />
@@ -192,7 +202,7 @@ import ComparisonSlider from "../../components/ComparisonSlider.astro";
         The main consideration was making enough room for the target board and shooting interaction.
     </div>
     <div>
-        ### Building the stall
+        ### Presentation
 
         The model had to support the gameplay,
         rather than simply serve as a decorative backdrop.
@@ -386,13 +396,14 @@ import ComparisonSlider from "../../components/ComparisonSlider.astro";
 </Split>
 
 <Split ratio="1:1" align="center" reverse>
-    <Media
-        src="/videos/kermis/kermisTrailer.mp4"
-        aspect="16:9"
-        alt="The Kermis project trailer"
-        autoPlay={false} muted={false}
-        caption="Project trailer"
-    />
+    <div>
+        <YouTubeEmbed
+        id="D2BGo7aahJI"
+        title="The Kermis - Trailer"
+        start={0}
+        caption="Game Trailer: using SFX invoke nostalgia"
+        />
+    </div>
     <div>
         ### Trailer
 
@@ -466,7 +477,7 @@ I handled the concept, design, programming*, gameplay systems and integration of
 
 - Shooting stall model: [Vincent, ArtStation](https://www.artstation.com/vincentzzzvvv)
 - Ferris wheel cutscene: [@kwasi.me](https://www.tiktok.com/@kwasi.me)
-- 2D art and teddy bear model: [Julia, ArtStation](https://www.artstation.com/kniebeschermer)
+- UI, teddy bear model: [Julia, ArtStation](https://www.artstation.com/kniebeschermer)
 
 ### Audio
 
@@ -478,4 +489,4 @@ I handled the concept, design, programming*, gameplay systems and integration of
 
 - The Code Otter: [Interaction System](https://www.youtube.com/watch?v=FE0lJljavAM)
 - Afterlato: [How to break stuff](https://youtu.be/O9CU4G5i84s?si=uR6HBzj9K8lSLnx-)
-- Sven&Koen [€100 Schieten Op De Kermis](https://www.youtube.com/watch?v=4Yv4QXjN-mM)
+- Sven&Koen: [€100 Schieten Op De Kermis](https://www.youtube.com/watch?v=4Yv4QXjN-mM)
