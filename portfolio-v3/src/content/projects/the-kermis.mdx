@@ -17,6 +17,7 @@ import Media from "../../components/Media.astro";
 import Carousel from "../../components/Carousel.astro";
 import Center from "../../components/Center.astro";
 import Gallery from "../../components/Gallery.astro";
+import ComparisonSlider from "../../components/ComparisonSlider.astro";
 
 ## Overview
 
@@ -218,13 +219,59 @@ import Gallery from "../../components/Gallery.astro";
 
 {/*Temporary solution is autoplay muted */}
 <Media
-    lightbox
     src="/videos/kermis/StarBreak.mp4"
     aspect="16:9"
     alt="Clip of chain reaction"
     autoPlay={true} muted={true} loop={true}
     caption="Chain reaction of stars breaking"
 />
+
+## Playtesting
+
+Once the shooting gallery was playable,
+I started getting other people to try it.
+The first round of playtesting exposed a few issues with the experience.
+Some players struggled to identify which targets were shootable,
+aiming didn't always feel accurate,
+and the trajectory line could get in the way of seeing the actual shot.
+
+I went back to the hit detection and experimented with different collider configurations and camera angles.
+Eventually, I settled on sphere colliders to make hitting the targets more consistent.
+I also adjusted the camera's field of view to 80 and made the targets more visually distinct.
+
+The larger stars received brighter,
+emissive materials and were worth more points.
+This gave players clearer visual priorities,
+while also introducing targets that were more rewarding to hit.
+
+<ComparisonSlider
+    start={70}
+    beforeSrc="/images/kermis/oldTargets.png"
+    beforeAlt="Before the change"
+    afterSrc="/images/kermis/newTargets.png"
+    afterAlt="After the change"
+    beforeLabel="Old"
+    afterLabel="New"
+/>
+
+The second playtest took place on June 10, with 13 testers.
+This time, the feedback highlighted a few additional improvements:
+a proper end screen, clearer feedback when the timer ran out,
+a faster charge speed and a projectile trail to make shots easier to follow.
+
+I implemented the projectile trail,
+but not every suggestion made it into the final build.
+An impact marker was also suggested,
+as was making more objects in the environment destructible.
+
+I didn't make the entire environment shootable,
+but I did develop a reusable hit-response component.
+This allowed different objects to react to being shot with optional score,
+sound and visual feedback, without having to implement a separate response for every object.
+A stuffed animal, for example, could simply play a squeak when hit.
+
+{/*I didn't annotate the image yet with the rectangles, but im going to be using the oldTargets and newTargets photos so u can drop them in pre-emptively laid out nice. */}
+{/* Actually on second note, reconsider that because a button "show hitboxes" would be cool but thats new web dev functionality. And in the trailer i actually show 3 shooting interactions outside the stars and cans. So it's fine as is. */}
 
 ## Systems
 
@@ -237,12 +284,11 @@ import Gallery from "../../components/Gallery.astro";
         without requiring a separate scene or loading screen.
 
         <Media
-        lightbox
-        src="/videos/kermis/cameraTransition.mp4"
-        aspect="4:3"
-        alt="Caamera interaction gif"
-        autoPlay={true} muted={true} loop={true}
-        caption="Camera transition into shooting perspective."
+            src="/videos/kermis/cameraTransition.mp4"
+            aspect="4:3"
+            alt="Caamera interaction gif"
+            autoPlay={true} muted={true} loop={true}
+            caption="Camera transition into shooting perspective."
         />
     </div>
     <div>
@@ -275,6 +321,77 @@ import Gallery from "../../components/Gallery.astro";
     lightbox aspect="16:9"
     src="/images/kermis/result.png" alt="stall ref"
     caption="Result screen"
+/>
+
+## Final Experience
+
+Although the shooting gallery became the main playable attraction,
+I still wanted the surrounding experience to communicate the idea behind `The Kermis.`
+The introduction and ending frame the game as a visit to a place that's about to disappear.
+
+### The Ferris wheel
+
+I wanted to use a Ferris wheel ride as the cinematic transition into the final moments of the experience.
+I first blocked out the surrounding environment in Unity,
+using Burgermeester in 't Veldpark in Zaandam as a reference.
+I then storyboarded the sequence and provided reference images to a friend who helped create the pre-rendered cutscene.
+
+The sequence moves from a distant view of the Ferris wheel and shooting stall,
+to the inside of a gondola, before looking back over the fairground.
+In the final shot, the kermis has disappeared,
+leaving the player with the view of an empty space where it used to be.
+
+I oversaw the direction and provided feedback throughout production,
+while my friend handled the cutscene's environment and final render.
+
+<Media
+    src="/videos/kermis/kermisRender.mp4"
+    aspect="16:9"
+    alt="Cutscene"
+    autoPlay={true} muted={true} loop={true}
+    caption="Pre-rendered cutscene by @kwasi.me"
+/>
+
+### Narrative framing
+
+The game opens with a reflection on returning to a familiar place on its final day.
+The player remembers visiting the kermis when they were younger,
+but finds that it no longer feels quite the same.
+
+The ending takes that idea further:
+
+> "You will be missed."
+>
+> "Yet I'm glad you happened."
+
+It then reflects on the lights,
+laughter and games that will be gone by tomorrow,
+ending with the thought that perhaps the memories are what matter.
+
+### Trailer
+
+For the marketing assignment,
+I chose to create a short trailer rather than a separate promotional website.
+The final edit runs for roughly 47 seconds,
+split between gameplay footage and the introductory and cinematic sequences.
+
+I wanted to show both sides of the project:
+what the player actually does and the atmosphere surrounding that experience.
+I also sourced carnival sound effects from kermisgeluiden.nl and edited them into the trailer to reinforce its setting.
+
+The trailer came together close to the submission deadline,
+so some of the original audio ideas never made it into the edit.
+Even so, it gave the project a concise promotional piece that brought its gameplay and presentation together.
+
+I uploaded the finished build to itch.io ahead of the June 15 deadline,
+before presenting the project on June 16.
+
+<Media
+    src="/videos/kermis/kermisTrailer.mp4"
+    aspect="16:9"
+    alt="Cutscene"
+    autoPlay={false} muted={false}
+    caption="Trailer made by me"
 />
 
 ## Reflection
