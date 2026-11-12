@@ -9,7 +9,6 @@ year: 2026
 links:
   - label: "GitHub Repo"
     url: "https://github.com/10KJVN/KermisGame"
-# TODO: links (repo, gameplay video)
 ---
 
 import Split from "../../components/Split.astro";
@@ -98,7 +97,7 @@ import ComparisonSlider from "../../components/ComparisonSlider.astro";
 </Gallery>
 
 <Gallery cols={2}>
-    <Media lightbox src="/images/kermis/Ferris.png" alt="Ref 3" caption="Burgermeester in 't Veldpark, Zaandam — Spring 2026." />
+    <Media lightbox src="/images/kermis/Ferris.png" alt="Ref 3" caption="A visit to the kermis" />
     <Media lightbox src="/images/kermis/Over.jpg" alt="Ref 4" />
 </Gallery>
 
@@ -124,7 +123,7 @@ import ComparisonSlider from "../../components/ComparisonSlider.astro";
 
 <Split ratio="1:1" align="start">
     <div>
-        Discussions with my buddy group pushed me to explore more interactive directions.
+        Further discussions with my peers pushed me to explore more interactive directions.
         Rather than only witnessing these moments,
         I wanted players to actively take part in them.
     </div>
@@ -133,23 +132,21 @@ import ComparisonSlider from "../../components/ComparisonSlider.astro";
         with players choosing how to spend their time.
         At one point, I even considered limiting them to three coins,
         forcing them to choose which attractions to visit.
+
+        The idea was still broader than the final scope,
+        but it gave me a more tangible direction to work towards.
     </div>
 </Split>
-
-<Center width="md">
-    The idea was still broader than the final scope,
-    but it gave me a more tangible direction to work towards.
-</Center>
 
 ## *The Shooting Gallery*
 
 <Split ratio="1:1" align="center">
     <div>
         I was considering three possible minigame directions:
-        `RNG`-based, timing-based, or aiming-based.
+    `RNG`-based, timing-based (like a boxing machine),
+        or aiming-based.
 
-        I asked my buddy group which kermis minigame they preferred,
-        and the shooting stall came out on top.
+        A quick vote among my peers put the shooting stall on top.
         It was also one of my own favourites,
         so I decided to build around it.
 
@@ -157,9 +154,10 @@ import ComparisonSlider from "../../components/ComparisonSlider.astro";
         giving the mechanic room for visual feedback and destruction.
     </div>
     <Media
-        lightbox aspect="16:9"
-        src="/images/kermis/research02.png" alt="Shooting stall reference"
-        caption="Shooting stall for reference"
+    lightbox aspect="16:9"
+    src="/images/kermis/research02.png"
+    alt="Collage of kermis shooting attraction references"
+    caption="References for presentation, targets and destructive feedback."
     />
 </Split>
 
@@ -167,7 +165,7 @@ import ComparisonSlider from "../../components/ComparisonSlider.astro";
     <div>
         ### *Prototyping*
 
-        I adapted a 2D hold-and-release projectile mechanic from a Code Monkey tutorial to a 3D scene,
+        I adapted a 2D hold-and-release projectile mechanic from a `Code Monkey` tutorial to a 3D scene,
         using it to test how the player could charge and fire their shots.
 
         Most of the iteration went into aiming.
@@ -175,43 +173,41 @@ import ComparisonSlider from "../../components/ComparisonSlider.astro";
         using a fixed direction,
         and aiming towards the mouse's world position.
 
-        The shooting minigame in `Final Fantasy VII Rebirth` was another useful reference,
-        particularly for its first-person framing, timer and scoring.
+        `Pirate's Rampage` in `Final Fantasy VII Rebirth`
+        helped shape the minigame's first-person framing and HUD,
+        particularly its timer and score layout.
     </div>
     <Media
-        lightbox aspect="16:9"
-        src="/images/kermis/earlyProto.png" alt="Early shooting mechanic prototype"
-        caption="Early mechanic prototype"
+    lightbox aspect="16:9"
+        src="/images/kermis/PiratesRampageFF7R.png"
+        alt="Pirate's Rampage shooting minigame in Final Fantasy VII Rebirth"
+        caption="Pirate's Rampage — Final Fantasy VII Rebirth"
     />
 </Split>
 
 <Split ratio="1:1" align="center" reverse>
     <div>
-        I collaborated with Vincent,
-        an artist from my buddy group,
-        to create the shooting stall.
-        I provided reference images,
-        a rough blockout and model specifications.
+        I provided the artist with the reference collage above,
+        my blockout and model specifications.
+        The main consideration was making enough room for the target board and shooting interaction.
     </div>
     <div>
         ### *Building the stall*
 
-        I was aiming for a stylized low-poly look,
-        inspired by `A Short Hike` and `Lil Gator Game`.
-        The layout also needed to leave enough room for the targets and shooting interaction.
+        The model had to support the gameplay,
+        rather than simply serve as a decorative backdrop.
     </div>
 </Split>
 
 <Gallery cols={3}>
     <Media lightbox src="/images/kermis/blockout.png" alt="Shooting stall blockout" caption="My Blockout" aspect="16:9" />
-    <Media lightbox src="/images/kermis/VModel.png" alt="Vincent's shooting stall model" caption="Vincent's Model" aspect="16:9" />
+    <Media lightbox src="/images/kermis/VModel.png" alt="Shooting stall model" caption="Final Model" aspect="16:9" />
     <Media lightbox src="/images/kermis/earlyINGame.png" alt="Early in-game shooting stall" caption="Early In-game" aspect="16:9" />
 </Gallery>
 
 <Center width="sm">
-    Once Vincent delivered the model,
-    I integrated it into Unity and fixed a few rendering issues,
-    including its URP decals.
+    I integrated the delivered model and fixed a few rendering issues,
+    including its `URP` decals.
 </Center>
 
 <Split ratio="1:1" align="center">
@@ -223,7 +219,7 @@ import ComparisonSlider from "../../components/ComparisonSlider.astro";
         I split the models into fragments and integrated them into the shooting mechanic.
     </div>
     <div>
-        One unexpected behavior was that fragments could collide with nearby stars and break them too.
+        One unexpected behavior was that fragments could collide with neighboring stars and break them too.
         I kept this accidental chain reaction.
         Larger stars were worth more points,
         and could lead to more destructive reactions.
@@ -248,8 +244,8 @@ aiming didn't always feel accurate,
 and the trajectory line could get in the way of seeing the actual shot.
 
 I went back to the hit detection and experimented with different collider configurations and camera angles.
-Eventually, I settled on sphere colliders to make hitting the targets more consistent.
-I also adjusted the camera's field of view to 80 and made the targets more visually distinct.
+Eventually, I settled on sphere colliders to make hits more consistent.
+I also set the camera's `FOV` to `80°` and made the targets more visually distinct.
 
 The larger stars received brighter,
 emissive materials and were worth more points.
