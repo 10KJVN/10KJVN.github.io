@@ -216,11 +216,13 @@ import Gallery from "../../components/Gallery.astro";
     </div>
 </Split>
 
+{/*Temporary solution is autoplay muted */}
 <Media
     lightbox
     src="/videos/kermis/StarBreak.mp4"
     aspect="16:9"
     alt="Clip of chain reaction"
+    autoPlay={true} muted={true} loop={true}
     caption="Chain reaction of stars breaking"
 />
 
@@ -239,6 +241,7 @@ import Gallery from "../../components/Gallery.astro";
         src="/videos/kermis/cameraTransition.mp4"
         aspect="4:3"
         alt="Caamera interaction gif"
+        autoPlay={true} muted={true} loop={true}
         caption="Camera transition into shooting perspective."
         />
     </div>
