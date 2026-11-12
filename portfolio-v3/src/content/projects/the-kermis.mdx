@@ -127,60 +127,101 @@ import Gallery from "../../components/Gallery.astro";
 </Split>
 
 ## The Shooting Gallery
+<Split ratio="1:1" align="center">
+    <div>
+        With the direction established,
+        I started looking into actual kermis attractions and the different ways they could translate into gameplay.
+        I gathered references from several shooting-stall variations,
+        including moving targets, shooting games with specific hit conditions,
+        and even a few unrelated attractions for inspiration.
+        {/* This story can be SHORTENED, because putting the YouTube video SHOWING all this in resources is better. */}
+        After comparing the possibilities with my buddy group,
+        the shooting stall was the one we settled on.
+        It offered a straightforward gameplay loop that I could build upon without having to simulate an entire attraction.
+        I decided to use shooting stars as the targets, giving the game a little more room for visual feedback and destruction.
 
-With the direction established,
-I started looking into actual kermis attractions and the different ways they could translate into gameplay.
-I gathered references from several shooting-stall variations,
-including moving targets, shooting games with specific hit conditions,
-and even a few unrelated attractions for inspiration.
+    </div>
+    <Media
+        lightbox aspect="16:9"
+        src="/images/kermis/research02.png" alt="stall ref"
+        caption="Shooting stall for reference"
+    />
+</Split>
 
-After comparing the possibilities with my buddy group,
-the shooting stall was the one we settled on.
-It offered a straightforward gameplay loop that I could build upon without having to simulate an entire attraction.
-I decided to use shooting stars as the targets, giving the game a little more room for visual feedback and destruction.
+<Split ratio="1:1" align="center" reverse>
+    <div>
+        ### Prototyping the mechanic
+        I started experimenting with the shooting mechanic separately from the final stall.
+        I adapted a 2D hold-and-release projectile mechanic into my 3D scene,
+        using it to explore how the player would charge and fire their shots.
 
-### Prototyping the mechanic
+        A big part of this was figuring out how aiming should work.
+        I tried several approaches,
+        from firing directly along the camera's forward direction to using a fixed direction or aiming towards the mouse position.
+        These experiments helped me settle on a more suitable way to aim within the shooting stall.
 
-I started experimenting with the shooting mechanic separately from the final stall.
-I adapted a 2D hold-and-release projectile mechanic into my 3D scene,
-using it to explore how the player would charge and fire their shots.
+        I also looked at other games for inspiration.
+        The shooting minigame in `Final Fantasy VII Rebirth` was particularly useful as a reference for its
+        first-person perspective, timer, scoring and overall presentation.
+        I used it to get a better idea of how to frame the attraction as a self-contained minigame.
+    </div>
+    <Media
+        lightbox aspect="16:9"
+        src="/images/kermis/earlyProto.png" alt="stall ref"
+        caption="Early mechanic prototype"
+    />
+</Split>
 
-A big part of this was figuring out how aiming should work.
-I tried several approaches,
-from firing directly along the camera's forward direction to using a fixed direction or aiming towards the mouse position.
-These experiments helped me settle on a more suitable way to aim within the shooting stall.
+<Split ratio="1:1" align="center" reverse>
+    <div>
+        So, I collaborated with Vincent,
+        an artist from my buddy group.
+        I provided reference images,
+        a rough blockout and model specifications to communicate the layout and visual direction I had in mind.
+    </div>
+    <div>
+        ### Building the stall
 
-I also looked at other games for inspiration.
-The shooting minigame in Final Fantasy VII Rebirth was particularly useful as a reference for its
-first-person perspective, timer, scoring and overall presentation.
-I used it to get a better idea of how to frame the attraction as a self-contained minigame.
+        I was aiming for a stylized low-poly look,
+        drawing inspiration from games like `A Short Hike` and `Lil Gator Game.`
+        The stall also needed to leave enough room for the targets and shooting interaction,
+        so the model had to work around the gameplay rather than just serve as a decorative backdrop.
+    </div>
+</Split>
 
-### Building the stall
+<Gallery cols={3}>
+    <Media lightbox src="/images/kermis/blockout.png" alt="stall ref" caption="My Blockout" aspect="16:9" />
+    <Media lightbox src="/images/kermis/VModel.png" alt="stall ref" caption="Vincent's Model" aspect="16:9" />
+    <Media lightbox src="/images/kermis/earlyINGame.png" alt="stall ref" caption="Early In-game" aspect="16:9" />
+</Gallery>
 
-For the actual stall,
-I collaborated with Vincent,
-an artist from my buddy group.
-I provided reference images,
-a rough blockout and model specifications to communicate the layout and visual direction I had in mind.
+<Center width="sm">
+    Once Vincent delivered the model,
+    I integrated it into Unity and worked through a few rendering issues,
+    including getting its URP decals to display correctly.
+</Center>
 
-I was aiming for a stylized low-poly look,
-drawing inspiration from games like A Short Hike and Lil Gator Game.
-The stall also needed to leave enough room for the targets and shooting interaction,
-so the model had to work around the gameplay rather than just serve as a decorative backdrop.
+<Split ratio="1:1" align="center" reverse>
+    <div>
+        I also prepared the star targets to be destructible.
+        After following a Blender tutorial,
+        I used its Breakable modifier to split the models into pieces,
+        then integrated those results into the shooting mechanic.
+    </div>
+    <div>
+        One unexpected behavior was that the broken pieces could collide with neighboring stars and destroy them as well.
+        Rather than treating this as a problem, I kept it.
+        It added an extra layer of unpredictability to the shooting,
+        especially when hitting the larger targets, which were worth more points.
+    </div>
+</Split>
 
-Once Vincent delivered the model,
-I integrated it into Unity and worked through a few rendering issues,
-including getting its URP decals to display correctly.
-
-I also prepared the star targets to be destructible.
-After following a Blender tutorial,
-I used its Breakable modifier to split the models into pieces,
-then integrated those results into the shooting mechanic.
-
-One unexpected behavior was that the broken pieces could collide with neighboring stars and destroy them as well.
-Rather than treating this as a problem, I kept it.
-It added an extra layer of unpredictability to the shooting,
-especially when hitting the larger targets, which were worth more points.
+<Media
+    lightbox
+    src="/videos/kermis/StarBreak.mp4"
+    alt="Clip of chain reaction"
+    caption="Chain reaction of stars breaking"
+/>
 
 ## Systems
 
