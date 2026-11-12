@@ -333,111 +333,149 @@ import ComparisonSlider from "../../components/ComparisonSlider.astro";
     </div>
 </Split>
 
-
 ## Final Experience
 
-Although the shooting gallery became the main playable attraction,
-I still wanted the surrounding experience to communicate the idea behind `The Kermis.`
-The introduction and ending frame the game as a visit to a place that's about to disappear.
+<Center width="md">
+    The shooting gallery became the main playable attraction,
+    but I still wanted the introduction and ending to frame it as one last visit to a place that's about to disappear.
+</Center>
 
-### The Ferris wheel
+<Split ratio="1:1" align="center">
+    <div>
+        ### Ferris wheel
 
-I wanted to use a Ferris wheel ride as the cinematic transition into the final moments of the experience.
-I first blocked out the surrounding environment in Unity,
-using Burgermeester in 't Veldpark in Zaandam as a reference.
-I then storyboarded the sequence and provided reference images to a friend who helped create the pre-rendered cutscene.
+        I created a top-down blockout of the park and storyboarded a Ferris wheel ride as the transition into the ending.
 
-The sequence moves from a distant view of the Ferris wheel and shooting stall,
-to the inside of a gondola, before looking back over the fairground.
-In the final shot, the kermis has disappeared,
-leaving the player with the view of an empty space where it used to be.
+        I supplied these references and the sequence to a collaborator,
+        who created the environment and pre-rendered cutscene.
+        I directed the sequence and provided feedback throughout production.
+    </div>
+    <Media
+        src="/videos/kermis/kermisRender.mp4"
+        aspect="16:9"
+        alt="Pre-rendered Ferris wheel cutscene"
+        autoPlay={true} muted={true} loop={true}
+        caption="Ferris wheel sequence"
+    />
+</Split>
 
-I oversaw the direction and provided feedback throughout production,
-while my friend handled the cutscene's environment and final render.
+<Split ratio="1:1" align="center">
+    <div>
+        ### Narrative framing
 
-<Media
-    src="/videos/kermis/kermisRender.mp4"
-    aspect="16:9"
-    alt="Cutscene"
-    autoPlay={true} muted={true} loop={true}
-    caption="Pre-rendered cutscene by @kwasi.me"
-/>
+        The opening establishes the player's return to a place they remember from childhood,
+        but no longer quite recognize.
+        The ending shifts from that sense of loss towards appreciation:
 
-### Narrative framing
+        > "You will be missed."
+        >
+        > "Yet I'm glad you happened."
 
-The game opens with a reflection on returning to a familiar place on its final day.
-The player remembers visiting the kermis when they were younger,
-but finds that it no longer feels quite the same.
+        It then reflects on the lights, laughter and games that will be gone by tomorrow,
+        ending with the thought that the memories remain.
+    </div>
+    <div>
+        <Media
+            src="/videos/kermis/endSequence.mp4"
+            aspect="16:9"
+            alt="Ending scene"
+            autoPlay={true} muted={true} loop={true}
+            caption="Final Scene of the game"
+        />
+    </div>
+</Split>
 
-The ending takes that idea further:
+<Split ratio="1:1" align="center" reverse>
+    <Media
+        src="/videos/kermis/kermisTrailer.mp4"
+        aspect="16:9"
+        alt="The Kermis project trailer"
+        autoPlay={false} muted={false}
+        caption="Project trailer"
+    />
+    <div>
+        ### Trailer
 
-> "You will be missed."
->
-> "Yet I'm glad you happened."
+        I also edited a short trailer combining gameplay,
+        the introduction and the Ferris wheel sequence.
 
-It then reflects on the lights,
-laughter and games that will be gone by tomorrow,
-ending with the thought that perhaps the memories are what matter.
-
-### Trailer
-
-For the marketing assignment,
-I chose to create a short trailer rather than a separate promotional website.
-The final edit runs for roughly 47 seconds,
-split between gameplay footage and the introductory and cinematic sequences.
-
-I wanted to show both sides of the project:
-what the player actually does and the atmosphere surrounding that experience.
-I also sourced carnival sound effects from kermisgeluiden.nl and edited them into the trailer to reinforce its setting.
-
-The trailer came together close to the submission deadline,
-so some of the original audio ideas never made it into the edit.
-Even so, it gave the project a concise promotional piece that brought its gameplay and presentation together.
-
-I uploaded the finished build to itch.io ahead of the June 15 deadline,
-before presenting the project on June 16.
-
-<Media
-    src="/videos/kermis/kermisTrailer.mp4"
-    aspect="16:9"
-    alt="Cutscene"
-    autoPlay={false} muted={false}
-    caption="Trailer made by me"
-/>
+        I sourced carnival sound effects from `kermisgeluiden.nl`
+        and edited them into the trailer to reinforce its setting.
+    </div>
+</Split>
 
 ## Reflection
 
-Looking back,
-I think the biggest challenge with `The Kermis` was translating an abstract fascination into an experience that actually communicated it.
+<Center width="md">
+    The biggest challenge with `The Kermis` was translating an abstract fascination
+    into an experience that actually communicated it.
+</Center>
 
-I managed to turn the original concept into a playable vertical slice,
-and the playtests helped me improve its usability and gameplay.
-However, most of that feedback focused on whether the shooting gallery worked,
-rather than whether the experience conveyed the feeling I originally set out to explore.
+<Split ratio="1:1" align="start">
+    <div>
+        ### *What worked*
 
-That became particularly apparent during the final review.
-One piece of feedback questioned whether the project was actually about `anti-nostalgia`,
-rather than the ephemeral splendor I had intended.
-The reviewer also pointed out that I had moved from concept to production quite quickly,
-without deeply analyzing the kermis experience itself.
+        I turned the original concept into a playable vertical slice.
+        The playtests also helped me improve the shooting gallery's usability,
+        from target readability to aiming and feedback.
+    </div>
+    <div>
+        ### *What I missed*
 
-It's an interpretation I hadn't fully considered beforehand.
-In hindsight,
-I had spent more time developing the attraction than investigating what made the setting meaningful in the first place.
-I had tested whether the gameplay worked,
-but not whether the intended emotional experience came across.
+        During the final review,
+        one question stood out:
+        was the project actually about `anti-nostalgia`,
+        rather than the ephemeral splendor I had intended?
 
-That's probably the biggest thing I'd approach differently next time.
-I'd spend more time observing and analyzing the subject before committing to production,
-and make room for playtesting the emotional and thematic aspects of the experience alongside its usability.
+        The reviewer also felt I had moved from concept to production too quickly,
+        without deeply analyzing the kermis experience itself.
+    </div>
+</Split>
 
-The project gave me a much clearer understanding of the difference between creating a playable experience and communicating an intended feeling through it.
-I don't think those two things necessarily come together on their own.
+<Center width="md">
+    > I had tested whether the gameplay worked,
+    > but not whether the intended emotional experience came across.
+</Center>
+
+<Split ratio="1:1" align="start">
+    <div>
+        ### *Looking back*
+
+        In hindsight,
+        I had spent more time developing the attraction than investigating what made the setting meaningful.
+        Most of my playtesting focused on usability,
+        rather than the thematic and emotional aspects of the experience.
+    </div>
+    <div>
+        ### *Next time*
+
+        I'd spend more time observing and analyzing the subject before committing to production.
+        I'd also make room for testing the intended feeling of the experience,
+        alongside its mechanics and usability.
+    </div>
+</Split>
 
 ## Resources
 
+The project was developed individually,
+with selected assets and the pre-rendered Ferris wheel sequence contributed by other creators.
+I handled the concept, design, programming*, gameplay systems and integration of the playable experience.
+`*Vibe-coded` here and there.
+
+### External contributions
+
+- Shooting stall model: [Vincent, ArtStation](https://www.artstation.com/vincentzzzvvv)
+- Ferris wheel cutscene: [@kwasi.me](https://www.tiktok.com/@kwasi.me)
+- 2D art and teddy bear model: [Julia, ArtStation](https://www.artstation.com/kniebeschermer)
+
+### Audio
+
 - [Kenney: Impact Sounds (CC0)](https://www.kenney.nl/assets/impact-sounds)
-- Misc SFX & Audio: Pixabay
-- 2D Art & Teddy bear model: https://www.artstation.com/kniebeschermer
-- 3D Art shooting stall: https://www.artstation.com/vincentzzzvvv
-- Remaining art: probably sketchfab
+- [Pixabay](https://pixabay.com/): SFX & Audio used in game
+- [Kermisgeluiden.nl](https://kermisgeluiden.nl): SFX used in the trailer
+
+### References
+
+- The Code Otter: [Interaction System](https://www.youtube.com/watch?v=FE0lJljavAM)
+- Afterlato: [How to break stuff](https://youtu.be/O9CU4G5i84s?si=uR6HBzj9K8lSLnx-)
+- Sven&Koen [€100 Schieten Op De Kermis](https://www.youtube.com/watch?v=4Yv4QXjN-mM)
