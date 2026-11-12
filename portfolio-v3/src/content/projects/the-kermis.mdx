@@ -219,38 +219,60 @@ import Gallery from "../../components/Gallery.astro";
 <Media
     lightbox
     src="/videos/kermis/StarBreak.mp4"
+    aspect="16:9"
     alt="Clip of chain reaction"
     caption="Chain reaction of stars breaking"
 />
 
 ## Systems
 
-<Split ratio="1:1">
+<Split ratio="1:1" align="start">
     <div>
-
         ### Interaction
 
-        For an object to be interactable it needs a box collider, because that is what the player raycasts against. Without colliders on the model, the mouse-world raycast went straight through the building and tried to aim into the skybox, where my max reach of 300 made it fail. Placing proper colliders fixed it.
+        I implemented an interaction system to let the player interact with objects in the environment.
+        The shooting stall uses this to transition the player from exploration into the minigame,
+        without requiring a separate scene or loading screen.
 
+        <Media
+        lightbox
+        src="/videos/kermis/cameraTransition.mp4"
+        aspect="4:3"
+        alt="Caamera interaction gif"
+        caption="Camera transition into shooting perspective."
+        />
     </div>
     <div>
+        ### Camera transitions
 
-        ### Camera and game modes
+        The project uses Cinemachine to handle the different camera perspectives.
+        During exploration, the player uses the regular gameplay camera.
+        Interacting with the shooting stall switches to a dedicated shooting camera,
+        framing the targets from the intended gameplay perspective.
 
-        A main camera with a `CinemachineBrain` blends to any virtual camera it finds at runtime. Enabling the shoot camera switches to it, and disabling it switches back to the dominant camera. That was a temporary, manual solution, and automating it is next.
+        I used a Cinemachine Brain on the main camera to handle the transitions between virtual cameras.
+        This made it possible to move between exploration and shooting mode without manually repositioning the camera.
 
-        When the timer reaches 0, a Unity Event exits shooting mode and re-enters explore mode.
+        ### Minigame flow
 
-        To stop the player walking off into the void if disabled mid-input, I plan to call `ClearState()` in `PlayerController.OnDisable`.
+        The shooting gallery has a timer that determines how long the player can play.
+        When the time runs out, the game exits shooting mode and returns to the exploration state.
 
+        Following feedback from the second playtest,
+        I also added a result screen that displays the player's final score.
+        From there, they can either continue exploring or try the shooting gallery again.
+
+        The UI itself remained deliberately functional and fairly minimal.
+        It wasn't a major visual focus of the project,
+        but it provided the information and options needed to complete the minigame loop.
     </div>
 </Split>
 
-### HUD and feedback
-
-The ammo meter was a placement puzzle. Under the aim marker doesn't work with this point of view, so I considered under the timer — since you're watching the time anyway — and bottom right next to the weapon, possibly as a vertical meter. I wanted to ask someone who plays a lot of shooters, or a UI/UX artist, where they'd expect it.
-
-The exploration HUD is intentionally minimal: coins, a time-of-day indication with hard-coded times (16:00, 18:00, 20:00), and maybe a pause button.
+<Media
+    lightbox aspect="16:9"
+    src="/images/kermis/result.png" alt="stall ref"
+    caption="Result screen"
+/>
 
 ## Reflection
 
