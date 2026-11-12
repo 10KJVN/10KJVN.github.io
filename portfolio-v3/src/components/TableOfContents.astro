@@ -35,8 +35,13 @@ const sectionCount: number = items.filter((h) => h.depth === 2).length;
 const show: boolean = sectionCount >= minHeadings;
 
 // Number the sections like the article does (01, 02, ...).
-let section = 0;
-const numbered = items.map((h) => ({ ...h, number: h.depth === 2 ? String(++section).padStart(2, "0") : null }));
+let section: number = 0;
+let parent: string = "";
+// Each sub-heading remembers which `##` section it belongs to.
+const numbered = items.map((h: Heading) => {
+    if (h.depth === 2) parent = h.slug;
+    return { ...h, number: h.depth === 2 ? String(++section).padStart(2, "0") : null, parent };
+});
 ---
 
 {!show ? (
@@ -62,7 +67,7 @@ const numbered = items.map((h) => ({ ...h, number: h.depth === 2 ? String(++sect
                 <nav id="toc-panel" data-toc-panel hidden aria-label={title} class="max-h-[60vh] overflow-y-auto border-t border-border py-2">
                     <ul>
                         {numbered.map((h) => (
-                                <li>
+                                <li data-depth={h.depth} data-parent={h.parent}>
                                     <a
                                             href={`#${h.slug}`}
                                             data-toc-link
@@ -88,7 +93,7 @@ const numbered = items.map((h) => ({ ...h, number: h.depth === 2 ? String(++sect
                     <p class="label mb-3">{title}</p>
                     <ul class="border-l border-border">
                         {numbered.map((h) => (
-                                <li>
+                                <li data-depth={h.depth} data-parent={h.parent}>
                                     <a
                                             href={`#${h.slug}`}
                                             data-toc-link
@@ -107,6 +112,10 @@ const numbered = items.map((h) => ({ ...h, number: h.depth === 2 ? String(++sect
 )}
 
 <style>
+    /* Sub-sections stay collapsed until their section is the one being read. */
+    :global([data-toc] li[data-depth="3"]:not([data-open])) {
+        display: none;
+    }
     /* Active section: accent edge on the rail, brighter text everywhere. */
     :global([data-toc] [data-toc-link][aria-current="location"]) {
         color: var(--color-text);
@@ -155,6 +164,11 @@ const numbered = items.map((h) => ({ ...h, number: h.depth === 2 ? String(++sect
                 if (link.dataset.slug === slug) link.setAttribute("aria-current", "location");
                 else link.removeAttribute("aria-current");
             });
+            // Open only the sub-list of the section being read; every other group collapses.
+            const parent: string = links.find((l) => l.dataset.slug === slug)?.closest("li")?.dataset.parent ?? "";
+            root.querySelectorAll<HTMLElement>("li[data-depth='3']").forEach((li: HTMLElement) => {
+                li.toggleAttribute("data-open", parent !== "" && li.dataset.parent === parent);
+                });
             if (current) {
                 // From the TOC's own data, not the heading element (which may contain the copy-link button).
                 const label = links.find((l) => l.dataset.slug === slug)?.dataset.title;
