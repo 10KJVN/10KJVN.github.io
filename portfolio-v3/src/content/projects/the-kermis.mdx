@@ -138,12 +138,12 @@ import ComparisonSlider from "../../components/ComparisonSlider.astro";
     </div>
 </Split>
 
-## *The Shooting Gallery*
+## The Shooting Gallery
 
 <Split ratio="1:1" align="center">
     <div>
         I was considering three possible minigame directions:
-    `RNG`-based, timing-based (like a boxing machine),
+        `RNG`-based, timing-based (like a boxing machine),
         or aiming-based.
 
         A quick vote among my peers put the shooting stall on top.
@@ -157,13 +157,13 @@ import ComparisonSlider from "../../components/ComparisonSlider.astro";
     lightbox aspect="16:9"
     src="/images/kermis/research02.png"
     alt="Collage of kermis shooting attraction references"
-    caption="References for presentation, targets and destructive feedback."
+    caption="References for presentation, targets and destructive feedback"
     />
 </Split>
 
 <Split ratio="1:1" align="center" reverse>
     <div>
-        ### *Prototyping*
+        ### Prototyping
 
         I adapted a 2D hold-and-release projectile mechanic from a `Code Monkey` tutorial to a 3D scene,
         using it to test how the player could charge and fire their shots.
@@ -192,7 +192,7 @@ import ComparisonSlider from "../../components/ComparisonSlider.astro";
         The main consideration was making enough room for the target board and shooting interaction.
     </div>
     <div>
-        ### *Building the stall*
+        ### Building the stall
 
         The model had to support the gameplay,
         rather than simply serve as a decorative backdrop.
@@ -212,7 +212,7 @@ import ComparisonSlider from "../../components/ComparisonSlider.astro";
 
 <Split ratio="1:1" align="center">
     <div>
-        ### *Destructible targets*
+        ### Destructible targets
 
         I also prepared the star targets for destruction.
         Using Blender's `Breakable` modifier,
@@ -234,7 +234,7 @@ import ComparisonSlider from "../../components/ComparisonSlider.astro";
     caption="Chain reaction of stars breaking"
 />
 
-## *Playtesting*
+## Playtesting
 
 <Center width="md">
     The first playtest exposed a few issues with the shooting gallery.
@@ -245,14 +245,14 @@ import ComparisonSlider from "../../components/ComparisonSlider.astro";
 
 <Split ratio="1:1" align="start">
     <div>
-        ### *Target readability*
+        ### Target readability
 
         The targets needed a clearer visual hierarchy.
         Larger stars received brighter emissive materials,
         and were worth more points to reward players for prioritising them.
     </div>
     <div>
-        ### *Aiming and hit detection*
+        ### Aiming and hit detection
 
         I experimented with different collider configurations and camera angles.
         Eventually, I settled on sphere colliders to make hits more consistent.
@@ -278,7 +278,7 @@ import ComparisonSlider from "../../components/ComparisonSlider.astro";
 
 <Split ratio="1:1" align="start" reverse>
     <div>
-        ### *Reusable responses*
+        ### Reusable responses
 
         I didn't make the entire environment shootable.
         Instead, I developed a reusable hit-response component.
@@ -288,7 +288,7 @@ import ComparisonSlider from "../../components/ComparisonSlider.astro";
         without needing a separate implementation for each one.
     </div>
     <div>
-        ### *Gameplay feedback*
+        ### Gameplay feedback
 
         I implemented the projectile trail and added the result screen.
         An impact marker was also suggested,
@@ -306,14 +306,14 @@ import ComparisonSlider from "../../components/ComparisonSlider.astro";
     <div>
         ### Interaction
 
-        I implemented an interaction system to let the player interact with objects in the environment.
-        The shooting stall uses this to transition the player from exploration into the minigame,
-        without requiring a separate scene or loading screen.
+        The interaction system lets players engage with objects in the environment.
+        At the shooting stall, it switches the player from exploration into the minigame,
+        without requiring another scene or loading screen.
 
         <Media
             src="/videos/kermis/cameraTransition.mp4"
-            aspect="4:3"
             alt="Caamera interaction gif"
+            aspect="16:9"
             autoPlay={true} muted={true} loop={true}
             caption="Camera transition into shooting perspective."
         />
@@ -321,34 +321,18 @@ import ComparisonSlider from "../../components/ComparisonSlider.astro";
     <div>
         ### Camera transitions
 
-        The project uses Cinemachine to handle the different camera perspectives.
-        During exploration, the player uses the regular gameplay camera.
-        Interacting with the shooting stall switches to a dedicated shooting camera,
-        framing the targets from the intended gameplay perspective.
+        Cinemachine handles the transition between the exploration and shooting cameras.
+        A `Cinemachine Brain` on the main camera blends between the virtual cameras,
+        framing the targets when the player enters the stall.
 
-        I used a Cinemachine Brain on the main camera to handle the transitions between virtual cameras.
-        This made it possible to move between exploration and shooting mode without manually repositioning the camera.
-
-        ### Minigame flow
-
-        The shooting gallery has a timer that determines how long the player can play.
-        When the time runs out, the game exits shooting mode and returns to the exploration state.
-
-        Following feedback from the second playtest,
-        I also added a result screen that displays the player's final score.
-        From there, they can either continue exploring or try the shooting gallery again.
-
-        The UI itself remained deliberately functional and fairly minimal.
-        It wasn't a major visual focus of the project,
-        but it provided the information and options needed to complete the minigame loop.
+        <Media
+            lightbox aspect="16:9"
+            src="/images/kermis/result.png" alt="stall ref"
+            caption="Result screen"
+        />
     </div>
 </Split>
 
-<Media
-    lightbox aspect="16:9"
-    src="/images/kermis/result.png" alt="stall ref"
-    caption="Result screen"
-/>
 
 ## Final Experience
 
