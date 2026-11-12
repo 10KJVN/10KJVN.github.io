@@ -72,148 +72,115 @@ import Gallery from "../../components/Gallery.astro";
 
 ## Vertical Slice
 
-I started looking more closely at what made these fleeting experiences memorable.
-One distinction that helped me put it into words was the difference between
-`Vergankelijke Schoonheid` and `Efemere Pracht.`
+<Split ratio="1:1" align="start">
+    <div>
+        I started looking more closely at what made these fleeting experiences memorable.
+        One distinction that helped me put it into words was the difference between
+        `Vergankelijke Schoonheid` and `Efemere Pracht.`
+    </div>
+    <div>
+        The former is more about the melancholy of things `gradually passing:`
+        autumn leaves, aging, or something slowly falling apart.
+        The latter puts the emphasis on the brief but intense `moment itself:`
+        fireworks, a flower that only blooms for a day, or rain catching the sunlight.
+    </div>
+</Split>
 
+<Center>
+    Where `Weather Report` explored the former, I wanted `The Kermis` to lean towards the latter.
+    I also visited the kermis in Burgermeester in 't Veldpark, Zaandam, to experience the attractions and observe the atmosphere firsthand.
+</Center>
 
-The former is more about the melancholy of things `gradually passing:`
-autumn leaves, aging, or something slowly falling apart.
-The latter puts the emphasis on the brief but intense `moment itself:`
-fireworks, a flower that only blooms for a day, or rain catching the sunlight.
-
-Where `Weather Report` explored the former, I wanted `The Kermis` to lean towards the latter.
-
-{/* The original intended experience */}
 <Gallery cols={2}>
-    <Media
-        lightbox
-        src="/images/kermis/kref01.jpg"
-        aspect="4:3"
-        alt="Ref 1"
-    />
-    <Media
-        lightbox
-        src="/images/kermis/kref02.jpg"
-        aspect="4:3"
-        alt="Ref 1"
-    />
+    <Media lightbox src="/images/kermis/Punch.png" alt="Ref 1" />
+    <Media lightbox src="/images/kermis/Gamble.png" alt="Ref 2" />
 </Gallery>
 
-My initial idea was to let players spend a day at an amusement park with different companions,
-visiting attractions and taking pictures along the way.
-Eventually, the surroundings and people would disappear,
-leaving the player with the memories of that day.
+<Gallery cols={2}>
+    <Media lightbox src="/images/kermis/Ferris.png" alt="Ref 3" caption="Burgermeester in 't Veldpark, Zaandam — Spring 2026." />
+    <Media lightbox src="/images/kermis/Over.jpg" alt="Ref 4" />
+</Gallery>
 
-I liked the idea,
-but I was still figuring out how to make it interactive without having to simulate every attraction in full.
-For example, boarding a rollercoaster could simply trigger an interaction followed by a scripted ride sequence.
-The Ferris wheel eventually took a similar direction, although that became a pre-rendered cinematic.
-
-Discussions with my buddy group also helped me explore more interactive directions.
-Rather than just witnessing these moments, I wanted players to actively take part in them.
-
-This gradually evolved into a collection of smaller attractions and minigames,
-with players deciding how to spend their time.
-At one point, I even considered limiting them to three coins,
-forcing them to choose which attractions to visit.
-
-{/*Considering to make this also centered, if not then aligned to the left.*/}
-{/* Finding the scope */}
-The idea was still broader than what I would eventually build,
-but now I had a more tangible direction to work towards.
-
-## From concept to vertical slice
-
-<Split ratio="1:1">
+{/* The original intended experience */}
+<Split ratio="1:1" align="center">
     <div>
+        My initial idea was to let players spend a day at an amusement park with different companions,
+        visiting attractions and taking pictures along the way.
+        Eventually, the surroundings and people would disappear,
+        leaving the player with the memories of that day.
 
-        I started by researching real fairground attractions, with a focus on shooting-stall variations:
+        I liked the idea,
+        but I was still figuring out how to make it interactive without having to simulate every attraction in full.
 
-        - Shooting nails, where the nails move
-        - An RNG game: cutting for €2
-        - Shooting fingers: the whole finger has to come off, otherwise it doesn't count
-        - A boxing-ball game for inspiration
-
-        The initial ambition was broader, with multiple carnival attractions contributing to the experience.
-        As development progressed, I reconsidered how much of that scope was necessary to demonstrate the game's core idea.
-
+        Discussions with my buddy group also helped me explore more interactive directions.
+        Rather than just witnessing these moments, I wanted players to actively take part in them.
     </div>
     <div>
+        This gradually evolved into a collection of smaller attractions and minigames,
+        with players deciding how to spend their time.
+        At one point, I even considered limiting them to three coins,
+        forcing them to choose which attractions to visit.
 
-        After comparing them, I chose the shooting gallery.
-        I blocked out the stall model and its in-engine setup, then wrote model specifications and art outsourcing requests.
-
-        If the stall was large enough for three sections, I could make three variations, each with one open spot:
-        in the first, left and right are occupied so you shoot in the middle, and so on.
-
-        However, I chose to concentrate on one playable attraction instead. That gave me more room to iterate on the gameplay itself, test it with other people, and respond to what made the experience enjoyable.
-
+        The idea was still broader than what I would eventually build,
+        but now I had a more tangible direction to work towards.
     </div>
 </Split>
 
-<Split ratio="1:1">
-    <div>
+## The Shooting Gallery
 
-        ### What changed after testing?
+With the direction established,
+I started looking into actual kermis attractions and the different ways they could translate into gameplay.
+I gathered references from several shooting-stall variations,
+including moving targets, shooting games with specific hit conditions,
+and even a few unrelated attractions for inspiration.
 
-        - **Scope:** A larger collection of attractions became a focused vertical slice.
-        - **Priorities:** More attention went towards making the central gameplay enjoyable.
-        - **Narrative:** The relationship between the playable experience and the original fascination remained an area to develop further.
+After comparing the possibilities with my buddy group,
+the shooting stall was the one we settled on.
+It offered a straightforward gameplay loop that I could build upon without having to simulate an entire attraction.
+I decided to use shooting stars as the targets, giving the game a little more room for visual feedback and destruction.
 
-    </div>
-    <Media src="/images/caustics.svg" alt="An earlier iteration of The Kermis" caption="Earlier iteration" />
-</Split>
+### Prototyping the mechanic
 
-## The shooting gallery
+I started experimenting with the shooting mechanic separately from the final stall.
+I adapted a 2D hold-and-release projectile mechanic into my 3D scene,
+using it to explore how the player would charge and fire their shots.
 
-<Split ratio="2:3" align="center">
-    <div>
+A big part of this was figuring out how aiming should work.
+I tried several approaches,
+from firing directly along the camera's forward direction to using a fixed direction or aiming towards the mouse position.
+These experiments helped me settle on a more suitable way to aim within the shooting stall.
 
-        The shooting gallery became the project's main gameplay focus. It offered a concrete place to experiment with aiming, shooting, feedback, and the rhythm of a short minigame.
+I also looked at other games for inspiration.
+The shooting minigame in Final Fantasy VII Rebirth was particularly useful as a reference for its
+first-person perspective, timer, scoring and overall presentation.
+I used it to get a better idea of how to frame the attraction as a self-contained minigame.
 
-        I made the star targets breakable in Blender and tested them in game. The first version that worked only aimed linearly, so you couldn't really aim at anything except the middle.
+### Building the stall
 
-        My checklist for a playtest MVP (29 May):
+For the actual stall,
+I collaborated with Vincent,
+an artist from my buddy group.
+I provided reference images,
+a rough blockout and model specifications to communicate the layout and visual direction I had in mind.
 
-        - Plastic-breaking sound effect
-        - Rifle fire sound effect on every shot
-        - Score counting
-        - Balancing the stall prefab size and the shooting oscillator
-        - A marker or UI element showing where you aim
-        - Collisions for the stall
-        - Maybe let the cans fall when shot
+I was aiming for a stylized low-poly look,
+drawing inspiration from games like A Short Hike and Lil Gator Game.
+The stall also needed to leave enough room for the targets and shooting interaction,
+so the model had to work around the gameplay rather than just serve as a decorative backdrop.
 
-    </div>
-    <Media src="/images/caustics.svg" alt="Breakable star targets" caption="Breakable stars, work in progress" />
-</Split>
+Once Vincent delivered the model,
+I integrated it into Unity and worked through a few rendering issues,
+including getting its URP decals to display correctly.
 
-<Split ratio="1:1">
-    <div>
+I also prepared the star targets to be destructible.
+After following a Blender tutorial,
+I used its Breakable modifier to split the models into pieces,
+then integrated those results into the shooting mechanic.
 
-        ### Medals
-
-        I settled on three score tiers:
-
-        - Bronze: 1000 points
-        - Silver: 1500 points
-        - Gold: 2500 points
-
-    </div>
-    <div>
-
-        ### Difficulty
-
-        Difficulty modifiers come from the targets' Rigidbody: mass, and potentially gravity. I managed 2000 points, and reached 2600 more easily with less mass.
-
-        - Mass 1.0: hard
-        - Mass 0.8: medium
-        - Mass 0.75: easier
-
-        Fairground games are unfair anyway, so I settled on 0.75.
-
-    </div>
-</Split>
+One unexpected behavior was that the broken pieces could collide with neighboring stars and destroy them as well.
+Rather than treating this as a problem, I kept it.
+It added an extra layer of unpredictability to the shooting,
+especially when hitting the larger targets, which were worth more points.
 
 ## Systems
 
