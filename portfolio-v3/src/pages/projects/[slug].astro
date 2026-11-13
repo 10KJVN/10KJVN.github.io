@@ -20,6 +20,7 @@ import { resolveFeatureHref } from "../../lib/resolveFeatureHref";
 import BackToTop from "../../components/BackToTop.astro";
 import PageEndNav from "../../components/PageEndNav.astro";
 import { getPageNav } from "../../lib/pageNav";
+import { isPublished } from "../../lib/content";
 
 export async function getStaticPaths() {
     const projects = await getCollection("projects");
@@ -39,7 +40,7 @@ const { Content, headings } = await render(project)
 
 // Show every feature explicitly associated with this project, in its chosen order.
 // The route should not silently hide content when a project has more than two features.
-const allFeatures = await getCollection("features");
+const allFeatures = await getCollection("features", isPublished);
 
 const projectFeatures = allFeatures
     .filter((feature) => feature.data.projectSlug === project.id)

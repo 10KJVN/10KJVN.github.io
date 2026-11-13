@@ -10,6 +10,7 @@ import { getCollection, render, type CollectionEntry } from "astro:content";
 import BackToTop from "../../components/BackToTop.astro";
 import PageEndNav from "../../components/PageEndNav.astro";
 import { getPageNav } from "../../lib/pageNav";
+import { isPublished } from "../../lib/content";
 
 export async function getStaticPaths() {
     const features = await getCollection("features");
@@ -32,7 +33,7 @@ interface Props {
 const { feature } = Astro.props;
 const { Content, headings } = await render(feature);
 
-const projects = await getCollection("projects");
+const projects = await getCollection("projects", isPublished);
 
 const parentProject = feature.data.projectSlug
     ? projects.find((project) => project.id === feature.data.projectSlug)

@@ -5,8 +5,9 @@ import FilterBar from "../components/FilterBar.astro";
 import ProjectsGrid from "../components/ProjectsGrid.astro"
 import { getCollection } from "astro:content";
 import { resolveFeatureHref } from "../lib/resolveFeatureHref";
+import {isPublished} from "../lib/content.ts";
 
-const allFeatures = await getCollection("features")
+const allFeatures = await getCollection("features", isPublished)
 
 const sorted = [...allFeatures].sort(
     (a, b) => (a.data.order ?? Infinity) - (b.data.order ?? Infinity)

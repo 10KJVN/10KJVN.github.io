@@ -4,8 +4,9 @@ import SectionHeader from "../components/SectionHeader.astro";
 import FilterBar from "../components/FilterBar.astro";
 import ProjectsGrid from "../components/ProjectsGrid.astro";
 import { getCollection } from "astro:content";
+import { isPublished } from "../lib/content";
 
-const allProjects = await getCollection("projects");
+const allProjects = await getCollection("projects", isPublished);
 
 const sorted = [...allProjects].sort(
     (a, b) => (a.data.order ?? Infinity) - (b.data.order ?? Infinity)

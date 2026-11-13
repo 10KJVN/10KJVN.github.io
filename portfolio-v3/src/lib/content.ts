@@ -1,0 +1,2 @@
+/** Filter for getCollection: getCollection("projects", isPublished) leaves out `draft: true` entries. */
+export const isPublished = (entry: { data: { draft: boolean } }): boolean => !entry.data.draft;

@@ -17,6 +17,7 @@ const cardFields = {
 
     highlight: z.boolean().default(false), // homepage highlight
     order: z.number().optional(), // manual sort order
+    draft: z.boolean().default(false), // true = hidden from lists and not built as a page
 };
 
 // Project Information stats + quick links
