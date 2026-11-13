@@ -19,7 +19,7 @@ const { groups } = Astro.props;
 
 <!--
   Layout: a year column on the left, a continuous rule with one dot per year, and the entries to the right.
-  Entries sit in two columns from lg up so wide screens are used, one column below that.
+  Entries stack in a single column, newest first, so the reading order is always top to bottom.
 -->
 <ol>
     {groups.map((group) => (
@@ -34,9 +34,9 @@ const { groups } = Astro.props;
                             class="absolute -left-[6px] top-[5px] h-[11px] w-[11px] rounded-full border-2 border-accent bg-background"
                     ></span>
 
-                    <ul class="grid gap-x-14 gap-y-9 lg:grid-cols-2">
+                    <ul class="grid gap-y-9">
                         {group.entries.map((entry) => (
-                                <li class="max-w-[34rem]">
+                                <li class="max-w-2xl">
                                     <h4 class="mb-1.5 text-lg font-semibold leading-snug text-text/90">{entry.title}</h4>
                                     <p class="text-sm leading-relaxed text-text/70">{entry.description}</p>
                                     {entry.link && (
