@@ -29,10 +29,10 @@ import YouTubeEmbed from "../../components/YoutubeEmbed.astro";
 
 ## Overview
 
-<Split ratio="3:2" align="center">
+<Split ratio="1:1" align="center">
     <div>
 
-        Candy Dandy was our final exam project at Mediacollege, created in collaboration with Azerion.
+        Candy Dandy was our final exam project at `Mediacollege`, created in collaboration with `Azerion`.
         The goal: develop a match-3 mobile game where matching tiles directly affects a secondary gameplay layer.
         The team was 3 developers and 5 artists.
 
@@ -43,7 +43,7 @@ import YouTubeEmbed from "../../components/YoutubeEmbed.astro";
         - Handled Canvas & UI scaling for mobile ([Safe Area Handler](https://github.com/j5x/PvB2025/blob/develop/Assets/Script/UI/SafeArea.cs))
         - Integrated [VFX](https://github.com/j5x/PvB2025/tree/develop/Assets/Script/Vfx) and optimized textures
 
-        Builds are available for Android and Windows.
+        Builds are available for `Android` and `Windows`.
         Since the game was designed for portrait mobile, expect stretched visuals on PC.
 
     </div>
@@ -65,17 +65,15 @@ Early mockups helped us and the client decide on a portrait layout to balance sc
 <Media lightbox
        src="/images/candydandy/concept-mockups.png"
        alt="Hand-drawn mockups of a portrait concept and a landscape concept on phone frames"
-       caption="Concept 1 (left): Portrait, matching and fighting combined. Concept 2 (right): Landscape, matching with cutscene transitions." />
+       caption="Concept 1 (left): Portrait, matching and fighting combined | Concept 2 (right): Landscape, matching with cutscene transitions." />
 
 ## Development
 
-<Split ratio="2:3" align="center">
+<Split ratio="1:1" align="center">
     <div>
-
         ### Character system
-
-        All characters (player and enemies) derive from a shared base class handling variables, components, and core functions.
-
+        All characters (player and enemies) derive from a shared base class handling variables,
+        components, and core functions.
     </div>
     <Media lightbox
            src="/images/candydandy/character-diagram.png"
@@ -108,14 +106,16 @@ This made the game consistently playable across a wide range of devices.
     <Media lightbox
            src="/images/candydandy/safe-area-debug.png"
            alt="Safe area debug colors"
+           aspect="1:1"
            caption="Debug overlay used to visualize and adjust safe areas during setup." />
     <Media lightbox
            src="/images/candydandy/safe-area-cropping-fix.png"
            alt="Safe area cropping issue and the fix"
+           aspect="1:1"
            caption="The cropping issue and its fix." />
 </Gallery>
 
-<Split ratio="3:2" align="center">
+<Split ratio="1:1" align="center">
     <div>
 
         The safe area initially cropped the game view, leaving empty borders on taller screens.
@@ -124,12 +124,13 @@ This made the game consistently playable across a wide range of devices.
     </div>
     <Media src="/videos/candydandy/gameplay-sprint2.mp4"
            alt="Sprint 2 gameplay after scaling fixes"
+           aspect="1:1"
            caption="Sprint 2: gameplay after scaling fixes, verified across multiple device sizes." />
 </Split>
 
 ## Takeaway
 
-<Split ratio="3:2" align="center">
+<Split ratio="1:1" align="center">
     <div>
 
         Candy Dandy taught me how to adapt UI for mobile screens and implement Safe Area handling, skills praised by our client as invaluable for future projects.
@@ -139,5 +140,6 @@ This made the game consistently playable across a wide range of devices.
     </div>
     <Media src="/videos/candydandy/final-presentation-vfx.mp4"
            alt="Final presentation showing the VFX integration"
-           caption="Final presentation: VFX integration and technical animation support." />
+           caption="Final presentation: VFX integration and technical animation support."
+           aspect="16:9"/>
 </Split>
