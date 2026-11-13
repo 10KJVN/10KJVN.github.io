@@ -25,25 +25,33 @@ links:
 import Split from "../../components/Split.astro";
 import Media from "../../components/Media.astro";
 import Gallery from "../../components/Gallery.astro";
+import Center from "../../components/Center.astro";
+import YoutubeEmbed from "../../components/YoutubeEmbed.astro";
 
 ## Overview
 
-<Split ratio="2:3" align="center">
+<Split ratio="1:1" align="start">
     <div>
-
-        The Ensemble is an architectural visualization project built in Unreal Engine, developed together with Veldboom Studios for a real estate client.
+        The Ensemble is an architectural visualization project built in Unreal Engine,
+        developed together with Veldboom Studios for a real estate client.
         The project spanned nearly two years of intermittent development across three major phases.
 
-        Although primarily an ArchViz product, Ensemble became my first large-scale Unreal project.
-        My contribution focused on system design and UI programming, collaborating with a small team of developers and a 3D designer.
         It remains my most extensive project to date.
-        My responsibilities grew from early prototyping and feature design to maintaining the technical backbone of the project, including UI, gameplay-like systems, and version control.
-
+        My responsibilities grew from early prototyping and feature design to maintaining the technical backbone of the project,
+        including UI, gameplay-like systems, and version control.
     </div>
-    <Media lightbox
-           src="/images/ensemble/hero.jpg"
-           alt="Hero render of The Ensemble"
-           caption="Hero render" />
+    <div>
+        Although primarily an `ArchViz` product, Ensemble became my first large-scale Unreal project.
+        My contribution focused on system design and UI programming,
+        collaborating with a small team of developers and a 3D designer.
+
+        <YoutubeEmbed
+            id="RBOQLQzFc7U"
+            title="Ensemble"
+            start={18}
+            caption="(Near) Final product showcase"
+        />
+    </div>
 </Split>
 
 <Split ratio="1:1">
@@ -80,6 +88,7 @@ I integrated Ultra Dynamic Sky and added custom weather controls on top of it, a
 <Gallery cols={2}>
     <Media lightbox
            src="/videos/ensemble/ui-sketches.gif"
+           aspect="16:9"
            alt="Earliest UI sketches"
            caption="Earliest sketches" />
     <Media lightbox
@@ -121,16 +130,10 @@ A selection of additional visuals and behind-the-scenes material from the develo
 
 ### Interactive UI system
 
-<Split ratio="2:3" align="center">
-    <div>
-
-        Functionalities: lights, filtering, time & weather control.
-
-    </div>
-    <Media src="/videos/ensemble/hmi-showcase.mp4"
-           alt="Tablet HMI interaction showcase"
-           caption="Tablet HMI showcase." />
-</Split>
+<Media src="/videos/ensemble/hmi-showcase.mp4"
+       alt="Tablet HMI interaction showcase"
+       caption="Functionalities: lights, filtering, time & weather control."
+/>
 
 <Media lightbox
        src="/images/ensemble/tablet-ui-final.jpg"
@@ -142,8 +145,9 @@ A selection of additional visuals and behind-the-scenes material from the develo
 <Gallery cols={2}>
     <Media lightbox
            src="/images/ensemble/wall-reference.jpg"
+           aspect="1:1"
            alt="Reference photo of a wall in The Ensemble"
-           caption="Wall reference: irregular and not directly usable as a texture asset." />
+           caption="Photo irregular and not directly usable as a texture asset" />
     <Media lightbox
            src="/images/ensemble/seamless-texture-1k.jpg"
            alt="Seamless 1024x1024 texture"
