@@ -34,14 +34,13 @@ import YouTubeEmbed from "../../components/YouTubeEmbed.astro";
 
 <Split ratio="1:1" align="center" reverse>
     <div>
-        *"The fair won't be here forever."*
-
-        The Kermis is a solo game project set on the final day of a Dutch fairground.
-        What started as an idea for a collection of small attractions eventually became a playable vertical slice,
-        centred around a shooting gallery.
+        The Kermis is a short game set on the final day of a Dutch fairground.
+        What started as an idea for a collection of small attractions
+        eventually became a compact game centred around a shooting gallery.
 
         The project explores the experience of revisiting a familiar place,
-        taking part in its attractions, and knowing that by tomorrow, it will all be gone.
+        taking part in its attractions, and knowing that by tomorrow,
+        it will all be gone.
     </div>
     <Media lightbox src="/images/kermis/AltOverview.png" alt="The Kermis — representative in-game screenshot" caption="The fairground" />
 </Split>
@@ -100,7 +99,7 @@ import YouTubeEmbed from "../../components/YouTubeEmbed.astro";
 
 <Center>
     Where `Weather Report` explored the former, I wanted `The Kermis` to lean towards the latter.
-    I also visited the kermis in Burgermeester in 't Veldpark, Zaandam, to experience the attractions and observe the atmosphere firsthand.
+    I also visited the kermis at `Burgermeester in 't Veldpark, Zaandam`, to experience the attractions and observe the atmosphere firsthand.
 </Center>
 
 <Gallery cols={2}>
@@ -197,30 +196,18 @@ import YouTubeEmbed from "../../components/YouTubeEmbed.astro";
     />
 </Split>
 
-<Split ratio="1:1" align="center" reverse>
-    <div>
-        I provided the artist with the reference collage above,
-        my blockout and model specifications.
-        The main consideration was making enough room for the target board and shooting interaction.
-    </div>
-    <div>
-        ### Presentation
+### Presentation
 
-        The model had to support the gameplay,
-        rather than simply serve as a decorative backdrop.
-    </div>
-</Split>
+I provided reference images, my blockout and model specifications for the stall.
+The main requirement was leaving enough room for the target board and shooting interaction.
+I integrated the delivered model and fixed a few rendering issues,
+including its `URP` decals.
 
 <Gallery cols={3}>
     <Media lightbox src="/images/kermis/blockout.png" alt="Shooting stall blockout" caption="My Blockout" aspect="16:9" />
     <Media lightbox src="/images/kermis/VModel.png" alt="Shooting stall model" caption="Final Model" aspect="16:9" />
     <Media lightbox src="/images/kermis/earlyINGame.png" alt="Early in-game shooting stall" caption="Early In-game" aspect="16:9" />
 </Gallery>
-
-<Center width="sm">
-    I integrated the delivered model and fixed a few rendering issues,
-    including its `URP` decals.
-</Center>
 
 <Split ratio="1:1" align="center">
     <div>
@@ -248,12 +235,19 @@ import YouTubeEmbed from "../../components/YouTubeEmbed.astro";
 
 ## Playtesting
 
-<Center width="md">
-    The first playtest exposed a few issues with the shooting gallery.
-    Players struggled to identify shootable targets,
-    aiming didn't always feel accurate,
-    and the trajectory line could obstruct the actual shot.
-</Center>
+<Split>
+    <div>
+        The first playtest exposed a few issues with the shooting gallery.
+        Players struggled to identify shootable targets,
+        aiming didn't always feel accurate,
+        and the trajectory line could obstruct the actual shot.
+    </div>
+    <div>
+        Despite those issues, players were already having fun experimenting with the rough prototype.
+        By the second playtest, some even jumped into the stall
+        and used their own shots to bounce their character around.
+    </div>
+</Split>
 
 <Split ratio="1:1" align="start">
     <div>
@@ -261,7 +255,7 @@ import YouTubeEmbed from "../../components/YouTubeEmbed.astro";
 
         The targets needed a clearer visual hierarchy.
         Larger stars received brighter emissive materials,
-        and were worth more points to reward players for prioritising them.
+        and were worth more points to reward players for prioritizing them.
     </div>
     <div>
         ### Aiming and hit detection
@@ -282,10 +276,8 @@ import YouTubeEmbed from "../../components/YouTubeEmbed.astro";
     afterLabel="New"
 />
 
-<Center width="md">
-    A second playtest with 13 testers brought up a few more improvements:
-    a proper end screen, clearer feedback when the timer ran out,
-    faster charging and a projectile trail.
+<Center width="sm">
+    A second playtest with 13 testers helped refine the minigame further.
 </Center>
 
 <Split ratio="1:1" align="start" reverse>
@@ -302,13 +294,9 @@ import YouTubeEmbed from "../../components/YouTubeEmbed.astro";
     <div>
         ### Gameplay feedback
 
-        I implemented the projectile trail and added the result screen.
+        I implemented the result screen and projectile trail.
         An impact marker was also suggested,
         but didn't make it into the final build.
-
-        The feedback also encouraged me to explore more reactive objects.
-        A stuffed animal, for example,
-        could simply play a squeak when hit.
     </div>
 </Split>
 
@@ -339,7 +327,7 @@ import YouTubeEmbed from "../../components/YouTubeEmbed.astro";
 
         <Media
             lightbox aspect="16:9"
-            src="/images/kermis/result.png" alt="stall ref"
+            src="/images/kermis/result.png" alt="End results screen"
             caption="Result screen"
         />
     </div>
@@ -400,10 +388,10 @@ import YouTubeEmbed from "../../components/YouTubeEmbed.astro";
 <Split ratio="1:1" align="center" reverse>
     <div>
         <YouTubeEmbed
-        id="D2BGo7aahJI"
-        title="The Kermis - Trailer"
-        start={0}
-        caption="Game Trailer: using SFX invoke nostalgia"
+            id="D2BGo7aahJI"
+            title="The Kermis - Trailer"
+            start={0}
+            caption="Game Trailer - edited with carnival SFX to invoke nostalgia"
         />
     </div>
     <div>
@@ -428,7 +416,7 @@ import YouTubeEmbed from "../../components/YouTubeEmbed.astro";
     <div>
         ### *What worked*
 
-        I turned the original concept into a playable vertical slice.
+        I turned the original concept into a short, playable game.
         The playtests also helped me improve the shooting gallery's usability,
         from target readability to aiming and feedback.
     </div>
@@ -454,13 +442,17 @@ import YouTubeEmbed from "../../components/YouTubeEmbed.astro";
     <div>
         ### *Looking back*
 
-        In hindsight,
-        I had spent more time developing the attraction than investigating what made the setting meaningful.
-        Most of my playtesting focused on usability,
-        rather than the thematic and emotional aspects of the experience.
+        Part of that focus came from earlier feedback on `Weather Report`.
+        I had been challenged to give players more control
+        and move beyond building a technically functional system.
+
+        With `The Kermis`, I responded by putting more attention into readability,
+        aiming and feedback.
+        The playtests showed that the shooting gallery was enjoyable,
+        but I didn't give the wider emotional experience the same attention.
     </div>
     <div>
-        ### *Next time*
+         ### *Next time*
 
         I'd spend more time observing and analyzing the subject before committing to production.
         I'd also make room for testing the intended feeling of the experience,
@@ -470,25 +462,40 @@ import YouTubeEmbed from "../../components/YouTubeEmbed.astro";
 
 ## Resources
 
-The project was developed individually,
-with selected assets and the pre-rendered Ferris wheel sequence contributed by other creators.
-I handled the concept, design, programming*, gameplay systems and integration of the playable experience.
-`*Vibe-coded` here and there.
+<Split ratio="1:1" align="start">
+    <div>
+        The game was developed individually,
+        with selected assets and the pre-rendered Ferris wheel sequence contributed by other creators.
 
-### External contributions
+        I handled the concept, design, programming, gameplay systems and integration of the playable experience.
+        Some parts of the implementation were `vibe-coded.` Thank you for reading.
 
-- Shooting stall model: [Vincent, ArtStation](https://www.artstation.com/vincentzzzvvv)
-- Ferris wheel cutscene: [@kwasi.me](https://www.tiktok.com/@kwasi.me)
-- UI, teddy bear model: [Julia, ArtStation](https://www.artstation.com/kniebeschermer)
+        <Media
+            lightbox
+            src="/images/kermis/dandelion.jpg"
+            aspect="16:9"
+            position="center 12%"
+            alt="Dandelion artwork"
+            caption="Ephemeral Beauty artwork - by Floral Abstractions"
+        />
+    </div>
+    <div>
+        ### External contributions
 
-### Audio
+        - Shooting stall model: [Vincent, ArtStation](https://www.artstation.com/vincentzzzvvv)
+        - Ferris wheel cutscene: [@kwasi.me](https://www.tiktok.com/@kwasi.me)
+        - UI, teddy bear model: [Julia, ArtStation](https://www.artstation.com/kniebeschermer)
 
-- [Kenney: Impact Sounds (CC0)](https://www.kenney.nl/assets/impact-sounds)
-- [Pixabay](https://pixabay.com/): SFX & Audio used in game
-- [Kermisgeluiden.nl](https://kermisgeluiden.nl): SFX used in the trailer
+        ### Audio
 
-### References
+        - [Kenney: Impact Sounds (CC0)](https://www.kenney.nl/assets/impact-sounds)
+        - [Pixabay](https://pixabay.com/): SFX & Audio used in game
+        - [Kermisgeluiden.nl](https://kermisgeluiden.nl): SFX used in the trailer
 
-- The Code Otter: [Interaction System](https://www.youtube.com/watch?v=FE0lJljavAM)
-- Afterlato: [How to break stuff](https://youtu.be/O9CU4G5i84s?si=uR6HBzj9K8lSLnx-)
-- Sven&Koen: [€100 Schieten Op De Kermis](https://www.youtube.com/watch?v=4Yv4QXjN-mM)
+        ### References
+
+        - The Code Otter: [Interaction System](https://www.youtube.com/watch?v=FE0lJljavAM)
+        - Afterlato: [How to break stuff](https://youtu.be/O9CU4G5i84s?si=uR6HBzj9K8lSLnx-)
+        - Sven&Koen: [€100 Schieten Op De Kermis](https://www.youtube.com/watch?v=4Yv4QXjN-mM)
+    </div>
+</Split>
