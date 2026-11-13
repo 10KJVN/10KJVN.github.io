@@ -18,7 +18,7 @@ const aboutImages: [
     { src?: string; alt: string; caption?: string; position?: string },
     { src?: string; alt: string; caption?: string; position?: string },
 ] = [
-    { alt: "Portrait of me" }, // tall
+    { src: "/images/abtme.jpg", alt: "Portrait of me" }, // tall
     { alt: "Me working on a project" }, // wide
     { alt: "Work or project imagery" }, // small
 ];
@@ -139,7 +139,7 @@ const timeline = [
                         I'm a 21-year-old game developer from Amsterdam, The Netherlands.
                     </p>
                     <p>
-                        At the core, I'm a generalist Game Developer with expertise in gameplay and UI programming — games are meant to be played first, which is why gameplay comes before graphics for me.
+                        At the core, I'm a generalist Game Developer with expertise in gameplay and UI programming - games are meant to be played first, which is why gameplay comes before graphics for me.
                         That said, I'm working toward a specialization somewhere between Technical Artist and Graphics Programmer, drawn in by shaders and the visual side of rendering.
                     </p>
                 </div>
@@ -148,14 +148,14 @@ const timeline = [
             <PhotoTrio images={aboutImages} />
         </section>
 
-        <section class="mt-24 border-t border-border-strong pt-12 md:mt-28">
-            <SectionHeader title="My Story" class="!mb-10" />
-            <Timeline groups={timeline} />
-        </section>
-
         <section class="mt-16 border-t border-border-strong pt-12 md:mt-20">
             <SectionHeader title="Skills" subtitle="What I work with, and for how long." />
             <Skills skills={skills} />
+        </section>
+
+        <section class="mt-24 border-t border-border-strong pt-12 md:mt-28">
+            <SectionHeader title="My Story" class="!mb-10" />
+            <Timeline groups={timeline} />
         </section>
 
     </div>
