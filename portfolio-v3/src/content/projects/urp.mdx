@@ -16,6 +16,8 @@ role: "Technical Artist"
 links:
   - label: "GitHub Repo"
     url: "https://github.com/10KJVN/URPShaders"
+#  - label: "Specialization Pitch"
+#    url: "/documents/urp/specialization-pitch.pdf"
 ---
 
 import Split from "../../components/Split.astro";
@@ -24,16 +26,16 @@ import Gallery from "../../components/Gallery.astro";
 
 ## Overview
 
-<Split ratio="2:3" align="center">
+<Split ratio="1:1" align="center">
     <div>
 
-        During the elective *Verdieping Software*, I focused on deepening my understanding of the Universal Render Pipeline and shader programming.
-        Developed during my time at NeoN Origins, it became a personal R&D project centered around post-processing and custom render features.
+        During the elective `Verdieping Software`, I focused on deepening my understanding of the Universal Render Pipeline and shader programming.
+        Developed during my time at `NeoN Origins`, it became a personal R&D project centered around `post-processing` and custom render features.
 
-        It began with a user story from [Operation Starfall](/projects/operation-starfall): "I want the game to feel like watching an 80s NTSC TV."
-        That became my starting point for learning post-processing, experimenting with ShaderGraph, and studying shader fundamentals.
+        It began with a user story from [Operation Starfall](/projects/operation-starfall): ` I want the game to feel like watching an 80s NTSC TV.`
+        That became my starting point for learning post-processing, experimenting with `ShaderGraph`, and studying shader fundamentals.
 
-        Two features came out of it and were delivered: a **Tint** renderer feature and a **Chromatic Aberration** effect.
+        Two features came out of it and were delivered: a `Tint renderer feature` and a `Chromatic Aberration` effect.
         Everything after that is exploration.
 
     </div>
@@ -85,7 +87,7 @@ The shaders were fine, I had simply forgotten to add my renderer feature to the 
 
 ## Chromatic Aberration
 
-The effect started as an experiment in UV space, eventually evolving into a full post-processing pass with tweakable intensity.
+The effect started as an experiment in `UV` space, eventually evolving into a full post-processing pass with tweakable intensity.
 
 <Gallery cols={2}>
     <Media lightbox
@@ -98,15 +100,15 @@ The effect started as an experiment in UV space, eventually evolving into a full
            caption="Fullscreen effect: RGB channels split across the entire screen with customizable offset." />
 </Gallery>
 
-The UV-space version applies the effect within the bounds of a 3D object rather than screen-wide.
-Each channel is manipulated based on altered UV input, simulating color fringing in a localized, object-contained way.
+The `UV-space` version applies the effect within the bounds of a 3D object rather than screen-wide.
+Each channel is manipulated based on altered UV input, simulating color fringing in a localized, `object-contained` way.
 
 <Media lightbox
        src="/images/urp/shadergraph-uv-prototype.png"
        alt="ShaderGraph with hand-drawn annotations comparing the old and new UV offset setup"
        caption="Localized UV-space chromatic aberration prototype." />
 
-Both implementations separately manipulate and recombine the color channels to form new RGB vectors,
+Both implementations separately manipulate and recombine the color channels to form new `RGB` vectors,
 then blend them with a sampled source using a strength-controlled `EffectMultiply` parameter.
 
 <Media lightbox
@@ -121,7 +123,7 @@ After delivering the core features, I kept exploring shader techniques:
 - Color bleeding via blurred offsets
 - Depth testing using normalized values
 - Multipass rendering
-- Color spaces, manually converting between RGB and YUV
+- Color spaces, manually converting between `RGB` and `YUV`
 
 Most of these resulted in glitchy, trippy visuals, but each experiment revealed something new about the rendering pipeline.
 
@@ -149,7 +151,7 @@ Most of these resulted in glitchy, trippy visuals, but each experiment revealed 
         ### Shader curiosity
 
         Outside of Unity, I explored shader languages and rendering pipelines.
-        I experimented with CG, HLSL and GLSL, and learned how ShaderLab structures SubShaders, Passes and HLSL includes.
+        I experimented with `CG`, `HLSL` and `GLSL`, and learned how `ShaderLab` structures `SubShaders`, `Passes` and `HLSL includes`.
         I also collected notes on shader stages (vertex, fragment, geometry, etc.), realizing I was only scratching the surface.
 
         This gave me the foundation to move from node-based workflows to structured shader code, a skill I now apply across graphics projects.
