@@ -1,8 +1,16 @@
 ---
+interface TimelineLink {
+    label: string;
+    url: string;
+}
+
 interface TimelineEntry {
     title: string;
     description: string;
-    link?: { label: string; url: string };
+    /** A single link. Still works, so existing entries need no changes. */
+    link?: TimelineLink;
+    /** Several links, shown side by side. */
+    links?: TimelineLink[];
 }
 
 interface TimelineGroup {
@@ -15,6 +23,8 @@ interface Props {
 }
 
 const { groups } = Astro.props;
+// `link` and `links` both work; this turns either one into a single list.
+const linksOf = (entry: TimelineEntry): TimelineLink[] => entry.links ?? (entry.link ? [entry.link] : []);
 ---
 
 <!--
@@ -39,10 +49,14 @@ const { groups } = Astro.props;
                                 <li class="max-w-2xl">
                                     <h4 class="mb-1.5 text-lg font-semibold leading-snug text-text/90">{entry.title}</h4>
                                     <p class="text-sm leading-relaxed text-text/70">{entry.description}</p>
-                                    {entry.link && (
-                                            <a href={entry.link.url} class="mt-2 inline-block text-sm text-accent hover:underline">
-                                                {entry.link.label} &rarr;
-                                            </a>
+                                    {linksOf(entry).length > 0 && (
+                                            <div class="mt-2 flex flex-wrap gap-x-5 gap-y-1">
+                                                {linksOf(entry).map((link: TimelineLink) => (
+                                                        <a href={link.url} class="text-sm text-accent hover:underline">
+                                                            {link.label} &rarr;
+                                                        </a>
+                                                ))}
+                                            </div>
                                     )}
                                 </li>
                         ))}
