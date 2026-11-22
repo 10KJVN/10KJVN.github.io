@@ -45,7 +45,7 @@ const infoFields = {
 const heroFields = {
     // Which intro layout the page uses.
     // Always set per page in the front matter, never inferred from slug or parent.
-    heroLayout: z.enum(["stacked", "stacked-left", "compact"]).default("stacked"),
+    heroLayout: z.enum(["stacked", "stacked-left"]).default("stacked"),
 
     // Finished-gameplay video for the hero (mp4 path or YouTube URL).
     // Empty = the hero uses `thumbnail`.

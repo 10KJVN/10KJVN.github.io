@@ -184,7 +184,8 @@
 }
 
 @layer components {
-  .mdx-content { counter-reset: section; }
+  /* The first heading sits right under the hero, so the page gap alone sets the distance. */
+  .mdx-content > :is(h2, .section-break):first-child { margin-top: 0; }
 
   .mdx-content h2 {
     counter-increment: section;

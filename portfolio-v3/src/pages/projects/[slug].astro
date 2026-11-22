@@ -8,12 +8,10 @@
     */
 
 import Layout from "../../layouts/Layout.astro";
-import HeroMedia from "../../components/HeroMedia.astro";
-import HeroMeta from "../../components/HeroMeta.astro";
-import ProjectInfo from "../../components/ProjectInfo.astro";
 import TableOfContents from "../../components/TableOfContents.astro";
 import HeadingLinks from "../../components/HeadingLinks.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
+import PageHero from "../../components/PageHero.astro";
 import FeatureHighlightCard from "../../components/FeatureHighlightCard.astro";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import { resolveFeatureHref } from "../../lib/resolveFeatureHref";
@@ -57,48 +55,11 @@ const nav = await getPageNav("project", project.id);
         description={project.data.description}
         width="wide"
 >
-    <article class="mx-auto max-w-[1600px] px-8 py-16 lg:px-12 xl:px-16">
+    <article class="mx-auto max-w-[1600px] px-8 pb-16 pt-20 lg:px-12 xl:px-16">
 
-        <Breadcrumb trail={[{ label: "Projects", href: "/projects" }, { label: project.data.title }]} />
-
-        <!-- Project Header -->
-        <header class="mx-auto max-w-5xl text-center">
-
-            <p class="mt-3 label">
-                Project · {project.data.year}
-            </p>
-
-            <h1 class="mt-4 font-display text-5xl uppercase tracking-wide md:text-7xl">
-                {project.data.title}
-            </h1>
-
-            <p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
-                {project.data.description}
-            </p>
-        </header>
-
-        <HeroMedia class="mx-auto mt-14 max-w-[1440px]" thumbnail={project.data.thumbnail} video={project.data.heroVideo} alt={project.data.title} />
-
-        <!-- Hero sits outside the header so it can use the wide canvas instead of the header's max-w-5xl.
-             It is the page's largest image, so it loads immediately. -->
-        <!--<figure class="mx-auto mt-14 max-w-[1440px] overflow-hidden rounded-frame border border-border crop-marks">-->
-        <!--    <Img src={project.data.thumbnail} alt={project.data.title} class="w-full" loading="eager" fetchpriority="high" sizes="(min-width: 1440px) 1440px, 100vw" />-->
-        <!--</figure>-->
-
-        <!-- Tags left, links right. Both optional. -->
-        <HeroMeta class="mx-auto mt-3 max-w-[1440px]" tags={project.data.tags} links={project.data.links} />
-
-        <!-- Role / team / duration / engine / language. Per project: infoTitle, infoHide in the front matter.
-             Year is left out here because the eyebrow above the title already shows it. -->
-        <ProjectInfo
-                class="mx-auto mt-3 max-w-[1440px]"
-                role={project.data.role}
-                teamSize={project.data.teamSize}
-                duration={project.data.duration}
-                engine={project.data.engine}
-                language={project.data.language}
-                title={project.data.infoTitle}
-                hide={[...project.data.infoHide, "year"]}
+        <PageHero
+                trail={[{ label: "Projects", href: "/projects" }, { label: project.data.title }]}
+                data={project.data}
         />
 
         <!-- Feature Showcase -->
@@ -137,7 +98,7 @@ const nav = await getPageNav("project", project.id);
 
         <!-- Project narrative is authored in MDX so each project can choose its own structure. -->
         <!-- On long pages the article gets a persistent table of contents (see src/config.ts for the threshold). -->
-        <div class="mt-20">
+        <div class="mt-12">
             <TableOfContents headings={headings}>
                 <div class="mdx-content">
                     <Content />

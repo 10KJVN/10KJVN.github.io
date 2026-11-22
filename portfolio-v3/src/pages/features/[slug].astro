@@ -6,6 +6,7 @@ import ProjectInfo from "../../components/ProjectInfo.astro";
 import TableOfContents from "../../components/TableOfContents.astro";
 import HeadingLinks from "../../components/HeadingLinks.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
+import PageHero from "../../components/PageHero.astro";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import BackToTop from "../../components/BackToTop.astro";
 import PageEndNav from "../../components/PageEndNav.astro";
@@ -39,6 +40,17 @@ const parentProject = feature.data.projectSlug
     ? projects.find((project) => project.id === feature.data.projectSlug)
     : undefined;
 
+const trail: { label: string; href?: string }[] = parentProject
+    ? [
+        { label: "Projects", href: "/projects" },
+        { label: parentProject.data.title, href: `/projects/${parentProject.id}` },
+        { label: feature.data.title },
+    ]
+    : [
+        { label: "Features", href: "/features" },
+        { label: feature.data.title },
+    ];
+
 const nav = await getPageNav("feature", feature.id);
 ---
 
@@ -49,54 +61,7 @@ const nav = await getPageNav("feature", feature.id);
 >
     <article class="mx-auto max-w-[1600px] px-8 py-16 lg:px-12 xl:px-16">
 
-        <Breadcrumb
-                trail={
-                    parentProject
-                        ? [
-                            { label: "Projects", href: "/projects" },
-                            {
-                                label: parentProject.data.title,
-                                href: `/projects/${parentProject.id}`
-                            },
-                            { label: feature.data.title }
-                        ]
-                        : [
-                            { label: "Features", href: "/features" },
-                            { label: feature.data.title }
-                        ]
-                }
-        />
-
-        <header class="mx-auto max-w-4xl">
-            <p class="label">
-                Feature · {feature.data.year}
-            </p>
-
-            <h1 class="mt-4 font-display text-5xl uppercase tracking-wide md:text-7xl">
-                {feature.data.title}
-            </h1>
-
-            <p class="mt-4 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
-                {feature.data.description}
-            </p>
-
-        </header>
-
-        <!-- Per feature: infoTitle / infoHide in the front matter (e.g. infoHide: ["engine"]). Year is left out: the eyebrow already shows it. -->
-        <ProjectInfo
-                class="mx-auto mt-14 max-w-[1440px]"
-                role={feature.data.role}
-                teamSize={feature.data.teamSize}
-                duration={feature.data.duration}
-                engine={feature.data.engine}
-                language={feature.data.language}
-                title={feature.data.infoTitle}
-                hide={[...feature.data.infoHide, "year"]}
-        />
-        <HeroMedia class="mx-auto mt-3 max-w-[1440px]" thumbnail={feature.data.thumbnail} video={feature.data.heroVideo} alt={feature.data.title} />
-
-        <!-- Tags left, links right. Both optional. -->
-        <HeroMeta class="mx-auto mt-3 max-w-[1440px]" tags={feature.data.tags} links={feature.data.links} />
+        <PageHero trail={trail} data={feature.data} />
 
         <div class="mt-16">
             <TableOfContents headings={headings}>

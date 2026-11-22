@@ -24,17 +24,23 @@ interface Props {
 }
 
 const { trail, data } = Astro.props;
+
+const left: boolean = data.heroLayout === "stacked-left";
+const about: string = data.about ?? "";
+const learned: string[] = data.learned;
+const hasOverview: boolean = about !== "" || learned.length > 0;
+const hasBoth: boolean = about !== "" && learned.length > 0;
 ---
 
 <header>
-    <div class="mx-auto max-w-5xl text-center">
-        <Breadcrumb trail={trail} align="center" />
+    <div class={`mx-auto ${left ? "max-w-[1440px] text-left" : "max-w-5xl text-center"}`}>
+        <Breadcrumb trail={trail} align={left ? "left" : "center"} />
 
         <h1 class="font-display text-5xl uppercase tracking-wide md:text-6xl">
             {data.title}
         </h1>
 
-        <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
+        <p class={`mt-4 max-w-2xl text-base leading-relaxed text-muted md:text-lg ${left ? "" : "mx-auto"}`}>
             {data.description}
         </p>
     </div>
@@ -47,12 +53,41 @@ const { trail, data } = Astro.props;
             duration={data.duration}
             engine={data.engine}
             language={data.language}
-            year={data.year}
             title={data.infoTitle ?? ""}
             hide={data.infoHide}
     />
 
     <HeroMedia class="mx-auto mt-6 max-w-[1440px]" thumbnail={data.thumbnail} video={data.heroVideo} alt={data.title} />
 
-    <HeroMeta class="mx-auto mt-3 max-w-[1440px]" tags={data.tags} links={data.links} />
+    <HeroMeta class="mx-auto mt-3 max-w-[1440px]" tags={data.tags} year={data.year} links={data.links} />
 </header>
+
+{hasOverview && (
+<section aria-labelledby="project-overview-title" class="mx-auto mt-12 max-w-[1440px]">
+    <h2 id="project-overview-title" class="mb-3 font-display text-xl uppercase tracking-wide">
+        Project Overview
+    </h2>
+
+    <!-- Two columns from lg up, stacked below. The column ratio is the lg:grid-cols value:
+           lg:grid-cols-2        = equal halves
+           lg:grid-cols-[3fr_2fr] = About gets 60%, Learned 40%
+         With only one block present it takes the full width. -->
+    <div class={`grid gap-3 ${hasBoth ? "lg:grid-cols-2" : ""}`}>
+        {about && (
+                <div class="rounded-frame border border-border bg-surface px-5 py-4">
+                    <h3 class="label">About this Project</h3>
+                    <p class="mt-2 whitespace-pre-line text-sm leading-relaxed text-text/80">{about}</p>
+                </div>
+        )}
+
+        {learned.length > 0 && (
+                <div class="rounded-frame border border-border bg-surface px-5 py-4">
+                    <h3 class="label">What I Learned / TL;DR</h3>
+                    <ul class="mt-2 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-text/80 marker:text-accent">
+                        {learned.map((point: string) => <li>{point}</li>)}
+                    </ul>
+                </div>
+        )}
+    </div>
+</section>
+    )}

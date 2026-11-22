@@ -58,7 +58,7 @@ const headingId = "project-info-title";
                  stay clean however many fields there are and however they wrap. -->
             <dl class="flex flex-wrap overflow-hidden">
                 {fields.map((field) => (
-                        <div class={`-ml-px -mt-px min-w-0 flex-1 border-l border-t border-border px-4 py-3 ${field.key === "role" ? "basis-56 sm:flex-[1.4]" : "basis-36"}`}>
+                        <div class={`-ml-px -mt-px min-w-0 flex-1 border-l border-t border-border px-4 py-3 ${field.key === "role" ? "basis-full sm:basis-72 sm:grow-2" : "basis-36"}`}>
                             <dt class="label">{field.label}</dt>
                             <dd class={`mt-1 ${field.key === "role" ? "text-base font-medium text-text" : "text-sm text-text/80"}`}>{field.value}</dd>
                         </div>

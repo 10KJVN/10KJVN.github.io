@@ -1,9 +1,9 @@
 ---
 /**
- * The strip directly under a project/feature hero image: tags on the left, links on the right.
+ * The strip directly under a project/feature hero image: tags left, year centre, links right.
  *   - Up to `maxTags` tags (default 5).
- *   - Either side can be empty: it simply isn't rendered, and links stay on the right.
- *   - Below md the two sides stack, tags first.
+ *   - Every part is optional: a missing part simply isn't rendered.
+ *   - Below lg the three parts stack (tags, year, links), all left-aligned.
  */
 import ProjectLinks from "./ProjectLinks.astro";
 
@@ -15,33 +15,43 @@ interface LinkItem {
 interface Props {
     tags?: string[];
     links?: LinkItem[];
+    year?: number;
     maxTags?: number;
     class?: string;
 }
 
-const { tags = [], links = [], maxTags = 5, class: className = "" } = Astro.props;
+const { tags = [], links = [], year, maxTags = 5, class: className = "" } = Astro.props;
 const shownTags: string[] = tags.slice(0, maxTags);
-const show: boolean = shownTags.length > 0 || links.length > 0;
+const show: boolean = shownTags.length > 0 || links.length > 0 || year !== undefined;
 ---
 
 {show && (
-        <div class={`flex flex-col gap-3 rounded-frame border border-border bg-surface px-4 py-2.5 md:flex-row md:items-center md:justify-between md:gap-8 ${className}`}>
-            {shownTags.length > 0 && (
-                    <div class="min-w-0">
-                        <p class="sr-only">Tags</p>
-                        <ul class="flex flex-wrap gap-2">
-                            {shownTags.map((tag) => (
-                                    <li class="rounded-full border border-border px-3 py-1.5 font-mono text-[10px] uppercase tracking-wide text-muted">{tag}</li>
-                            ))}
-                        </ul>
+        <div class={`grid gap-3 rounded-frame border border-border bg-surface px-4 py-2.5 lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-8 ${className}`}>
+                {shownTags.length > 0 && (
+                    <div class="min-w-0 lg:col-start-1">
+                            <p class="sr-only">Tags</p>
+                            <ul class="flex flex-wrap gap-2">
+                                    {shownTags.map((tag) => (
+                                        <li class="rounded-full border border-border px-3 py-1.5 font-mono text-[10px] uppercase tracking-wide text-muted">{tag}</li>
+                                    ))}
+                            </ul>
                     </div>
-            )}
+                )}
 
-            {links.length > 0 && (
-                    <div class="md:ml-auto md:max-w-[55%]">
-                        <p class="sr-only">Links</p>
-                        <ProjectLinks links={links} variant="compact" />
+                <!-- Year: quiet on purpose, it is context rather than a control.
+                     The side borders turn it into its own small segment between the two groups. -->
+                {year !== undefined && (
+                    <p class="flex items-center gap-2 lg:col-start-2 lg:self-stretch lg:border-x lg:border-border lg:px-6">
+                            <span class="label">Year</span>
+                            <time datetime={String(year)} class="font-mono text-xs tracking-wide text-text/80">{year}</time>
+                    </p>
+                )}
+
+                {links.length > 0 && (
+                    <div class="min-w-0 max-lg:[&>div]:justify-start lg:col-start-3 lg:justify-self-end">
+                            <p class="sr-only">Links</p>
+                            <ProjectLinks links={links} variant="compact" />
                     </div>
-            )}
-        </div>
+        )}
+  </div>
 )}
