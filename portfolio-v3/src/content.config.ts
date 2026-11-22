@@ -40,11 +40,30 @@ const infoFields = {
         .default([]),
 };
 
+// Hero + overview composition for project and feature pages.
+// All optional, so existing pages keep working without changes.
+const heroFields = {
+    // Which intro layout the page uses.
+    // Always set per page in the front matter, never inferred from slug or parent.
+    heroLayout: z.enum(["stacked", "stacked-left", "compact"]).default("stacked"),
+
+    // Finished-gameplay video for the hero (mp4 path or YouTube URL).
+    // Empty = the hero uses `thumbnail`.
+    heroVideo: z.string().optional(),
+
+    // "About this Project" block. Empty = the block is not rendered.
+    about: z.string().optional(),
+
+    // "What I Learned / TL;DR" bullets. Empty = the block is not rendered.
+    learned: z.array(z.string()).default([]),
+};
+
 const projects = defineCollection({
     loader: glob({ pattern: "**/*.mdx", base: "./src/content/projects" }),
     schema: z.object({
         ...cardFields,
         ...infoFields,
+        ...heroFields,
     }),
 });
 
@@ -54,6 +73,7 @@ const features = defineCollection({
     schema: z.object({
         ...cardFields,
         ...infoFields,
+        ...heroFields,
 
         externalUrl: z.string().url().optional(),
         projectSlug: z.string().optional(),

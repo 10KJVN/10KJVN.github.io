@@ -25,10 +25,10 @@ const show: boolean = shownTags.length > 0 || links.length > 0;
 ---
 
 {show && (
-        <div class={`flex flex-col gap-4 rounded-frame border border-border bg-surface px-4 py-3.5 md:flex-row md:items-start md:justify-between md:gap-8 ${className}`}>
+        <div class={`flex flex-col gap-3 rounded-frame border border-border bg-surface px-4 py-2.5 md:flex-row md:items-center md:justify-between md:gap-8 ${className}`}>
             {shownTags.length > 0 && (
                     <div class="min-w-0">
-                        <p class="label mb-2">Tags</p>
+                        <p class="sr-only">Tags</p>
                         <ul class="flex flex-wrap gap-2">
                             {shownTags.map((tag) => (
                                     <li class="rounded-full border border-border px-3 py-1.5 font-mono text-[10px] uppercase tracking-wide text-muted">{tag}</li>
@@ -38,8 +38,8 @@ const show: boolean = shownTags.length > 0 || links.length > 0;
             )}
 
             {links.length > 0 && (
-                    <div class="md:ml-auto md:max-w-[55%] md:text-right">
-                        <p class="label mb-2">Links</p>
+                    <div class="md:ml-auto md:max-w-[55%]">
+                        <p class="sr-only">Links</p>
                         <ProjectLinks links={links} variant="compact" />
                     </div>
             )}

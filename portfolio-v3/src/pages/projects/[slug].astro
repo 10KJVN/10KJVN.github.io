@@ -8,7 +8,7 @@
     */
 
 import Layout from "../../layouts/Layout.astro";
-import Img from "../../components/Img.astro";
+import HeroMedia from "../../components/HeroMedia.astro";
 import HeroMeta from "../../components/HeroMeta.astro";
 import ProjectInfo from "../../components/ProjectInfo.astro";
 import TableOfContents from "../../components/TableOfContents.astro";
@@ -77,11 +77,13 @@ const nav = await getPageNav("project", project.id);
             </p>
         </header>
 
+        <HeroMedia class="mx-auto mt-14 max-w-[1440px]" thumbnail={project.data.thumbnail} video={project.data.heroVideo} alt={project.data.title} />
+
         <!-- Hero sits outside the header so it can use the wide canvas instead of the header's max-w-5xl.
              It is the page's largest image, so it loads immediately. -->
-        <figure class="mx-auto mt-14 max-w-[1440px] overflow-hidden rounded-frame border border-border crop-marks">
-            <Img src={project.data.thumbnail} alt={project.data.title} class="w-full" loading="eager" fetchpriority="high" sizes="(min-width: 1440px) 1440px, 100vw" />
-        </figure>
+        <!--<figure class="mx-auto mt-14 max-w-[1440px] overflow-hidden rounded-frame border border-border crop-marks">-->
+        <!--    <Img src={project.data.thumbnail} alt={project.data.title} class="w-full" loading="eager" fetchpriority="high" sizes="(min-width: 1440px) 1440px, 100vw" />-->
+        <!--</figure>-->
 
         <!-- Tags left, links right. Both optional. -->
         <HeroMeta class="mx-auto mt-3 max-w-[1440px]" tags={project.data.tags} links={project.data.links} />

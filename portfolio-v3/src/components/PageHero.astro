@@ -1,0 +1,58 @@
+---
+/**
+    * Everything above the narrative on a project or feature page ("Stacked introduction"):
+    * breadcrumb, title, description, info strip, hero media, tags + links.
+    * Overview block (step 3b) and layout variants (step 4) get added here.
+    *
+    * Spacing: mt-8 / mt-6 / mt-3 are Tailwind steps (1 step = 0.25rem). mt-8 = 2rem, mt-6 = 1.5rem.
+    * Raise or lower a number to loosen or tighten that gap.
+    */
+import Breadcrumb from "./Breadcrumb.astro";
+import ProjectInfo from "./ProjectInfo.astro";
+import HeroMedia from "./HeroMedia.astro";
+import HeroMeta from "./HeroMeta.astro";
+import type { CollectionEntry } from "astro:content";
+
+interface Crumb {
+    label: string;
+    href?: string;
+}
+
+interface Props {
+    trail: Crumb[];
+    data: CollectionEntry<"projects">["data"] | CollectionEntry<"features">["data"];
+}
+
+const { trail, data } = Astro.props;
+---
+
+<header>
+    <div class="mx-auto max-w-5xl text-center">
+        <Breadcrumb trail={trail} align="center" />
+
+        <h1 class="font-display text-5xl uppercase tracking-wide md:text-6xl">
+            {data.title}
+        </h1>
+
+        <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
+            {data.description}
+        </p>
+    </div>
+
+    <!-- Info strip: title row hidden by default. Set infoTitle in the front matter to bring it back. -->
+    <ProjectInfo
+            class="mx-auto mt-8 max-w-[1440px]"
+            role={data.role}
+            teamSize={data.teamSize}
+            duration={data.duration}
+            engine={data.engine}
+            language={data.language}
+            year={data.year}
+            title={data.infoTitle ?? ""}
+            hide={data.infoHide}
+    />
+
+    <HeroMedia class="mx-auto mt-6 max-w-[1440px]" thumbnail={data.thumbnail} video={data.heroVideo} alt={data.title} />
+
+    <HeroMeta class="mx-auto mt-3 max-w-[1440px]" tags={data.tags} links={data.links} />
+</header>

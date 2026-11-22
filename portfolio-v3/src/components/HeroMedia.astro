@@ -1,0 +1,48 @@
+---
+/**
+    * The hero media of a project or feature page. One of three things, in this order:
+    *   1. `video` is a YouTube link   -> click-to-load YouTube player
+    *   2. `video` is an .mp4 path/URL -> native <video> with controls
+    *   3. otherwise                   -> the page's thumbnail image
+    * Sizing lives in global.css (.hero-media), so it only affects this component.
+    */
+import Img from "./Img.astro";
+import YouTubeEmbed from "./YouTubeEmbed.astro";
+import { resolveVideo } from "../lib/media";
+
+interface Props {
+    thumbnail: string;
+    alt: string;
+    /** Finished-gameplay video: a YouTube link or an .mp4 path. Empty = use the thumbnail. */
+    video?: string;
+    class?: string;
+}
+
+const { thumbnail, alt, video = "", class: className = "" } = Astro.props;
+
+const youtubeId: string | null =
+    video.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([\w-]{11})/)?.[1] ?? null;
+const clip = !youtubeId && /\.mp4$/i.test(video) ? await resolveVideo(video) : null;
+---
+
+<div class={`hero-media ${className}`}>
+    {youtubeId ? (
+            <div class="hero-media__embed">
+                <YouTubeEmbed id={youtubeId} title={`${alt} gameplay video`} />
+            </div>
+    ) : clip ? (
+            <video
+                    src={clip.src}
+                    poster={clip.poster}
+                    width={clip.width}
+                    height={clip.height}
+                    controls
+                    playsinline
+                    preload="metadata"
+                    aria-label={`${alt} gameplay video`}
+                    class="hero-media__asset"
+            ></video>
+    ) : (
+            <Img src={thumbnail} alt={alt} class="hero-media__asset" loading="eager" fetchpriority="high" sizes="(min-width: 1440px) 1440px, 100vw" />
+    )}
+</div>

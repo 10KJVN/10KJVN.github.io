@@ -306,20 +306,30 @@
     background-repeat: no-repeat;
   }
 
-  /* Corner crop marks, inside two opposite corners. Needs the element to clip
-     its own content, so it sits on the hero plates. Size 14px, offset 10px. */
-  .crop-marks { position: relative; }
-  .crop-marks::before,
-  .crop-marks::after {
-    content: "";
-    position: absolute;
-    width: 14px;
-    height: 14px;
-    border: 0 solid var(--color-accent);
-    pointer-events: none;
+  /* Hero media: shows the real file at its own aspect ratio, never cropped, tinted or overlaid.
+     The height cap is the only number to tweak (--hero-h):
+     min(48svh, 480px) = 48% of the screen height, but never more than 480px.
+     Bigger hero: min(55svh, 560px). Smaller: min(40svh, 400px). */
+
+  .hero-media {
+    --hero-h: min(48svh, 480px);
+    display: flex;
+    justify-content: center;
   }
-  .crop-marks::before { top: 10px; left: 10px; border-top-width: 1px; border-left-width: 1px; }
-  .crop-marks::after { right: 10px; bottom: 10px; border-right-width: 1px; border-bottom-width: 1px; }
+  .hero-media picture { display: contents; } /* lets the img size itself against .hero-media */
+  .hero-media__asset {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: var(--hero-h);
+    object-fit: contain;
+    border: 1px solid var(--color-border); /* sits outside the pixels; delete this line for no frame */
+    border-radius: var(--radius-frame);
+  }
+  /* The YouTube embed has no intrinsic size, so its width is derived from the height cap (16:9). */
+  .hero-media__embed { width: min(100%, calc(var(--hero-h) * 16 / 9)); }
+  .hero-media__embed figure { margin: 0; }
 
   .lightbox {
     --lightbox-pad: clamp(1rem, 5vw, 4rem); /* breathing room around the image: raise it for a smaller image */
