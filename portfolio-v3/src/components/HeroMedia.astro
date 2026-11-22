@@ -15,17 +15,18 @@ interface Props {
     alt: string;
     /** Finished-gameplay video: a YouTube link or an .mp4 path. Empty = use the thumbnail. */
     video?: string;
+    size?: "bounded" | "full";
     class?: string;
 }
 
-const { thumbnail, alt, video = "", class: className = "" } = Astro.props;
+const { thumbnail, alt, video = "", size = "bounded", class: className = "" } = Astro.props;
 
 const youtubeId: string | null =
     video.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([\w-]{11})/)?.[1] ?? null;
 const clip = !youtubeId && /\.mp4$/i.test(video) ? await resolveVideo(video) : null;
 ---
 
-<div class={`hero-media ${className}`}>
+<div class={`hero-media ${size === "full" ? "hero-media--full" : ""} ${className}`}>
     {youtubeId ? (
             <div class="hero-media__embed">
                 <YouTubeEmbed id={youtubeId} title={`${alt} gameplay video`} />

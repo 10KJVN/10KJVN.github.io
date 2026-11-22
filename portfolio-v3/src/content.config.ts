@@ -51,6 +51,10 @@ const heroFields = {
     // Empty = the hero uses `thumbnail`.
     heroVideo: z.string().optional(),
 
+    // "bounded" = height-capped (default). "full" = full content width, no height cap.
+    // The media is never cropped, so "full" makes the hero taller.
+    heroSize: z.enum(["bounded", "full"]).default("bounded"),
+
     // "About this Project" block. Empty = the block is not rendered.
     about: z.string().optional(),
 

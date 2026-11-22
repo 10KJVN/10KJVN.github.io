@@ -332,6 +332,11 @@
   .hero-media__embed { width: min(100%, calc(var(--hero-h) * 16 / 9)); }
   .hero-media__embed figure { margin: 0; }
 
+  /* heroSize: "full". Uses the whole content width. Height follows the file's own ratio. */
+  .hero-media--full { --hero-h: none; }
+  .hero-media--full .hero-media__asset,
+  .hero-media--full .hero-media__embed { width: 100%; }
+
   .lightbox {
     --lightbox-pad: clamp(1rem, 5vw, 4rem); /* breathing room around the image: raise it for a smaller image */
     position: fixed;
